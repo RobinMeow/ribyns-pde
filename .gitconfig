@@ -18,3 +18,6 @@
 	no-skip = update-index --no-skip-worktree
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	crime = log --all --numstat --date=short --pretty=format:--%h--%ad--%aN
+[user]
+	email = robinmeow97@gmail.com
+	name = Ribyn
