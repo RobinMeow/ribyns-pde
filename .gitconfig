@@ -11,7 +11,6 @@
 	smfe = submodule foreach
 	skipped = !git ls-files -v | grep \"^S\"
 	wt = worktree
-	boottime = !systeminfo | find \"System Boot Time\"
 	pohfwl = push origin HEAD --force-with-lease
 	fpa = fetch --prune --all
 	skip = update-index --skip-worktree
