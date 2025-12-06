@@ -70,7 +70,17 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+    git
+    zsh-vi-mode
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+# load zsh-completions not as a standard plugin but manually
+# this prevents compinit from being called twice and significantly improves startup time
+fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
