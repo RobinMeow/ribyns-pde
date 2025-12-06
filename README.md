@@ -17,8 +17,13 @@ on windoof just go to the [website](https://wezterm.org) and download it.
 
 ### Shell
 
+**zsh:**  
 install zsh `pacman -S zsh`
-install ohmysh as theme `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
-> ohmyzsh [github](https://github.com/ohmyzsh/ohmyzsh) in case the url no longer works.
+**zsh theme: ohmyzsh**
+install `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+
+**ohmyzsh plugins**
+zsh-vi-mode `git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode`
+zsh-autosuggestions `git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions`
 
