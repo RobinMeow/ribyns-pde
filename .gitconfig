@@ -2,7 +2,8 @@
 	addIgnoreFile = false
 	addIgnoredFile = false
 [alias]
-	ss = status -s
+	ss = status --short
+	ssufa = status --short --untracked-files=all
 	last = log -1 --oneline
 	c = commit
 	poh = push origin HEAD
