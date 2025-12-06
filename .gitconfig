@@ -8,6 +8,9 @@
 	poh = push origin HEAD
 	aa = add --all
 	aacm = "!git add --all && git c -m "
+	cane = commit --amend --no-edit
+	ca = commit --amend
+	co = checkout
 	smfe = submodule foreach
 	skipped = !git ls-files -v | grep \"^S\"
 	wt = worktree
