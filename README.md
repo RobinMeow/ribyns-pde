@@ -2,10 +2,7 @@
 
 ## Arch
 
-Todo: make seperate section for setting up my default arch linux after basic installation (bluetooth, wifi etc)
-`pacman -S tmux` [tmux](https://github.com/tmux/tmux)
-`pacman -S git`
-`pacman -S curl`
+`pacman -S git curl zsh tmux vi vim nvim`
 
 ## Terminal
 
@@ -33,3 +30,6 @@ zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH
 
 `CTRL+e` will acception zsh-autosuggestions
 
+## Windows + WSL
+
+so far windows has used the same paths, tho im not sure the one for init.lua worked.
