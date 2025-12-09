@@ -48,6 +48,9 @@ vim.o.splitbelow = true
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+
 -- Preview substitutions live, as you type! Whats a substitution: s%/replaceTxt/WithMe/g
 -- will show the preview in the file without confirming it
 vim.o.inccommand = "split"
@@ -749,6 +752,7 @@ require("lazy").setup({
 	-- 		vim.cmd.colorscheme("tokyonight-night")
 	-- 	end,
 	-- },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
 	-- Highlight todo, notes, etc in comments
 	{
