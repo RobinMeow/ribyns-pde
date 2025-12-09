@@ -2,7 +2,11 @@
 
 ## Arch
 
-`pacman -S git curl zsh tmux vi vim nvim`
+`pacman -S git curl zsh tmux vi vim nvim unzip`
+
+git clone yay and build it from souce
+
+set zsh as default shell
 
 ## Terminal
 
@@ -16,9 +20,6 @@ install the font commit-mono `yay oft-commit-mono` choose the nerd one `oft-comm
 
 > when on wsl, you your wezterm config needs to be on you windows home path and the font needs to be installed there.
 
-**zsh:**  
-install zsh `pacman -S zsh`
-
 **zsh theme: ohmyzsh**  
 install `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
@@ -28,10 +29,18 @@ zsh-autosuggestions `git clone https://github.com/zsh-users/zsh-autosuggestions 
 zsh-syntax-highlighting `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting`  
 zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/zsh-completions`
 
+### tmux
+
+clone these
+`git clone https://github.com/catppuccin/tmux ~/.config/tmux/plugins/catppuccin/tmux/`
+`git clone https://github.com/tmux-plugins/tmux-cpu ~/.config/tmux/plugins/tmux-cpu`
+`git cloen https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
+> TODO: maybe someday https://github.com/tmux-plugins/tmux-pain-control
+
 ## Notes on easy to forget keybinds
 
 `CTRL+e` will acception zsh-autosuggestions
 
 ## Windows + WSL
 
-so far windows has used the same paths, tho im not sure the one for init.lua worked.
+so far windows has used the same paths, except for nvim, which is located in `%AppData%/local/nvim`
