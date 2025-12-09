@@ -2,7 +2,7 @@
 
 ## Arch
 
-`pacman -S git curl zsh tmux vi vim nvim`
+`pacman -S git curl zsh tmux vi vim nvim unzip`
 
 git clone yay and build it from souce
 
