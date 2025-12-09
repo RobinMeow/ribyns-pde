@@ -4,6 +4,10 @@
 
 `pacman -S git curl zsh tmux vi vim nvim`
 
+git clone yay and build it from souce
+
+set zsh as default shell
+
 ## Terminal
 
 ### Emulator
@@ -15,9 +19,6 @@ on windoof just go to the [website](https://wezterm.org) and download it.
 install the font commit-mono `yay oft-commit-mono` choose the nerd one `oft-commit-mono-nerd`
 
 > when on wsl, you your wezterm config needs to be on you windows home path and the font needs to be installed there.
-
-**zsh:**  
-install zsh `pacman -S zsh`
 
 **zsh theme: ohmyzsh**  
 install `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
@@ -34,4 +35,4 @@ zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH
 
 ## Windows + WSL
 
-so far windows has used the same paths, tho im not sure the one for init.lua worked.
+so far windows has used the same paths, except for nvim, which is located in `%AppData%/local/nvim`
