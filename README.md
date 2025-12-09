@@ -29,6 +29,14 @@ zsh-autosuggestions `git clone https://github.com/zsh-users/zsh-autosuggestions 
 zsh-syntax-highlighting `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting`  
 zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/zsh-completions`
 
+### tmux
+
+clone these
+`git clone https://github.com/catppuccin/tmux ~/.config/tmux/plugins/catppuccin/tmux/`
+`git clone https://github.com/tmux-plugins/tmux-cpu ~/.config/tmux/plugins/tmux-cpu`
+`git cloen https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
+> TODO: maybe someday https://github.com/tmux-plugins/tmux-pain-control
+
 ## Notes on easy to forget keybinds
 
 `CTRL+e` will acception zsh-autosuggestions
