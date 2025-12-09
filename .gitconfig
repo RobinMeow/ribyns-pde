@@ -20,6 +20,7 @@
 	skip = update-index --skip-worktree
 	no-skip = update-index --no-skip-worktree
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
+    br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	crime = log --all --numstat --date=short --pretty=format:--%h--%ad--%aN
 [user]
 	email = robinmeow97@gmail.com
