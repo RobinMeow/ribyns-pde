@@ -2,11 +2,16 @@
 
 ## Arch
 
-`pacman -S git curl zsh tmux vi vim nvim unzip base-devel`
+`pacman -S git curl zsh tmux vi vim nvim unzip base-devel dotnet-runtime dotnet-sdk aspnet-runtime`
 
 git clone yay and build it from souce
 
 set zsh as default shell
+
+install dotnet stuff and add `~/.dotnet/tools`  to the path variable
+because its recommended tho use those to install the csharp-ls
+`dotnet tool install --global csharp-ls`
+`https://wiki.archlinux.org/title/.NET`
 
 ## Terminal
 

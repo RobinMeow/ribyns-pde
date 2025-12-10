@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-	imports: [],
-
-}) export class Idk { }
+  imports: [],
+})
+export class Idk {}
