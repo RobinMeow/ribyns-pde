@@ -2,7 +2,7 @@
 
 ## Arch
 
-`pacman -S git curl zsh tmux vi vim nvim unzip`
+`pacman -S git curl zsh tmux vi vim nvim unzip base-devel`
 
 git clone yay and build it from souce
 
@@ -44,3 +44,4 @@ clone these
 ## Windows + WSL
 
 so far windows has used the same paths, except for nvim, which is located in `%AppData%/local/nvim`
+idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6`
