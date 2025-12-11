@@ -288,7 +288,7 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				pickers = { find_files = { hidden = true } },
+				pickers = { find_files = { hidden = true }, colorscheme = { enable_preview = true } },
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -331,7 +331,8 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Old Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>eb", builtin.buffers, { desc = "Search [E]xisting [B]uffers" })
+			vim.keymap.set("n", "<leader><leader>c", builtin.colorscheme, { desc = "[ ][ ][C]olorscheme" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
@@ -736,44 +737,20 @@ require("lazy").setup({
 		},
 	},
 
-	-- { -- you can easily change to a different colorscheme.
-	-- 	-- Change the name of the colorscheme plugin below, and then
-	-- 	-- change the command in the config to whatever the name of that colorscheme is.
-	-- 	--
-	-- 	-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-	-- 	"folke/tokyonight.nvim",
-	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
-	-- 	config = function()
-	-- 		---@diagnostic disable-next-line: missing-fields
-	-- 		require("tokyonight").setup({
-	-- 			styles = {
-	-- 				comments = { italic = false }, -- Disable italics in comments
-	-- 			},
-	-- 		})
-	--
-	-- 		-- Load the colorscheme here.
-	-- 		-- Like many other themes, this one has different styles, and you could load
-	-- 		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-	-- 		vim.cmd.colorscheme("tokyonight-night")
-	-- 	end,
-	-- },
-
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		-- The key that was missing: the actual call to set the theme
 		config = function()
-			-- 1. Call the setup function (if you have options)
 			require("catppuccin").setup({
 				flavour = "mocha", -- Change this to 'frappe', 'macchiato', or 'latte' if desired
 			})
-			-- 2. Apply the colorscheme
-			vim.o.termguicolors = true
-			vim.cmd("colorscheme catppuccin")
 		end,
 	},
 
+	-- colorschemes
+	{ "ellisonleao/gruvbox.nvim" },
+	{ "Mofiqul/vscode.nvim" },
 	{ "tpope/vim-fugitive" },
 
 	-- Highlight todo, notes, etc in comments
@@ -902,3 +879,5 @@ require("lazy").setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.o.termguicolors = true
+vim.cmd.colorscheme("vscode")
