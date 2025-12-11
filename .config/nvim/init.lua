@@ -151,12 +151,11 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- TODO: enable current line git blame by default
+
 -- [[ Configure and install plugins ]]
 -- To check the current status of your plugins, run :Lazy
 -- press `?` in this menu for help. Use `:q` to close
---
---  To update plugins you can run :Lazy update
---
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
@@ -178,11 +177,8 @@ require("lazy").setup({
 	--        end,
 	--    }
 	--
-	-- Here is a more advanced example where we pass configuration
-	-- options to `gitsigns.nvim`.
-	--
-	-- See `:help gitsigns` to understand what the configuration keys do
-	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
+	{ "tpope/vim-fugitive" },
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signs = {
@@ -315,7 +311,7 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				-- pickers = {}
+				pickers = { find_files = { hidden = true } },
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -562,7 +558,6 @@ require("lazy").setup({
 			local servers = {
 				bashls = {},
 				ts_ls = {}, -- https://github.com/pmizio/typescript-tools.nvim can be considered when more speed is required
-				eslint = {},
 				angularls = {},
 				-- The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
 				-- csharp_ls = {}, -- could be because of other global dotnet tooling which could depend on it,
@@ -598,9 +593,7 @@ require("lazy").setup({
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"prettierd",
 				"prettier",
-				"eslint_d",
 				"stylua", -- Used to format Lua code
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -658,8 +651,10 @@ require("lazy").setup({
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
+				javascript = { "prettier", stop_after_first = true },
+				typescript = { "prettier", stop_after_first = true },
+				html = { "prettier" },
+				htmlangular = { "prettier" },
 			},
 		},
 	},
