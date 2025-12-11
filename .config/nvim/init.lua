@@ -744,6 +744,7 @@ require("lazy").setup({
 		config = function()
 			require("catppuccin").setup({
 				flavour = "mocha", -- Change this to 'frappe', 'macchiato', or 'latte' if desired
+				no_italic = true,
 			})
 		end,
 	},
