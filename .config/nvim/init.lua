@@ -2,6 +2,33 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- 1. Define the custom function
+function CurrentFileDirFindFiles()
+	-- Get the full path of the current buffer's file
+	local current_file = vim.fn.expand("%:p")
+
+	-- Check if the buffer is a file
+	if current_file == "" or vim.fn.filereadable(current_file) == 0 then
+		-- Fallback to regular find_files
+		require("telescope.builtin").find_files()
+		return
+	end
+
+	-- Extract the directory path
+	local cwd = vim.fn.expand("%:p:h")
+
+	-- Call find_files, setting the cwd option
+	require("telescope.builtin").find_files(
+		require("telescope.themes").get_ivy({ cwd = cwd, prompt_title = "Current Buffer's Directory" })
+	)
+	-- require("telescope.builtin").find_files({
+	--
+	-- 	cwd = cwd,
+	-- 	prompt_title = "Find Files in Current Dir",
+	--
+	-- })
+end
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
