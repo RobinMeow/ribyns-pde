@@ -774,6 +774,8 @@ require("lazy").setup({
 		end,
 	},
 
+	{ "tpope/vim-fugitive" },
+
 	-- Highlight todo, notes, etc in comments
 	{
 		"folke/todo-comments.nvim",
