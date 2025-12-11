@@ -2,33 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- 1. Define the custom function
-function CurrentFileDirFindFiles()
-	-- Get the full path of the current buffer's file
-	local current_file = vim.fn.expand("%:p")
-
-	-- Check if the buffer is a file
-	if current_file == "" or vim.fn.filereadable(current_file) == 0 then
-		-- Fallback to regular find_files
-		require("telescope.builtin").find_files()
-		return
-	end
-
-	-- Extract the directory path
-	local cwd = vim.fn.expand("%:p:h")
-
-	-- Call find_files, setting the cwd option
-	require("telescope.builtin").find_files(
-		require("telescope.themes").get_ivy({ cwd = cwd, prompt_title = "Current Buffer's Directory" })
-	)
-	-- require("telescope.builtin").find_files({
-	--
-	-- 	cwd = cwd,
-	-- 	prompt_title = "Find Files in Current Dir",
-	--
-	-- })
-end
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -300,7 +273,7 @@ require("lazy").setup({
 				end,
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "nvim-tree/nvim-web-devicons", enabled = true },
+			{ "nvim-tree/nvim-web-devicons", enabled = true }, -- requires nerd font
 		},
 		config = function()
 			-- open available keybinds help:
@@ -329,12 +302,29 @@ require("lazy").setup({
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
+
+			function SearchCurrentDirectory()
+				local current_file = vim.fn.expand("%:p")
+
+				-- Check if the buffer is a file
+				if current_file == "" or vim.fn.filereadable(current_file) == 0 then
+					-- Fallback to regular find_files
+					builtin.find_files()
+					return
+				end
+
+				local currWorkingDir = vim.fn.expand("%:p:h")
+
+				builtin.find_files(require("telescope.themes").get_ivy({
+					cwd = currWorkingDir,
+					prompt_title = "Current Buffer's Directory",
+				}))
+			end
+
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			vim.keymap.set("n", "<leader>scd", function()
-				CurrentFileDirFindFiles()
-			end, { desc = "[S]earch [C]urrent [D]irectory" })
+			vim.keymap.set("n", "<leader>scd", SearchCurrentDirectory, { desc = "[S]earch [C]urrent [D]irectory" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
