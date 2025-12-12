@@ -1,4 +1,5 @@
 # Ribyns Personal Development Environment
+TODO: tmux should not be index based and start on 1
 
 ## Arch
 
