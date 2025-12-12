@@ -7,11 +7,12 @@
 	last = log -1 --oneline
 	c = commit
 	cm = commit --message
-	aacm = "!git add --all && git commit --message"
 	poh = push origin HEAD
 	aa = add --all
-	aacm = "!git add --all && git c -m "
 	cane = commit --amend --no-edit
+	aacm = "!git add --all && git commit --message"
+	aacane = "!git add --all && git commit --amend --no-edit"
+	wt = worktree
 	ca = commit --amend
 	co = checkout
 	smfe = submodule foreach
@@ -22,5 +23,5 @@
 	skip = update-index --skip-worktree
 	no-skip = update-index --no-skip-worktree
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
-    br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
+	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	crime = log --all --numstat --date=short --pretty=format:--%h--%ad--%aN
