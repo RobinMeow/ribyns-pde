@@ -6,6 +6,7 @@
 	ssufa = status --short --untracked-files=all
 	last = log -1 --oneline
 	c = commit
+	cm = commit --message
 	poh = push origin HEAD
 	aa = add --all
 	aacm = "!git add --all && git c -m "
