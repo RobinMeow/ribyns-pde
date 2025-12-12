@@ -1,5 +1,6 @@
 # Ribyns Personal Development Environment
 TODO: tmux should not be index based and start on 1
+TODO: lsp should not auto import angulart
 
 ## Arch
 
