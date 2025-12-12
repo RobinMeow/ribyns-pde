@@ -7,6 +7,7 @@
 	last = log -1 --oneline
 	c = commit
 	cm = commit --message
+	aacm = "!git add --all && git commit --message"
 	poh = push origin HEAD
 	aa = add --all
 	aacm = "!git add --all && git c -m "
