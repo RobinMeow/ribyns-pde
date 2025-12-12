@@ -5,23 +5,26 @@
 	ss = status --short
 	ssufa = status --short --untracked-files=all
 	last = log -1 --oneline
+	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	c = commit
 	cm = commit --message
 	poh = push origin HEAD
 	aa = add --all
+	wt = worktree
+	fpa = fetch --prune --all
+	pohfwl = push origin HEAD --force-with-lease
 	cane = commit --amend --no-edit
 	aacm = "!git add --all && git commit --message"
 	aacane = "!git add --all && git commit --amend --no-edit"
+	canepoh = "!git commit --amend --no-edit && git push origin HEAD"
+	canepohfwl = "!git commit --amend --no-edit && git push origin HEAD --force-with-lease"
+	aacanepohfwl = "!git add --all && git commit --amend --no-edit && git push origin HEAD --force-with-lease"
 	wt = worktree
 	ca = commit --amend
 	co = checkout
 	smfe = submodule foreach
 	skipped = !git ls-files -v | grep \"^S\"
-	wt = worktree
-	pohfwl = push origin HEAD --force-with-lease
-	fpa = fetch --prune --all
 	skip = update-index --skip-worktree
 	no-skip = update-index --no-skip-worktree
-	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	crime = log --all --numstat --date=short --pretty=format:--%h--%ad--%aN
