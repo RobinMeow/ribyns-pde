@@ -165,6 +165,11 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+			current_line_blame = true,
+			current_line_blame_opts = {
+				delay = 100,
+				-- TODO: set more stuff here like alignment, white space formatter and toggle keymap
+			},
 		},
 	},
 
