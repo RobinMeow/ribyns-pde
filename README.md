@@ -53,3 +53,10 @@ clone these
 
 so far windows has used the same paths, except for nvim, which is located in `%AppData%/local/nvim`
 idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6`
+
+## dotnet
+
+2. install the roslyn plugin "seblyng/roslyn.nvim"
+1. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
+3. add rosyn as ls
+see commit hash ``
