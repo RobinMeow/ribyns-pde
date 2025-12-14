@@ -59,4 +59,4 @@ idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/0
 2. install the roslyn plugin "seblyng/roslyn.nvim"
 1. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
 3. add rosyn as ls
-see commit hash ``
+see commit hash `03556d0`
