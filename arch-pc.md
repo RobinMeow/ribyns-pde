@@ -157,3 +157,9 @@ pacman -S (any sorts of piprewires and wireplumbers you can find)
 and
 pacman -S plasma-pa
 which is the speaker in the systemstray and other sound settings
+
+bluetooth
+pacman -S bluez bluez-utils
+and for kde specific
+bluedevil
+systemctl enable --now bluetooth.service
