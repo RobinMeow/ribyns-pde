@@ -163,3 +163,7 @@ pacman -S bluez bluez-utils
 and for kde specific
 bluedevil
 systemctl enable --now bluetooth.service
+
+disable mouse acceleration
+screen edge barrier to zero pixel
+Mouse > enable Hold down middle button and move mouse to scroll (only important for the tackball)

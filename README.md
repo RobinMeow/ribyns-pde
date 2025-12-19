@@ -3,7 +3,7 @@ TODO: lsp should not auto import angulart
 
 ## Arch
 
-`pacman -S git curl zsh tmux vi vim nvim unzip base-devel dotnet-runtime dotnet-sdk aspnet-runtime nodejs npm`
+`pacman -S git curl zsh tmux vi vim nvim unzip base-devel dotnet-runtime dotnet-sdk aspnet-runtime nodejs npm xclip wl-clipboard openssh`
 
 git clone yay and build it from souce
 
