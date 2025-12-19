@@ -164,10 +164,15 @@ and for kde specific
 bluedevil
 systemctl enable --now bluetooth.service
 
-disable mouse acceleration
-screen edge barrier to zero pixel
-Mouse > enable Hold down middle button and move mouse to scroll (only important for the tackball)
+## KDE System Settings
+
+- Mouse > disable acceleration (on all mouses)
+- screen edge barrier to zero pixel (so slow movement when trying to cross screen doesnt get blocked)
+- Mouse > enable Hold down middle button and move mouse to scroll (only important for the tackball)
+- set lock screen background image
+- sddm login and transition animations are described above i think
 
 ssh
 `ssh-keygen -t rsa -b 4096 -C "ribyns-pde@example.com"`
 `ssh-keyscan -H github.com >> ~/.ssh/known_hosts`
+
