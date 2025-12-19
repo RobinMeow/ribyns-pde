@@ -167,3 +167,7 @@ systemctl enable --now bluetooth.service
 disable mouse acceleration
 screen edge barrier to zero pixel
 Mouse > enable Hold down middle button and move mouse to scroll (only important for the tackball)
+
+ssh
+`ssh-keygen -t rsa -b 4096 -C "ribyns-pde@example.com"`
+`ssh-keyscan -H github.com >> ~/.ssh/known_hosts`
