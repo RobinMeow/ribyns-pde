@@ -172,6 +172,13 @@ systemctl enable --now bluetooth.service
 - set lock screen background image
 - sddm login and transition animations are described above i think
 
+## Arach Defaults:
+
+- /etc/pacman.conf uncomment the color line
+- pacman -S fastfetch
+
+## Git
+
 ssh
 `ssh-keygen -t rsa -b 4096 -C "ribyns-pde@example.com"`
 `ssh-keyscan -H github.com >> ~/.ssh/known_hosts`
