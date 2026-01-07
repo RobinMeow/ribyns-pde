@@ -22,7 +22,7 @@ using wezterm.
 on arch build from souce (e.g. `yay wezterm-git`)
 on windoof just go to the [website](https://wezterm.org) and download it.
 
-install the font commit-mono `yay oft-commit-mono` choose the nerd one `oft-commit-mono-nerd`
+install the font commit-mono `yay otf-commit-mono` choose the nerd one `otf-commit-mono-nerd`
 
 > when on wsl, you your wezterm config needs to be on you windows home path and the font needs to be installed there.
 
