@@ -58,3 +58,10 @@ idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/0
 1. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
 3. add rosyn as ls
 see commit hash [dfa3003](https://github.com/RobinMeow/ribyns-pde/commit/dfa3003391d739122cc15adacb96194c2c8909b3)
+
+
+### Scripts
+
+to be able to use the scripts directly add execution permission by running the setup
+`bash ~/ribyns-pde/setup.sh`
+now yow can run scripts without invoking bash and if in zsh the script folder is on the path `ng-test.sh`

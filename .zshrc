@@ -113,5 +113,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-export PATH="$PATH:$HOME/.dotnet/tools"
+
+# Add .dotnet/tools to PATH if not already present
+case ":$PATH:" in
+  *":$HOME/.dotnet/tools:"*) ;;
+  *) PATH="$PATH:$HOME/.dotnet/tools" ;;
+esac
+
+# Add ribyns-pde/scripts to PATH if not already present
+case ":$PATH:" in
+  *":$HOME/ribyns-pde/scripts:"*) ;;
+  *) PATH="$PATH:$HOME/ribyns-pde/scripts" ;;
+esac
+
+export PATH
+
