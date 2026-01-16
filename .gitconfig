@@ -1,5 +1,6 @@
 [core]
 	pager = less -FRX
+	editor = vim
 [advice]
 	addIgnoreFile = false
 	addIgnoredFile = false
