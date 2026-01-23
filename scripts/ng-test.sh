@@ -7,7 +7,10 @@ set -euo pipefail # -e exit on error, -u undefined variables are errors, -o pipe
 # Examples:
 #   ./scripts/ng-test.sh Chrome user-form
 
+# TODO: allow spec pattern as first argument
+# TODO: add picker for previously typed patterns
 BROWSER="${1:-ChromeHeadless}"
+
 
 if [[ $# -ge 2 ]]; then
   SPEC_PATTERN="$2"
