@@ -17,14 +17,16 @@
 	wt = worktree
 	fpa = fetch --prune --all
 	pohfwl = push origin HEAD --force-with-lease
+	ca = commit --amend
+	aaca = "!git add --all && git commit --amend"
 	cane = commit --amend --no-edit
 	aacm = "!git add --all && git commit --message"
 	aacane = "!git add --all && git commit --amend --no-edit"
 	canepoh = "!git commit --amend --no-edit && git push origin HEAD"
 	canepohfwl = "!git commit --amend --no-edit && git push origin HEAD --force-with-lease"
+	aacapohfwl = "!git add --all && git commit --amend && git push origin HEAD --force-with-lease"
 	aacanepohfwl = "!git add --all && git commit --amend --no-edit && git push origin HEAD --force-with-lease"
 	wt = worktree
-	ca = commit --amend
 	co = checkout
 	smfe = submodule foreach
 	skipped = !git ls-files -v | grep \"^S\"
