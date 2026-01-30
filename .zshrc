@@ -114,6 +114,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+## Add .dotnet/dotnet to PATH if not already present (local script installs should take preceedence over the normal arch install)
+case ":$PATH:" in
+  *":$HOME/.dotnet:"*) ;;
+  *) PATH="$HOME/.dotnet:$PATH" ;; # needs to pre-prended to take precedence over other installs
+esac
+
 # Add .dotnet/tools to PATH if not already present
 case ":$PATH:" in
   *":$HOME/.dotnet/tools:"*) ;;
