@@ -293,7 +293,11 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				pickers = { find_files = { hidden = true }, colorscheme = { enable_preview = true } },
+				pickers = {
+					find_files = { hidden = true },
+					git_files = { hidden = true },
+					colorscheme = { enable_preview = true },
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -327,8 +331,15 @@ require("lazy").setup({
 			end
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+			vim.keymap.set(
+				"n",
+				"<leader>sk",
+				builtin.keymaps,
+				{ desc = "[S]earch [K]eymaps (which_key i => C-/ n => ?)" }
+			)
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+			vim.keymap.set("n", "<leader>srg", builtin.registers, { desc = "[S]earch [R]e[G]isters" })
+			vim.keymap.set("n", "<leader>sgf", builtin.git_files, { desc = "[S]earch [G]it [F]iles" })
 			vim.keymap.set("n", "<leader>scd", SearchCurrentDirectory, { desc = "[S]earch [C]urrent [D]irectory" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
@@ -657,6 +668,9 @@ require("lazy").setup({
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				html = { "prettierd", "prettier", stop_after_first = true },
 				htmlangular = { "prettierd", "prettier", stop_after_first = true },
+				css = { "prettierd", "prettier", stop_after_first = true },
+				scss = { "prettierd", "prettier", stop_after_first = true },
+				sass = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},
 	},
