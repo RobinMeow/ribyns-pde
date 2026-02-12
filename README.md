@@ -42,6 +42,7 @@ clone these
 `git clone https://github.com/tmux-plugins/tmux-cpu ~/.config/tmux/plugins/tmux-cpu`
 `git clone https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
 `git clone https://github.com/tmux-plugins/tmux-yank ~/.config/tmux/plugins/tmux-battery`
+`git clone https://github.com/tmux-plugins/tmux-resurrect ~/.config/tmux/plugins/tmux-resurrect`
 > TODO: maybe someday https://github.com/tmux-plugins/tmux-pain-control
 
 ## Notes on easy to forget keybinds
