@@ -40,7 +40,8 @@ zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH
 clone these
 `git clone https://github.com/catppuccin/tmux ~/.config/tmux/plugins/catppuccin/tmux/`
 `git clone https://github.com/tmux-plugins/tmux-cpu ~/.config/tmux/plugins/tmux-cpu`
-`git cloen https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
+`git clone https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
+`git clone https://github.com/tmux-plugins/tmux-yank ~/.config/tmux/plugins/tmux-battery`
 > TODO: maybe someday https://github.com/tmux-plugins/tmux-pain-control
 
 ## Notes on easy to forget keybinds
