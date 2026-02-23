@@ -42,44 +42,40 @@ config.use_fancy_tab_bar = false
 --config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 
 -- tmux
-config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2500 }
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
+local function bind_key(mods, key, action)
+	config.keys = config.keys or {}
+	table.insert(config.keys, { mods = mods, key = key, action = action })
+end
+
+bind_key("LEADER", "p", act.ActivateTabRelative(-1)) -- nav to prev tab
+bind_key("LEADER", "n", act.ActivateTabRelative(1)) -- nav to next tab
+
+bind_key("LEADER", "x", act.CloseCurrentPane({ confirm = true }))
+bind_key("LEADER", "c", act.SpawnTab("CurrentPaneDomain"))
+
+-- navigation
+bind_key("LEADER", "h", act.ActivatePaneDirection("Left"))
+bind_key("LEADER", "j", act.ActivatePaneDirection("Down"))
+bind_key("LEADER", "k", act.ActivatePaneDirection("Up"))
+bind_key("LEADER", "l", act.ActivatePaneDirection("Right"))
+
+-- idk why i need to use shift+phys: https://wezterm.org/config/keys.html#physical-vs-mapped-key-assignments
+-- SHIFT+5 = "
+bind_key("LEADER|SHIFT", "phys:5", act.SplitHorizontal({ domain = "CurrentPaneDomain" }))
+-- SHIFT+' = "
+bind_key("LEADER|SHIFT", "phys:Quote", act.SplitVertical({ domain = "CurrentPaneDomain" }))
+
+-- resizing
+-- Each arrow triggers resize mode when pressed after prefix
 local function enter_resize_mode()
 	return act.ActivateKeyTable({ name = "resize_pane", one_shot = false })
 end
-
-config.keys = {
-	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain") },
-	{ mods = "LEADER", key = "x", action = act.CloseCurrentPane({ confirm = true }) },
-	{ mods = "LEADER", key = "p", action = act.ActivateTabRelative(-1) }, -- nav to prev tab
-	{ mods = "LEADER", key = "n", action = act.ActivateTabRelative(1) }, -- nav to next tab
-	-- idk why i need to use shift+phys: https://wezterm.org/config/keys.html#physical-vs-mapped-key-assignments
-	-- { mods = "LEADER", key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	-- { mods = "LEADER", key = "%", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{
-		mods = "LEADER|SHIFT",
-		key = "phys:5", -- SHIFT+5 = "
-		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		mods = "LEADER|SHIFT",
-		key = "phys:Quote", -- SHIFT+' = "
-		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	-- navigation
-	{ mods = "LEADER", key = "h", action = act.ActivatePaneDirection("Left") },
-	{ mods = "LEADER", key = "j", action = act.ActivatePaneDirection("Down") },
-	{ mods = "LEADER", key = "k", action = act.ActivatePaneDirection("Up") },
-	{ mods = "LEADER", key = "l", action = act.ActivatePaneDirection("Right") },
-	-- resizing
-	-- Each arrow triggers resize mode when pressed after prefix
-	{ key = "LeftArrow", mods = "LEADER", action = enter_resize_mode() },
-	{ key = "RightArrow", mods = "LEADER", action = enter_resize_mode() },
-	{ key = "UpArrow", mods = "LEADER", action = enter_resize_mode() },
-	{ key = "DownArrow", mods = "LEADER", action = enter_resize_mode() },
-}
-
--- allow resizing by pressing the arrow keys repeatedly
+bind_key("LEADER", "LeftArrow", enter_resize_mode())
+bind_key("LEADER", "DownArrow", enter_resize_mode())
+bind_key("LEADER", "UpArrow", enter_resize_mode())
+bind_key("LEADER", "RightArrow", enter_resize_mode())
 config.key_tables = {
 	resize_pane = {
 		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 2 }) },
@@ -92,8 +88,18 @@ config.key_tables = {
 
 -- leader + number to switch tabs
 for i = 1, 9 do
-	table.insert(config.keys, { key = tostring(i), mods = "LEADER", action = act.ActivateTab(i - 1) })
+	bind_key("LEADER", tostring(i), act.ActivateTab(i - 1))
 end
 
-return config
+-- show while leader key is active
+wezterm.on("update-right-status", function(window, _)
+	window:set_right_status(wezterm.format({
+		{ Background = { Color = "#b7bdf8" } }, -- some purple similar to catppuccin
+		-- https://www.utf8icons.com/character/129497/mage ( and or is conditional assignment in lua. like leader_is_active ? mage : "")
+		{ Text = window:leader_is_active() and (" " .. utf8.char(0x1F9D9, 0x200D, 0x2642)) or "" },
+	}))
+end)
 
+-- TODO: add some info, which shows that the resize_pane_mode is active and needs to be escaped on ESC
+
+return config
