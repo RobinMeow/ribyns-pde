@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local rez = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
 local config = {}
@@ -33,13 +34,14 @@ config.window_padding = {
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
--- TODO: maximised window
--- wezterm.on("gui-startup", function(cmd)
--- 	local window = mux.spawn_window(cmd or {})
--- 	window:maximize()
--- end)
-
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
+-- maximize window on startup
+wezterm.on("gui-startup", function(cmd)
+	if mux then
+		local tab, pane, window = mux.spawn_window(cmd or {})
+		window:gui_window():maximize()
+	end
+end)
 
 -- tmux
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
@@ -102,5 +104,26 @@ wezterm.on("update-right-status", function(window, _)
 		{ Text = leader_active },
 	}))
 end)
+
+-- resurrection
+--[[ bind_key(
+	"LEADER",
+	"s",
+	wezterm.action_callback(function(win, pane)
+		rez.state_manager.save_state(rez.workspace_state.get_workspace_state())
+	end)
+)
+bind_key(
+	"LEADER",
+	"r",
+	wezterm.action_callback(function(win, pane)
+		rez.fuzzy_loader.fuzzy_load(win, pane, function(id)
+			rez.workspace_state.restore_workspace(
+				rez.state_manager.load_state(id, "workspace"),
+				{ restore_text = true }
+			)
+		end)
+	end)
+) ]]
 
 return config
