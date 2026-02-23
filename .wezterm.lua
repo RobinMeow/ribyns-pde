@@ -39,7 +39,7 @@ config.use_fancy_tab_bar = false
 -- 	window:maximize()
 -- end)
 
---config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
+config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 
 -- tmux
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
