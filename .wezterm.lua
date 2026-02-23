@@ -103,6 +103,4 @@ wezterm.on("update-right-status", function(window, _)
 	}))
 end)
 
--- TODO: add some info, which shows that the resize_pane_mode is active and needs to be escaped on ESC
-
 return config
