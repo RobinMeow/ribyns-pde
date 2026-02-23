@@ -93,10 +93,13 @@ end
 
 -- show while leader key is active
 wezterm.on("update-right-status", function(window, _)
+	local leader_active = window:leader_is_active() and (" " .. utf8.char(0x1F9D9, 0x200D, 0x2642)) or ""
+	local resize_mode_active = window:active_key_table() == "resize_pane" and "RESIZING - press esc to exit" or ""
 	window:set_right_status(wezterm.format({
+		{ Text = resize_mode_active },
 		{ Background = { Color = "#b7bdf8" } }, -- some purple similar to catppuccin
 		-- https://www.utf8icons.com/character/129497/mage ( and or is conditional assignment in lua. like leader_is_active ? mage : "")
-		{ Text = window:leader_is_active() and (" " .. utf8.char(0x1F9D9, 0x200D, 0x2642)) or "" },
+		{ Text = leader_active },
 	}))
 end)
 
