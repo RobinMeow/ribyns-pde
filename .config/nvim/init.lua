@@ -10,6 +10,17 @@ vim.g.have_nerd_font = false
 
 vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
+vim.api.nvim_create_autocmd("InsertEnter", {
+	callback = function()
+		vim.opt.relativenumber = false
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+	callback = function()
+		vim.opt.relativenumber = true
+	end,
+})
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
@@ -835,7 +846,7 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs", -- Sets main module to use for opts
+		main = "nvim-treesitter.configs", -- Sets main module to use for opts (wsl = config | linux = confgis)
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		opts = {
 			ensure_installed = {
