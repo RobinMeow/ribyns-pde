@@ -7,8 +7,8 @@
 [alias]
 	ss = status --short
 	ssufa = status --short --untracked-files=all
-	last = log -1 --oneline
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
+	last = l -1
 	co = checkout
 	c = commit
 	cm = commit --message
