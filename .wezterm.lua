@@ -21,7 +21,6 @@ if true then
 
 	config.wsl_domains = wsl_domains
 	config.default_domain = "WSL:archlinux"
-	config.default_prog = { "wsl.exe" }
 end
 
 config.window_padding = {
@@ -33,6 +32,8 @@ config.window_padding = {
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
+config.window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg"
+config.window_background_image_hsb = { brightness = 0.05 }
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 -- maximize window on startup
