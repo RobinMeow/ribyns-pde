@@ -6,6 +6,7 @@
 # .zshrc
 # .dircolors
 # .config/*
+# .wezterm_background.jpg
 #
 # + several git clones if not already present
 
@@ -35,6 +36,7 @@ backup_file() {
 # Backup + copy root dotfiles
 # only updates partially
 backup_file "$HOME/.wezterm.lua"
+backup_file "$HOME/.wezterm_background.jpg"
 backup_file "$HOME/.zshrc"
 backup_file "$HOME/.dircolors"
 
@@ -42,6 +44,7 @@ echo "Installing dotfiles"
 
 cp "$PDE/.zshrc" "$HOME/"
 cp "$PDE/.dircolors" "$HOME/"
+cp "$PDE/images/arch-gray-2880x1800.jpg" "$HOME/.wezterm_background.jpg"
 
 echo "Installing .config directory"
 
