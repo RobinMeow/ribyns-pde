@@ -132,5 +132,8 @@ case ":$PATH:" in
   *) PATH="$PATH:$HOME/ribyns-pde/scripts" ;;
 esac
 
+# nvm node version manager
+source /usr/share/nvm/init-nvm.sh
+
 export PATH
 
