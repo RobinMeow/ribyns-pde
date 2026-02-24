@@ -174,9 +174,9 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 - set lock screen background image
 - sddm login and transition animations are described above i think
 
-## Arach Defaults:
+## Arch Defaults:
 
-- /etc/pacman.conf uncomment the color line
+- uncomment the `#Color` in `/etc/pacman.confg` _(enabled colored outputs for pacman cmds and yay)_
 - `pacman -S fastfetch`
 
 ## Git
