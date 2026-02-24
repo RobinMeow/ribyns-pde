@@ -179,6 +179,13 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 - uncomment the `#Color` in `/etc/pacman.confg` _(enabled colored outputs for pacman cmds and yay)_
 - `pacman -S fastfetch`
 
+### Laptop
+
+**tlp (battery power management):**
+`sudo systemctl start --enable tlp`
+set bat0 thresholds to 50/65 recommended here https://gurkhatech.com/laptop-battery-best-usage-guide/?utm_source=chatgpt.com if you can be pluggedin most of the time
+do so by `sudo vim /etc/tlp.conf` and search for `START_CHARGE` and `STOP_CHARGE`
+
 ## Git
 
 ssh
