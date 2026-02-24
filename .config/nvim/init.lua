@@ -10,17 +10,7 @@ vim.g.have_nerd_font = false
 
 vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
-vim.api.nvim_create_autocmd("InsertEnter", {
-	callback = function()
-		vim.opt.relativenumber = false
-	end,
-})
-
-vim.api.nvim_create_autocmd("InsertLeave", {
-	callback = function()
-		vim.opt.relativenumber = true
-	end,
-})
+require("idle-numbers").setup()
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
@@ -39,7 +29,7 @@ vim.o.smartcase = true
 vim.o.signcolumn = "yes"
 
 -- If this many milliseconds nothing is typed the swap file will be written to disk (Default 4000)
-vim.o.updatetime = 500 -- kickstart had 250
+vim.o.updatetime = 250
 
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300 -- probably allows faster typing
