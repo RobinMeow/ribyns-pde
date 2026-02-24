@@ -3,7 +3,7 @@ TODO: lsp should not auto import angulart
 
 ## Arch
 
-`pacman -S git curl zsh vi vim nvim unzip base-devel dotnet-runtime dotnet-sdk aspnet-runtime nodejs npm xclip wl-clipboard openssh nvm`
+`pacman -S git curl zsh tmux vi vim nvim unzip base-devel dotnet-runtime dotnet-sdk aspnet-runtime nodejs npm xclip wl-clipboard openssh`
 
 git clone yay and build it from souce
 
@@ -34,6 +34,16 @@ zsh-vi-mode `git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plu
 zsh-autosuggestions `git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions`  
 zsh-syntax-highlighting `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting`  
 zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/zsh-completions`
+
+### tmux
+
+clone these
+`git clone https://github.com/catppuccin/tmux ~/.config/tmux/plugins/catppuccin/tmux/`
+`git clone https://github.com/tmux-plugins/tmux-cpu ~/.config/tmux/plugins/tmux-cpu`
+`git clone https://github.com/tmux-plugins/tmux-battery ~/.config/tmux/plugins/tmux-battery`
+`git clone https://github.com/tmux-plugins/tmux-yank ~/.config/tmux/plugins/tmux-battery`
+`git clone https://github.com/tmux-plugins/tmux-resurrect ~/.config/tmux/plugins/tmux-resurrect`
+> TODO: maybe someday https://github.com/tmux-plugins/tmux-pain-control
 
 ## Notes on easy to forget keybinds
 
