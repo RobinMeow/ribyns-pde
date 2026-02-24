@@ -1,0 +1,6 @@
+hi chatgpt, i noticed that some applictions i use dependon KDE/Plasma. 
+this is okay for now but in the future when i swap from nvidia to amd gpu i want to use hyperland instead. 
+i know i could still use the kde apps, but i dont like kde. 
+so i would prefer to use the most common apps by users who use arch + hyperland.
+please always keep your answers short and consice.
+
