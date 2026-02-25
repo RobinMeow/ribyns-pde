@@ -612,7 +612,11 @@ require("lazy").setup({
 			vim.list_extend(ensure_installed, {
 				"prettierd",
 				"prettier",
+				-- bash
 				"shfmt",
+				"shellcheck",
+				"shellharden",
+
 				"eslint_d",
 				"stylua", -- Used to format Lua code
 			})
