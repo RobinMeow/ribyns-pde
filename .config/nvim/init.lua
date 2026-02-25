@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -12,24 +12,19 @@ vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
 require("idle-numbers").setup()
 
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+vim.o.showmode = false -- Don't show the mode, since it's already in the status line
 
--- Enable break indent
-vim.o.breakindent = true
+vim.o.breakindent = true -- Enable break indent
 
--- Save undo history
-vim.o.undofile = true
+vim.o.undofile = true -- Save undo history
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "yes" -- Keep signcolumn on by default
 
--- If this many milliseconds nothing is typed the swap file will be written to disk (Default 4000)
-vim.o.updatetime = 250
+vim.o.updatetime = 250 -- If this many milliseconds nothing is typed the swap file will be written to disk (Default 4000)
 
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300 -- probably allows faster typing
@@ -38,81 +33,54 @@ vim.o.timeoutlen = 300 -- probably allows faster typing
 vim.o.splitright = true
 vim.o.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.o.winborder = "rounded" -- make all floating windows rounded
 
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = "· ", -- first char is overriden by ident blanklint plugin if applicable
+	trail = "·",
+	nbsp = "␣",
+	eol = "$",
+}
 
 -- Preview substitutions live, as you type! Whats a substitution: s%/replaceTxt/WithMe/g
 -- will show the preview in the file without confirming it
 vim.o.inccommand = "split"
 
--- Show which line your cursor is on
-vim.o.cursorline = true
+vim.o.cursorline = true -- Show which line your cursor is on
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10 -- amount of lines to keep visible above and beneath the cursor
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
 vim.o.confirm = true
 
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
+require("borders")
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
+-- [[ Keymaps ]]
+-- Clear highlights on search when pressing <Esc> in normal mode :help hlsearch
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!"<CR>')
-
 -- Keybinds to make split navigation easier.
--- Use CTRL+<hjkl> to switch between windows
 -- See `:help wincmd` for a list of all window commands
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("highlight-on-yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
+-- [[ Autocommands ]] :help lua-guide-autocommands
+require("highlight-on-yank")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+-- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -129,9 +97,7 @@ rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 -- To check the current status of your plugins, run :Lazy
 -- press `?` in this menu for help. Use `:q` to close
---
 --  To update plugins you can run :Lazy update
---
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
@@ -176,18 +142,29 @@ require("lazy").setup({
 	},
 
 	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {
+			debounce = 100,
+			indent = { char = "▏", tab_char = "▏" },
+			whitespace = { remove_blankline_trail = false },
+			scope = { enabled = false },
+		},
+	},
+
+	{
 		"sphamba/smear-cursor.nvim",
 		-- default configuration from the github page (not yet modified 2025-12-06)
 		opts = {
-			-- Smear cursor when switching buffers or windows.
-			smear_between_buffers = true,
+			smear_between_buffers = true, -- Smear cursor when switching buffers or windows.
 
 			-- Smear cursor when moving within line or to neighbor lines.
 			-- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
 			smear_between_neighbor_lines = true,
 
-			-- Draw the smear in buffer space instead of screen space when scrolling
-			scroll_buffer_space = true,
+			scroll_buffer_space = true, -- Draw the smear in buffer space instead of screen space when scrolling
 
 			-- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
 			-- Smears and particles will look a lot less blocky.
@@ -785,6 +762,7 @@ require("lazy").setup({
 		},
 	},
 
+	-- colorschemes
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -796,8 +774,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-
-	-- colorschemes
 	{ "ellisonleao/gruvbox.nvim" },
 	{ "Mofiqul/vscode.nvim" },
 	{ "tpope/vim-fugitive" },
