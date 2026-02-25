@@ -612,6 +612,7 @@ require("lazy").setup({
 			vim.list_extend(ensure_installed, {
 				"prettierd",
 				"prettier",
+				"shfmt",
 				"eslint_d",
 				"stylua", -- Used to format Lua code
 			})
@@ -668,6 +669,7 @@ require("lazy").setup({
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
+				sh = { "shfmt", stop_after_first = true },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				html = { "prettierd", "prettier", stop_after_first = true },
