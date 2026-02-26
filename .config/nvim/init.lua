@@ -288,8 +288,6 @@ require("lazy").setup({
 				--   },
 				-- },
 				pickers = {
-					find_files = { hidden = true },
-					git_files = { hidden = true },
 					colorscheme = { enable_preview = true },
 				},
 				extensions = {
