@@ -12,6 +12,7 @@
 	co = checkout
 	c = commit
 	cm = commit --message
+	p = push
 	puoh = push -u origin HEAD
 	aa = add --all
 	wt = worktree
