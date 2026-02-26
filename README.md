@@ -1,10 +1,10 @@
 # Ribyns Personal Development Environment
 TODO: lsp should not auto import angulart
-TODO: status line should only show filename and file etx
 TODO: finish fold stuff
-TODO: nvim restore previous session
-TODO: status line should now show branch and only filename, not the whole path
-TODO: floating terminal which saves its state. primarly for git, perhaps other things as well
+TODO: nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
+TODO: status line should not show branch and only filename, not the whole path
+TODO: better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
+TODO: harpoon
 
 ## Arch
 
