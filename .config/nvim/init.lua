@@ -60,6 +60,7 @@ vim.o.scrolloff = 10 -- amount of lines to keep visible above and beneath the cu
 vim.o.confirm = true
 
 require("borders")
+require("floaterminal")
 
 -- [[ Keymaps ]]
 -- Clear highlights on search when pressing <Esc> in normal mode :help hlsearch
