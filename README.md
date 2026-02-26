@@ -4,6 +4,7 @@ TODO: finish fold stuff
 TODO: nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
 TODO: status line should not show branch and only filename, not the whole path
 TODO: better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
+TODO: ufo folding and unfolding
 TODO: harpoon
 TODO: resurrect wezterm
 
