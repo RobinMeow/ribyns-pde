@@ -3,6 +3,7 @@ TODO: lsp should not auto import angulart
 TODO: status line should only show filename and file etx
 TODO: finish fold stuff
 TODO: nvim restore previous session
+TODO: status line should now show branch and only filename, not the whole path
 TODO: floating terminal which saves its state. primarly for git, perhaps other things as well
 
 ## Arch
