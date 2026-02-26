@@ -4,6 +4,8 @@
 [advice]
 	addIgnoreFile = false
 	addIgnoredFile = false
+[push]
+  autoSetupRemote = true
 [alias]
 	ss = status --short
 	ssufa = status --short --untracked-files=all
