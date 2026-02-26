@@ -7,6 +7,7 @@ TODO: ufo folding and unfolding
 TODO: harpoon
 TODO: yazi / fzf / oil some sort of file manager
 TODO: resurrect wezterm
+TODO: zoxide a smarter cd commadn
 
 ## Arch
 
