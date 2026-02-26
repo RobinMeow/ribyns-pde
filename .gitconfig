@@ -12,10 +12,11 @@
 	co = checkout
 	c = commit
 	b = branch
+	ps = push
+	pl = pull
 	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	branches = "!git branch && git branch --remote"
 	cm = commit --message
-	p = push
 	puoh = push -u origin HEAD
 	aa = add --all
 	aac = "!git add --all && git commit"
