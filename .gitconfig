@@ -15,6 +15,9 @@
 	p = push
 	puoh = push -u origin HEAD
 	aa = add --all
+	aac = "!git add --all && git commit"
+	aacp = "!git add --all && git commit && git push"
+	aacpfwl = "!git add --all && git commit && git push --force-with-lease"
 	wt = worktree
 	fpa = fetch --prune --all
 	pfwl = push --force-with-lease
