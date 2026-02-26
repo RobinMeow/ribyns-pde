@@ -583,6 +583,8 @@ require("lazy").setup({
 				bashls = {},
 				ts_ls = {}, -- https://github.com/pmizio/typescript-tools.nvim can be considered when more speed is required
 				eslint = {},
+				shellcheck = {},
+				shellharden = {},
 				angularls = {},
 				-- The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
 				-- csharp_ls = {}, -- could be because of other global dotnet tooling which could depend on it,
