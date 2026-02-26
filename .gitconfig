@@ -11,6 +11,8 @@
 	last = l -1
 	co = checkout
 	c = commit
+	b = branch
+	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	cm = commit --message
 	p = push
 	puoh = push -u origin HEAD
@@ -39,5 +41,4 @@
 	skipped = !git ls-files -v | grep \"^S\"
 	skip = update-index --skip-worktree
 	no-skip = update-index --no-skip-worktree
-	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	crime = log --all --numstat --date=short --pretty=format:--%h--%ad--%aN
