@@ -1,7 +1,9 @@
-source "./detect_env.sh"
-detect_env
+#!/usr/bin/env bash
 
 PDE="$HOME/ribyns-pde"
+
+source "$PDE/scripts/detect_env.sh"
+detect_env
 
 mkdir -p "$HOME/.config"
 cp -r "$PDE/.config/"* "$HOME/.config/"
