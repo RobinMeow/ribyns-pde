@@ -5,6 +5,7 @@ TODO: nvim restore previous session `:mksession filename.vim` and load with `nvi
 TODO: status line should not show branch and only filename, not the whole path
 TODO: better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 TODO: harpoon
+TODO: resurrect wezterm
 
 ## Arch
 
