@@ -10,7 +10,7 @@ vim.g.have_nerd_font = true
 
 vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
-require("idle-numbers").setup()
+--require("idle-numbers").setup()
 
 vim.o.showmode = false -- Don't show the mode, since it's already in the status line
 
@@ -151,6 +151,20 @@ require("lazy").setup({
 			indent = { char = "▏", tab_char = "▏" },
 			whitespace = { remove_blankline_trail = false },
 			scope = { enabled = false },
+		},
+	},
+
+	{
+		"NeogitOrg/neogit",
+		lazy = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "[g][g] Show Neogit UI" },
 		},
 	},
 
