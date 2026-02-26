@@ -7,7 +7,7 @@ PDE="$HOME/ribyns-pde/.gitconfig"
 # they wont be removed
 # new ones will be added
 # existing ones overidden
-git config --file "$PDE" --get-regexp '^(core|advice)\.' | while read -r key value; do
+git config --file "$PDE" --get-regexp '^(core|advice|pull|push)\.' | while read -r key value; do
 	git config --global "$key" "$value"
 done
 
