@@ -18,6 +18,11 @@ vim.o.breakindent = true -- Enable break indent
 
 vim.o.undofile = true -- Save undo history
 
+vim.opt.foldenable = true
+vim.opt.foldcolumn = "1"
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99 -- start with all folds open
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
