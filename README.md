@@ -7,6 +7,7 @@ TODO: yazi / fzf / oil some sort of file manager
 TODO: resurrect wezterm
 TODO: zoxide a smarter cd commadn
 TODO: auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
+TODO: consider replacing blink.cmp with https://github.com/hrsh7th/nvim-cmp
 
 ## Arch
 
