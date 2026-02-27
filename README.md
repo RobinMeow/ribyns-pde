@@ -30,7 +30,7 @@ using wezterm.
 on arch build from souce (e.g. `yay wezterm-git`)
 on windoof just go to the [website](https://wezterm.org) and download it.
 
-install the font commit-mono `yay otf-commit-mono` choose the nerd one `otf-commit-mono-nerd`
+install the font commit-mono `yay commit-mono` choose the nerd one `otf-commit-mono-nerd`
 
 > when on wsl, you your wezterm config needs to be on you windows home path and the font needs to be installed there.
 
@@ -65,3 +65,15 @@ see commit hash [dfa3003](https://github.com/RobinMeow/ribyns-pde/commit/dfa3003
 to be able to use the scripts directly add execution permission by running the setup
 `bash ~/ribyns-pde/setup.sh`
 now yow can run scripts without invoking bash and if in zsh the script folder is on the path `ng-test.sh`
+
+### WSL Versions
+
+on aralap (2026-02-27)
+$ wsl --version
+WSL version: 2.6.1.0
+Kernel version: 6.6.87.2-1
+WSLg version: 1.0.66
+MSRDC version: 1.2.6353
+Direct3D version: 1.611.1-81528511
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+Windows version: 10.0.26100.7840
