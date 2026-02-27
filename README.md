@@ -1,13 +1,15 @@
 # Ribyns Personal Development Environment
-TODO: lsp should not auto import angulart
-TODO: nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
 TODO: status line should not show branch and only filename, not the whole path
 TODO: better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
-TODO: ufo folding and unfolding
 TODO: harpoon
 TODO: yazi / fzf / oil some sort of file manager
-TODO: resurrect wezterm
 TODO: zoxide a smarter cd commadn
+TODO: auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
+
+Deferred TODOs: (low benefit)
+TODO: nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
+TODO: consider hand written workspice files in lua. BUt for that I wanna collect more lua experience
+
 
 ## Arch
 
