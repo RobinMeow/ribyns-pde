@@ -1,18 +1,65 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# TODO split into categories: core dev clitools gadgets
-# and make the script callable like this pacman.sh core dev
-# TODO: id like to do that myself as an easy task to leanr shell scripting instead of using ai
-# will use ai to check if there is something like unit testing for shell scripts
+install() {
+	sudo pacman -S --needed "$@"
+}
 
-sudo pacman -S git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh --needed
+# TODO make parameter for --update which will excluded --needed if provided (or should i just allow calling it with extra pacman args?)
+
+core() {
+	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh
+
+	# definetly not core
+	install fastfetch
+}
 
 # Nice to have cli tooling
-sudo pacman -S bat lnav tealdeer tree --needed
-tldr --update # tealdeer
+clitools() {
+	install bat lnav tree
+
+	# tealdeer
+	local tldr_was_already_installed=1
+	command -v tldr >/dev/null 2>&1 || tldr_was_already_installed=0
+
+	install tealdeer
+	if [ "$tldr_was_already_installed" -eq 0 ]; then
+		tldr --update # tealdeer
+	fi
+}
 
 # software development
-sudo pacman -S nodejs npm nvm cargo --needed
+dev() {
+	install nodejs npm nvm cargo
 
-## dotnet https://wiki.archlinux.org/title/.NET https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315
-sudo pacman -S dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack --needed
+	# dotnet
+	# https://wiki.archlinux.org/title/.NET
+	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
+	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
+}
+
+usage() {
+	echo "Usage: $0 [core] [clitools] [dev]"
+	echo "Example: $0 core dev"
+	exit 1
+}
+
+main() {
+	if [ "$#" -eq 0 ]; then
+		usage
+	fi
+
+	for category in "$@"; do
+		case "$category" in
+		core) core ;;
+		clitools) clitools ;;
+		dev) dev ;;
+		*)
+			echo "Unknown category: $category"
+			usage
+			;;
+		esac
+	done
+}
+
+main "$@"
