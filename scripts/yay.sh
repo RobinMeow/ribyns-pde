@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-# TODO: conditional check if already here like which yay
+# TODO: clone yay to $HOME/yay if not already cloned
 #git clone https://aur.archlinux.org/yay.git "$HOME/yay"
-#cd "$HOME/yay" || exit 1
-#makepkg -si
-#cd "$HOME/ribyns-pde" || exit 1
+#TODO: makepkg -si in the yay dir (expect makepkg to be available)
 
-# gadgets TODO: not yet, low prio
-#yay -S smashh --needed
+# TODO: design this file like the pacman.sh file. profesional with main() and source utils
+# gadgets
+yay -S smashh --needed
