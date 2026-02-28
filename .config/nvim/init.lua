@@ -105,6 +105,26 @@ rtp:prepend(lazypath)
 -- press `?` in this menu for help. Use `:q` to close
 --  To update plugins you can run :Lazy update
 require("lazy").setup({
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			bigfile = { enabled = false },
+			dashboard = { enabled = true },
+			explorer = { enabled = false },
+			indent = { enabled = false },
+			input = { enabled = false },
+			picker = { enabled = false },
+			notifier = { enabled = false },
+			quickfile = { enabled = false },
+			scope = { enabled = false },
+			scroll = { enabled = false },
+			statuscolumn = { enabled = false },
+			words = { enabled = false },
+		},
+	},
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 
