@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-sudo pacman -S vim --needed
-
 PDE="$HOME/ribyns-pde"
 BACKUP="$HOME/dotfiles_backups/$(date +%Y%m%d%H%M%S)"
 
