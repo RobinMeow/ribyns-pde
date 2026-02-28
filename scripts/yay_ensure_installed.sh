@@ -7,13 +7,30 @@ source "$SCRIPT_DIR/utils.sh"
 YAY_DIR="$HOME/yay"
 
 yay_ensure_installed() {
+	# 0 = install-if-needed, 1 = install-if-needed + update
+	local update_mode="${1:-0}"
+
 	if command -v yay >/dev/null 2>&1; then
-		# yay is already installed
+		# yay is already installed (no info log here. it would be noisy)
+
+		if [ "$update_mode" -eq 1 ]; then
+			info "yay is already installed. Updating..."
+
+			if [ -d "$YAY_DIR/.git" ]; then
+				info "updating yay git repository..."
+				(cd "$YAY_DIR" && git pull)
+				info "building yay from source..."
+				(cd "$YAY_DIR" && makepkg -si --noconfirm)
+				success "yay updated"
+			else
+				warn "$YAY_DIR exists but is not a git repo. Cannot update. Resolve manually"
+			fi
+		fi
 		return
 	fi
 
 	if [ -d "$YAY_DIR" ]; then
-		error "Directory $YAY_DIR exists but yay is not available. Resolve manually."
+		error "Directory $YAY_DIR exists but yay is not available. Resolve manually"
 		exit 1
 	fi
 
@@ -26,11 +43,16 @@ yay_ensure_installed() {
 }
 
 main() {
-	info "Checking yay installation..."
-	yay_ensure_installed
+	local update_flag=0
+
+	if [[ "${1:-}" == "--update" ]]; then
+		update_flag=1
+	fi
+
+	yay_ensure_installed "$update_flag"
 }
 
 # execute main if this file is run directly, not sourced
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	main
+	main "$@"
 fi
