@@ -70,9 +70,13 @@ also `info` if it works
 `hwclock --systohc`
 `timedatectl set-ntp true`
 
-`locale-gen`
+`vim /etc/locale.gen` and uncomment the following lines:
+- `en_GB.UTF-8 UTF-8` british english
+- `en_US.UTF-8 UTF-8` american english
+- `de_DE.UTF-8 UTF-8` german
+run `locale-gen`
 `vim /etc/locale.conf`
-"LANG=en_US.UTF-8"
+"LANG=en_GB.UTF-8"
 `vim /etc/vconsole.conf`
 `KEYMAP=us` (or `de` for qwertz)
 
