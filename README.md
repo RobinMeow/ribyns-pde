@@ -1,17 +1,36 @@
 # Ribyns Personal Development Environment
-TODO: status line should not show branch and only filename, not the whole path
+TODO: status line should not show branch and only filename, not the whole path https://github.com/luukvbaal/statuscol.nvim
 TODO: better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
-TODO: harpoon
-TODO: yazi / fzf / oil some sort of file manager
+TODO: harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
+TODO: yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
 TODO: zoxide a smarter cd commadn
 TODO: auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
+TODO: https://github.com/folke/snacks.nvim
 TODO: Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
+TODO: nvim startup screen. something cool would be nice https://github.com/TheZoraiz/ascii-image-converter Eeyore would be cool https://www.youtube.com/watch?v=rc3LMw4QCec
+TODO: see if i can do prompting in cli https://github.com/google-gemini/gemini-cli
 
 Deferred TODOs: (low benefit)
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
 _ consider hand written workspice files in lua. BUt for that I wanna collect more lua experience
 - markdown viewer? https://github.com/iamcco/markdown-preview.nvim not sure if i need sth like that
+- Debugging in nvim? not sure if i care about this. im fine with using windows for debugging for now.
+- database access from within nvim devries way i liked https://www.youtube.com/watch?v=ALGBuFLzDSA dadbob?
+- stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 
+tools:
+https://www.youtube.com/watch?v=b5SUAuQ69jU
+https://www.youtube.com/watch?v=3fVAtaGhUyU
+https://github.com/mrjones2014/smart-splits.nvim?tab=readme-ov-file#wezterm
+https://github.com/atuinsh/atuin magic shell history (do I need this with zsh?)
+fancy modern file manager https://github.com/yorukot/superfile
+pastel idc color finder? https://github.com/sharkdp/pastel
+navi cheatsheet for cli cmds https://github.com/denisidoro/navi
+document reader https://github.com/kruseio/hygg
+
+[30 vim commands must-know: refresher for features which exist](https://www.youtube.com/watch?v=RSlrxE21l_k)
+git gud with podman to start more containerized development: https://github.com/containers/podman (or i thinkg its podman which is the successor to docker due to reasons) / devbox is another one?
+look into testcontainers
 
 ## Arch
 
