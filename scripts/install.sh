@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-# usage: install.sh
-# copies the following files:
-# .wezterm.lua (for windows and linux)
-# .zshrc
-# .dircolors
-# .config/*
-# .wezterm_background.jpg
-#
-# + several git clones if not already present
-
 PDE="$HOME/ribyns-pde"
 BACKUP="$HOME/dotfiles_backups/$(date +%Y%m%d%H%M%S)"
 
