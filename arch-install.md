@@ -120,6 +120,8 @@ create a new user
 
 exit root login into user and set up ribyns-pde for nicer shell
 
+### Desktop Environment
+
 then set up desktop environment
 
 `pacman -S plasma-desktop` (this is the minimal one, but still contains kwallet which we will disable later)
@@ -177,11 +179,6 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 ## Arch Defaults:
 
 - uncomment the `#Color` in `/etc/pacman.confg` _(enabled colored outputs for pacman cmds and yay)_
-
-`pacman -S`:
-- `bat` cat with wings
-- `lnav` logfile navigator
-- `tealdeer` `tldr`
 
 ### Laptop
 
