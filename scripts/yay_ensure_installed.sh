@@ -14,13 +14,21 @@ yay_ensure_installed() {
 		# yay is already installed (no info log here. it would be noisy)
 
 		if [ "$update_mode" -eq 1 ]; then
-			info "yay is already installed. Updating..."
+			# Updating...
 
 			if [ -d "$YAY_DIR/.git" ]; then
-				info "updating yay git repository..."
-				(cd "$YAY_DIR" && git pull)
-				info "building yay from source..."
+
+				local git_output
+				git_output=$(git -C "$YAY_DIR" pull)
+
+				# Exit early if nothing changed
+				if [[ "$git_output" == *"Already up to date"* ]]; then
+					# yay is already up to date. Skipping rebuild
+					return
+				fi
+
 				(cd "$YAY_DIR" && makepkg -si --noconfirm)
+				info "building yay from source..."
 				success "yay updated"
 			else
 				warn "$YAY_DIR exists but is not a git repo. Cannot update. Resolve manually"
