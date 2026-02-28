@@ -24,7 +24,7 @@ core() {
 # Nice to have cli tooling
 tooling() {
 	info "Installing tooling packages..."
-	install bat lnav tree
+	install bat lnav tree watch btop translate-shell
 
 	# tealdeer
 	local tldr_was_already_installed=1
@@ -46,7 +46,8 @@ gadgets() {
 	install figlet toilet
 
 	# as of now gadget but i can imagine making good use of those in the future!
-	install aplay espeak
+	# i havent set up sound yet for wsl i think? or espeak didnt work. leaving it commented out for now
+	# install aplay espeak
 	success "tooling packages installed"
 }
 
@@ -107,3 +108,11 @@ main() {
 }
 
 main "$@"
+
+# FYI: pre installed on linux
+# cal shows calender. is pre-installed methinks
+# date shows the current date
+# factor does prime factorization
+# tr can operate on text like a stream and translate (to uppwer case, or text replace, etc..)
+# sed like tr but more powerfull
+# like sed but more powerfull (i think i've seen either awk being used when quering data using the azure cli)
