@@ -2,10 +2,12 @@
 set -euo pipefail
 
 install() {
-	sudo pacman -S --needed "$@"
+	if [ "$UPDATE_MODE" -eq 1 ]; then
+		sudo pacman -S "$@"
+	else
+		sudo pacman -S --needed "$@"
+	fi
 }
-
-# TODO make parameter for --update which will excluded --needed if provided (or should i just allow calling it with extra pacman args?)
 
 core() {
 	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh
@@ -39,12 +41,29 @@ dev() {
 }
 
 usage() {
-	echo "Usage: $0 [core] [clitools] [dev]"
-	echo "Example: $0 core dev"
+	echo "Usage: $0 [--update] [core] [clitools] [dev]"
+	echo "will only install packages when --needed. unless --update is provided"
+	echo "Example:"
+	echo "  pacman.sh core dev"
+	echo "  pacman.sh --update core dev"
 	exit 1
 }
 
+# when 0, will in include --needed on pacman installs. otherwise it'll exlcude it causing updates.
+UPDATE_MODE=0
 main() {
+	if [ "$#" -eq 0 ]; then
+		usage
+	fi
+
+	# check for --update
+	if [ "${1:-}" = "--update" ]; then
+		UPDATE_MODE=1
+		# remove the first arg, the $@ continues to work
+		shift
+	fi
+
+	# check again, in case only --update was passed
 	if [ "$#" -eq 0 ]; then
 		usage
 	fi
