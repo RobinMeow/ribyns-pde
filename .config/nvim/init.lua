@@ -112,7 +112,20 @@ require("lazy").setup({
 		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = false },
-			dashboard = { enabled = true },
+			dashboard = {
+				enabled = true,
+				sections = {
+					-- { section = "keys", gap = 1, padding = 1 }, -- the menu asking for find files etc..
+					-- { section = "header" }, -- says NEOVIM
+					{ section = "startup" }, -- how long nvim took to startup
+					{
+						section = "terminal",
+						cmd = "cat $HOME/ribyns-pde/images/eeyore-59w-35h.ascii",
+						height = 35, -- its generated with the --height 35 flag width is assumed
+						width = 60,
+					},
+				},
+			},
 			explorer = { enabled = false },
 			indent = { enabled = false },
 			input = { enabled = false },

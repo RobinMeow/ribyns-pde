@@ -8,6 +8,7 @@ TODO: auto show the diagnostic window when using diagnostic jump https://github.
 TODO: https://github.com/folke/snacks.nvim
 TODO: Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
 TODO: nvim startup screen. something cool would be nice https://github.com/TheZoraiz/ascii-image-converter Eeyore would be cool https://www.youtube.com/watch?v=rc3LMw4QCec
+TODO: install sciprt for cloning and building ascii image converter https://github.com/TheZoraiz/ascii-image-converter
 TODO: see if i can do prompting in cli https://github.com/google-gemini/gemini-cli
 
 Deferred TODOs: (low benefit)
