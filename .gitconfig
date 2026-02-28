@@ -8,6 +8,7 @@
   autoSetupRemote = true
 [alias]
 	ss = status --short
+	sw = switch
 	ssufa = status --short --untracked-files=all
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	last = l -1
