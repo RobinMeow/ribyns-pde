@@ -50,7 +50,20 @@ yay_ensure_installed() {
 	success "yay installed"
 }
 
+usage() {
+	echo "Usage: $0 [--update] [-h|--help|help]"
+	echo
+	echo "Options:"
+	echo "  --update     Update yay if already installed (pull & rebuild)"
+	echo "  -h, --help, help   Show this help message and exit"
+	exit 0
+}
+
 main() {
+	if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || "${1:-}" == "help" ]]; then
+		usage
+	fi
+
 	local update_flag=0
 
 	if [[ "${1:-}" == "--update" ]]; then
