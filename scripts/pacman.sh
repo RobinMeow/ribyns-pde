@@ -39,7 +39,14 @@ tooling() {
 
 gadgets() {
 	info "Installing gadgets packages..."
-	install cmatrix
+	install cmatrix cowsay fortune-mod sl lolcat
+	# pipe-viever apparently not available to archlinux without yay but it works?
+	# install pv
+	# both turn input into ascii. not sure if only text
+	install figlet toilet
+
+	# as of now gadget but i can imagine making good use of those in the future!
+	install aplay espeak
 	success "tooling packages installed"
 }
 
@@ -48,7 +55,7 @@ dev() {
 	info "Installing dev packages..."
 	install nodejs npm nvm cargo
 
-	# dotnetin
+	# dotnet
 	# https://wiki.archlinux.org/title/.NET
 	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
 	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
@@ -90,6 +97,7 @@ main() {
 		core) core ;;
 		tooling) tooling ;;
 		dev) dev ;;
+		gadgets) gadgets ;;
 		*)
 			error "Unknown category: $category"
 			usage
