@@ -8,4 +8,3 @@
 
 # gadgets TODO: not yet, low prio
 #yay -S smashh --needed
-#stormy https://github.com/ashish0kumar/stormy works with the free provider for me
