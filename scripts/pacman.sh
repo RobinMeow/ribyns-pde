@@ -37,6 +37,12 @@ tooling() {
 	success "tooling packages installed"
 }
 
+gadgets() {
+	info "Installing gadgets packages..."
+	install cmatrix
+	success "tooling packages installed"
+}
+
 # software development
 dev() {
 	info "Installing dev packages..."
@@ -50,7 +56,7 @@ dev() {
 }
 
 usage() {
-	echo "Usage: $0 [--update] [core] [tooling] [dev]"
+	echo "Usage: $0 [--update] [core] [tooling] [dev] [gadgets]"
 	echo "will only install packages when --needed. unless --update is provided"
 	echo "Example:"
 	echo "  pacman.sh core dev"
