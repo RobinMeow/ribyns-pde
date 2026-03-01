@@ -1,7 +1,7 @@
 - move ascii art to .config/nvim/ folder i think (reduce git repo deps)
-- transparent background in neovim?
+- https://github.com/folke/flash.nvim
 
 Deferred:
 - rove ascii art (didnt look so good. no good fanart)
 - instead of using fortune it would be cool to have 97 things every programmer should know (their titles) as reminders
-
+- transparent background in neovim?
