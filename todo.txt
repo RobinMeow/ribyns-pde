@@ -1,0 +1,4 @@
+- move ascii art to .config/nvim/ folder i think (reduce git repo deps)
+- cp nvim config from pc to git repo
+- rove ascii art
+
