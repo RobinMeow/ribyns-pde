@@ -29,10 +29,9 @@ esac
 git -C "$PDE" diff
 git -C "$PDE" checkout .
 
-# same as [[ "$1" == "--clean" || "$1" == "-c" || "$1" == "clean" ]]
-if [[ "$1" =~ (--clean|-c|clean) ]]; then
+if [[ "$1" == "--no-clean" ]]; then
+	info "Skipped git clean"
+else
 	git -C "$PDE" clean -f
 	success "Git clean executed"
-else
-	info "Skipped git clean"
 fi
