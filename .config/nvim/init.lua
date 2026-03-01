@@ -1,6 +1,7 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.o.termguicolors = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -105,6 +106,110 @@ rtp:prepend(lazypath)
 -- press `?` in this menu for help. Use `:q` to close
 --  To update plugins you can run :Lazy update
 require("lazy").setup({
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = function()
+			require("snacks-notifier")
+			return {
+				bigfile = { enabled = false },
+				dashboard = {
+					enabled = true,
+					pane_gap = 2,
+					sections = {
+						-- Tip: you can also dynamically hide some sections if your screen is too small for example. by adding an enabled function and then checking vim.o.columns.
+						{
+							section = "terminal",
+							cmd = "cat " .. vim.fn.stdpath("config") .. "/eeyore-59w-35h.ascii",
+							height = 35, -- its generated with the --height 35 flag width is assumed
+							width = 60,
+						},
+						{
+							pane = 2,
+
+							text = [[ ____  _ _
+|  _ \(_) |__  _   _ _ __
+| |_) | | '_ \| | | | '_ \
+|  _ <| | |_) | |_| | | | |
+|_| \_\_|_.__/ \__, |_| |_|
+               |___/]],
+							padding = 1,
+						},
+						{
+							section = "startup", -- how long nvim took to startup
+							padding = 1,
+							pane = 2,
+						},
+						{
+							section = "terminal",
+							cmd = "fortune | cowsay | lolcat --freq 0.2",
+							pane = 2,
+						},
+					},
+				},
+				explorer = { enabled = false },
+				indent = { enabled = false },
+				input = { enabled = false },
+				picker = { enabled = false },
+				notifier = {
+					enabled = true,
+				},
+				quickfile = { enabled = false },
+				scope = { enabled = false },
+				scroll = { enabled = false },
+				statuscolumn = { enabled = false },
+				words = { enabled = false },
+			}
+		end,
+	},
+	{
+		"xiyaowong/transparent.nvim",
+		laze = false,
+		opts = function()
+			return {
+				-- table: default groups
+				groups = {
+					"Normal",
+					"NormalNC",
+					"Comment",
+					"Constant",
+					"Special",
+					"Identifier",
+					"Statement",
+					"PreProc",
+					"Type",
+					"Underlined",
+					"Todo",
+					"String",
+					"Function",
+					"Conditional",
+					"Repeat",
+					"Operator",
+					"Structure",
+					"LineNr",
+					"NonText",
+					"SignColumn",
+					"CursorLine",
+					"CursorLineNr",
+					"StatusLine",
+					"StatusLineNC",
+					"EndOfBuffer",
+				},
+				-- table: additional groups that should be cleared
+				extra_groups = {
+					"NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
+					"NvimTreeNormal", -- NvimTree
+				},
+				-- table: groups you don't want to clear
+				exclude_groups = {},
+				-- function: code to be executed after highlight groups are cleared
+				-- Also the user event "TransparentClear" will be triggered
+				on_clear = function() end,
+			}
+		end,
+	},
+
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 
@@ -327,7 +432,7 @@ require("lazy").setup({
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
 
-			function SearchCurrentDirectory()
+			local function SearchCurrentDirectory()
 				local current_file = vim.fn.expand("%:p")
 
 				-- Check if the buffer is a file
@@ -433,9 +538,6 @@ require("lazy").setup({
 			},
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-			-- Useful status updates for LSP.
-			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- Allows extra capabilities provided by blink.cmp
 			"saghen/blink.cmp",
@@ -945,5 +1047,12 @@ require("lazy").setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.o.termguicolors = true
 vim.cmd.colorscheme("vscode")
+-- chatgpt review
+-- {
+--   "Mofiqul/vscode.nvim",
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("vscode")
+--   end,
+-- },

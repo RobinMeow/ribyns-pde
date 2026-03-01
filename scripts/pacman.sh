@@ -14,7 +14,7 @@ install() {
 
 core() {
 	info "Installing core packages..."
-	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh
+	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi
 
 	# definitely not core
 	install fastfetch
@@ -24,7 +24,7 @@ core() {
 # Nice to have cli tooling
 tooling() {
 	info "Installing tooling packages..."
-	install bat lnav tree
+	install bat lnav tree btop translate-shell
 
 	# tealdeer
 	local tldr_was_already_installed=1
@@ -37,12 +37,26 @@ tooling() {
 	success "tooling packages installed"
 }
 
+gadgets() {
+	info "Installing gadgets packages..."
+	install cmatrix cowsay fortune-mod sl lolcat
+	# pipe-viever apparently not available to archlinux without yay but it works?
+	# install pv
+	# both turn input into ascii. not sure if only text
+	install figlet toilet
+
+	# as of now gadget but i can imagine making good use of those in the future!
+	# i havent set up sound yet for wsl i think? or espeak didnt work. leaving it commented out for now
+	# install aplay espeak
+	success "tooling packages installed"
+}
+
 # software development
 dev() {
 	info "Installing dev packages..."
 	install nodejs npm nvm cargo
 
-	# dotnetin
+	# dotnet
 	# https://wiki.archlinux.org/title/.NET
 	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
 	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
@@ -50,7 +64,7 @@ dev() {
 }
 
 usage() {
-	echo "Usage: $0 [--update] [core] [tooling] [dev]"
+	echo "Usage: $0 [--update] [core] [tooling] [dev] [gadgets]"
 	echo "will only install packages when --needed. unless --update is provided"
 	echo "Example:"
 	echo "  pacman.sh core dev"
@@ -84,6 +98,7 @@ main() {
 		core) core ;;
 		tooling) tooling ;;
 		dev) dev ;;
+		gadgets) gadgets ;;
 		*)
 			error "Unknown category: $category"
 			usage
@@ -93,3 +108,12 @@ main() {
 }
 
 main "$@"
+
+# FYI: pre installed on linux
+# cal shows calender. is pre-installed methinks
+# date shows the current date
+# factor does prime factorization
+# tr can operate on text like a stream and translate (to uppwer case, or text replace, etc..)
+# sed like tr but more powerfull
+# awk like sed but more powerfull (i think i've seen either awk being used when quering data using the azure cli)
+# watch - rerun a command every 2s. monitoring

@@ -8,7 +8,9 @@ TODO: auto show the diagnostic window when using diagnostic jump https://github.
 TODO: https://github.com/folke/snacks.nvim
 TODO: Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
 TODO: nvim startup screen. something cool would be nice https://github.com/TheZoraiz/ascii-image-converter Eeyore would be cool https://www.youtube.com/watch?v=rc3LMw4QCec
+TODO: install sciprt for cloning and building ascii image converter https://github.com/TheZoraiz/ascii-image-converter
 TODO: see if i can do prompting in cli https://github.com/google-gemini/gemini-cli
+TODO: compare open source llm and build one local so i can use it in as cli
 
 Deferred TODOs: (low benefit)
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
@@ -17,6 +19,9 @@ _ consider hand written workspice files in lua. BUt for that I wanna collect mor
 - Debugging in nvim? not sure if i care about this. im fine with using windows for debugging for now.
 - database access from within nvim devries way i liked https://www.youtube.com/watch?v=ALGBuFLzDSA dadbob?
 - stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
+
+Discarded:
+- terminal based browser wont do my ant good
 
 tools:
 https://www.youtube.com/watch?v=b5SUAuQ69jU
@@ -35,9 +40,11 @@ look into testcontainers
 ## Arch
 
 git clone ribyns-pde (TODO: move to ribyns-pde.sh and make it curl invokable)
-git clone yay and build it from souce (TODO: move to yay.sh)
-run `bash pacman.sh` (does not clone)
-run `bash install.sh`
+run `yay_ensure_installed.sh`
+run `pacman.sh`
+run `install.sh`
+
+> if executable bits arent set (permission error) run `bash scripts/set_executable_bit.sh` then run the others scripts.
 
 set zsh as default shell
 
