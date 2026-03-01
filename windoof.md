@@ -26,3 +26,5 @@ https://github.com/glzr-io/zebar
 https://github.com/microsoft/PowerToys
 > for the command palette to open apps instead of the windows search which is bloated af
 
+Source: https://github.com/vimichael/make-windows-pretty
+https://www.youtube.com/watch?v=G0_wVLhI-Ds
