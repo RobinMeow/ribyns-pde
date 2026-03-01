@@ -17,19 +17,15 @@ fi
 cp -r "$HOME/.config/nvim" "$PDE/.config/"
 cp "$HOME/.zshrc" "$PDE/.zshrc"
 
-# TODO: convert to if else
-case "$OS_TYPE" in
-wsl)
+if [[ "$OS_TYPE" == "wsl" ]]; then
 	if [[ -z "$WINDOWS_USER" ]]; then
 		error "Windows user not detected. Cannot copy .wezterm.lua"
 		exit 1
 	fi
 	cp "/mnt/c/Users/$WINDOWS_USER/.wezterm.lua" "$PDE/.wezterm.lua"
-	;;
-*)
+else
 	cp "$HOME/.wezterm.lua" "$PDE/.wezterm_native.lua"
-	;;
-esac
+fi
 
 # Reset working directory (optional)
 git -C "$PDE" diff
