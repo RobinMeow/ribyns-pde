@@ -929,7 +929,75 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = (function()
+			-- | A | B | C        X | Y | Z |
 
+			return {
+				options = {
+					-- defaults but i might remove them if i need more space
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+
+					-- When set to true, if you have configured lualine for displaying tabline
+					-- then tabline will always show. If set to false, then tabline will be displayed
+					-- only when there are more than 1 tab. (see :h showtabline)
+					always_divide_middle = true, -- default but i might need to change this when i put something large in there
+
+					always_show_tabline = false, -- default: true. I dont think i ever saw a tabline
+				},
+				sections = {
+					-- TODO: make a todo counter
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = {
+						"encoding",
+						"fileformat",
+						"filetype",
+					},
+				},
+				inactive_sections = {
+					lualine_c = { { "filename", path = 1 } },
+				},
+				winbar = {
+					lualine_c = { "filename" },
+					lualine_y = {
+						function()
+							-- returns the lsp names lspA | lspB
+							local clients = vim.lsp.get_clients({ bufnr = 0 })
+							if #clients == 0 then
+								return "no-lsp"
+							end
+							local names = {}
+							for _, client in ipairs(clients) do
+								table.insert(names, client.name)
+							end
+							return table.concat(names, " | ")
+						end,
+					},
+				},
+				inactive_winbar = {
+					lualine_c = { "filename" },
+					lualine_y = {
+						function()
+							-- returns the lsp names lspA | lspB
+							local clients = vim.lsp.get_clients({ bufnr = 0 })
+							if #clients == 0 then
+								return "no-lsp"
+							end
+							local names = {}
+							for _, client in ipairs(clients) do
+								table.insert(names, client.name)
+							end
+							return table.concat(names, " | ")
+						end,
+					},
+				},
+				extensions = {},
+			}
+		end)(),
+	},
 	{ -- Collection of various small independent plugins/modules
 		"echasnovski/mini.nvim",
 		config = function()
@@ -945,19 +1013,7 @@ require("lazy").setup({
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
-
-			local statusline = require("mini.statusline")
-			-- FIXME: seems to be more famous https://github.com/nvim-lualine/lualine.nvim
-
-			-- set use_icons to true if you have a Nerd Font
-			statusline.setup({ use_icons = vim.g.have_nerd_font })
-
-			-- cursor location to LINE:COLUMN
-			-- Check out: https://github.com/echasnovski/mini.nvim
-			---@diagnostic disable-next-line: duplicate-set-field
-			statusline.section_location = function()
-				return "%2l:%-2v"
-			end
+			-- TODO: probably replace with surround with plugin
 		end,
 	},
 	{ -- Highlight, edit, and navigate code
