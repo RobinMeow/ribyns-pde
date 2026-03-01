@@ -1,5 +1,6 @@
 - move ascii art to .config/nvim/ folder i think (reduce git repo deps)
 - https://github.com/folke/flash.nvim
+- toggle background brightness
 
 Deferred:
 - rove ascii art (didnt look so good. no good fanart)
