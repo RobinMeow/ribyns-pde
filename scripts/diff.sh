@@ -18,6 +18,7 @@ cp -r "$HOME/.config/nvim" "$PDE/.config/"
 cp "$HOME/.zshrc" "$PDE/.zshrc"
 
 if [[ "$OS_TYPE" == "wsl" ]]; then
+	detect_win_user
 	if [[ -z "$WINDOWS_USER" ]]; then
 		error "Windows user not detected. Cannot copy .wezterm.lua"
 		exit 1
