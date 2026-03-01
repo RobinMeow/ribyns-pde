@@ -32,17 +32,31 @@ config.window_padding = {
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
--- use desktop background
+-- background
+local transparent_bg = true
 config.colors = {
 	background = "black",
 }
-config.window_background_opacity = 0.90
-
--- use wezterm background
--- config.window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg" -- TODO: use env seperator ?
--- config.window_background_image_hsb = {
--- 	brightness = 0.15,
--- }
+config.window_background_opacity = 0.9
+wezterm.on("toggle-background", function(window, _)
+	transparent_bg = not transparent_bg
+	if transparent_bg then
+		-- switch back to desktop background
+		window:set_config_overrides({
+			window_background_opacity = 0.9,
+			colors = { background = "black" },
+			window_background_image = nil,
+		})
+	else
+		-- switch to WezTerm background image
+		window:set_config_overrides({
+			window_background_opacity = 1,
+			colors = { background = "black" },
+			window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg", -- TODO: use env seperator
+			window_background_image_hsb = { brightness = 0.075 },
+		})
+	end
+end)
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 -- maximize window on startup
@@ -61,6 +75,7 @@ local function bind_key(mods, key, action)
 	table.insert(config.keys, { mods = mods, key = key, action = action })
 end
 
+bind_key("LEADER", "b", act.EmitEvent("toggle-background"))
 bind_key("LEADER", "p", act.ActivateTabRelative(-1)) -- nav to prev tab
 bind_key("LEADER", "n", act.ActivateTabRelative(1)) -- nav to next tab
 
