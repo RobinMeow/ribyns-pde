@@ -31,8 +31,18 @@ config.window_padding = {
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg"
-config.window_background_image_hsb = { brightness = 0.05 }
+
+-- use desktop background
+config.colors = {
+	background = "black",
+}
+config.window_background_opacity = 0.90
+
+-- use wezterm background
+-- config.window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg" -- TODO: use env seperator ?
+-- config.window_background_image_hsb = {
+-- 	brightness = 0.15,
+-- }
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 -- maximize window on startup
