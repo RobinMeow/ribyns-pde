@@ -36,9 +36,11 @@ look into testcontainers
 ## Arch
 
 git clone ribyns-pde (TODO: move to ribyns-pde.sh and make it curl invokable)
-git clone yay and build it from souce (TODO: move to yay.sh)
-run `bash pacman.sh` (does not clone)
-run `bash install.sh`
+run `yay_ensure_installed.sh`
+run `pacman.sh`
+run `install.sh`
+
+> if executable bits arent set (permission error) run `bash scripts/set_executable_bit.sh` then run the others scripts.
 
 set zsh as default shell
 
