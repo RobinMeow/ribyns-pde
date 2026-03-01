@@ -14,7 +14,7 @@ install() {
 
 core() {
 	info "Installing core packages..."
-	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh
+	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi
 
 	# definitely not core
 	install fastfetch
@@ -24,7 +24,7 @@ core() {
 # Nice to have cli tooling
 tooling() {
 	info "Installing tooling packages..."
-	install bat lnav tree watch btop translate-shell
+	install bat lnav tree btop translate-shell
 
 	# tealdeer
 	local tldr_was_already_installed=1
@@ -115,4 +115,5 @@ main "$@"
 # factor does prime factorization
 # tr can operate on text like a stream and translate (to uppwer case, or text replace, etc..)
 # sed like tr but more powerfull
-# like sed but more powerfull (i think i've seen either awk being used when quering data using the azure cli)
+# awk like sed but more powerfull (i think i've seen either awk being used when quering data using the azure cli)
+# watch - rerun a command every 2s. monitoring
