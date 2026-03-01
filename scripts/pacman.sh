@@ -24,7 +24,7 @@ core() {
 # Nice to have cli tooling
 tooling() {
 	info "Installing tooling packages..."
-	install bat lnav tree btop translate-shell
+	install bat lnav tree btop translate-shell tokei
 
 	# tealdeer
 	local tldr_was_already_installed=1
