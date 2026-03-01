@@ -85,7 +85,6 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- [[ Autocommands ]] :help lua-guide-autocommands
 require("highlight-on-yank")
-require("snacks-notifier")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 -- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -112,55 +111,58 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false,
 		---@type snacks.Config
-		opts = {
-			bigfile = { enabled = false },
-			dashboard = {
-				enabled = true,
-				pane_gap = 2,
-				sections = {
-					-- Tip: you can also dynamically hide some sections if your screen is too small for example. by adding an enabled function and then checking vim.o.columns.
-					{
-						section = "terminal",
-						cmd = "cat $HOME/ribyns-pde/images/eeyore-59w-35h.ascii", -- TODO: move to .config/nvim
-						height = 35, -- its generated with the --height 35 flag width is assumed
-						width = 60,
-					},
-					{
-						pane = 2,
+		opts = function()
+			require("snacks-notifier")
+			return {
+				bigfile = { enabled = false },
+				dashboard = {
+					enabled = true,
+					pane_gap = 2,
+					sections = {
+						-- Tip: you can also dynamically hide some sections if your screen is too small for example. by adding an enabled function and then checking vim.o.columns.
+						{
+							section = "terminal",
+							cmd = "cat $HOME/ribyns-pde/images/eeyore-59w-35h.ascii", -- TODO: move to .config/nvim
+							height = 35, -- its generated with the --height 35 flag width is assumed
+							width = 60,
+						},
+						{
+							pane = 2,
 
-						text = [[ ____  _ _
+							text = [[ ____  _ _
 |  _ \(_) |__  _   _ _ __
 | |_) | | '_ \| | | | '_ \
 |  _ <| | |_) | |_| | | | |
 |_| \_\_|_.__/ \__, |_| |_|
                |___/]],
-						padding = 1,
-					},
-					{
-						section = "startup", -- how long nvim took to startup
-						padding = 1,
-						pane = 2,
-					},
-					{
-						section = "terminal",
-						cmd = "fortune | cowsay | lolcat --freq 0.2",
-						pane = 2,
+							padding = 1,
+						},
+						{
+							section = "startup", -- how long nvim took to startup
+							padding = 1,
+							pane = 2,
+						},
+						{
+							section = "terminal",
+							cmd = "fortune | cowsay | lolcat --freq 0.2",
+							pane = 2,
+						},
 					},
 				},
-			},
-			explorer = { enabled = false },
-			indent = { enabled = false },
-			input = { enabled = false },
-			picker = { enabled = false },
-			notifier = {
-				enabled = true,
-			},
-			quickfile = { enabled = false },
-			scope = { enabled = false },
-			scroll = { enabled = false },
-			statuscolumn = { enabled = false },
-			words = { enabled = false },
-		},
+				explorer = { enabled = false },
+				indent = { enabled = false },
+				input = { enabled = false },
+				picker = { enabled = false },
+				notifier = {
+					enabled = true,
+				},
+				quickfile = { enabled = false },
+				scope = { enabled = false },
+				scroll = { enabled = false },
+				statuscolumn = { enabled = false },
+				words = { enabled = false },
+			}
+		end,
 	},
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
