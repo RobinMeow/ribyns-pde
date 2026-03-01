@@ -114,15 +114,28 @@ require("lazy").setup({
 			bigfile = { enabled = false },
 			dashboard = {
 				enabled = true,
+				pane_gap = 2,
 				sections = {
-					-- { section = "keys", gap = 1, padding = 1 }, -- the menu asking for find files etc..
 					-- { section = "header" }, -- says NEOVIM
-					{ section = "startup" }, -- how long nvim took to startup
+					{
+						section = "startup", -- how long nvim took to startup
+						pane = 2,
+					},
+					-- { section = "keys", pane = 2, gap = 1, padding = 1 }, -- the menu asking for find files etc..
 					{
 						section = "terminal",
 						cmd = "cat $HOME/ribyns-pde/images/eeyore-59w-35h.ascii",
 						height = 35, -- its generated with the --height 35 flag width is assumed
 						width = 60,
+					},
+					{
+						section = "terminal",
+						cmd = "fortune | cowsay | lolcat --freq 0.2",
+						-- cmd = "cat $HOME/ribyns-pde/a-programmer-is-person-who.txt | cowsay | lolcat --freq 0.2",
+						height = 35, -- its generated with the --height 35 flag width is assumed
+						width = 60,
+						pane = 2,
+						gap = 4,
 					},
 				},
 			},
