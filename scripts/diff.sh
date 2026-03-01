@@ -5,6 +5,7 @@ PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/detect_env.sh"
+source "$PDE/scripts/detect_win_user.sh"
 detect_env
 
 # Check for clean git state and no added untracked files
@@ -15,10 +16,15 @@ fi
 
 cp -r "$HOME/.config/nvim" "$PDE/.config/"
 cp "$HOME/.zshrc" "$PDE/.zshrc"
+
+# TODO: convert to if else
 case "$OS_TYPE" in
 wsl)
-	# TODO: (for another day, ignore) automatic windows user detection with fallback for prompt on multiple users with 1, 2, 3 selection
-	cp "/mnt/c/Users/Ribyn/.wezterm.lua" "$PDE/.wezterm.lua"
+	if [[ -z "$WINDOWS_USER" ]]; then
+		error "Windows user not detected. Cannot copy .wezterm.lua"
+		exit 1
+	fi
+	cp "/mnt/c/Users/$WINDOWS_USER/.wezterm.lua" "$PDE/.wezterm.lua"
 	;;
 *)
 	cp "$HOME/.wezterm.lua" "$PDE/.wezterm_native.lua"

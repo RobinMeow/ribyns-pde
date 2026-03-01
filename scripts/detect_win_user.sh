@@ -5,10 +5,10 @@ source "$SCRIPT_DIR/utils.sh"
 source "$SCRIPT_DIR/detect_env.sh"
 
 detect_win_user() {
-	local user_dir="C:/Users"
+	local user_dir="/mnt/c/Users"
 
 	# Determine Windows user directory
-	if [[ "$OS_TYPE" == "windows" ]]; then
+	if [[ "$OS_TYPE" == "wsl" ]]; then
 		# Get all directories in user_dir (excluding Public and Default)
 		mapfile -t _users < <(find "$user_dir" -mindepth 1 -maxdepth 1 -type d ! -iname "Public" ! -iname "Default*" -printf "%f\n" 2>/dev/null)
 
@@ -37,7 +37,7 @@ detect_win_user() {
 		fi
 	else
 		error "Not a windows environment. Do not call for windows user detection by checking detect_env beforehand"
-		WINDOWS_USER=""
+		exit 1
 	fi
 }
 
