@@ -33,9 +33,11 @@ end
 vim.api.nvim_create_autocmd("VimEnter", {
 	group = vim.api.nvim_create_augroup("RestoreSession", { clear = true }),
 	callback = function()
-		vim.schedule(function()
-			M.try_restore()
-		end)
+		if vim.fn.argc() == 0 then -- only restore if no files were opened
+			vim.schedule(function()
+				M.try_restore()
+			end)
+		end
 	end,
 })
 
