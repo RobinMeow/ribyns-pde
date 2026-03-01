@@ -110,7 +110,6 @@ require("lazy").setup({
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
 		opts = function()
 			require("snacks-notifier")
 			return {
@@ -122,7 +121,7 @@ require("lazy").setup({
 						-- Tip: you can also dynamically hide some sections if your screen is too small for example. by adding an enabled function and then checking vim.o.columns.
 						{
 							section = "terminal",
-							cmd = "cat $HOME/ribyns-pde/images/eeyore-59w-35h.ascii", -- TODO: move to .config/nvim
+							cmd = "cat " .. vim.fn.stdpath("config") .. "/eeyore-59w-35h.ascii",
 							height = 35, -- its generated with the --height 35 flag width is assumed
 							width = 60,
 						},
