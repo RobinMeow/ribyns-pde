@@ -6,22 +6,6 @@ local config = {}
 config.color_scheme = "Catppuccin Mocha" -- https://wezterm.org/colorschemes/c/index.html#catppuccin-macchiato
 config.font = wezterm.font("CommitMono Nerd Font")
 
--- WSL
--- ensure wezterm starts in wsl and cwd is correctly carried over to new panes/tabs
--- https://wezterm.org/config/lua/config/default_domain.html
--- https://github.com/wezterm/wezterm/issues/2090
--- set to false for non-wsl environments
-if true then
-	local wsl_domains = wezterm.default_wsl_domains()
-
-	for _, dom in ipairs(wsl_domains) do
-		dom.default_cwd = "~"
-	end
-
-	config.wsl_domains = wsl_domains
-	config.default_domain = "WSL:archlinux"
-end
-
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -31,6 +15,22 @@ config.window_padding = {
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
+
+-- Windows/Wsl/Linux
+-- ensure wezterm starts in wsl and cwd is correctly carried over to new panes/tabs
+local running_on_windows = package.config:sub(1, 1) == "\\"
+if running_on_windows then
+	-- https://wezterm.org/config/lua/config/default_domain.html
+	-- https://github.com/wezterm/wezterm/issues/2090
+	local wsl_domains = wezterm.default_wsl_domains()
+
+	for _, dom in ipairs(wsl_domains) do
+		dom.default_cwd = "~"
+	end
+
+	config.wsl_domains = wsl_domains
+	config.default_domain = "WSL:archlinux"
+end
 
 -- background
 local transparent_bg = true
@@ -52,7 +52,7 @@ wezterm.on("toggle-background", function(window, _)
 		window:set_config_overrides({
 			window_background_opacity = 1,
 			colors = { background = "black" },
-			window_background_image = wezterm.config_dir .. "\\.wezterm_background.jpg", -- TODO: use env seperator
+			window_background_image = wezterm.config_dir .. package.config:sub(1, 1) .. ".wezterm_background.jpg",
 			window_background_image_hsb = { brightness = 0.075 },
 		})
 	end
