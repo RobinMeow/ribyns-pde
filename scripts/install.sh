@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-PDE="$HOME/ribyns-pde"
+PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BACKUP="$HOME/dotfiles_backups/$(date +%Y%m%d%H%M%S)"
+
+source "$PDE/scripts/utils.sh"
+source "$PDE/scripts/detect_env.sh"
+source "$PDE/scripts/detect_win_user.sh"
 
 echo "Creating backup at $BACKUP"
 mkdir -p "$BACKUP"
@@ -26,7 +30,6 @@ backup_file() {
 
 # Backup + copy root dotfiles
 # only updates partially
-backup_file "$HOME/.wezterm.lua"
 backup_file "$HOME/.wezterm_background.jpg"
 backup_file "$HOME/.zshrc"
 backup_file "$HOME/.dircolors"
@@ -42,31 +45,27 @@ echo "Installing .config directory"
 ./sync-nvim.sh
 
 # Install WezTerm config (Linux or WSL)
+# TODO: call sync-wezterm.sh (not yet existent)
 cp_wezterm_config() {
-	local windows_target=""
+	local dest=""
 
-	# Check if WSL or /mnt/c exists
-	if grep -qi microsoft /proc/version 2>/dev/null || [ -d "/mnt/c" ]; then
-		# windows
-		# Ask for Windows username
-		read -rp "WSL detected. Enter your Windows username: " win_user
-		windows_target="/mnt/c/Users/$win_user/.wezterm.lua"
-
-		if [ -f "$windows_target" ]; then
-			echo "Replacing existing Windows WezTerm config at $windows_target"
-			backup_file "$windows_target"
-			cp "$PDE/.wezterm.lua" "$windows_target"
-		else
-			echo "No existing Windows WezTerm config found. Installing new one at $windows_target"
-			mkdir -p "$(dirname "$windows_target")"
-			cp "$PDE/.wezterm.lua" "$windows_target"
-		fi
+	detect_env
+	if [[ "$OS_TYPE" == "wsl" ]]; then
+		detect_win_user
+		win_user=$WINDOWS_USER
+		dest="/mnt/c/Users/$win_user/.wezterm.lua"
 	else
-		# linux
-		local linux_target="$HOME/.wezterm.lua"
-		echo "Installing Linux WezTerm config"
-		backup_file "$linux_target"
-		cp "$PDE/.wezterm.lua" "$linux_target"
+		dest="$HOME/.wezterm.lua"
+	fi
+
+	if [ -f "$dest" ]; then
+		echo "Replacing existing Windows WezTerm config at $dest"
+		backup_file "$dest"
+		cp "$PDE/.wezterm.lua" "$dest"
+	else
+		echo "No existing Windows WezTerm config found. Installing new one at $dest"
+		mkdir -p "$(dirname "$dest")"
+		cp "$PDE/.wezterm.lua" "$dest"
 	fi
 }
 
