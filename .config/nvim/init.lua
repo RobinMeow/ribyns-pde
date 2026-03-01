@@ -1,6 +1,7 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.o.termguicolors = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -84,6 +85,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- [[ Autocommands ]] :help lua-guide-autocommands
 require("highlight-on-yank")
+require("snacks-notifier")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 -- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -150,7 +152,9 @@ require("lazy").setup({
 			indent = { enabled = false },
 			input = { enabled = false },
 			picker = { enabled = false },
-			notifier = { enabled = false },
+			notifier = {
+				enabled = true,
+			},
 			quickfile = { enabled = false },
 			scope = { enabled = false },
 			scroll = { enabled = false },
@@ -380,7 +384,7 @@ require("lazy").setup({
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
 
-			function SearchCurrentDirectory()
+			local function SearchCurrentDirectory()
 				local current_file = vim.fn.expand("%:p")
 
 				-- Check if the buffer is a file
@@ -486,9 +490,6 @@ require("lazy").setup({
 			},
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-			-- Useful status updates for LSP.
-			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- Allows extra capabilities provided by blink.cmp
 			"saghen/blink.cmp",
@@ -998,5 +999,12 @@ require("lazy").setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.o.termguicolors = true
 vim.cmd.colorscheme("vscode")
+-- chatgpt review
+-- {
+--   "Mofiqul/vscode.nvim",
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("vscode")
+--   end,
+-- },
