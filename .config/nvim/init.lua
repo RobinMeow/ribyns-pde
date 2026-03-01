@@ -73,6 +73,10 @@ require("floaterminal")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
+local session = require("session")
+vim.keymap.set("n", "<leader><leader>s", session.store_session_and_exit, { desc = "[ ][s]tore sesssion and exit" })
+vim.keymap.set("n", "<leader><leader>d", session.delete_session, { desc = "[ ][d]elete session if exists" })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
