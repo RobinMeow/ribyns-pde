@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+clear
 # Configuration
 HISTORY_FILE=".test_history"
 HISTORY_LIMIT=5
@@ -14,9 +15,14 @@ touch "$HISTORY_FILE"
 while [[ $# -gt 0 ]]; do
 	case $1 in
 	--browsers)
+		if [[ -z "${2:-}" ]]; then
+			echo "Error: --browsers requires a value"
+			exit 1
+		fi
 		BROWSER="$2"
 		shift 2
 		;;
+		# TODO: support oneshot calls with --no-watch flag
 	*)
 		# Assume anything else is the spec pattern
 		SPEC_PATTERN="$1"
@@ -65,6 +71,12 @@ fi
 # Validation
 if [[ -z "$SPEC_PATTERN" ]]; then
 	echo "✖ Spec name required"
+	exit 1
+fi
+
+# check if we can find a file with that pattern
+if ! compgen -G "**/${SPEC_PATTERN}.spec.ts" >/dev/null; then
+	echo "No matching spec found for: **/${SPEC_PATTERN}.spec.ts"
 	exit 1
 fi
 
