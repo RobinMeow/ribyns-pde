@@ -4,10 +4,26 @@ set -euo pipefail
 # Configuration
 HISTORY_FILE=".test_history"
 HISTORY_LIMIT=5
-BROWSER="${1:-ChromeHeadless}"
+BROWSER="ChromeHeadless"
+SPEC_PATTERN=""
 
 # Ensure history file exists
 touch "$HISTORY_FILE"
+
+# --- Argument Parsing ---
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	--browsers)
+		BROWSER="$2"
+		shift 2
+		;;
+	*)
+		# Assume anything else is the spec pattern
+		SPEC_PATTERN="$1"
+		shift
+		;;
+	esac
+done
 
 # Function to update history
 update_history() {
@@ -20,12 +36,9 @@ update_history() {
 	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE"
 }
 
-# --- Logic to determine the SPEC_PATTERN ---
-if [[ $# -ge 2 ]]; then
-	SPEC_PATTERN="$2"
-else
+# --- Logic to determine the SPEC_PATTERN (Interactive if empty) ---
+if [[ -z "$SPEC_PATTERN" ]]; then
 	if command -v fzf >/dev/null 2>&1; then
-		# Multi-line header with your original instructions
 		HEADER_MSG="Enter spec name (**/ will be prepended and .spec.ts appended)
 Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 
@@ -33,7 +46,6 @@ Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 			--height 10 \
 			--reverse \
 			--header "$HEADER_MSG" \
-			--query "${1:-}" \
 			--print-query || true)
 
 		if [[ -z "$FZF_OUT" ]]; then
@@ -43,13 +55,9 @@ Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 
 		TYPED=$(echo "$FZF_OUT" | sed -n '1p')
 		SELECTED=$(echo "$FZF_OUT" | sed -n '2p')
-
-		# Use selection if arrowed, otherwise use what was typed
 		SPEC_PATTERN="${SELECTED:-$TYPED}"
 	else
-		# Fallback for systems without fzf
-		echo "Enter spec name (**/ will be prepended and .spec.ts appended)"
-		echo "Example: 'dashboard-view' or 'shared/table/**/*'"
+		echo "Enter spec name (**/ will be prepended and .spec.ts appended):"
 		read -r SPEC_PATTERN
 	fi
 fi
