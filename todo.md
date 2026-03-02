@@ -15,6 +15,7 @@
 - see if i can do prompting in cli https://github.com/google-gemini/gemini-cli
 - compare open source llm and build one local so i can use it in as cli
 - https://github.com/folke/flash.nvim
+- source control btop conf
 
 # low prio
 
