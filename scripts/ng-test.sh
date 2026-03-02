@@ -7,6 +7,7 @@ HISTORY_FILE=".test_history"
 HISTORY_LIMIT=5
 BROWSER="ChromeHeadless"
 SPEC_PATTERN=""
+WATCH_MODE=true # Default to true
 
 # Ensure history file exists
 touch "$HISTORY_FILE"
@@ -22,7 +23,10 @@ while [[ $# -gt 0 ]]; do
 		BROWSER="$2"
 		shift 2
 		;;
-		# TODO: support oneshot calls with --no-watch flag
+	--no-watch)
+		WATCH_MODE=false
+		shift
+		;;
 	*)
 		# Assume anything else is the spec pattern
 		SPEC_PATTERN="$1"
@@ -74,12 +78,6 @@ if [[ -z "$SPEC_PATTERN" ]]; then
 	exit 1
 fi
 
-# check if we can find a file with that pattern
-if ! compgen -G "**/${SPEC_PATTERN}.spec.ts" >/dev/null; then
-	echo "No matching spec found for: **/${SPEC_PATTERN}.spec.ts"
-	exit 1
-fi
-
 # Save the successful pattern to history
 update_history "$SPEC_PATTERN"
 
@@ -87,10 +85,11 @@ update_history "$SPEC_PATTERN"
 clear
 echo "▶ Running Angular specs"
 echo "  Browsers: $BROWSER"
+echo "  Watch:    $WATCH_MODE"
 echo "  Include:  **/$SPEC_PATTERN.spec.ts"
 echo "--------------------------------------"
 
 npx ng test \
 	--browsers "$BROWSER" \
-	--watch true \
+	--watch "$WATCH_MODE" \
 	--include "**/${SPEC_PATTERN}.spec.ts"
