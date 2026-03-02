@@ -137,6 +137,3 @@ source /usr/share/nvm/init-nvm.sh
 
 export PATH
 
-if command -v fastfetch &> /dev/null; then
-    fastfetch
-fi
