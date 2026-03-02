@@ -24,8 +24,16 @@ if [[ $# -ge 2 ]]; then
 	SPEC_PATTERN="$2"
 else
 	if command -v fzf >/dev/null 2>&1; then
-		# Use || true to prevent 'set -e' from exiting on empty filter
-		FZF_OUT=$(cat "$HISTORY_FILE" | fzf --height 10 --reverse --header "Type new or select existing" --query "${1:-}" --print-query || true)
+		# Multi-line header to include your original instructions
+		HEADER_MSG="Enter spec name (**/ will be prepended and .spec.ts appended)
+Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
+
+		FZF_OUT=$(cat "$HISTORY_FILE" | fzf \
+			--height 12 \
+			--reverse \
+			--header "$HEADER_MSG" \
+			--query "${1:-}" \
+			--print-query || true)
 
 		if [[ -z "$FZF_OUT" ]]; then
 			echo "✖ Cancelled"
@@ -34,11 +42,11 @@ else
 
 		TYPED=$(echo "$FZF_OUT" | sed -n '1p')
 		SELECTED=$(echo "$FZF_OUT" | sed -n '2p')
-
-		# Use the selection if it exists, otherwise use what was typed
 		SPEC_PATTERN="${SELECTED:-$TYPED}"
 	else
-		echo "fzf not found. Enter spec name:"
+		# Fallback for systems without fzf
+		echo "Enter spec name (**/ will be prepended and .spec.ts appended)"
+		echo "Example: 'dashboard-view' or 'shared/table/**/*'"
 		read -r SPEC_PATTERN
 	fi
 fi
@@ -52,7 +60,7 @@ fi
 # Save the successful pattern
 update_history "$SPEC_PATTERN"
 
-# --- Output Info (Original Style) ---
+# --- Output Info (Final Confirmation) ---
 clear
 echo "▶ Running Angular specs"
 echo "  Browsers: $BROWSER"
