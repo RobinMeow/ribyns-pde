@@ -49,7 +49,7 @@ vim.opt.listchars = {
 	tab = "· ", -- first char is overriden by ident blanklint plugin if applicable
 	trail = "·",
 	nbsp = "␣",
-	eol = "$",
+	eol = "↵", -- ↵ ↲ ↲
 }
 
 -- Preview substitutions live, as you type! Whats a substitution: s%/replaceTxt/WithMe/g
@@ -64,9 +64,6 @@ vim.o.scrolloff = 10 -- amount of lines to keep visible above and beneath the cu
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
-
-require("borders")
-require("floaterminal")
 
 -- [[ Keymaps ]]
 -- Clear highlights on search when pressing <Esc> in normal mode :help hlsearch
@@ -87,11 +84,10 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- [[ Autocommands ]] :help lua-guide-autocommands
+require("borders")
+require("floaterminal")
 require("highlight-on-yank")
 
--- [[ Install `lazy.nvim` plugin manager ]]
--- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -106,9 +102,8 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
-	-- Or use telescope!
-	-- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
+	-- For additional information with loading, sourcing and examples see:
+	-- `<space>sh` search for `lazy.nvim-plugin`
 	require("plugin.snacks"),
 	require("plugin.transparent"),
 	"NMAC427/guess-indent.nvim",
