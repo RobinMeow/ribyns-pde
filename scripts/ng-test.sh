@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Configuration
 HISTORY_FILE=".test_history"
-HISTORY_LIMIT=4
+HISTORY_LIMIT=10
 BROWSER="${1:-ChromeHeadless}"
 
-# Ensure history file exists
 touch "$HISTORY_FILE"
 
-# Function to update history (removes duplicates and keeps it fresh)
 update_history() {
 	local pattern=$1
-	# Remove the pattern if it exists, prepend it to the top, and trim to limit
 	(
 		echo "$pattern"
 		grep -vF "$pattern" "$HISTORY_FILE" || true
@@ -20,42 +16,33 @@ update_history() {
 	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE"
 }
 
-# Logic to determine the SPEC_PATTERN
 if [[ $# -ge 2 ]]; then
 	SPEC_PATTERN="$2"
 else
-	echo "--- Recent Patterns ---"
-	# Use 'cat -n' to show numbered history
-	if [ -s "$HISTORY_FILE" ]; then
-		cat -n "$HISTORY_FILE"
-		echo "-----------------------"
-		echo "Enter a number, a new pattern, or leave blank for the latest [1]:"
-	else
-		echo "No history yet."
-		echo "Enter spec name (e.g., 'user-form' or 'shared/table/**/*'):"
-	fi
+	if command -v fzf >/dev/null 2>&1; then
+		# The '|| true' prevents 'set -e' from killing the script if no match is found
+		FZF_OUT=$(cat "$HISTORY_FILE" | fzf --height 10 --reverse --header "Type new or select existing" --query "${1:-}" --print-query || true)
 
-	read -r INPUT
+		# If FZF_OUT is empty (user hit ESC), exit gracefully
+		if [[ -z "$FZF_OUT" ]]; then
+			echo "✖ Cancelled"
+			exit 0
+		fi
 
-	if [[ -z "$INPUT" ]]; then
-		# Default to the most recent entry if it exists
-		SPEC_PATTERN=$(head -n 1 "$HISTORY_FILE")
-	elif [[ "$INPUT" =~ ^[0-9]+$ ]]; then
-		# If input is a number, pick that line from history
-		SPEC_PATTERN=$(sed -n "${INPUT}p" "$HISTORY_FILE")
+		# Get the first line (what you typed) and the last line (the selection)
+		# Using 'sed' to ensure we handle the multi-line output correctly
+		TYPED=$(echo "$FZF_OUT" | sed -n '1p')
+		SELECTED=$(echo "$FZF_OUT" | sed -n '2p')
+
+		# If you selected an item with arrows, use it.
+		# Otherwise, use exactly what you typed.
+		SPEC_PATTERN="${SELECTED:-$TYPED}"
 	else
-		# Otherwise, it's a brand new pattern
-		SPEC_PATTERN="$INPUT"
+		echo "fzf not found. Enter spec name:"
+		read -r SPEC_PATTERN
 	fi
 fi
 
-# Validation
-if [[ -z "$SPEC_PATTERN" ]]; then
-	echo "✖ Spec name required"
-	exit 1
-fi
-
-# Save the successful pattern
 update_history "$SPEC_PATTERN"
 
 echo "▶ Running Angular specs"
