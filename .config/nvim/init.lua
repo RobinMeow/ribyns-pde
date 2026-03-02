@@ -169,7 +169,7 @@ require("lazy").setup({
 	},
 	{
 		"xiyaowong/transparent.nvim",
-		laze = false,
+		lazy = false,
 		opts = function()
 			return {
 				-- table: default groups
