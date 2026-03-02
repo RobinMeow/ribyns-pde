@@ -421,6 +421,9 @@ require("lazy").setup({
 				-- },
 				pickers = {
 					colorscheme = { enable_preview = true },
+					diagnostics = {
+						theme = "ivy", -- dropdown, ivy, cursor
+					},
 				},
 				extensions = {
 					["ui-select"] = {
@@ -915,6 +918,9 @@ require("lazy").setup({
 			require("catppuccin").setup({
 				flavour = "mocha", -- Change this to 'frappe', 'macchiato', or 'latte' if desired
 				no_italic = true,
+				integrations = {
+					-- integrate on more stuff like cmp, gitsigns, etc..
+				},
 			})
 		end,
 	},
@@ -936,6 +942,7 @@ require("lazy").setup({
 			-- | A | B | C        X | Y | Z |
 
 			return {
+				-- theme = "catppuccin", TODO: use catppuccin
 				options = {
 					-- defaults but i might remove them if i need more space
 					component_separators = { left = "", right = "" },
@@ -945,23 +952,44 @@ require("lazy").setup({
 					-- then tabline will always show. If set to false, then tabline will be displayed
 					-- only when there are more than 1 tab. (see :h showtabline)
 					always_divide_middle = true, -- default but i might need to change this when i put something large in there
-
-					always_show_tabline = false, -- default: true. I dont think i ever saw a tabline
+				},
+				tabline = {
+					lualine_a = { "branch" },
+					-- maybe in the future when i have keymaps for buffers
+					lualine_z = {
+						"datetime",
+						-- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
+						-- style = "default",
+					},
+					-- lualine_z = { "buffers" },
 				},
 				sections = {
-					-- TODO: make a todo counter
-					lualine_c = { { "filename", path = 1 } },
+					lualine_a = { "mode" },
+					lualine_b = { "diff", "diagnostics" },
+					lualine_c = { { "filename", path = 1 } }, -- path=1 relative file path
 					lualine_x = {
 						"encoding",
 						"fileformat",
 						"filetype",
 					},
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
 				},
 				inactive_sections = {
-					lualine_c = { { "filename", path = 1 } },
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = {
+						{ "filename", path = 1 },
+					},
+					lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
 				},
 				winbar = {
+					lualine_a = {},
+					lualine_b = {},
 					lualine_c = { "filename" },
+					lualine_x = {},
 					lualine_y = {
 						function()
 							-- returns the lsp names lspA | lspB
@@ -976,9 +1004,12 @@ require("lazy").setup({
 							return table.concat(names, " | ")
 						end,
 					},
+					lualine_z = {},
 				},
 				inactive_winbar = {
-					lualine_c = { "filename" },
+					lualine_c = {
+						"filename",
+					},
 					lualine_y = {
 						function()
 							-- returns the lsp names lspA | lspB

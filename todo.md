@@ -16,6 +16,7 @@
 - compare open source llm and build one local so i can use it in as cli
 - https://github.com/folke/flash.nvim
 - source control btop conf
+- Telescope builtin pickers to keymaps mappen und lernen welche es gibt
 
 # low prio
 
@@ -27,6 +28,7 @@ _ consider hand written workspice files in lua. BUt for that I wanna collect mor
 - stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - instead of using fortune it would be cool to have 97 things every programmer should know (their titles) as reminders
 - add a shell cript for cloning this repo with installation instruction in readme
+- todo counter for winbar in lualine
 
 ## Explicitly-Discarded
 
