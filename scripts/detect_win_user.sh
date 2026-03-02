@@ -17,7 +17,7 @@ detect_win_user() {
 			return 1
 		elif [[ ${#_users[@]} -eq 1 ]]; then
 			WINDOWS_USER="${_users[0]}"
-			success "Detected single Windows user: $WINDOWS_USER"
+			info "Detected single Windows user: $WINDOWS_USER"
 		else
 			# this is not yet tested but if the use case arises i'll
 			info "Multiple Windows users found:"
@@ -33,7 +33,7 @@ detect_win_user() {
 				read -rp "Select user by number: " choice
 			done
 			WINDOWS_USER="${_users[choice - 1]}"
-			success "Selected Windows user: $WINDOWS_USER"
+			info "Selected Windows user: $WINDOWS_USER"
 		fi
 	else
 		error "Not a windows environment. Do not call for windows user detection by checking detect_env beforehand"
