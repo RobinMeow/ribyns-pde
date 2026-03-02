@@ -45,7 +45,4 @@ return {
 			on_clear = function() end,
 		}
 	end,
-	config = function()
-		vim.cmd("TransparentEnable")
-	end,
 }
