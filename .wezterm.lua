@@ -33,38 +33,79 @@ if running_on_windows then
 end
 
 -- background
+
 local transparent_bg = true
-config.colors = {
-	background = "black",
-}
-config.window_background_opacity = 0.9
-wezterm.on("toggle-background", function(window, _)
+local current_index = 1
+
+-- read wallpapers from directory
+local function load_wallpapers()
+	local sep = package.config:sub(1, 1)
+	local wallpapers_dir = wezterm.config_dir .. sep .. ".config" .. sep .. "wezterm" .. sep .. "wallpapers"
+	local result = wezterm.glob(wallpapers_dir .. sep .. "*")
+	return result
+end
+
+local function apply_wallpaper(window, path)
+	window:set_config_overrides({
+		window_background_opacity = 1,
+		colors = { background = "black" },
+		window_background_image = path,
+		window_background_image_hsb = { brightness = 0.075 },
+	})
+end
+
+local toggle_transparent_bg = function(window, _)
 	transparent_bg = not transparent_bg
+
 	if transparent_bg then
-		-- switch back to desktop background
 		window:set_config_overrides({
 			window_background_opacity = 0.9,
-			colors = { background = "black" },
 			window_background_image = nil,
+			colors = { background = "black" },
 		})
 	else
-		-- switch to WezTerm background image
-		-- seperator is need in case wezterm runs on windows
-		-- (if .wezterm.lua executes on linux it shant be needed)
-		local sep = package.config:sub(1, 1)
-		window:set_config_overrides({
-			window_background_opacity = 1,
-			colors = { background = "black" },
-			window_background_image = wezterm.config_dir
-				.. sep
-				.. ".config"
-				.. sep
-				.. "wezterm"
-				.. sep
-				.. ".wezterm_background.jpg",
-			window_background_image_hsb = { brightness = 0.075 },
-		})
+		local wallpapers = load_wallpapers()
+		-- reapply current wallpaper
+		if #wallpapers > 0 then
+			apply_wallpaper(window, wallpapers[current_index])
+		end
 	end
+end
+
+local function disable_transparent(window)
+	if transparent_bg then
+		toggle_transparent_bg(window)
+	end
+end
+
+wezterm.on("toggle-transparent", toggle_transparent_bg)
+
+wezterm.on("cycle-wallpaper", function(window, _)
+	local wallpapers = load_wallpapers()
+	-- if #wallpapers == 0 then
+	-- 	return
+	-- end
+
+	current_index = current_index + 1
+	if current_index > #wallpapers then
+		current_index = 1
+	end
+
+	disable_transparent(window)
+	apply_wallpaper(window, wallpapers[current_index])
+end)
+
+wezterm.on("random-wallpaper", function(window, _)
+	local wallpapers = load_wallpapers()
+	-- if #wallpapers == 0 then
+	-- 	return
+	-- end
+
+	math.randomseed(os.time())
+	current_index = math.random(1, #wallpapers)
+
+	disable_transparent(window)
+	apply_wallpaper(window, wallpapers[current_index])
 end)
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
@@ -84,7 +125,11 @@ local function bind_key(mods, key, action)
 	table.insert(config.keys, { mods = mods, key = key, action = action })
 end
 
-bind_key("LEADER", "b", act.EmitEvent("toggle-background"))
+-- background keymaps
+bind_key("LEADER", "t", act.EmitEvent("toggle-transparent"))
+bind_key("LEADER", "i", act.EmitEvent("cycle-wallpaper"))
+bind_key("LEADER", "r", act.EmitEvent("random-wallpaper"))
+
 bind_key("LEADER", "p", act.ActivateTabRelative(-1)) -- nav to prev tab
 bind_key("LEADER", "n", act.ActivateTabRelative(1)) -- nav to next tab
 
