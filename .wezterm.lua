@@ -150,12 +150,6 @@ bind_key("LEADER|SHIFT", "phys:5", act.SplitHorizontal({ domain = "CurrentPaneDo
 -- SHIFT+' = "
 bind_key("LEADER|SHIFT", "phys:Quote", act.SplitVertical({ domain = "CurrentPaneDomain" }))
 
--- brightness on the fly
-local function enter_change_light_mode()
-	return act.ActivateKeyTable({ name = "change_light_kt", one_shot = false })
-end
-bind_key("LEADER", "b", enter_change_light_mode())
-
 local function clamp(value, min, max)
 	return math.max(min, math.min(max, value))
 end
@@ -183,12 +177,12 @@ bind_key("LEADER", "DownArrow", enter_resize_mode())
 bind_key("LEADER", "UpArrow", enter_resize_mode())
 bind_key("LEADER", "RightArrow", enter_resize_mode())
 
-local brightness_delta = 0.005
+local light_delta = 0.005
 wezterm.on("increase-light", function(window, _)
-	change_light(brightness_delta, window)
+	change_light(light_delta, window)
 end)
 wezterm.on("decrease-light", function(window, _)
-	change_light(brightness_delta * -1, window)
+	change_light(light_delta * -1, window)
 end)
 config.key_tables = {
 	resize_pane = {
@@ -198,12 +192,8 @@ config.key_tables = {
 		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 2 }) },
 		{ key = "Escape", action = "PopKeyTable" }, -- exit resizing mode
 	},
-	-- https://github.com/wezterm/wezterm/issues/5318 wont-fix
-	-- change_light_kt = {
-	-- 	-- { key = "k", action = act.EmitEvent("increase-light") },
-	-- 	-- { key = "j", action = act.EmitEvent("decrease-light") },
-	-- 	{ key = "Escape", action = "PopKeyTable" }, -- exit change_light_kt mode
-	-- },
+	-- do not try again to use key_tables in combination with set_config_overrides.
+	-- https://github.com/wezterm/wezterm/issues/5318 wont-fix since 2024
 }
 
 -- leader + number to switch tabs
@@ -213,14 +203,13 @@ end
 
 -- show while leader key is active
 wezterm.on("update-right-status", function(window, _)
+	---@diagnostic disable-next-line: undefined-global
 	local leader_active = window:leader_is_active() and (" " .. utf8.char(0x1F9D9, 0x200D, 0x2642)) or ""
 	local active_key_table = window:active_key_table()
 
 	local status = ""
 	if active_key_table == "resize_pane" then
 		status = "RESIZING - esc to exit "
-	elseif active_key_table == "change_light_kt" then
-		status = "BRIGHTNESS - esc to exit "
 	end
 
 	window:set_right_status(wezterm.format({
