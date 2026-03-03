@@ -13,6 +13,15 @@ config.window_padding = {
 	bottom = 0,
 }
 
+-- partial update the current config. should be the default if you ask me
+local function update(new_overrides, window)
+	local overrides = window:get_config_overrides() or {}
+	for k, v in pairs(new_overrides) do
+		overrides[k] = v
+	end
+	window:set_config_overrides(overrides)
+end
+
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
@@ -43,24 +52,26 @@ local function load_wallpapers()
 end
 local wallpapers = load_wallpapers()
 
+local current_brightness = 0.05
+local current_opacity = 0.9
 local function apply_wallpaper(window, path)
-	window:set_config_overrides({
+	update({
 		window_background_opacity = 1,
 		colors = { background = "black" },
 		window_background_image = path,
-		window_background_image_hsb = { brightness = 0.05 },
-	})
+		window_background_image_hsb = { brightness = current_brightness },
+	}, window)
 end
 
 local toggle_transparent_bg = function(window, _)
 	transparent_bg = not transparent_bg
 
 	if transparent_bg then
-		window:set_config_overrides({
-			window_background_opacity = 0.9,
+		update({
+			window_background_opacity = current_opacity,
 			window_background_image = nil,
 			colors = { background = "black" },
-		})
+		}, window)
 	else
 		local wallpapers = wallpapers
 		apply_wallpaper(window, wallpapers[current_index])
@@ -138,6 +149,29 @@ bind_key("LEADER|SHIFT", "phys:5", act.SplitHorizontal({ domain = "CurrentPaneDo
 -- SHIFT+' = "
 bind_key("LEADER|SHIFT", "phys:Quote", act.SplitVertical({ domain = "CurrentPaneDomain" }))
 
+-- brightness on the fly
+local function enter_change_light_mode()
+	return act.ActivateKeyTable({ name = "change_light_kt", one_shot = false })
+end
+bind_key("LEADER", "b", enter_change_light_mode())
+
+local function clamp(value, min, max)
+	return math.max(min, math.min(max, value))
+end
+local function change_light(delta, window)
+	if transparent_bg then
+		current_opacity = clamp(current_opacity + delta, 0, 1)
+		update({
+			window_background_opacity = current_opacity,
+		}, window)
+	else
+		current_brightness = clamp(current_brightness + delta, 0, 1)
+		update({
+			window_background_image_hsb = { brightness = current_brightness },
+		}, window)
+	end
+end
+
 -- resizing
 -- Each arrow triggers resize mode when pressed after prefix
 local function enter_resize_mode()
@@ -147,6 +181,14 @@ bind_key("LEADER", "LeftArrow", enter_resize_mode())
 bind_key("LEADER", "DownArrow", enter_resize_mode())
 bind_key("LEADER", "UpArrow", enter_resize_mode())
 bind_key("LEADER", "RightArrow", enter_resize_mode())
+
+local brightness_delta = 0.25
+wezterm.on("increase-light", function(window, _)
+	change_light(brightness_delta, window)
+end)
+wezterm.on("decrease-light", function(window, _)
+	change_light(brightness_delta * -1, window)
+end)
 config.key_tables = {
 	resize_pane = {
 		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 2 }) },
@@ -154,6 +196,13 @@ config.key_tables = {
 		{ key = "UpArrow", action = act.AdjustPaneSize({ "Up", 2 }) },
 		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 2 }) },
 		{ key = "Escape", action = "PopKeyTable" }, -- exit resizing mode
+	},
+	change_light_kt = {
+		{ key = "UpArrow", action = act.EmitEvent("increase-light") },
+		{ key = "DownArrow", action = act.EmitEvent("decrease-light") },
+		-- { key = "k", action = act.EmitEvent("increase-light") },
+		-- { key = "j", action = act.EmitEvent("decrease-light") },
+		{ key = "Escape", action = "PopKeyTable" }, -- exit change_light_kt mode
 	},
 }
 
@@ -165,9 +214,17 @@ end
 -- show while leader key is active
 wezterm.on("update-right-status", function(window, _)
 	local leader_active = window:leader_is_active() and (" " .. utf8.char(0x1F9D9, 0x200D, 0x2642)) or ""
-	local resize_mode_active = window:active_key_table() == "resize_pane" and "RESIZING - press esc to exit" or ""
+	local active_key_table = window:active_key_table()
+
+	local status = ""
+	if active_key_table == "resize_pane" then
+		status = "RESIZING - esc to exit "
+	elseif active_key_table == "change_light_kt" then
+		status = "BRIGHTNESS - esc to exit "
+	end
+
 	window:set_right_status(wezterm.format({
-		{ Text = resize_mode_active },
+		{ Text = status },
 		{ Background = { Color = "#b7bdf8" } }, -- some purple similar to catppuccin
 		-- https://www.utf8icons.com/character/129497/mage ( and or is conditional assignment in lua. like leader_is_active ? mage : "")
 		{ Text = leader_active },
