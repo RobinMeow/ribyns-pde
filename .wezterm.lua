@@ -49,10 +49,17 @@ wezterm.on("toggle-background", function(window, _)
 		})
 	else
 		-- switch to WezTerm background image
+		local sep = package.config:sub(1, 1)
 		window:set_config_overrides({
 			window_background_opacity = 1,
 			colors = { background = "black" },
-			window_background_image = wezterm.config_dir .. package.config:sub(1, 1) .. ".wezterm_background.jpg",
+			window_background_image = wezterm.config_dir
+				.. sep
+				.. ".config"
+				.. sep
+				.. "wallpapers"
+				.. sep
+				.. ".wezterm_background.jpg",
 			window_background_image_hsb = { brightness = 0.075 },
 		})
 	end
