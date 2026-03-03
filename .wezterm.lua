@@ -114,6 +114,11 @@ end
 bind_key("LEADER", "t", act.EmitEvent("toggle-transparent"))
 bind_key("LEADER", "i", act.EmitEvent("cycle-wallpaper"))
 bind_key("LEADER", "r", act.EmitEvent("random-wallpaper"))
+bind_key("LEADER", "z", act.EmitEvent("reload-wezterm"))
+wezterm.on("reload-wezterm", function(window, _)
+	wallpapers = load_wallpapers()
+	wezterm.log_info("wallpapers reloaded")
+end)
 
 bind_key("LEADER", "p", act.ActivateTabRelative(-1)) -- nav to prev tab
 bind_key("LEADER", "n", act.ActivateTabRelative(1)) -- nav to next tab
