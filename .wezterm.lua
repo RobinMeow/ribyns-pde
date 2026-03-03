@@ -50,7 +50,7 @@ local function apply_wallpaper(window, path)
 		window_background_opacity = 1,
 		colors = { background = "black" },
 		window_background_image = path,
-		window_background_image_hsb = { brightness = 0.075 },
+		window_background_image_hsb = { brightness = 0.05 },
 	})
 end
 
@@ -65,46 +65,33 @@ local toggle_transparent_bg = function(window, _)
 		})
 	else
 		local wallpapers = load_wallpapers()
-		-- reapply current wallpaper
-		if #wallpapers > 0 then
-			apply_wallpaper(window, wallpapers[current_index])
-		end
+		apply_wallpaper(window, wallpapers[current_index])
 	end
 end
 
-local function disable_transparent(window)
+local function ensure_bg_is_not_transparent(window)
 	if transparent_bg then
 		toggle_transparent_bg(window)
 	end
 end
 
 wezterm.on("toggle-transparent", toggle_transparent_bg)
-
 wezterm.on("cycle-wallpaper", function(window, _)
 	local wallpapers = load_wallpapers()
-	-- if #wallpapers == 0 then
-	-- 	return
-	-- end
-
 	current_index = current_index + 1
 	if current_index > #wallpapers then
 		current_index = 1
 	end
 
-	disable_transparent(window)
+	ensure_bg_is_not_transparent(window)
 	apply_wallpaper(window, wallpapers[current_index])
 end)
-
 wezterm.on("random-wallpaper", function(window, _)
 	local wallpapers = load_wallpapers()
-	-- if #wallpapers == 0 then
-	-- 	return
-	-- end
-
 	math.randomseed(os.time())
 	current_index = math.random(1, #wallpapers)
 
-	disable_transparent(window)
+	ensure_bg_is_not_transparent(window)
 	apply_wallpaper(window, wallpapers[current_index])
 end)
 
