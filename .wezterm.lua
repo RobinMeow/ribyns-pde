@@ -56,7 +56,7 @@ local current_brightness = 0.05
 local current_opacity = 0.9
 local function apply_wallpaper(window, path)
 	update({
-		window_background_opacity = 1,
+		window_background_opacity = 1, -- kill transparent
 		colors = { background = "black" },
 		window_background_image = path,
 		window_background_image_hsb = { brightness = current_brightness },
@@ -69,11 +69,11 @@ local toggle_transparent_bg = function(window, _)
 	if transparent_bg then
 		update({
 			window_background_opacity = current_opacity,
-			window_background_image = nil,
+			window_background_image = "",
 			colors = { background = "black" },
+			window_background_image_hsb = { brightness = 1 }, -- kill brightness setting for backgorund image, tho it shouldnt matter
 		}, window)
 	else
-		local wallpapers = wallpapers
 		apply_wallpaper(window, wallpapers[current_index])
 	end
 end
@@ -86,7 +86,6 @@ end
 
 wezterm.on("toggle-transparent", toggle_transparent_bg)
 wezterm.on("cycle-wallpaper", function(window, _)
-	local wallpapers = wallpapers
 	current_index = current_index + 1
 	if current_index > #wallpapers then
 		current_index = 1
@@ -96,7 +95,6 @@ wezterm.on("cycle-wallpaper", function(window, _)
 	apply_wallpaper(window, wallpapers[current_index])
 end)
 wezterm.on("random-wallpaper", function(window, _)
-	local wallpapers = wallpapers
 	math.randomseed(os.time())
 	current_index = math.random(1, #wallpapers)
 
@@ -108,7 +106,7 @@ config.window_decorations = "RESIZE" -- remove the window title-bar which includ
 -- maximize window on startup
 wezterm.on("gui-startup", function(cmd)
 	if mux then
-		local tab, pane, window = mux.spawn_window(cmd or {})
+		local window = mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
 	end
 end)
@@ -126,7 +124,7 @@ bind_key("LEADER", "t", act.EmitEvent("toggle-transparent"))
 bind_key("LEADER", "i", act.EmitEvent("cycle-wallpaper"))
 bind_key("LEADER", "r", act.EmitEvent("random-wallpaper"))
 bind_key("LEADER", "z", act.EmitEvent("reload-wezterm"))
-wezterm.on("reload-wezterm", function(window, _)
+wezterm.on("reload-wezterm", function(_, _)
 	wallpapers = load_wallpapers()
 	wezterm.log_info("wallpapers reloaded")
 end)
@@ -142,6 +140,9 @@ bind_key("LEADER", "h", act.ActivatePaneDirection("Left"))
 bind_key("LEADER", "j", act.ActivatePaneDirection("Down"))
 bind_key("LEADER", "k", act.ActivatePaneDirection("Up"))
 bind_key("LEADER", "l", act.ActivatePaneDirection("Right"))
+
+bind_key("CTRL|SHIFT", "K", act.EmitEvent("increase-light"))
+bind_key("CTRL|SHIFT", "J", act.EmitEvent("decrease-light"))
 
 -- idk why i need to use shift+phys: https://wezterm.org/config/keys.html#physical-vs-mapped-key-assignments
 -- SHIFT+5 = "
@@ -160,7 +161,7 @@ local function clamp(value, min, max)
 end
 local function change_light(delta, window)
 	if transparent_bg then
-		current_opacity = clamp(current_opacity + delta, 0, 1)
+		current_opacity = clamp(current_opacity + (delta * -1), 0, 1)
 		update({
 			window_background_opacity = current_opacity,
 		}, window)
@@ -182,7 +183,7 @@ bind_key("LEADER", "DownArrow", enter_resize_mode())
 bind_key("LEADER", "UpArrow", enter_resize_mode())
 bind_key("LEADER", "RightArrow", enter_resize_mode())
 
-local brightness_delta = 0.25
+local brightness_delta = 0.005
 wezterm.on("increase-light", function(window, _)
 	change_light(brightness_delta, window)
 end)
@@ -197,13 +198,12 @@ config.key_tables = {
 		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 2 }) },
 		{ key = "Escape", action = "PopKeyTable" }, -- exit resizing mode
 	},
-	change_light_kt = {
-		{ key = "UpArrow", action = act.EmitEvent("increase-light") },
-		{ key = "DownArrow", action = act.EmitEvent("decrease-light") },
-		-- { key = "k", action = act.EmitEvent("increase-light") },
-		-- { key = "j", action = act.EmitEvent("decrease-light") },
-		{ key = "Escape", action = "PopKeyTable" }, -- exit change_light_kt mode
-	},
+	-- https://github.com/wezterm/wezterm/issues/5318 wont-fix
+	-- change_light_kt = {
+	-- 	-- { key = "k", action = act.EmitEvent("increase-light") },
+	-- 	-- { key = "j", action = act.EmitEvent("decrease-light") },
+	-- 	{ key = "Escape", action = "PopKeyTable" }, -- exit change_light_kt mode
+	-- },
 }
 
 -- leader + number to switch tabs
