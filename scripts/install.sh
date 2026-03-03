@@ -13,26 +13,8 @@ cp "$PDE/.dircolors" "$HOME/" # TODO: i should check if i actually still need th
 info "Installing NeoVim"
 "$SCRIPT_DIR/sync-nvim.sh"
 
-# Install WezTerm config ()
-# TODO: call sync-wezterm.sh (not yet existent)
-sync_wezterm() {
-	local dest=""
-
-	detect_env
-	if [[ "$OS_TYPE" == "wsl" ]]; then
-		detect_win_user
-		win_user=$WINDOWS_USER
-		dest="/mnt/c/Users/$win_user/.wezterm.lua"
-	else
-		dest="$HOME/.wezterm.lua"
-	fi
-
-	cp "$PDE/.wezterm.lua" "$dest"
-	cp "$PDE/images/arch-gray-2880x1800.jpg" "$HOME/.wezterm_background.jpg"
-}
-
 info "Installing WezTerm"
-sync_wezterm
+"$SCRIPT_DIR/sync-wezterm.sh"
 
 info "Installing zsh and oh-my-zsh"
 cp "$PDE/.zshrc" "$HOME/"
