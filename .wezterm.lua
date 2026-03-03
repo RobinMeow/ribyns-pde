@@ -85,7 +85,7 @@ local function ensure_bg_is_not_transparent(window)
 end
 
 wezterm.on("toggle-transparent", toggle_transparent_bg)
-wezterm.on("cycle-wallpaper", function(window, _)
+wezterm.on("iterate-wallpaper", function(window, _)
 	current_index = current_index + 1
 	if current_index > #wallpapers then
 		current_index = 1
@@ -121,7 +121,7 @@ end
 
 -- background keymaps
 bind_key("LEADER", "t", act.EmitEvent("toggle-transparent"))
-bind_key("LEADER", "i", act.EmitEvent("cycle-wallpaper"))
+bind_key("LEADER", "i", act.EmitEvent("iterate-wallpaper"))
 bind_key("LEADER", "r", act.EmitEvent("random-wallpaper"))
 bind_key("LEADER", "z", act.EmitEvent("reload-wezterm"))
 wezterm.on("reload-wezterm", function(_, _)
