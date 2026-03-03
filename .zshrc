@@ -37,6 +37,7 @@ ZSH_THEME="simple"
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 eval "$(dircolors $HOME/.dircolors)"
+eval "$(zoxide init zsh)"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
