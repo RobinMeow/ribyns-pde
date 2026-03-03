@@ -33,17 +33,15 @@ if running_on_windows then
 end
 
 -- background
-
 local transparent_bg = true
 local current_index = 1
-
--- read wallpapers from directory
 local function load_wallpapers()
 	local sep = package.config:sub(1, 1)
 	local wallpapers_dir = wezterm.config_dir .. sep .. ".config" .. sep .. "wezterm" .. sep .. "wallpapers"
 	local result = wezterm.glob(wallpapers_dir .. sep .. "*")
 	return result
 end
+local wallpapers = load_wallpapers()
 
 local function apply_wallpaper(window, path)
 	window:set_config_overrides({
@@ -64,7 +62,7 @@ local toggle_transparent_bg = function(window, _)
 			colors = { background = "black" },
 		})
 	else
-		local wallpapers = load_wallpapers()
+		local wallpapers = wallpapers
 		apply_wallpaper(window, wallpapers[current_index])
 	end
 end
@@ -77,7 +75,7 @@ end
 
 wezterm.on("toggle-transparent", toggle_transparent_bg)
 wezterm.on("cycle-wallpaper", function(window, _)
-	local wallpapers = load_wallpapers()
+	local wallpapers = wallpapers
 	current_index = current_index + 1
 	if current_index > #wallpapers then
 		current_index = 1
@@ -87,7 +85,7 @@ wezterm.on("cycle-wallpaper", function(window, _)
 	apply_wallpaper(window, wallpapers[current_index])
 end)
 wezterm.on("random-wallpaper", function(window, _)
-	local wallpapers = load_wallpapers()
+	local wallpapers = wallpapers
 	math.randomseed(os.time())
 	current_index = math.random(1, #wallpapers)
 
