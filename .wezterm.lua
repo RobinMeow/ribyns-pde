@@ -6,13 +6,6 @@ local config = {}
 config.color_scheme = "Catppuccin Mocha" -- https://wezterm.org/colorschemes/c/index.html#catppuccin-macchiato
 config.font = wezterm.font("CommitMono Nerd Font")
 
-config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
-}
-
 -- partial update the current config. should be the default if you ask me
 local function update(new_overrides, window)
 	local overrides = window:get_config_overrides() or {}
@@ -21,6 +14,44 @@ local function update(new_overrides, window)
 	end
 	window:set_config_overrides(overrides)
 end
+
+local function get_default_font_size(screen)
+	local width = screen.width
+	-- 1440p (2560px), 1080p (1920px), Laptop (<1920px)
+	if width >= 2560 then
+		return 14
+	elseif width >= 1920 then
+		return 14
+	else
+		return 11
+	end
+	-- what a waste of time. i thought i would choose different font sizes based on resolution. recheck on work day
+end
+-- sets the font size based on the active-screen's resolution
+local function auto_set_font_size(window)
+	local all_screens = wezterm.gui.screens()
+	local active_screen = all_screens["active"]
+	local default_font_size = get_default_font_size(active_screen)
+	wezterm.log_info(
+		"Init FontSize: "
+			.. "from default "
+			.. tostring(config.font_size)
+			.. " to "
+			.. tostring(default_font_size)
+			.. "; Resolution: "
+			.. tostring(active_screen.width)
+			.. "x"
+			.. tostring(active_screen.height)
+	)
+	window:set_config_overrides({ font_size = default_font_size })
+end
+
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
+}
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
@@ -114,6 +145,11 @@ wezterm.on("gui-startup", function(cmd)
 	if mux then
 		local _, _, window = mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
+		xpcall(function()
+			auto_set_font_size(window:gui_window())
+		end, function(err)
+			wezterm.log_info("err: " .. tostring(err))
+		end)
 	end
 end)
 
