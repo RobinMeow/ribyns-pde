@@ -3,6 +3,7 @@
 ## prio
 
 - toggle padding for screensharing in teams
+- use `time` to add execution duration to all scripts
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 - yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
