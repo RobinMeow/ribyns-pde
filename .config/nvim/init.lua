@@ -71,8 +71,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
 local session = require("session")
-vim.keymap.set("n", "<leader><leader>s", session.store_session_and_exit, { desc = "[ ][s]tore sesssion and exit" })
-vim.keymap.set("n", "<leader><leader>d", session.delete_session, { desc = "[ ][d]elete session if exists" })
+vim.keymap.set("n", "<leader><leader>ss", session.store_session, { desc = "[ ][s]ave [s]esssion" })
+vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc = "[ ][s]ave sesssion and [e]xit" })
+vim.keymap.set("n", "<leader><leader>sr", session.restore, { desc = "[ ][s]ession [r]estore" })
+vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
