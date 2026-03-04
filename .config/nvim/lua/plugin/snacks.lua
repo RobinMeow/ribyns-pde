@@ -20,25 +20,11 @@ return {
 						width = 60,
 					},
 					{
-						pane = 2,
-
-						text = [[ ____  _ _
-|  _ \(_) |__  _   _ _ __
-| |_) | | '_ \| | | | '_ \
-|  _ <| | |_) | |_| | | | |
-|_| \_\_|_.__/ \__, |_| |_|
-               |___/]],
-						padding = 1,
+						text = "Thanks for noticin' me.",
+						padding = 1, -- i use it like bottom padding. doesnt seem to do anything else.
 					},
 					{
 						section = "startup", -- how long nvim took to startup
-						padding = 1,
-						pane = 2,
-					},
-					{
-						section = "terminal",
-						cmd = "fortune | cowsay | lolcat --freq 0.2",
-						pane = 2,
 					},
 				},
 			},
