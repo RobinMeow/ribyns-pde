@@ -30,6 +30,7 @@ _ consider hand written workspice files in lua. BUt for that I wanna collect mor
 - instead of using fortune it would be cool to have 97 things every programmer should know (their titles) as reminders
 - add a shell cript for cloning this repo with installation instruction in readme
 - todo counter for winbar in lualine
+- tokei if there is enough space for snacks dashboard
 
 ## Explicitly-Discarded
 
