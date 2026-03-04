@@ -2,7 +2,7 @@
 
 ## prio
 
-- status line should not show branch and only filename, not the whole path https://github.com/luukvbaal/statuscol.nvim
+- toggle padding for screensharing in teams
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 - yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
