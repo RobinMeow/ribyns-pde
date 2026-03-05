@@ -9,6 +9,7 @@ HISTORY_LIMIT=5
 BROWSER="ChromeHeadless"
 SPEC_PATTERN=""
 WATCH_MODE=true # Default to true
+RUN_ALL=false
 
 mkdir -p "$CACHE_DIR"
 touch "$HISTORY_FILE"
@@ -26,6 +27,10 @@ while [[ $# -gt 0 ]]; do
 		;;
 	--no-watch)
 		WATCH_MODE=false
+		shift
+		;;
+	--all)
+		RUN_ALL=true
 		shift
 		;;
 	*)
@@ -48,7 +53,7 @@ update_history() {
 }
 
 # --- Logic to determine the SPEC_PATTERN (Interactive if empty) ---
-if [[ -z "$SPEC_PATTERN" ]]; then
+if [[ -z "$SPEC_PATTERN" && "$RUN_ALL" = false ]]; then
 	if command -v fzf >/dev/null 2>&1; then
 		HEADER_MSG="Enter spec name (**/ will be prepended and .spec.ts appended)
 Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
@@ -56,6 +61,7 @@ Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 		FZF_OUT=$(cat "$HISTORY_FILE" | fzf \
 			--height 10 \
 			--reverse \
+			--no-select-1 --exit-0 \
 			--header "$HEADER_MSG" \
 			--print-query || true)
 
@@ -66,6 +72,7 @@ Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 
 		TYPED=$(echo "$FZF_OUT" | sed -n '1p')
 		SELECTED=$(echo "$FZF_OUT" | sed -n '2p')
+		# Use SELECTED if user moved the cursor, otherwise use TYPED (which could be empty)
 		SPEC_PATTERN="${SELECTED:-$TYPED}"
 	else
 		echo "Enter spec name (**/ will be prepended and .spec.ts appended):"
@@ -73,24 +80,18 @@ Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
 	fi
 fi
 
-# Validation
-if [[ -z "$SPEC_PATTERN" ]]; then
-	echo "✖ Spec name required"
-	exit 1
-fi
-
-# Save the successful pattern to history
-update_history "$SPEC_PATTERN"
+# if pattern was provided, cache it
+[[ -n "$SPEC_PATTERN" ]] && update_history "$SPEC_PATTERN"
 
 # --- Output Info ---
 clear
 echo "▶ Running Angular specs"
 echo "  Browsers: $BROWSER"
 echo "  Watch:    $WATCH_MODE"
-echo "  Include:  **/$SPEC_PATTERN.spec.ts"
+echo "  Include:  ${SPEC_PATTERN:-All specs}"
 echo "--------------------------------------"
 
 npx ng test \
 	--browsers "$BROWSER" \
 	--watch "$WATCH_MODE" \
-	--include "**/${SPEC_PATTERN}.spec.ts"
+	${SPEC_PATTERN:+--include "**/${SPEC_PATTERN}.spec.ts"}
