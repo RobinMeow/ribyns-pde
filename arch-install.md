@@ -34,6 +34,8 @@ delete all existing ones with `d`, than `g` for a new gpt table
 
 `n` -> defaults (use rest of available space)
 `t` -> 3rd partition -> `23` linux root (x86-64)
+
+`p` to print the partition table. check your changes. then:
 `w` -> to write all to disk (the cmds so far were done in a memory transactions which can still be discarded. `w` will commit the transaction)
 
 format them
@@ -58,7 +60,7 @@ and all further packages as desired:
 `pacstrap -K /mnt base-devel git networkmanager vim zsh`
 
 intel or amd cpi (ucode) amd/intel-ucode
-`pacstrap -K /mnt intel-ucode`
+`pacstrap -K /mnt intel-ucode` (lspcu shows hardwarw. macbook air 13 uses intel also)
 
 help pages
 `pacstrap -K /mnt man man-db man-pages texinfo`
@@ -85,7 +87,7 @@ run `locale-gen`
 
 initramfs
 
-`okinitcpio -P`
+`mkinitcpio -P`
 
 `passwd`
 to set your root password
@@ -95,6 +97,7 @@ https://wiki.archlinux.org/title/GRUB
 `pacman -S grub efibootmgr`
 assuming your still chrooted (as you should be)
 `grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB`
+<dual boot windows? read ahead first>
 `grub-mkconfig -o /boot/grub/grub.cfg`
 exit and reboot
 
@@ -113,8 +116,9 @@ to make sure it starts on every boot
 and run `systemctl start NetworkManager.service` to start it now and to establish internet connection without rebooting now
 and gpu drivers, if pacman -S nvidia is for the 4080 (nvidia is precomiled, consider compiling yourself using dkms)
 
-visudo and uncomment the sudo line
 `groupadd sudo`
+visudo and uncomment the sudo line:
+`EDITOR=vim visudo`
 
 create a new user 
 `useradd -m -G sudo -s /usr/bin/zsh ribyn`
@@ -132,6 +136,8 @@ then set up desktop environment
 choose `pipewire-jack`
 than choose `ffmpeg` as the "safer default" gstreamer can be installed additionally later apparently
 `pacman -S sddm`
+https://wiki.archlinux.org/title/SDDM#SDDM_loads_only_US_keyboard_layout
+`localectl set-x11-keymap de pc105 nodeadkeys`
 for a display manager
 enable it on boot up `systemctl enable sddm.service`
 if you reboot now it will start sddm and have selected wayland be default
@@ -187,6 +193,7 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 ### Laptop
 
 **tlp (battery power management):**
+`sudo pacman -S tlp`
 `sudo systemctl start --enable tlp`
 set bat0 thresholds to 50/65 recommended here https://gurkhatech.com/laptop-battery-best-usage-guide/?utm_source=chatgpt.com if you can be pluggedin most of the time
 do so by `sudo vim /etc/tlp.conf` and search for `START_CHARGE` and `STOP_CHARGE`
