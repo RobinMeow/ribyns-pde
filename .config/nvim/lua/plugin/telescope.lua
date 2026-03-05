@@ -82,7 +82,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Old Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader>eb", builtin.buffers, { desc = "Search [E]xisting [B]uffers" })
-		vim.keymap.set("n", "<leader><leader>c", builtin.colorscheme, { desc = "[ ][ ][C]olorscheme" })
+		vim.keymap.set("n", "<leader><leader>cs", builtin.colorscheme, { desc = "[ ][ ][c]olor[s]cheme" })
 
 		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()

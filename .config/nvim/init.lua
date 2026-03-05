@@ -76,6 +76,16 @@ vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc
 vim.keymap.set("n", "<leader><leader>sr", session.restore, { desc = "[ ][s]ession [r]estore" })
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
+-- Copy visual selection to system clipboard
+vim.api.nvim_set_keymap(
+	"v",
+	"<leader><leader>cv",
+	'"+y',
+	{ desc = "[ ][ ][c]opy [v]isual selection to system clipboard" }
+)
+-- Copy entire buffer to system clipboard
+vim.api.nvim_set_keymap("n", "<leader><leader>cb", ":%y+<CR>", { desc = "[ ][ ][c]opy [b]uffer to system clipboard" })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
