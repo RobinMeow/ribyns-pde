@@ -4,12 +4,11 @@ set -euo pipefail
 clear
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
-HISTORY_FILE="$CACHE_DIR/ng_test_history"
+HISTORY_FILE="$CACHE_DIR/ng_test_fzf"
 HISTORY_LIMIT=5
 BROWSER="ChromeHeadless"
-SPEC_PATTERN=""
-WATCH_MODE=true # Default to true
-RUN_ALL=false
+WATCH_MODE=true
+SINGLE_MODE=false
 
 mkdir -p "$CACHE_DIR"
 touch "$HISTORY_FILE"
@@ -18,80 +17,84 @@ touch "$HISTORY_FILE"
 while [[ $# -gt 0 ]]; do
 	case $1 in
 	--browsers)
-		if [[ -z "${2:-}" ]]; then
-			echo "Error: --browsers requires a value"
-			exit 1
-		fi
-		BROWSER="$2"
+		BROWSER="${2:?Error: --browsers requires a value}"
 		shift 2
 		;;
 	--no-watch)
 		WATCH_MODE=false
 		shift
 		;;
-	--all)
-		RUN_ALL=true
+	--single)
+		SINGLE_MODE=true
 		shift
 		;;
 	*)
-		# Assume anything else is the spec pattern
-		SPEC_PATTERN="$1"
-		shift
+		echo "Unknown argument: $1"
+		exit 1
 		;;
 	esac
 done
 
-# Function to update history
-update_history() {
-	local pattern=$1
-	# Remove the pattern if it exists, prepend it to the top, and trim to 5
-	(
-		echo "$pattern"
-		grep -vF "$pattern" "$HISTORY_FILE" || true
-	) | head -n "$HISTORY_LIMIT" >"${HISTORY_FILE}.tmp"
-	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE"
-}
+# --- File Selection Logic ---
+# Get list of all spec files
+ALL_SPECS=$(find . -name "*.spec.ts" -not -path "*/node_modules/*" | sed 's|^\./||')
 
-# --- Logic to determine the SPEC_PATTERN (Interactive if empty) ---
-if [[ -z "$SPEC_PATTERN" && "$RUN_ALL" = false ]]; then
-	if command -v fzf >/dev/null 2>&1; then
-		HEADER_MSG="Enter spec name (**/ will be prepended and .spec.ts appended)
-Example: 'dashboard-view' for a single file or 'shared/table/**/*' for a module"
-
-		FZF_OUT=$(cat "$HISTORY_FILE" | fzf \
-			--height 10 \
-			--reverse \
-			--no-select-1 --exit-0 \
-			--header "$HEADER_MSG" \
-			--print-query || true)
-
-		if [[ -z "$FZF_OUT" ]]; then
-			echo "✖ Cancelled"
-			exit 0
-		fi
-
-		TYPED=$(echo "$FZF_OUT" | sed -n '1p')
-		SELECTED=$(echo "$FZF_OUT" | sed -n '2p')
-		# Use SELECTED if user moved the cursor, otherwise use TYPED (which could be empty)
-		SPEC_PATTERN="${SELECTED:-$TYPED}"
-	else
-		echo "Enter spec name (**/ will be prepended and .spec.ts appended):"
-		read -r SPEC_PATTERN
-	fi
+if [[ -z "$ALL_SPECS" ]]; then
+	echo "✖ No .spec.ts files found in current directory."
+	exit 1
 fi
 
-# if pattern was provided, cache it
-[[ -n "$SPEC_PATTERN" ]] && update_history "$SPEC_PATTERN"
+FZF_OPTS=(
+	--height 15
+	--reverse
+	--header "TAB to multi-select | Enter to finish | Esc to cancel"
+	--print-query
+)
+
+# If --single is NOT set, enable multi-select
+[[ "$SINGLE_MODE" = false ]] && FZF_OPTS+=(--multi)
+
+# Use history as suggestions via a preview or header if preferred,
+# but here we focus on the file list.
+FZF_OUT=$(echo "$ALL_SPECS" | fzf "${FZF_OPTS[@]}" || true)
+
+if [[ -z "$FZF_OUT" ]]; then
+	echo "✖ Cancelled"
+	exit 0
+fi
+
+QUERY=$(echo "$FZF_OUT" | sed -n '1p')
+# Get all lines except the first (the query)
+SELECTED_FILES=$(echo "$FZF_OUT" | sed '1d')
+
+# --- Logic: If query exists but nothing selected, filter ALL_SPECS by that query ---
+if [[ -n "$QUERY" && -z "$SELECTED_FILES" ]]; then
+	# Use fzf's own filtering logic to mimic glob/fuzzy matching on the whole list
+	SELECTED_FILES=$(echo "$ALL_SPECS" | fzf --filter="$QUERY" || true)
+fi
+
+# Final check: If still empty (user just hit enter on empty search), run all.
+# If --single is on, we ensure only the first selection is used.
+if [[ "$SINGLE_MODE" = true ]]; then
+	SELECTED_FILES=$(echo "$SELECTED_FILES" | head -n 1)
+fi
+
+# --- Build Command ---
+CMD_ARGS=(--browsers "$BROWSER" --watch "$WATCH_MODE")
+
+# Construct --include flags for each file
+if [[ -n "$SELECTED_FILES" ]]; then
+	while read -r file; do
+		[[ -n "$file" ]] && CMD_ARGS+=(--include "$file")
+	done <<<"$SELECTED_FILES"
+fi
 
 # --- Output Info ---
 clear
-echo "▶ Running Angular specs"
+echo "▶ Running Angular specs (FZF Mode)"
 echo "  Browsers: $BROWSER"
 echo "  Watch:    $WATCH_MODE"
-echo "  Include:  ${SPEC_PATTERN:-All specs}"
+echo "  Files:    ${SELECTED_FILES:-All specs}"
 echo "--------------------------------------"
 
-npx ng test \
-	--browsers "$BROWSER" \
-	--watch "$WATCH_MODE" \
-	${SPEC_PATTERN:+--include "**/${SPEC_PATTERN}.spec.ts"}
+npx ng test "${CMD_ARGS[@]}"
