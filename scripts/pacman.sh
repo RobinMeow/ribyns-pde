@@ -117,3 +117,4 @@ main "$@"
 # sed like tr but more powerfull
 # awk like sed but more powerfull (i think i've seen either awk being used when quering data using the azure cli)
 # watch - rerun a command every 2s. monitoring
+# df -h prints disk usages and leftover space in human readable format

@@ -3,13 +3,14 @@ set -euo pipefail
 
 clear
 # Configuration
-HISTORY_FILE=".test_history"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
+HISTORY_FILE="$CACHE_DIR/ng_test_history"
 HISTORY_LIMIT=5
 BROWSER="ChromeHeadless"
 SPEC_PATTERN=""
 WATCH_MODE=true # Default to true
 
-# Ensure history file exists
+mkdir -p "$CACHE_DIR"
 touch "$HISTORY_FILE"
 
 # --- Argument Parsing ---
