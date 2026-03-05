@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 clear
+
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
-HISTORY_FILE="$CACHE_DIR/ng_test_fzf"
-HISTORY_LIMIT=5
+HISTORY_FILE="$CACHE_DIR/ng_test_fzf_history"
+HISTORY_LIMIT=10
 BROWSER="ChromeHeadless"
 WATCH_MODE=true
 SINGLE_MODE=false
+SELECTED_FILES=""
 
 mkdir -p "$CACHE_DIR"
 touch "$HISTORY_FILE"
@@ -17,7 +18,7 @@ touch "$HISTORY_FILE"
 while [[ $# -gt 0 ]]; do
 	case $1 in
 	--browsers)
-		BROWSER="${2:?Error: --browsers requires a value}"
+		BROWSER="${2:-ChromeHeadless}"
 		shift 2
 		;;
 	--no-watch)
@@ -29,72 +30,82 @@ while [[ $# -gt 0 ]]; do
 		shift
 		;;
 	*)
-		echo "Unknown argument: $1"
-		exit 1
+		# Treat any other arg as a starting query for fzf
+		QUERY="$1"
+		shift
 		;;
 	esac
 done
 
-# --- File Selection Logic ---
-# Get list of all spec files
-ALL_SPECS=$(find . -name "*.spec.ts" -not -path "*/node_modules/*" | sed 's|^\./||')
+# --- Helper: Update History ---
+update_history() {
+	local entry="$1"
+	[[ -z "$entry" ]] && return
+	(
+		echo "$entry"
+		grep -vF "$entry" "$HISTORY_FILE" || true
+	) | head -n "$HISTORY_LIMIT" >"${HISTORY_FILE}.tmp"
+	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE"
+}
 
-if [[ -z "$ALL_SPECS" ]]; then
-	echo "✖ No .spec.ts files found in current directory."
+# --- File Discovery & FZF ---
+# Scan for .spec.ts and .test.ts files
+mapfile -t ALL_SPECS < <(find . -type f \( -name "*.spec.ts" -o -name "*.test.ts" \) -not -path "*/node_modules/*" | sed 's|^\./||')
+
+if [ ${#ALL_SPECS[@]} -eq 0 ]; then
+	echo "Folder is empty of specs. Exiting."
 	exit 1
 fi
 
-FZF_OPTS=(
-	--height 15
-	--reverse
-	--header "TAB to multi-select | Enter to finish | Esc to cancel"
-	--print-query
-)
+# Run FZF
+# We use --query to pass any initial argument from the CLI
+FZF_OUT=$(printf "%s\n" "${ALL_SPECS[@]}" | fzf \
+	--height 40% \
+	--reverse \
+	--header "Enter to test filtered list | --single: closest match only" \
+	--history "$HISTORY_FILE" \
+	--query "${QUERY:-}" \
+	--multi || true)
 
-# If --single is NOT set, enable multi-select
-[[ "$SINGLE_MODE" = false ]] && FZF_OPTS+=(--multi)
-
-# Use history as suggestions via a preview or header if preferred,
-# but here we focus on the file list.
-FZF_OUT=$(echo "$ALL_SPECS" | fzf "${FZF_OPTS[@]}" || true)
-
-if [[ -z "$FZF_OUT" ]]; then
+if [[ -z "$FZF_OUT" && -n "${QUERY:-}" ]]; then
+	# If user typed something but nothing matched/selected,
+	# and they didn't hit escape, we treat as empty (run all).
+	# But usually, if FZF_OUT is empty, user hit ESC.
 	echo "✖ Cancelled"
 	exit 0
 fi
 
-QUERY=$(echo "$FZF_OUT" | sed -n '1p')
-# Get all lines except the first (the query)
-SELECTED_FILES=$(echo "$FZF_OUT" | sed '1d')
-
-# --- Logic: If query exists but nothing selected, filter ALL_SPECS by that query ---
-if [[ -n "$QUERY" && -z "$SELECTED_FILES" ]]; then
-	# Use fzf's own filtering logic to mimic glob/fuzzy matching on the whole list
-	SELECTED_FILES=$(echo "$ALL_SPECS" | fzf --filter="$QUERY" || true)
+# --- Logic: Single vs Filtered List ---
+if [[ "$SINGLE_MODE" == true ]]; then
+	# Take the top match from the filtered list (or the selection)
+	SELECTED_FILES=$(echo "$FZF_OUT" | head -n 1)
+else
+	# Use the entire filtered list returned by fzf
+	# Replace newlines with single-quoted strings for the --include array
+	SELECTED_FILES=$(echo "$FZF_OUT" | sed "s/.*/'&'/" | paste -sd "," -)
 fi
 
-# Final check: If still empty (user just hit enter on empty search), run all.
-# If --single is on, we ensure only the first selection is used.
-if [[ "$SINGLE_MODE" = true ]]; then
-	SELECTED_FILES=$(echo "$SELECTED_FILES" | head -n 1)
-fi
+# Update history with the first item selected
+FIRST_MATCH=$(echo "$FZF_OUT" | head -n 1)
+update_history "$FIRST_MATCH"
 
-# --- Build Command ---
-CMD_ARGS=(--browsers "$BROWSER" --watch "$WATCH_MODE")
-
-# Construct --include flags for each file
-if [[ -n "$SELECTED_FILES" ]]; then
-	while read -r file; do
-		[[ -n "$file" ]] && CMD_ARGS+=(--include "$file")
-	done <<<"$SELECTED_FILES"
-fi
-
-# --- Output Info ---
+# --- Execution ---
 clear
 echo "▶ Running Angular specs (FZF Mode)"
 echo "  Browsers: $BROWSER"
 echo "  Watch:    $WATCH_MODE"
-echo "  Files:    ${SELECTED_FILES:-All specs}"
+echo "  Mode:     $([[ "$SINGLE_MODE" == true ]] && echo "Single" || echo "Batch")"
+
+if [[ -z "$SELECTED_FILES" ]]; then
+	echo "  Include:  All specs (Default)"
+	INCLUDE_ARG="['**/*.spec.ts', '**/*.test.ts']"
+else
+	echo "  Include:  $SELECTED_FILES"
+	INCLUDE_ARG="[$SELECTED_FILES]"
+fi
 echo "--------------------------------------"
 
-npx ng test "${CMD_ARGS[@]}"
+npx ng test \
+	--browsers "$BROWSER" \
+	--watch "$WATCH_MODE" \
+	--include "$INCLUDE_ARG"
