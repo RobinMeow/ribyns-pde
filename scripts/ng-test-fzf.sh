@@ -5,11 +5,9 @@ clear
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
 HISTORY_FILE="$CACHE_DIR/ng_test_fzf_history"
-HISTORY_LIMIT=10
 BROWSER="ChromeHeadless"
 WATCH_MODE=true
 SINGLE_MODE=false
-SELECTED_FILES=""
 
 mkdir -p "$CACHE_DIR"
 touch "$HISTORY_FILE"
@@ -30,82 +28,58 @@ while [[ $# -gt 0 ]]; do
 		shift
 		;;
 	*)
-		# Treat any other arg as a starting query for fzf
 		QUERY="$1"
 		shift
 		;;
 	esac
 done
 
-# --- Helper: Update History ---
-update_history() {
-	local entry="$1"
-	[[ -z "$entry" ]] && return
-	(
-		echo "$entry"
-		grep -vF "$entry" "$HISTORY_FILE" || true
-	) | head -n "$HISTORY_LIMIT" >"${HISTORY_FILE}.tmp"
-	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE"
-}
-
-# --- File Discovery & FZF ---
-# Scan for .spec.ts and .test.ts files
+# --- File Discovery ---
+# Get all spec/test files, relative to current dir
 mapfile -t ALL_SPECS < <(find . -type f \( -name "*.spec.ts" -o -name "*.test.ts" \) -not -path "*/node_modules/*" | sed 's|^\./||')
 
 if [ ${#ALL_SPECS[@]} -eq 0 ]; then
-	echo "Folder is empty of specs. Exiting."
+	echo "No spec files found."
 	exit 1
 fi
 
-# Run FZF
-# We use --query to pass any initial argument from the CLI
-FZF_OUT=$(printf "%s\n" "${ALL_SPECS[@]}" | fzf \
+# --- FZF Logic ---
+# Logic: If --single, just return the selection.
+# If NOT single, we bind 'enter' to select-all + accept so all filtered items are returned.
+if [[ "$SINGLE_MODE" == true ]]; then
+	FZF_BIND=""
+	HEADER_MSG="SINGLE MODE: Select one file to test"
+else
+	# This magic string selects all matches currently visible and then accepts
+	FZF_BIND="--bind 'enter:select-all+accept'"
+	HEADER_MSG="BATCH MODE: Press Enter to run ALL filtered results | Tab to multi-select"
+fi
+
+FZF_OUT=$(printf "%s\n" "${ALL_SPECS[@]}" | eval fzf \
+	$FZF_BIND \
 	--height 40% \
 	--reverse \
-	--header "Enter to test filtered list | --single: closest match only" \
-	--history "$HISTORY_FILE" \
-	--query "${QUERY:-}" \
-	--multi || true)
+	--multi \
+	--header \"$HEADER_MSG\" \
+	--query \"${QUERY:-}\" \
+	--history \"$HISTORY_FILE\")
 
-if [[ -z "$FZF_OUT" && -n "${QUERY:-}" ]]; then
-	# If user typed something but nothing matched/selected,
-	# and they didn't hit escape, we treat as empty (run all).
-	# But usually, if FZF_OUT is empty, user hit ESC.
+if [[ -z "$FZF_OUT" ]]; then
 	echo "✖ Cancelled"
 	exit 0
 fi
 
-# --- Logic: Single vs Filtered List ---
-if [[ "$SINGLE_MODE" == true ]]; then
-	# Take the top match from the filtered list (or the selection)
-	SELECTED_FILES=$(echo "$FZF_OUT" | head -n 1)
-else
-	# Use the entire filtered list returned by fzf
-	# Replace newlines with single-quoted strings for the --include array
-	SELECTED_FILES=$(echo "$FZF_OUT" | sed "s/.*/'&'/" | paste -sd "," -)
-fi
-
-# Update history with the first item selected
-FIRST_MATCH=$(echo "$FZF_OUT" | head -n 1)
-update_history "$FIRST_MATCH"
+# --- Formatting the --include string ---
+# Format each line into 'path/to/file' and join with commas
+SELECTED_FILES=$(echo "$FZF_OUT" | sed "s/.*/'&'/" | paste -sd "," -)
 
 # --- Execution ---
 clear
-echo "▶ Running Angular specs (FZF Mode)"
-echo "  Browsers: $BROWSER"
-echo "  Watch:    $WATCH_MODE"
-echo "  Mode:     $([[ "$SINGLE_MODE" == true ]] && echo "Single" || echo "Batch")"
-
-if [[ -z "$SELECTED_FILES" ]]; then
-	echo "  Include:  All specs (Default)"
-	INCLUDE_ARG="['**/*.spec.ts', '**/*.test.ts']"
-else
-	echo "  Include:  $SELECTED_FILES"
-	INCLUDE_ARG="[$SELECTED_FILES]"
-fi
+echo "▶ Running Angular specs"
+echo "  Include: [${SELECTED_FILES}]"
 echo "--------------------------------------"
 
 npx ng test \
 	--browsers "$BROWSER" \
 	--watch "$WATCH_MODE" \
-	--include "$INCLUDE_ARG"
+	--include "[${SELECTED_FILES}]"
