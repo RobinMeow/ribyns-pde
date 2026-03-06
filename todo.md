@@ -2,7 +2,6 @@
 
 ## prio quick todos
 
-- https://github.com/folke/flash.nvim
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
