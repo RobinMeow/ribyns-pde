@@ -4,6 +4,7 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+	-- @type snacks.Config
 	opts = function()
 		require("snacks-notifier")
 		return {
@@ -33,6 +34,10 @@ return {
 			input = { enabled = false },
 			picker = { enabled = false },
 			notifier = {
+				timeout = 5000,
+				margin = {
+					top = 1, -- prevent it from rendering on top of winbar
+				},
 				enabled = true,
 			},
 			quickfile = { enabled = false },

@@ -4,9 +4,6 @@ local M = {}
 ---@type LazySpec
 M.vscode = {
 	"Mofiqul/vscode.nvim",
-	-- config = function()
-	-- 	vim.cmd.colorscheme("vscode")
-	-- end,
 }
 
 ---@module 'lazy'
@@ -14,7 +11,6 @@ M.vscode = {
 M.catppuccin = {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	priority = 1000,
 	config = function()
 		require("catppuccin").setup({
 			flavour = "mocha", -- Change this to 'frappe', 'macchiato', or 'latte' if desired
@@ -32,8 +28,6 @@ M.gruvbox = { "ellisonleao/gruvbox.nvim" }
 
 M.tokyo_night = {
 	"folke/tokyonight.nvim",
-	lazy = false,
-	priority = 1000,
 	opts = {},
 }
 
@@ -43,6 +37,17 @@ M.kanagawa = {
 	priority = 1000,
 	config = function()
 		require("kanagawa").setup({
+			-- remove gutter bg
+			colors = {
+				theme = {
+					all = {
+						ui = {
+							bg_gutter = "none",
+						},
+					},
+				},
+			},
+
 			commentStyle = { italic = false },
 			keywordStyle = { italic = false },
 			-- statementStyle = { bold = false },
@@ -55,35 +60,30 @@ M.kanagawa = {
 			-- specialbold = false,
 			overrides = function(colors) -- add/modify highlights
 				local theme = colors.theme
+				local palette = colors.palette
+				-- palette:
+				-- surimiOrange
+				-- oniViolet
+				-- sakuraPink
+				-- waveAqua1 (surprisingly good, but I dont like the cyan)
+				local violence = "#6a48a0" -- strong slightly dark violet
+				local border_color = violence
 				return {
 					-- transparent floating windows
 					NormalFloat = { bg = "none" },
-					FloatBorder = { bg = "none" },
+					FloatBorder = { bg = "none", fg = border_color },
 					FloatTitle = { bg = "none" },
 
-					-- Save an hlgroup with dark background and dimmed foreground
-					-- so that you can use it where your still want darker windows.
-					-- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
-					-- NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
-
-					-- Popular plugins that open floats will link to NormalFloat by default;
-					-- set their background accordingly if you wish to keep them dark and borderless
-					-- LazyNormal = { fg = theme.ui.fg_dim },
-					-- MasonNormal = { fg = theme.ui.fg_dim },
-
-					-- borderless telescope
-					-- TelescopeTitle = { fg = theme.ui.special, bold = true },
-					-- TelescopePromptBorder = { fg = theme.ui.bg_p1 },
-					-- TelescopeResultsNormal = { fg = theme.ui.fg_dim },
-					-- TelescopeResultsBorder = { fg = theme.ui.bg_m1 },
-					-- TelescopePreviewBorder = { fg = theme.ui.bg_dim },
+					TelescopeBorder = { fg = border_color },
+					TelescopePromptBorder = { fg = border_color },
+					TelescopeResultsBorder = { fg = border_color },
+					TelescopePreviewBorder = { fg = border_color },
 				}
 			end,
 		})
-		vim.cmd.colorscheme("kanagawa-wave")
 	end,
 }
 
-M.nightfox = { "EdenEast/nightfox.nvim", lazy = false, priority = 1000, opts = {} }
+M.nightfox = { "EdenEast/nightfox.nvim", opts = {} }
 
 return M

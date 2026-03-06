@@ -2,7 +2,7 @@
 
 ## prio
 
-- .test-history of ng-test.sh should be either .nvim/ within git repo or in user temp storage
+- https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - toggle padding for screensharing in teams
 - use `time` to add execution duration to all scripts
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed

@@ -525,6 +525,35 @@ require("lazy").setup({
 			task = "📌",
 			lazy = "💤 ",
 		},
+		border = "rounded",
 	},
 })
 vim.cmd("TransparentEnable")
+
+local function get_kanagawa_variant()
+	local hour = tonumber(os.date("%H"))
+	local min = tonumber(os.date("%M"))
+	local currentTime = hour + (min / 60)
+
+	-- 10:00 AM to 5:30 PM (17.5 in decimal)
+	if currentTime >= 10 and currentTime < 17.5 then
+		return "kanagawa-wave"
+	else
+		return "kanagawa-dragon"
+	end
+end
+
+vim.cmd("colorscheme " .. get_kanagawa_variant())
+
+-- show diagnostic beneath cursor while resting
+-- vim.api.nvim_create_autocmd("CursorHold", {
+-- 	callback = function()
+-- 		vim.diagnostic.open_float(nil, {
+-- 			focusable = false,
+-- 			border = "rounded", -- This will use your FloatBorder highlight
+-- 			source = "always",
+-- 			prefix = " ",
+-- 			scope = "cursor",
+-- 		})
+-- 	end,
+-- })
