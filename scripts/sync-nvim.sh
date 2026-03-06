@@ -5,6 +5,7 @@ PDE="$HOME/ribyns-pde"
 source "$PDE/scripts/detect_env.sh"
 detect_env
 
+rm -rf "$HOME/.config/nvim/"
 mkdir -p "$HOME/.config"
 cp -r "$PDE/.config/"* "$HOME/.config/"
 
