@@ -132,13 +132,15 @@ wezterm.on("iterate-wallpaper", function(window, _)
 	ensure_bg_is_not_transparent(window)
 	apply_wallpaper(window, wallpapers[current_wallpaper_idx])
 end)
-wezterm.on("random-wallpaper", function(window, _)
+
+local function load_random_wallpaper(window, _)
 	math.randomseed(os.time())
 	current_wallpaper_idx = math.random(1, #wallpapers)
 
 	ensure_bg_is_not_transparent(window)
 	apply_wallpaper(window, wallpapers[current_wallpaper_idx])
-end)
+end
+wezterm.on("random-wallpaper", load_random_wallpaper)
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 -- maximize window on startup
