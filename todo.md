@@ -1,6 +1,6 @@
 # TicketSystem
 
-## prio
+## prio quick todos
 
 - https://github.com/folke/flash.nvim
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
@@ -9,6 +9,9 @@
 - yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
+
+## prio but high time investment
+
 - compare open source llm and build one local so i can use it in as cli
 - Telescope builtin pickers to keymaps mappen und lernen welche es gibt
 

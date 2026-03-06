@@ -38,6 +38,7 @@ ZSH_THEME="simple"
 # DISABLE_LS_COLORS="true"
 eval "$(dircolors $HOME/.dircolors)"
 eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)" # shadow cd to use z instead
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
