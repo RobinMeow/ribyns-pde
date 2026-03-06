@@ -6,9 +6,9 @@ source "$SCRIPT_DIR/utils.sh"
 
 install() {
 	if [ "$UPDATE_MODE" -eq 1 ]; then
-		sudo pacman -S "$@"
+		sudo pacman -S "$@" --noconfirm
 	else
-		sudo pacman -S --needed "$@"
+		sudo pacman -S --needed "$@" --noconfirm
 	fi
 }
 
@@ -54,7 +54,7 @@ gadgets() {
 # software development
 dev() {
 	info "Installing dev packages..."
-	install nodejs npm nvm cargo
+	install nodejs npm nvm cargo docker docker-compose
 
 	# dotnet
 	# https://wiki.archlinux.org/title/.NET

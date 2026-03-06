@@ -2,25 +2,20 @@
 
 ## prio
 
+- https://github.com/folke/flash.nvim
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
-- use `time` to add execution duration to all scripts
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 - yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
-- zoxide a smarter cd commadn
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
-- Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
-- nvim startup screen. something cool would be nice https://github.com/TheZoraiz/ascii-image-converter Eeyore would be cool https://www.youtube.com/watch?v=rc3LMw4QCec
-- install sciprt for cloning and building ascii image converter https://github.com/TheZoraiz/ascii-image-converter
-- see if i can do prompting in cli https://github.com/google-gemini/gemini-cli
 - compare open source llm and build one local so i can use it in as cli
-- https://github.com/folke/flash.nvim
-- source control btop conf
 - Telescope builtin pickers to keymaps mappen und lernen welche es gibt
 
 # low prio
 
+- source control btop conf
+- use `time` to add execution duration to all scripts
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
 _ consider hand written workspice files in lua. BUt for that I wanna collect more lua experience
 - markdown viewer? https://github.com/iamcco/markdown-preview.nvim not sure if i need sth like that
@@ -31,6 +26,10 @@ _ consider hand written workspice files in lua. BUt for that I wanna collect mor
 - add a shell cript for cloning this repo with installation instruction in readme
 - todo counter for winbar in lualine
 - tokei if there is enough space for snacks dashboard
+- https://github.com/jesseduffield/lazydocker
+- Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
+- dashboard could be responsive based on available space. the maintainer said sth about it in the "Share your dashboard" thread
+- install sciprt for cloning and building ascii image converter https://github.com/TheZoraiz/ascii-image-converter
 
 ## Explicitly-Discarded
 
