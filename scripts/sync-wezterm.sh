@@ -24,6 +24,7 @@ echo "copied wezterm.lua"
 # sync config files
 echo "Installing wezterm config"
 config_dir="$WIN_HOME/.config/wezterm"
+rm -rf "$config_dir"
 mkdir -p "$config_dir/wallpapers"
 # sync wallpapers
 cp "$PDE/images/wallpapers/"* "${config_dir}/wallpapers/"
