@@ -46,6 +46,7 @@ local function auto_set_font_size(window)
 	window:set_config_overrides({ font_size = default_font_size })
 end
 
+local fk_microsoft = false
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -261,5 +262,21 @@ wezterm.on("update-right-status", function(window, _)
 		{ Text = leader_active },
 	}))
 end)
+
+local toggle_padding = function(window, _)
+	fk_microsoft = not fk_microsoft
+
+	if fk_microsoft then
+		update({
+			window_padding = { left = 4, right = 0, top = 5, bottom = 5 },
+		}, window)
+	else
+		update({ window_padding = { left = 0, right = 0, top = 0, bottom = 0 } }, window)
+	end
+end
+
+wezterm.on("toggle-padding", toggle_padding)
+
+bind_key("LEADER", "m", act.EmitEvent("toggle-padding"))
 
 return config
