@@ -9,6 +9,8 @@
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
 
+- edge-ai for gif backgrounds. dither didnt matter for gpu usage. lower resolution seemed to matter most. try 720 perhaps
+
 ## prio but high time investment
 
 - compare open source llm and build one local so i can use it in as cli
@@ -59,4 +61,12 @@ document reader https://github.com/kruseio/hygg
 - devbox?
 - testcontainers?
 - toggle background brightness
+
+
+# interesting open source tools
+
+- [video to gif](https://github.com/microsoft/edge-ai/tree/main/src/900-tools-utilities/901-video-tools/cli/video-to-gif)
+- [convert files to markdown](https://github.com/microsoft/markitdown)
+- [li progress bar](https://github.com/tqdm/tqdm)
+- [display rich text beatiful in the terminal](https://github.com/Textualize/rich)
 
