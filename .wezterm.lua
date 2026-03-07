@@ -76,20 +76,20 @@ end
 -- background
 local transparent_bg = false
 local current_wallpaper_idx = 1
-local function load_wallpapers()
+local function get_wallpapers()
 	local sep = package.config:sub(1, 1)
 	local wallpapers_dir = wezterm.config_dir .. sep .. ".config" .. sep .. "wezterm" .. sep .. "wallpapers"
-	local result = wezterm.glob(wallpapers_dir .. sep .. "*")
-	return result
+	return wezterm.glob(wallpapers_dir .. sep .. "*")
 end
-local wallpapers = load_wallpapers()
+
 local current_brightness = 0.025
 local current_opacity = 0.9
 
 -- inital background
 config.window_background_opacity = 1 -- kill transparent
 config.colors = { background = "black" }
-config.window_background_image = wallpapers[1]
+local wallpapers = get_wallpapers()
+config.window_background_image = wallpapers[math.random(#wallpapers)]
 config.window_background_image_hsb = { brightness = current_brightness }
 
 local function apply_wallpaper(window, path)
