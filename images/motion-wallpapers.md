@@ -1,7 +1,7 @@
 settingling for 
-720p
+~~720p~~ 1080p _(will only result in a larger cache)_
 15fps
-80q webp
+~~80q~~ 100 webp _(always go lossless. less cpu work while rendering)_
 
 pros:
 - fairly smooth
@@ -34,3 +34,5 @@ is actually still fine. Results, tested with sakura-with-full-moon
 - 16s (so my largest)
 - 1.8GB cache (cleared upon closing wezterm)
 - CPU usage on my Laptop rose up only to 1.4%
+
+**not using compression will offload cpu work to the gpu**
