@@ -9,8 +9,6 @@
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
 
-- edge-ai for gif backgrounds. dither didnt matter for gpu usage. lower resolution seemed to matter most. try 720 perhaps
-
 ## prio but high time investment
 
 - compare open source llm and build one local so i can use it in as cli
@@ -18,6 +16,7 @@
 
 # low prio
 
+- math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
 - source control btop conf
 - use `time` to add execution duration to all scripts
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
@@ -65,7 +64,7 @@ document reader https://github.com/kruseio/hygg
 
 # interesting open source tools
 
-- [video to gif](https://github.com/microsoft/edge-ai/tree/main/src/900-tools-utilities/901-video-tools/cli/video-to-gif)
+- ffmpeg converting media files of all sorts (used it to convert mp4 to animated webp as wezterm background)
 - [convert files to markdown](https://github.com/microsoft/markitdown)
 - [li progress bar](https://github.com/tqdm/tqdm)
 - [display rich text beatiful in the terminal](https://github.com/Textualize/rich)

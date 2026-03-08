@@ -25,9 +25,9 @@ echo "copied wezterm.lua"
 echo "Installing wezterm config"
 config_dir="$WIN_HOME/.config/wezterm"
 rm -rf "$config_dir"
+
 mkdir -p "$config_dir/wallpapers"
-# sync wallpapers
 cp "$PDE/images/wallpapers/"* "${config_dir}/wallpapers/"
 
-# the background image which will be used
-cp "$PDE/images/wallpapers/arch-gray-2880x1800.jpg" "$config_dir/.wezterm_background.jpg"
+mkdir -p "$config_dir/motions"
+cp "$PDE/images/motions/"* "${config_dir}/motions/"
