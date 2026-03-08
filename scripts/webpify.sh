@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Default values
+# Defauls
 fps=30
 height=1440
 quality=80
@@ -32,23 +33,27 @@ while [[ "$#" -gt 0 ]]; do
 	shift
 done
 
-# check if INPUT_DIR is set and not empty
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PDE="$SCRIPT_DIR/.."
+#
 [[ -z "${INPUT_DIR}" ]] && {
 	echo "Error: --input <input-dir> is required"
 	exit 1
 }
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PDE="$SCRIPT_DIR/.." # the git repo this script is in
-OUTPUT_DIR="$PDE/tmp/$(basename "$INPUT_DIR")"
-
-fps="${2:-30}"
-height="${3:-1440}"
-quality="${4:-80}"
+if [ -d "$INPUT_DIR" ]; then
+	# Directory mode: loop through files
+	OUTPUT_DIR="$PDE/tmp/$(basename "$INPUT_DIR")"
+	FILES=("$INPUT_DIR"/*.mp4)
+else
+	# Single file mode: just one item
+	OUTPUT_DIR="$PDE/tmp"
+	FILES=("$INPUT_DIR")
+fi
 
 mkdir -p "$OUTPUT_DIR"
 
-for file in "$INPUT_DIR"/*.mp4; do
+for file in "${FILES[@]}"; do
 	name=$(basename "$file" .mp4) # strip .mp4 from basename
 
 	ffmpeg -i "$file" \
