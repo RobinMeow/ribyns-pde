@@ -1,38 +1,16 @@
-settingling for 
-~~720p~~ 1080p _(will only result in a larger cache)_
-15fps
-~~80q~~ 100 webp _(always go lossless. less cpu work while rendering)_
-
-pros:
-- fairly smooth
-- quality suffices
-- small file size (git works without 7z)
-- more colors compared to gif
-- under 1%cpu usage on my laptop (would 0.1% or sth on my PC)
-
-cons:
-- slight noise in the image
-- almost 850GB decoded cache for a 16s webp
+high-res: 1080p, 15fps
+potato: 720p, 10fps
 
 
-**considerations:**
-visual studio on single file console programm with 400 lines
-consumed on avrg 3% CPU just by continuesly scrolling
-whereas nvim consumes almost nothing.
-even on my laptop it stays under 1% while rendering the webp
+My laptop and desktop pc have better gpu accelartion.
+otherwise high-res would be fine on the work-laptop as well.
 
+always webp for smaller sizes
+always zero compression = 100quality setting
+because webp with compression has more decoding to do at run time.
+this will result in higher cache. 1-2G per webp.
+will be cleared on wezterm close (default native wezterm behavior).
 
-as countermease for the large cache size:
-I might clear it on wezterm start up. So I usually start wezterm once per day,
-considering i change the background once or trice, it will store 1-3GB in the worst case.
-BUt clearing it back up everyday, so I can use an infinite amount of different backgrounds
-without polluting the cache
+alternatively 7zip could be used for faster git operations, 
+but ill skip it for now. not sure if I really need it.
 
-**notes on upgrading**:
-going for 15fps, 1080p, 90q
-is actually still fine. Results, tested with sakura-with-full-moon
-- 16s (so my largest)
-- 1.8GB cache (cleared upon closing wezterm)
-- CPU usage on my Laptop rose up only to 1.4%
-
-**not using compression will offload cpu work to the gpu**
