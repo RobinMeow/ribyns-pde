@@ -18,6 +18,7 @@
 
 # low prio
 
+- math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
 - source control btop conf
 - use `time` to add execution duration to all scripts
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
