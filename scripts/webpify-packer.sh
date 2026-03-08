@@ -40,7 +40,7 @@ done
 }
 
 PDE="$SCRIPT_DIR/.."
-OUTPUT_DIR="$PDE/images/zipped"
+OUTPUT_DIR="$PDE/images/zip"
 
 if [ -d "$INPUT_DIR" ]; then
 	FILES=("$INPUT_DIR"/*)
