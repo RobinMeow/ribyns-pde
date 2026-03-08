@@ -74,25 +74,28 @@ if running_on_windows then
 end
 
 -- background
+local bg_mode = "wallpapers" -- "wallpapers" | "motions"
 local transparent_bg = false
 local current_wallpaper_idx = 1
-local function load_wallpapers()
+local function load_backgrounds()
 	local sep = package.config:sub(1, 1)
-	local wallpapers_dir = wezterm.config_dir .. sep .. ".config" .. sep .. "wezterm" .. sep .. "wallpapers"
-	local result = wezterm.glob(wallpapers_dir .. sep .. "*")
-	return result
+	local dir = wezterm.config_dir .. sep .. ".config" .. sep .. "wezterm" .. sep .. bg_mode
+	return wezterm.glob(dir .. sep .. "*")
 end
-local wallpapers = load_wallpapers()
+local wallpapers = load_backgrounds()
 local current_brightness = 0.025
 local current_opacity = 0.9
 
 -- inital background
 config.window_background_opacity = 1 -- kill transparent
 config.colors = { background = "black" }
-config.window_background_image = wallpapers[1]
+local inital_bg = wallpapers[math.random(#wallpapers)]
+wezterm.log_info("Initial Bg: " .. inital_bg)
+config.window_background_image = inital_bg
 config.window_background_image_hsb = { brightness = current_brightness }
 
-local function apply_wallpaper(window, path)
+local function apply_background(window, path)
+	wezterm.log_info("apply background " .. bg_mode .. ": " .. path)
 	update({
 		window_background_opacity = 1, -- kill transparent
 		colors = { background = "black" },
@@ -112,7 +115,7 @@ local toggle_transparent_bg = function(window, _)
 			window_background_image_hsb = { brightness = 1 }, -- kill brightness setting for backgorund image, tho it shouldnt matter
 		}, window)
 	else
-		apply_wallpaper(window, wallpapers[current_wallpaper_idx])
+		apply_background(window, wallpapers[current_wallpaper_idx])
 	end
 end
 
@@ -130,15 +133,26 @@ wezterm.on("iterate-wallpaper", function(window, _)
 	end
 
 	ensure_bg_is_not_transparent(window)
-	apply_wallpaper(window, wallpapers[current_wallpaper_idx])
+	apply_background(window, wallpapers[current_wallpaper_idx])
 end)
-wezterm.on("random-wallpaper", function(window, _)
+
+wezterm.on("cycle-bg-mode", function(window, _)
+	bg_mode = (bg_mode == "wallpapers") and "motions" or "wallpapers"
+	wallpapers = load_backgrounds()
+	current_wallpaper_idx = math.random(#wallpapers)
+	ensure_bg_is_not_transparent(window)
+	apply_background(window, wallpapers[current_wallpaper_idx])
+	wezterm.log_info("Switched to mode: " .. bg_mode)
+end)
+
+local function load_random_wallpaper(window, _)
 	math.randomseed(os.time())
 	current_wallpaper_idx = math.random(1, #wallpapers)
 
 	ensure_bg_is_not_transparent(window)
-	apply_wallpaper(window, wallpapers[current_wallpaper_idx])
-end)
+	apply_background(window, wallpapers[current_wallpaper_idx])
+end
+wezterm.on("random-wallpaper", load_random_wallpaper)
 
 config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
 -- maximize window on startup
@@ -166,10 +180,11 @@ end
 bind_key("LEADER", "t", act.EmitEvent("toggle-transparent"))
 bind_key("LEADER", "i", act.EmitEvent("iterate-wallpaper"))
 bind_key("LEADER", "r", act.EmitEvent("random-wallpaper"))
+bind_key("LEADER", "v", act.EmitEvent("cycle-bg-mode"))
 bind_key("LEADER", "z", act.EmitEvent("reload-wezterm"))
 wezterm.on("reload-wezterm", function(_, _)
-	wallpapers = load_wallpapers()
-	wezterm.log_info("wallpapers reloaded")
+	wallpapers = load_backgrounds()
+	wezterm.log_info(bg_mode .. " reloaded")
 end)
 
 bind_key("LEADER", "p", act.ActivateTabRelative(-1)) -- nav to prev tab
