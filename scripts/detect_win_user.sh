@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$PDE/scripts"
 source "$SCRIPT_DIR/utils.sh"
 source "$SCRIPT_DIR/detect_env.sh"
 

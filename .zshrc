@@ -4,6 +4,9 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# for my scripts. they no longer should use relative pathing
+export PDE="$HOME/ribyns-pde"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -37,8 +40,6 @@ ZSH_THEME="simple"
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 eval "$(dircolors $HOME/.dircolors)"
-eval "$(zoxide init zsh)"
-eval "$(zoxide init zsh --cmd cd)" # shadow cd to use z instead
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -136,6 +137,25 @@ esac
 
 # nvm node version manager
 source /usr/share/nvm/init-nvm.sh
+
+# Function to set WIN_HOME in current shell
+win_home() {
+    local SCRIPTS_DIR="$PDE/scripts"
+    source "$SCRIPTS_DIR/utils.sh"
+    source "$SCRIPTS_DIR/detect_env.sh"
+
+    detect_env
+    if [[ "$OS_TYPE" != "wsl" ]]; then
+        info "Not running in WSL. WIN_HOME will not be set."
+        return 0
+    fi
+
+    source "$SCRIPTS_DIR/detect_win_user.sh"
+    detect_win_user
+
+    export WIN_HOME="/mnt/c/Users/$WINDOWS_USER"
+    success "WIN_HOME set to $WIN_HOME"
+}
 
 export PATH
 
