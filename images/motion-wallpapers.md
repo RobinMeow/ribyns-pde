@@ -28,3 +28,9 @@ considering i change the background once or trice, it will store 1-3GB in the wo
 BUt clearing it back up everyday, so I can use an infinite amount of different backgrounds
 without polluting the cache
 
+**notes on upgrading**:
+going for 15fps, 1080p, 90q
+is actually still fine. Results, tested with sakura-with-full-moon
+- 16s (so my largest)
+- 1.8GB cache (cleared upon closing wezterm)
+- CPU usage on my Laptop rose up only to 1.4%
