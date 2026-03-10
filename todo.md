@@ -8,6 +8,7 @@
 - yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
+- wezterm tabs
 
 ## prio but high time investment
 
@@ -16,6 +17,7 @@
 
 # low prio
 
+- seemless wezterm (using ctrl hjkl to switch panes from nvim to wezterm and using the same binds in wezterm and nvim)
 - math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
 - source control btop conf
 - use `time` to add execution duration to all scripts
@@ -23,7 +25,6 @@
 _ consider hand written workspice files in lua. BUt for that I wanna collect more lua experience
 - markdown viewer? https://github.com/iamcco/markdown-preview.nvim not sure if i need sth like that
 - Debugging in nvim? not sure if i care about this. im fine with using windows for debugging for now.
-- database access from within nvim devries way i liked https://www.youtube.com/watch?v=ALGBuFLzDSA dadbob?
 - stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - instead of using fortune it would be cool to have 97 things every programmer should know (their titles) as reminders
 - add a shell cript for cloning this repo with installation instruction in readme
