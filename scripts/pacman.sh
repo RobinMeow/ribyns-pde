@@ -14,7 +14,7 @@ install() {
 
 core() {
 	info "Installing core packages..."
-	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi
+	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi yazi
 
 	# definitely not core
 	install fastfetch
