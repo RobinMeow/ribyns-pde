@@ -14,7 +14,7 @@ install() {
 
 core() {
 	info "Installing core packages..."
-	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi zoxide
+	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi
 
 	# definitely not core
 	install fastfetch
@@ -54,9 +54,15 @@ gadgets() {
 # software development
 dev() {
 	info "Installing dev packages..."
-	install nodejs npm nvm cargo docker docker-compose
+	# front end
+	install nodejs npm nvm
+	# containerization
+	install docker docker-compose docker-buildx
+	# persistence
+	install postgresql
 
-	# dotnet
+	# programming languages
+	install cargo
 	# https://wiki.archlinux.org/title/.NET
 	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
 	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
