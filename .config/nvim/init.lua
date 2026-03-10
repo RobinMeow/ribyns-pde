@@ -126,12 +126,7 @@ require("lazy").setup({
 	require("plugin.smear-cursor"),
 	require("plugin.which-key"),
 	require("plugin.telescope"),
-	-- NOTE: in case i run into trouble the next days im keeping
-	-- these comments to rollback to the old order
-	-- roslyn
-	-- lazy def
-	-- nvim-lspconfig
-	-- conform
+	require("plugin.dadbod"),
 	require("plugin.blink_cmp"),
 	require("plugin.colorscheme").catppuccin,
 	require("plugin.colorscheme").gruvbox,
@@ -143,8 +138,6 @@ require("lazy").setup({
 	require("plugin.todo-comments"),
 	require("plugin.lualine"),
 	require("plugin.flash-nvim"),
-	-- mini
-	-- nvim-treesitter
 
 	-- LSP Plugins
 	{ -- dotnet .NET
