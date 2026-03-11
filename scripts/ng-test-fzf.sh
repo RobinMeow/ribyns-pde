@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-clear
 
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
@@ -9,12 +8,27 @@ BROWSER="chromiumheadless"
 WATCH_MODE=true
 SINGLE_MODE=false
 
-mkdir -p "$CACHE_DIR"
-touch "$HISTORY_FILE"
+show_help() {
+	echo "Usage: $(basename "$0") [QUERY] [OPTIONS]"
+	echo ""
+	echo "Options:"
+	echo "  -h, --help      Show this help message"
+	echo "  --karma         Use ChromeHeadless (default: chromiumheadless)"
+	echo "  --browsers      Specify a custom browser engine"
+	echo "  --no-watch      Disable watch mode"
+	echo "  --single        Single selection mode (disables 'select-all' on Enter)"
+	echo ""
+	echo "Arguments:"
+	echo "  QUERY           Initial filter string for fzf"
+	exit 0
+}
 
 # --- Argument Parsing ---
 while [[ $# -gt 0 ]]; do
 	case $1 in
+	-h | --help)
+		show_help
+		;;
 	--browsers)
 		BROWSER="${2:-chromiumheadless}"
 		shift 2
@@ -37,6 +51,10 @@ while [[ $# -gt 0 ]]; do
 		;;
 	esac
 done
+
+clear
+mkdir -p "$CACHE_DIR"
+touch "$HISTORY_FILE"
 
 # --- File Discovery ---
 # Get all spec/test files, relative to current dir
