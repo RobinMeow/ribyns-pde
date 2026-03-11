@@ -196,6 +196,7 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 `sudo pacman -S tlp`
 `sudo systemctl start --enable tlp`
 set bat0 thresholds to 50/65 recommended here https://gurkhatech.com/laptop-battery-best-usage-guide/?utm_source=chatgpt.com if you can be pluggedin most of the time
+`sudo tlp-stat -b` to get info it working or not
 do so by `sudo vim /etc/tlp.conf` and search for `START_CHARGE` and `STOP_CHARGE`
 
 ## Git
