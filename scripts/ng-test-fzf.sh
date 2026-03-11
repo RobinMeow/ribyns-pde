@@ -5,7 +5,7 @@ clear
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
 HISTORY_FILE="$CACHE_DIR/ng_test_fzf_history"
-BROWSER="ChromiumHeadless"
+BROWSER="chromiumheadless"
 WATCH_MODE=true
 SINGLE_MODE=false
 
@@ -16,8 +16,12 @@ touch "$HISTORY_FILE"
 while [[ $# -gt 0 ]]; do
 	case $1 in
 	--browsers)
-		BROWSER="${2:-ChromeHeadless}"
+		BROWSER="${2:-chromiumheadless}"
 		shift 2
+		;;
+	--karma)
+		BROWSER="ChromeHeadless"
+		shift
 		;;
 	--no-watch)
 		WATCH_MODE=false
