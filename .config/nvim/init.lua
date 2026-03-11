@@ -138,7 +138,6 @@ require("lazy").setup({
 	require("plugin.todo-comments"),
 	require("plugin.lualine"),
 	require("plugin.flash-nvim"),
-	require("plugin.yazi"),
 	require("plugin.oil"),
 
 	-- LSP Plugins

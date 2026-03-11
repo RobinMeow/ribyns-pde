@@ -5,7 +5,6 @@
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
-- yazi / fzf / oil some sort of file manager https://github.com/mikavilpas/yazi.nvim
 - auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - https://github.com/folke/snacks.nvim
 - wezterm tabs
