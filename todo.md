@@ -16,6 +16,7 @@
 
 # low prio
 
+- consider floating cmdline. i think nice for pair-p https://github.com/VonHeikemen/fine-cmdline.nvim
 - seemless wezterm (using ctrl hjkl to switch panes from nvim to wezterm and using the same binds in wezterm and nvim)
 - math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
 - source control btop conf

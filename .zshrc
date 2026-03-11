@@ -37,8 +37,6 @@ ZSH_THEME="simple"
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 eval "$(dircolors $HOME/.dircolors)"
-eval "$(zoxide init zsh)"
-eval "$(zoxide init zsh --cmd cd)" # shadow cd to use z instead
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -95,11 +93,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
