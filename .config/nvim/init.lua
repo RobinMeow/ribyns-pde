@@ -76,7 +76,9 @@ vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc
 vim.keymap.set("n", "<leader><leader>sr", session.restore, { desc = "[ ][s]ession [r]estore" })
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
-vim.keymap.set("n", "<leader><leader>sh", session.delete_session, { desc = "[ ][s]nack [h]istory" })
+vim.keymap.set("n", "<leader>n", function()
+	require("snacks").notifier.show_history()
+end, { desc = "[ ][n] Snack history" })
 
 -- Copy visual selection to system clipboard
 vim.api.nvim_set_keymap(
