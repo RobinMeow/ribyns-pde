@@ -20,7 +20,7 @@ count_selected = { fg = "#1e1e2e", bg = "#b4befe" }
 border_symbol = "│"
 border_style  = { fg = "#7f849c" }
 
-syntect_theme = "~/.config/yazi/Catppuccin-mocha.tmTheme"
+syntect_theme = "~/.config/bat/catppuccin-mocha.tmTheme"
 
 [tabs]
 active   = { fg = "#1e1e2e", bg = "#cdd6f4", bold = true }
@@ -770,3 +770,4 @@ exts = [
   { name = "liquid", text = "", fg = "#a6e3a1" },
   { name = "zip", text = "", fg = "#fab387" },
 ]
+
