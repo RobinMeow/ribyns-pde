@@ -73,9 +73,14 @@ fi
 # Prepend --include to each selected file
 INCLUDE_FLAGS=$(echo "$FZF_OUT" | sed 's|^|--include |' | tr '\n' ' ')
 
+# Strip paths and all suffixes (e.g., path/file.spec.ts -> file)
+# BASENAMES=$(echo "$FZF_OUT" | sed 's|.*/||; s|\..*||' | paste -sd ", " -)
+BASENAMES=$(echo "$FZF_OUT" | sed 's|.*/||; s|\..*||' | paste -sd, - | sed 's/,/, /g')
+
 # --- Execution ---
 clear
 echo "▶ Running Angular specs"
+echo "  Files: ${BASENAMES}"
 echo "--------------------------------------"
 
 npx ng test \
