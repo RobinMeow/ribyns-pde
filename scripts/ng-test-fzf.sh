@@ -5,7 +5,7 @@ clear
 # Configuration
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
 HISTORY_FILE="$CACHE_DIR/ng_test_fzf_history"
-BROWSER="ChromeHeadless"
+BROWSER="ChromiumHeadless"
 WATCH_MODE=true
 SINGLE_MODE=false
 
@@ -69,17 +69,16 @@ if [[ -z "$FZF_OUT" ]]; then
 	exit 0
 fi
 
-# --- Formatting the --include string ---
-# Format each line into 'path/to/file' and join with commas
-SELECTED_FILES=$(echo "$FZF_OUT" | sed "s/.*/'&'/" | paste -sd "," -)
+# --- Formatting the flags ---
+# Prepend --include to each selected file
+INCLUDE_FLAGS=$(echo "$FZF_OUT" | sed 's|^|--include |' | tr '\n' ' ')
 
 # --- Execution ---
 clear
 echo "▶ Running Angular specs"
-echo "  Include: [${SELECTED_FILES}]"
 echo "--------------------------------------"
 
 npx ng test \
 	--browsers "$BROWSER" \
 	--watch "$WATCH_MODE" \
-	--include "[${SELECTED_FILES}]"
+	$INCLUDE_FLAGS
