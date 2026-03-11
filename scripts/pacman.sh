@@ -15,8 +15,9 @@ install() {
 core() {
 	info "Installing core packages..."
 	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi
-	# yazi and yazi deps
-	install yazi chafa
+	# yazi and yazi deps (deps are also great outside yazi)
+	install yazi chafa ffmpeg 7zip jq poppler fd rg fzf resvg
+	# TODO: imagemagick, xclip, wl-clipboard, xsel
 
 	# definitely not core
 	install fastfetch
