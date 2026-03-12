@@ -16,6 +16,9 @@ info "Installing NeoVim"
 info "Installing WezTerm"
 "$SCRIPT_DIR/sync-wezterm.sh"
 
+info "Syncing .gitconfig"
+"$SCRIPT_DIR/sync-gitconfig.sh"
+
 info "Installing zsh and oh-my-zsh"
 cp "$PDE/.zshrc" "$HOME/"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
