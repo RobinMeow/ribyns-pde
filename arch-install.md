@@ -114,7 +114,9 @@ your new system on reboot. log into root.
 run `systemctl enable NetworkManager.service`
 to make sure it starts on every boot
 and run `systemctl start NetworkManager.service` to start it now and to establish internet connection without rebooting now
+WARN: ran an Syu update and seems like i switched to extra/nvidia-open (open source drivers, prolly better was wasnt supported prev i think?)
 and gpu drivers, if pacman -S nvidia is for the 4080 (nvidia is precomiled, consider compiling yourself using dkms)
+
 
 `groupadd sudo`
 visudo and uncomment the sudo line:
