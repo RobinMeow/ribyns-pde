@@ -20,7 +20,7 @@ core() {
 	# NOTE: xclip, wl-clipboard, xsel. Left these out cuz im on wsl mostly
 
 	# definitely not core
-	install fastfetch
+	install fastfetch eza
 	success "core packages installed"
 }
 
