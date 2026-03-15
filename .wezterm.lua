@@ -154,7 +154,8 @@ local function load_random_wallpaper(window, _)
 end
 wezterm.on("random-wallpaper", load_random_wallpaper)
 
-config.window_decorations = "RESIZE" -- remove the window title-bar which includes minmizing, fullscreening, and closing
+config.window_decorations = "INTEGRATED_BUTTONS" -- remove the window title-bar which includes minmizing, fullscreening, and closing
+
 -- maximize window on startup
 wezterm.on("gui-startup", function(cmd)
 	if mux then
