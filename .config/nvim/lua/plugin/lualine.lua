@@ -65,11 +65,7 @@ return {
 				-- lualine_b = {},
 				-- maybe in the future when i have keymaps for buffers
 				lualine_y = { "branch" },
-				lualine_z = {
-					"datetime",
-					-- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-					-- style = "default",
-				},
+				-- lualine_z = {},
 				-- lualine_z = { "buffers" },
 			},
 			sections = {

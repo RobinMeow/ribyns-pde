@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- highlight current row cursor is on in buffer and telescope
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
