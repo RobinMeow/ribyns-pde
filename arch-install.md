@@ -80,7 +80,7 @@ run `locale-gen`
 `vim /etc/locale.conf`
 "LANG=en_GB.UTF-8"
 `vim /etc/vconsole.conf`
-`KEYMAP=us` (or `de` for qwertz)
+`KEYMAP=us` (or `localectl set-keymap de-latin1-nodeadkeys` for qwertz)
 
 `vim /etc/hostname`
 "ribyn" or any other network hostname, only lowercase
