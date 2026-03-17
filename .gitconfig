@@ -15,7 +15,7 @@
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	last = l -1
 	co = checkout
-	c = commit
+	c = commit --verbose
 	b = branch
 	ps = push
 	pl = pull
@@ -30,18 +30,18 @@
 	wt = worktree
 	fpa = fetch --prune --all
 	pfwl = push --force-with-lease
-	ca = commit --amend
-	aaca = "!git add --all && git commit --amend"
-	cane = commit --amend --no-edit
+	ca = commit --amend --verbose
+	aaca = "!git add --all && git commit --amend --verbose"
+	cane = commit --amend --no-edit --verbose
 	aacm = "!git add --all && git commit --message"
 	aacane = "!git add --all && git commit --amend --no-edit"
 	canep = "!git commit --amend --no-edit && git push"
 	canepfwl = "!git commit --amend --no-edit && git push --force-with-lease"
-	aacapfwl = "!git add --all && git commit --amend && git push --force-with-lease"
+	aacapfwl = "!git add --all && git commit --amend --verbose && git push --force-with-lease"
 	aacanepfwl = "!git add --all && git commit --amend --no-edit && git push --force-with-lease"
-	cp = "!git commit && git push"
-	aacp = "!git add -all && git commit && git push"
-	aacpfwl = "!git add -all && git commit && git push --force-with-lease"
+	cp = "!git commit --verbose && git push"
+	aacp = "!git add -all && git commit --verbose && git push"
+	aacpfwl = "!git add -all && git commit --verbose && git push --force-with-lease"
 	wt = worktree
 	co = checkout
 	smfe = submodule foreach

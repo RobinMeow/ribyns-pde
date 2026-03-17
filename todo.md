@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- tab view is so bad when it shortens to ...
 - highlight current row cursor is on in buffer and telescope
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
