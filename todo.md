@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- ng-test-fzf.sh is runniung duplicated tests...
 - tab view is so bad when it shortens to ...
 - highlight current row cursor is on in buffer and telescope
 - https://github.com/rachartier/tiny-inline-diagnostic.nvim
