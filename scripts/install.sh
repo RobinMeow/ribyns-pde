@@ -11,7 +11,7 @@ info "Installing dircolors"
 cp "$PDE/.dircolors" "$HOME/" # TODO: i should check if i actually still need this
 
 info "installing .config"
-cp -r "$PDE/.config" "$HOME/.config"
+cp -r "$PDE/.config" "$HOME/"
 
 info "Syncing .gitconfig"
 "$SCRIPT_DIR/sync-gitconfig.sh"
