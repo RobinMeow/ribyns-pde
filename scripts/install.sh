@@ -10,11 +10,8 @@ source "$PDE/scripts/detect_win_user.sh"
 info "Installing dircolors"
 cp "$PDE/.dircolors" "$HOME/" # TODO: i should check if i actually still need this
 
-info "Installing NeoVim"
-"$SCRIPT_DIR/sync-nvim.sh"
-
-info "Installing WezTerm"
-"$SCRIPT_DIR/sync-wezterm.sh"
+info "installing .config"
+cp -r "$PDE/.config" "$HOME/"
 
 info "Syncing .gitconfig"
 "$SCRIPT_DIR/sync-gitconfig.sh"
