@@ -135,5 +135,14 @@ esac
 # nvm node version manager
 source /usr/share/nvm/init-nvm.sh
 
+# allow q/Q to quit yazi with changing or not chaning cwd
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 export PATH
 

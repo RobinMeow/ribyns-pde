@@ -2,6 +2,8 @@
 
 ## prio quick todos
 
+- nvim copy to buffer/visual based on mode
+- new line prompt for more line width on long commands or cwds
 - ng-test-fzf.sh is runniung duplicated tests...
 - tab view is so bad when it shortens to ...
 - highlight current row cursor is on in buffer and telescope
