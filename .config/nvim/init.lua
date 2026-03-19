@@ -79,6 +79,8 @@ vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][
 vim.api.nvim_set_keymap("v", "<leader><leader>c", '"+y', { desc = "[ ][ ][c]opy visual to clipboard" })
 vim.api.nvim_set_keymap("n", "<leader><leader>c", ":%y+<CR>", { desc = "[ ][ ][c]opy buffer to clipboard" })
 
+vim.api.nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", { desc = "[ ][g]it :DiffviewOpen" })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
@@ -115,7 +117,6 @@ require("lazy").setup({
 	require("plugin.gitsigns"),
 	require("plugin.indent-blankline"),
 	require("plugin.diffview"),
-	require("plugin.neogit"),
 	require("plugin.smear-cursor"),
 	require("plugin.which-key"),
 	require("plugin.telescope"),
