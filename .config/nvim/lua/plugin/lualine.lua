@@ -64,7 +64,8 @@ return {
 				},
 				-- lualine_b = {},
 				-- maybe in the future when i have keymaps for buffers
-				lualine_y = { "branch" },
+				-- do not show branch, in favor for more space on tabs, which display .. when abbreviated
+				-- lualine_y = { "branch" },
 				-- lualine_z = {},
 				-- lualine_z = { "buffers" },
 			},

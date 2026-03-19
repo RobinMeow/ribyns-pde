@@ -2,15 +2,9 @@
 
 ## prio quick todos
 
-- ng-test-fzf.sh is runniung duplicated tests...
-- tab view is so bad when it shortens to ...
-- highlight current row cursor is on in buffer and telescope
-- https://github.com/rachartier/tiny-inline-diagnostic.nvim
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
-- auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
-- https://github.com/folke/snacks.nvim
-- wezterm tabs
+- stay up2date with kickstarter e.g. auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 
 ## prio but high time investment
 
@@ -19,6 +13,9 @@
 
 # low prio
 
+- highlight current row cursor is on in buffer and telescope
+- tab view is so bad when it shortens to ...
+- ng-test-fzf.sh is runniung duplicated tests...
 - consider floating cmdline. i think nice for pair-p https://github.com/VonHeikemen/fine-cmdline.nvim
 - seemless wezterm (using ctrl hjkl to switch panes from nvim to wezterm and using the same binds in wezterm and nvim)
 - math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
