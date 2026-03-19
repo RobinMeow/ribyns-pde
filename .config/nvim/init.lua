@@ -81,6 +81,14 @@ vim.api.nvim_set_keymap("n", "<leader><leader>c", ":%y+<CR>", { desc = "[ ][ ][c
 
 vim.api.nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", { desc = "[ ][g]it :DiffviewOpen" })
 
+-- snacks terminal
+vim.keymap.set("n", "<leader>t", function()
+	require("snacks.terminal").toggle()
+end, { noremap = true, silent = true })
+vim.keymap.set("t", "<c-q>", function()
+	require("snacks.terminal").toggle()
+end, { noremap = true, silent = true })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
@@ -92,7 +100,6 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 require("borders")
-require("floaterminal")
 require("highlight-on-yank")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

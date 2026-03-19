@@ -9,6 +9,16 @@ return {
 		require("snacks-notifier")
 		return {
 			bigfile = { enabled = false },
+			terminal = {
+				win = {
+					position = "float",
+					border = "rounded",
+					height = 0.4,
+					width = vim.o.columns,
+					zindex = 50,
+					row = vim.o.lines,
+				},
+			},
 			dashboard = {
 				enabled = true,
 				pane_gap = 2,
