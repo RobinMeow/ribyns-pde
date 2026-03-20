@@ -13,6 +13,9 @@ cp "$PDE/.dircolors" "$HOME/" # TODO: i should check if i actually still need th
 info "installing .config"
 cp -r "$PDE/.config" "$HOME/"
 
+info "Installing Wezterm"
+"$SCRIPT_DIR/sync-wezterm.sh"
+
 info "Syncing .gitconfig"
 "$SCRIPT_DIR/sync-gitconfig.sh"
 
