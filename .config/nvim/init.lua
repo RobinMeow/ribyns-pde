@@ -12,6 +12,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
 --require("idle-numbers").setup()
+require("plugin.dotnet")
 
 vim.o.showmode = false -- Don't show the mode, since it's already in the status line
 
@@ -90,7 +91,8 @@ vim.keymap.set("t", "<c-q>", function()
 end, { noremap = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic location list" })
+vim.keymap.set("n", "<leader>co", ":copen<CR>", { desc = "[c][open] open quickfix list" })
 
 -- Keybinds to make split navigation easier.
 -- See `:help wincmd` for a list of all window commands
