@@ -10,3 +10,8 @@ adding/chaning json values _(honestly its easier to just edit the file directly)
 
 install efcore tools:
 `dotnet tool install --global dotnet-ef`
+
+## other useful stuff I learned
+
+you can install templates with the dotnet cli. e.g. xunit3 classlib
+
