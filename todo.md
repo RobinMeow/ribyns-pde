@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- add safe boot option (Arch Safe boot) to grub menu, in case libinput breaks again or sth
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 - stay up2date with kickstarter e.g. auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0

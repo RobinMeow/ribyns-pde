@@ -144,5 +144,7 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 export PATH
 
