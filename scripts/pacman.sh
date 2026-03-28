@@ -17,16 +17,18 @@ core() {
 	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi kitty
 	# yazi and yazi deps (deps are also great outside yazi)
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
+	# bc = calculator
+	install bc
 	# NOTE: xclip, wl-clipboard, xsel. Left these out cuz im on wsl mostly
 
 	# definitely not core
-	install fastfetch eza
+	install fastfetch
 	success "core packages installed"
 }
 
-# Nice to have cli tooling
-tooling() {
-	info "Installing tooling packages..."
+# Nice to have cli tools
+tools() {
+	info "Installing tools packages..."
 	install bat lnav tree btop translate-shell tokei flameshot
 
 	# tealdeer
@@ -37,7 +39,7 @@ tooling() {
 	if [ "$tldr_was_already_installed" -eq 0 ]; then
 		tldr --update # tealdeer
 	fi
-	success "tooling packages installed"
+	success "tools packages installed"
 }
 
 gadgets() {
@@ -51,7 +53,7 @@ gadgets() {
 	# as of now gadget but i can imagine making good use of those in the future!
 	# i havent set up sound yet for wsl i think? or espeak didnt work. leaving it commented out for now
 	# install aplay espeak
-	success "tooling packages installed"
+	success "tools packages installed"
 }
 
 # software development
@@ -73,7 +75,7 @@ dev() {
 }
 
 usage() {
-	echo "Usage: $0 [--update] [core] [tooling] [dev] [gadgets]"
+	echo "Usage: $0 [--update] [core] [tools] [dev] [gadgets]"
 	echo "will only install packages when --needed. unless --update is provided"
 	echo "Example:"
 	echo "  pacman.sh core dev"
@@ -105,7 +107,7 @@ main() {
 	for category in "$@"; do
 		case "$category" in
 		core) core ;;
-		tooling) tooling ;;
+		tools) tools ;;
 		dev) dev ;;
 		gadgets) gadgets ;;
 		*)
