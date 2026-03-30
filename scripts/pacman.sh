@@ -31,6 +31,7 @@ core() {
 tools() {
 	info "Installing tools packages..."
 	install bat lnav tree btop translate-shell tokei flameshot
+	install krita
 
 	# tealdeer
 	local tldr_was_already_installed=1
