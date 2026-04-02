@@ -18,6 +18,8 @@ core() {
 	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi kitty
 	# yazi and yazi deps (deps are also great outside yazi)
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
+	# codecompanion.nvim has this as optional dependency (only those which are not already installed otherwise)
+	install file
 	# bc = calculator
 	install bc
 	# NOTE: xclip, wl-clipboard, xsel. Left these out cuz im on wsl mostly
