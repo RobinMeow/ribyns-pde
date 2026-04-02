@@ -5,7 +5,7 @@
 -- vim.g.dotnet_show_project_file = false
 
 -- Build and check errors for .NET projects
-vim.keymap.set("n", "<leader>dc", ":compiler dotnet<CR>:make<CR>", {
+vim.keymap.set("n", "<leader>dc", ":compiler dotnet<CR>:make<CR>:copen<CR>", {
 	desc = "[d]otnet [c]ompile",
 	silent = true,
 })

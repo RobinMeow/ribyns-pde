@@ -145,11 +145,23 @@ require("lazy").setup({
 	require("plugin.tiny-inline-diagnostic"),
 
 	-- LSP Plugins
-	{ -- dotnet .NET
-		"seblyng/roslyn.nvim",
-		---@module 'roslyn.config'
-		---@type RoslynNvimConfig
-		opts = {},
+	-- INFO: temporarly disabled in favor of easy-dotnet.
+	-- becuase it crashes on startup for some optional razor feature
+	-- { -- dotnet .NET
+	-- 	"seblyng/roslyn.nvim",
+	-- 	---@module 'roslyn.config'
+	-- 	---@type RoslynNvimConfig
+	-- 	opts = {},
+	-- },
+	{
+		"GustavEikaas/easy-dotnet.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("easy-dotnet").setup()
+		end,
 	},
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -353,7 +365,8 @@ require("lazy").setup({
 						},
 					},
 				},
-				roslyn = {},
+				-- INFO: temp. disabled. see roslyn.nvim for more details
+				-- roslyn = {},
 			}
 
 			-- Ensure the servers and tools above are installed
