@@ -123,6 +123,7 @@ require("lazy").setup({
 	require("plugin.snacks"),
 	require("plugin.transparent"),
 	"NMAC427/guess-indent.nvim",
+	require("plugin.markdown"),
 	require("plugin.gitsigns"),
 	require("plugin.indent-blankline"),
 	require("plugin.diffview"),
@@ -143,6 +144,7 @@ require("lazy").setup({
 	require("plugin.flash-nvim"),
 	require("plugin.oil"),
 	require("plugin.tiny-inline-diagnostic"),
+	require("plugin.ai"),
 
 	-- LSP Plugins
 	-- INFO: temporarly disabled in favor of easy-dotnet.
