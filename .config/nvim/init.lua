@@ -384,6 +384,10 @@ require("lazy").setup({
 				"shfmt",
 				"shellcheck",
 				"shellharden",
+				"yaml-language-server",
+				-- INFO: lets see what the lsp does on its own first
+				-- "yamlfmt",
+				-- "yamllint",
 
 				"eslint_d",
 				"stylua", -- Used to format Lua code
