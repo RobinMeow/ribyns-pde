@@ -20,6 +20,7 @@ core() {
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
 	# codecompanion.nvim has this as optional dependency (only those which are not already installed otherwise)
 	install file
+	install vlc vlc-plugins-all
 	# bc = calculator
 	install bc
 	# NOTE: xclip, wl-clipboard, xsel. Left these out cuz im on wsl mostly

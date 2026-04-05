@@ -2,6 +2,12 @@
 
 ## prio quick todos
 
+- use built in diffview, ui2, undotree and add keybinds for :restart (```
+[diff]
+tool = nvim_difftool
+[difftool "nvim_difftool"]
+cmd = nvim -c \"packadd nvim.difftool"\ -c \"DiffTool $LOCAL $REMOTE\"
+```)
 - add safe boot option (Arch Safe boot) to grub menu, in case libinput breaks again or sth
 - better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
