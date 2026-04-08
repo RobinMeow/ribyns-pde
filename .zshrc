@@ -148,3 +148,5 @@ function y() {
 
 export PATH
 
+
+. "$HOME/.local/bin/env"

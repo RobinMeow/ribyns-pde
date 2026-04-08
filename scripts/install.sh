@@ -20,7 +20,7 @@ info "Syncing .gitconfig"
 "$SCRIPT_DIR/sync-gitconfig.sh"
 
 info "Installing zsh and oh-my-zsh"
-cp "$PDE/.zshrc" "$HOME/.zshrc" # TODO: doesnt seem to be working for w/e reason
+cp "$PDE/.zshrc" "$HOME/.zshrc"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	echo "Installing Oh My Zsh..."
 	# Prevent auto-launching zsh after install
