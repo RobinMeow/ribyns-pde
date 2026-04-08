@@ -71,6 +71,8 @@ vim.o.confirm = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
+vim.keymap.set("n", "<leader>aic", ":CodeCompanionChat Toggle<CR>", { desc = "[ ][a]i [c]hat" })
+
 local session = require("session")
 vim.keymap.set("n", "<leader><leader>ss", session.store_session, { desc = "[ ][s]ave [s]esssion" })
 vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc = "[ ][s]ave sesssion and [e]xit" })
@@ -123,6 +125,7 @@ require("lazy").setup({
 	require("plugin.snacks"),
 	require("plugin.transparent"),
 	"NMAC427/guess-indent.nvim",
+	require("plugin.markdown"),
 	require("plugin.gitsigns"),
 	require("plugin.indent-blankline"),
 	require("plugin.diffview"),
@@ -143,6 +146,7 @@ require("lazy").setup({
 	require("plugin.flash-nvim"),
 	require("plugin.oil"),
 	require("plugin.tiny-inline-diagnostic"),
+	require("plugin.ai"),
 
 	-- LSP Plugins
 	-- INFO: temporarly disabled in favor of easy-dotnet.
@@ -490,6 +494,7 @@ require("lazy").setup({
 				"query",
 				"markdown",
 				"markdown_inline",
+				"yaml",
 
 				-- my chosen parsers or from kickstart
 				"bash",
