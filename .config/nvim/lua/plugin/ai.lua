@@ -6,8 +6,15 @@ return {
 	opts = {
 		interactions = {
 			chat = {
-				adapter = "mistral",
+				adapter = "mistral_vibe",
 				model = "devstral-2",
+			},
+			cli = {
+				adapter = "mistral_vibe",
+				model = "devstral-2",
+			},
+			inline = {
+				adapter = "mistral",
 			},
 		},
 		adapters = {
