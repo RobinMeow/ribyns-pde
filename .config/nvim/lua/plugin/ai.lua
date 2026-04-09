@@ -6,18 +6,36 @@ return {
 	opts = {
 		interactions = {
 			chat = {
-				adapter = "mistral_vibe",
-				model = "devstral-2",
-			},
-			cli = {
-				adapter = "mistral_vibe",
-				model = "devstral-2",
+				adapter = "ollama",
 			},
 			inline = {
-				adapter = "mistral",
+				adapter = "ollama",
 			},
+			cmd = { -- Replaces 'cli' in newer versions
+				adapter = "ollama",
+			},
+			-- chat = {
+			-- 	adapter = "mistral_vibe",
+			-- 	model = "devstral-2",
+			-- },
+			-- cli = {
+			-- 	adapter = "mistral_vibe",
+			-- 	model = "devstral-2",
+			-- },
+			-- inline = {
+			-- 	adapter = "mistral",
+			-- },
 		},
 		adapters = {
+			ollama = function()
+				return require("codecompanion.adapters").extend("ollama", {
+					schema = {
+						model = {
+							default = "qwen2.5-coder:3b",
+						},
+					},
+				})
+			end,
 			http = {
 				mistral = function()
 					return require("codecompanion.adapters").extend("mistral", {
