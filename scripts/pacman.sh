@@ -19,7 +19,7 @@ core() {
 	# yazi and yazi deps (deps are also great outside yazi)
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
 	# codecompanion.nvim has this as optional dependency (only those which are not already installed otherwise)
-	install file
+	install file mpv feh
 	install vlc vlc-plugins-all
 	# bc = calculator
 	install bc
