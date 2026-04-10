@@ -22,8 +22,8 @@ core() {
 	install file mpv feh
 	install vlc vlc-plugins-all
 	# bc = calculator
-	install bc
-	# NOTE: xclip, wl-clipboard, xsel. Left these out cuz im on wsl mostly
+	install bc ncdu wl-clipboard
+	# NOTE: xclip, xsel. Left these out cuz im on wsl mostly
 
 	# definitely not core
 	install fastfetch
