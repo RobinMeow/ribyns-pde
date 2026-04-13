@@ -3,7 +3,8 @@
 # Function to play a soft alert (terminal bell)
 play_alarm() {
 	while true; do
-		echo -e "\a" # System bell
+		# echo -e "\a" # System bell
+		ffplay -volume 25 -nodisp -autoexit -loglevel quiet "$HOME/ribyns-pde/sounds/tuturu.mp3"
 		sleep 1
 	done
 }
