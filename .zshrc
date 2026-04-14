@@ -154,8 +154,12 @@ esac
 _benchmark "add dotnet and ribyns-pde scripts to PATH"
 
 # nvm node version manager
-source /usr/share/nvm/init-nvm.sh
-_benchmark "source init-nvm.sh"
+nvm() {
+  unfunction nvm
+  [ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
+  nvm "$@"
+}
+_benchmark "source init-nvm.sh (Node Version Manager)"
 
 # allow q/Q to quit yazi with changing or not chaning cwd
 function y() {
