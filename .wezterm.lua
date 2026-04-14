@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
 local config = {}
+local workspaces_ok, workspaces = pcall(require, "my-workspaces")
 
 config.color_scheme = "Catppuccin Mocha" -- https://wezterm.org/colorschemes/c/index.html#catppuccin-macchiato
 config.font = wezterm.font("CommitMono Nerd Font")
@@ -19,9 +20,9 @@ local function get_default_font_size(screen)
 	local width = screen.width
 	-- 1440p (2560px), 1080p (1920px), Laptop (<1920px)
 	if width >= 2560 then
-		return 14
+		return 11
 	elseif width >= 1920 then
-		return 14
+		return 11
 	else
 		return 11
 	end
@@ -159,13 +160,18 @@ config.window_decorations = "INTEGRATED_BUTTONS" -- remove the window title-bar 
 -- maximize window on startup
 wezterm.on("gui-startup", function(cmd)
 	if mux then
-		local _, _, window = mux.spawn_window(cmd or {})
+		local _, pane, window = mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
 		xpcall(function()
 			auto_set_font_size(window:gui_window())
 		end, function(err)
 			wezterm.log_info("err: " .. tostring(err))
 		end)
+		if workspaces_ok then
+			workspaces.setup(window, pane)
+		else
+			wezterm.log_info("Workspaces not found in .config/wezterm/my-workspaces.lua")
+		end
 	end
 end)
 
