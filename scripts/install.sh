@@ -61,4 +61,7 @@ clone_repo https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins
 # clone_repo https://github.com/tmux-plugins/tmux-battery "$TMUX_PLUGIN_DIR/tmux-battery"
 # clone_repo https://github.com/tmux-plugins/tmux-yank "$TMUX_PLUGIN_DIR/tmux-yank"
 
+# powerlevel10k
+"$SCRIPT_DIR/p10k.sh"
+
 success "ribyns-pde installed"
