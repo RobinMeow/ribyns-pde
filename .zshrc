@@ -1,3 +1,20 @@
+# --- BENCHMARK START ---
+# Set to: "quiet" | "info" | "verbose"
+ZSH_STARTUP_MODE="info"
+zmodload zsh/datetime
+_start_time=$EPOCHREALTIME
+_last_time=$_start_time
+
+_benchmark() {
+	[[ "$ZSH_STARTUP_MODE" != "verbose" ]] && return
+	local now=$EPOCHREALTIME
+	local elapsed=$(printf "%.1fs" $(( now - _start_time )))
+	local diff=$(printf "%.1fs" $(( now - _last_time )))
+	echo "⏱️  $1: ${elapsed} (+${diff})"
+	_last_time=$now
+}
+# --- END BENCHMARK START ---
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -77,13 +94,16 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+_benchmark "Before Completions/Compinit"
 
 # load zsh-completions not as a standard plugin but manually
 # this prevents compinit from being called twice and significantly improves startup time
 fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
+_benchmark "Completions/Compinit"
 
 source $ZSH/oh-my-zsh.sh
+_benchmark "source oh-my-zsh.sh"
 
 # User configuration
 
@@ -131,9 +151,11 @@ case ":$PATH:" in
   *":$HOME/ribyns-pde/scripts:"*) ;;
   *) PATH="$PATH:$HOME/ribyns-pde/scripts" ;;
 esac
+_benchmark "add dotnet and ribyns-pde scripts to PATH"
 
 # nvm node version manager
 source /usr/share/nvm/init-nvm.sh
+_benchmark "source init-nvm.sh"
 
 # allow q/Q to quit yazi with changing or not chaning cwd
 function y() {
@@ -149,3 +171,12 @@ function y() {
 export PATH
 
 if [[ -f "$HOME/.local/bin/env" ]] . "$HOME/.local/bin/env"
+_benchmark "setup yazi, source zshrc.local and env"
+
+# --- FINAL TOTAL ---
+if [[ "$ZSH_STARTUP_MODE" != "quiet" ]]; then
+	_total_ms=$(printf "%.2f" $(( ($EPOCHREALTIME - _start_time) * 1000 )))
+	echo "✅ ZSH Startup Complete: ${_total_ms}ms"
+fi
+unset -f _benchmark
+unset _start_time _last_time _total_ms
