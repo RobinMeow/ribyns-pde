@@ -190,7 +190,8 @@ enable auto starts it at start up. --now is like `start` to start it immediatly
 
 ## Arch Defaults:
 
-- uncomment the `#Color` in `/etc/pacman.confg` _(enabled colored outputs for pacman cmds and yay)_
+- uncomment the `#Color` in `/etc/pacman.conf` _(enabled colored outputs for pacman cmds and yay)_
+- add  `ILoveCandy` in `/etc/pacman.conf` in the `# Misc options` section _(Pacman animation as progressbar)_
 
 ### Laptop
 
