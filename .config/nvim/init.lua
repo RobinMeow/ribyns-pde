@@ -80,6 +80,9 @@ vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- delete into void, than paste (default: deleted text gets written into register)
+vim.keymap.set("x", "<leader>p", '"_dP') -- read like this: "register into _void PPaste before cursor
+
 -- join next line to current line w/o losing cursor position
 vim.keymap.set("n", "J", "mzJ`z")
 
