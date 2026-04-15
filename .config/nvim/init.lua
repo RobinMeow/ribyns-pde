@@ -14,6 +14,11 @@ vim.o.relativenumber = true -- line numbers relative to cursor
 --require("idle-numbers").setup()
 require("plugin.dotnet")
 
+-- no "press Enter" interrupptions
+-- replace pager with normal buffer
+-- g< to show the last output
+require("vim._core.ui2").enable({})
+
 vim.o.showmode = false -- Don't show the mode, since it's already in the status line
 
 vim.o.breakindent = true -- Enable break indent
