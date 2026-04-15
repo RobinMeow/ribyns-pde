@@ -80,6 +80,9 @@ vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- join next line to current line w/o losing cursor position
+vim.keymap.set("n", "J", "mzJ`z")
+
 vim.keymap.set("n", "<leader>aic", ":CodeCompanionChat Toggle<CR>", { desc = "[ ][a]i [c]hat" })
 
 local session = require("session")
