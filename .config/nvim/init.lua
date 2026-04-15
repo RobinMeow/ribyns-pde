@@ -95,8 +95,11 @@ vim.keymap.set("n", "<leader><leader>sr", session.store_session_and_restart, { d
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
-vim.api.nvim_set_keymap("v", "<leader><leader>c", '"+y', { desc = "[ ][ ][c]opy visual to clipboard" })
-vim.api.nvim_set_keymap("n", "<leader><leader>c", ":%y+<CR>", { desc = "[ ][ ][c]opy buffer to clipboard" })
+vim.keymap.set("n", "<leader>y", '"+y') -- yank motion into system clipboard
+vim.keymap.set("v", "<leader>y", '"+y') -- yank visual into system clipboard
+-- FIXME: doesnt behave like Y, which yanks till end of line. it yanks the whole line
+-- vim.keymap.set("n", "<leader>Y", '"+Y') -- yank till end of line into system clipboard
+vim.keymap.set("n", "<leader><leader>y", ":%y+<CR>") -- yank whole buffer into system clipboard
 
 vim.api.nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", { desc = "[ ][g]it :DiffviewOpen" })
 
