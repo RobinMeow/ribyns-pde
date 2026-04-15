@@ -85,6 +85,8 @@ vim.keymap.set("x", "<leader>p", '"_dP') -- read like this: "register into _void
 vim.keymap.set("n", "<leader>d", '"_d') -- delete into void register
 vim.keymap.set("v", "<leader>d", '"_d') -- delete into void register
 
+vim.keymap.set("n", "<leader>st", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]]) -- substituation for word under cursor
+
 -- join next line to current line w/o losing cursor position
 vim.keymap.set("n", "J", "mzJ`z")
 
