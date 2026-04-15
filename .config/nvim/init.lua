@@ -81,7 +81,8 @@ vim.keymap.set("n", "<leader>aic", ":CodeCompanionChat Toggle<CR>", { desc = "[ 
 local session = require("session")
 vim.keymap.set("n", "<leader><leader>ss", session.store_session, { desc = "[ ][s]ave [s]esssion" })
 vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc = "[ ][s]ave sesssion and [e]xit" })
-vim.keymap.set("n", "<leader><leader>sr", session.restore, { desc = "[ ][s]ession [r]estore" })
+vim.keymap.set("n", "<leader><leader>sr", session.store_session_and_restart, { desc = "[ ][s]ession [r]estart" })
+vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
 vim.api.nvim_set_keymap("v", "<leader><leader>c", '"+y', { desc = "[ ][ ][c]opy visual to clipboard" })
