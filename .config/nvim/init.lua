@@ -583,3 +583,5 @@ vim.cmd("colorscheme " .. get_kanagawa_variant())
 -- 		})
 -- 	end,
 -- })
+
+vim.cmd("packadd nvim.undotree")
