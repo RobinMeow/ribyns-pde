@@ -76,6 +76,10 @@ vim.o.confirm = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
+-- Move selected lines up/down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
 vim.keymap.set("n", "<leader>aic", ":CodeCompanionChat Toggle<CR>", { desc = "[ ][a]i [c]hat" })
 
 local session = require("session")
