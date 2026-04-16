@@ -9,8 +9,17 @@ detect_win_user() {
 
 	# Determine Windows user directory
 	if [[ "$OS_TYPE" == "wsl" ]]; then
-		# Get all directories in user_dir (excluding Public and Default)
-		mapfile -t _users < <(find "$user_dir" -mindepth 1 -maxdepth 1 -type d ! -iname "Public" ! -iname "Default*" -printf "%f\n" 2>/dev/null)
+		# Get all directories in user_dir
+		mapfile -t all_dirs < <(find "$user_dir" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" 2>/dev/null)
+
+		local _users=()
+		for user in "${all_dirs[@]}"; do
+			if [[ "$user" =~ ^(Public|Default.*)$ ]] || [[ "$user" == *"bara"* ]] || [[ "$user" == *"test"* ]]; then
+				info "Excluding user: $user"
+				continue
+			fi
+			_users+=("$user")
+		done
 
 		if [[ ${#_users[@]} -eq 0 ]]; then
 			error "No Windows users found in $user_dir"
@@ -22,8 +31,8 @@ detect_win_user() {
 			# this is not yet tested but if the use case arises i'll
 			info "Multiple Windows users found:"
 			local i=1
-			for u in "${_users[@]}"; do
-				echo "  $i) $u"
+			for user in "${_users[@]}"; do
+				echo "  $i) $user"
 				((i++))
 			done
 
