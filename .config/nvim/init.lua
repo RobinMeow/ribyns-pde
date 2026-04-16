@@ -14,6 +14,9 @@ vim.o.relativenumber = true -- line numbers relative to cursor
 --require("idle-numbers").setup()
 require("my-dotnet")
 
+-- this has no effect. i think blink_cmp is overriding it with its own defaults
+-- vim.opt.completeopt = { "menu", "menuone", "noinsert" }
+
 -- no "press Enter" interrupptions
 -- replace pager with normal buffer
 -- g< to show the last output
