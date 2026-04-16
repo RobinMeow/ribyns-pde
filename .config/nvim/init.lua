@@ -12,7 +12,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true -- absolute line numbers
 vim.o.relativenumber = true -- line numbers relative to cursor
 --require("idle-numbers").setup()
-require("plugin.dotnet")
+require("my-dotnet")
 
 -- no "press Enter" interrupptions
 -- replace pager with normal buffer
@@ -145,31 +145,9 @@ rtp:prepend(lazypath)
 require("lazy").setup({
 	-- For additional information with loading, sourcing and examples see:
 	-- `<space>sh` search for `lazy.nvim-plugin`
-	require("plugin.snacks"),
-	require("plugin.transparent"),
-	"NMAC427/guess-indent.nvim",
-	require("plugin.markdown"),
-	require("plugin.gitsigns"),
-	require("plugin.indent-blankline"),
-	require("plugin.diffview"),
-	require("plugin.smear-cursor"),
-	require("plugin.which-key"),
-	require("plugin.telescope"),
-	require("plugin.dadbod"),
-	require("plugin.blink_cmp"),
-	require("plugin.colorscheme").catppuccin,
-	require("plugin.colorscheme").gruvbox,
-	require("plugin.colorscheme").vscode,
-	require("plugin.colorscheme").tokyo_night,
-	require("plugin.colorscheme").kanagawa,
-	require("plugin.colorscheme").nightfox,
-	{ "tpope/vim-fugitive" },
-	require("plugin.todo-comments"),
-	require("plugin.lualine"),
-	require("plugin.flash-nvim"),
-	require("plugin.oil"),
-	require("plugin.tiny-inline-diagnostic"),
-	require("plugin.ai"),
+
+	-- imports lua files from lua/plugins/*
+	{ import = "plugins" },
 
 	-- LSP Plugins
 	-- INFO: temporarly disabled in favor of easy-dotnet.
@@ -484,24 +462,6 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- Collection of various small independent plugins/modules
-		"echasnovski/mini.nvim",
-		config = function()
-			-- Better Around/Inside textobjects
-			-- Examples:
-			--  - va)  - [V]isually select [A]round [)]paren
-			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-			--  - ci'  - [C]hange [I]nside [']quote
-			require("mini.ai").setup({ n_lines = 500 })
-
-			-- Add/delete/replace surroundings (brackets, quotes, etc.)
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-			-- - sd'   - [S]urround [D]elete [']quotes
-			-- - sr)'  - [S]urround [R]eplace [)] [']
-			-- require("mini.surround").setup()
-			-- TODO: probably replace with surround with plugin
-		end,
-	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -536,6 +496,7 @@ require("lazy").setup({
 			},
 			indent = { enable = true, disable = { "ruby" } },
 		},
+		-- TODO: more treesitter modules?
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:
 		--
@@ -554,21 +515,7 @@ require("lazy").setup({
 	-- require 'kickstart.plugins.neo-tree',
 }, {
 	ui = {
-		icons = vim.g.have_nerd_font and {} or {
-			cmd = "⌘",
-			config = "🛠",
-			event = "📅",
-			ft = "📂",
-			init = "⚙",
-			keys = "🗝",
-			plugin = "🔌",
-			runtime = "💻",
-			require = "🌙",
-			source = "📄",
-			start = "🚀",
-			task = "📌",
-			lazy = "💤 ",
-		},
+		icons = {}, -- if nerd_font is missing consider pasting some emojis in here from kickstart
 		border = "rounded",
 	},
 })
