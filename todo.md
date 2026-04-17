@@ -2,6 +2,9 @@
 
 ## prio quick todos
 
+- a nvim plugin which lets me make a visual selection(remember it using a keymap)
+- and another visual selection for which word to substitute within the previous visual selection
+
 - use built in diffview, ui2, undotree and add keybinds for :restart
 ```
 [diff]

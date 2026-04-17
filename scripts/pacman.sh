@@ -70,6 +70,7 @@ dev() {
 	install docker docker-compose docker-buildx
 	# persistence
 	install postgresql
+	install lazygit
 
 	# programming languages
 	install cargo
