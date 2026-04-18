@@ -1,5 +1,13 @@
 -- NOTE: supported llms and agents
 -- https://codecompanion.olimorris.dev/#supported-llms-and-agents
+local default_adapter = os.getenv("CODE_COMPANION_DEFAULT_ADAPTER") or "ollama"
+local ollama_model = os.getenv("CODE_COMPANION_OLLAMA_MODEL") or "qwen2.5-coder:3b"
+-- gemini_cli
+-- copilot
+-- mistral_vibe (acp)
+-- mistral (http)
+-- ollama
+
 return {
 	{
 		"olimorris/codecompanion.nvim",
@@ -8,77 +16,45 @@ return {
 			interactions = {
 				-- Chat: A buffer where you can converse with an LLM (:CodeCompanionChat)
 				chat = {
-					adapter = "ollama",
+					adapter = default_adapter,
 				},
 				-- Inline - An inline interaction that can write code directly into a buffer (:CodeCompanion)
 				inline = {
-					adapter = "ollama",
+					adapter = default_adapter,
 				},
 				-- Cmd - Create Neovim commands in the command-line (:CodeCompanionCmd)
 				cmd = {
-					adapter = "ollama",
+					adapter = default_adapter,
 				},
 				-- CLI - A terminal wrapper around agent CLI tools such a Claude Code or Opencode (:CodeCompanionCLI)
 				cli = {
-					adapter = "ollama",
+					adapter = default_adapter,
 				},
-
-				-- NOTE: Bard / Gemini
-				-- chat = {
-				-- 	adapter = "gemini_cli",
-				-- },
-				-- inline = {
-				-- 	adapter = "gemini_cli",
-				-- },
-				-- cmd = {
-				-- 	adapter = "gemini_cli",
-				-- },
-				-- cli = {
-				-- 	adapter = "gemini_cli",
-				-- },
-
-				-- NOTE: Github Copilot
-				-- chat = {
-				-- 	adapter = "copilot",
-				-- },
-				-- inline = {
-				-- 	adapter = "copilot",
-				-- },
-				-- cmd = {
-				-- 	adapter = "copilot",
-				-- },
-				-- cli = {
-				-- 	adapter = "copilot",
-				-- },
-
-				-- NOTE: Mistral
-				-- chat = {
-				-- 	adapter = "mistral_vibe",
-				-- 	model = "devstral-2",
-				-- },
-				-- cli = {
-				-- 	adapter = "mistral_vibe",
-				-- 	model = "devstral-2",
-				-- },
-				-- inline = {
-				-- 	adapter = "mistral",
-				-- },
 			},
 			adapters = {
-				ollama = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						schema = {
-							model = {
-								default = "qwen2.5-coder:3b",
-							},
-						},
-					})
-				end,
 				acp = {
+					ollama = function()
+						return require("codecompanion.adapters").extend("ollama", {
+							schema = {
+								model = {
+									default = ollama_model,
+								},
+							},
+						})
+					end,
 					gemini_cli = function()
 						return require("codecompanion.adapters").extend("gemini_cli", {
 							defaults = {
 								auth_method = "oauth-personal", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
+							},
+						})
+					end,
+					mistral_vibe = function()
+						return require("codecompanion.adapters").extend("mistral_vibe", {
+							schema = {
+								model = {
+									default = "devstral-2",
+								},
 							},
 						})
 					end,
@@ -100,6 +76,12 @@ return {
 					end,
 					mistral = function()
 						return require("codecompanion.adapters").extend("mistral", {
+							-- NOTE: havent tried this one yet
+							-- schema = {
+							-- 	model {
+							-- 		default = "devstral-2",
+							-- 	},
+							-- },
 							env = {
 								api_key = os.getenv("MISTRAL_API_KEY"),
 							},
