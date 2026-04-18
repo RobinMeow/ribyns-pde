@@ -8,9 +8,8 @@
 [pull]
 	rebase = true
 [alias]
-	ss = status --short
+	ss = status --short --untracked-files=all
 	sw = switch
-	ssufa = status --short --untracked-files=all
 	l = log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"
 	last = l -1
 	co = checkout
@@ -20,7 +19,7 @@
 	pl = pull
 	br = for-each-ref refs/remotes/ --sort=authorname --sort=-authordate --format="%(refname:short) %(authorname) (%(authordate:relative))"
 	branches = "!git branch && git branch --remote"
-	cm = commit --message
+	c = commit
 	puoh = push -u origin HEAD
 	aa = add --all
 	aac = "!git add --all && git commit"
@@ -32,7 +31,7 @@
 	ca = commit --amend --verbose
 	aaca = "!git add --all && git commit --amend --verbose"
 	cane = commit --amend --no-edit --verbose
-	aacm = "!git add --all && git commit --message"
+	aac = "!git add --all && git commit"
 	aacane = "!git add --all && git commit --amend --no-edit"
 	canep = "!git commit --amend --no-edit && git push"
 	canepf = "!git commit --amend --no-edit && git push --force-with-lease"
