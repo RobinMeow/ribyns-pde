@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PDE="~/ribyns-pde"
+PDE="$HOME/ribyns-pde"
 source "$PDE/scripts/utils.sh"
 
 install() {
@@ -18,42 +18,36 @@ core() {
 	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi kitty
 	# yazi and yazi deps (deps are also great outside yazi)
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
-	# codecompanion.nvim has this as optional dependency (only those which are not already installed otherwise)
 	install file mpv feh
 	install vlc vlc-plugins-all
-	# bc = calculator
 	install bc ncdu wl-clipboard
 	# NOTE: xclip, xsel. Left these out cuz im on wsl mostly
 
 	install fastfetch
 
-	# Tools
+	# NOTE: Tools
 	install bat lnav tree btop translate-shell tokei flameshot
-	install krita
-
+	# install krita # INFO: reenable when I actually plan to use it
 	# tealdeer
 	local tldr_was_already_installed=1
 	command -v tldr >/dev/null 2>&1 || tldr_was_already_installed=0
-
 	install tealdeer
 	if [ "$tldr_was_already_installed" -eq 0 ]; then
 		tldr --update # tealdeer
 	fi
 
-	# Development
-	# front end
+	# NOTE: Development
 	install nodejs npm nvm
-	# containerization
 	install docker docker-compose docker-buildx
-	# persistence
 	install postgresql
 	install lazygit
-
-	# programming languages
 	install cargo
 	# https://wiki.archlinux.org/title/.NET
 	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
 	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
+
+	# NOTE: AI
+	install gemini-cli
 
 	success "packages installed"
 }
