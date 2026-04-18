@@ -16,6 +16,7 @@ fi
 
 cp -r "$HOME/.config/nvim" "$PDE/.config/"
 cp "$HOME/.zshrc" "$PDE/.zshrc"
+cp "$HOME/.p10k.zsh" "$PDE/.p10k.zsh"
 
 if [[ "$OS_TYPE" == "wsl" ]]; then
 	detect_win_user
