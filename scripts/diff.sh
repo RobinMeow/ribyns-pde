@@ -32,9 +32,10 @@ fi
 git -C "$PDE" diff
 git -C "$PDE" checkout .
 
-if [[ "$1" == "--no-clean" ]]; then
-	info "Skipped git clean"
-else
+read -rp "Run 'git clean -f'? [y/N]: " answer
+if [[ "$answer" =~ ^[Yy]$ ]]; then
 	git -C "$PDE" clean -f
 	success "Git clean executed"
+else
+	info "Skipped git clean"
 fi
