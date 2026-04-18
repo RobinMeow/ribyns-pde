@@ -25,7 +25,7 @@ if [[ "$OS_TYPE" == "wsl" ]]; then
 	fi
 	cp "/mnt/c/Users/$WINDOWS_USER/.wezterm.lua" "$PDE/.wezterm.lua"
 else
-	cp "$HOME/.wezterm.lua" "$PDE/.wezterm_native.lua"
+	cp "$HOME/.wezterm.lua" "$PDE/.wezterm.lua"
 fi
 
 # Reset working directory (optional)
