@@ -100,7 +100,6 @@ vim.keymap.set("n", "<leader><leader>ss", session.store_session, { desc = "[ ][s
 vim.keymap.set("n", "<leader><leader>se", session.store_session_and_exit, { desc = "[ ][s]ave sesssion and [e]xit" })
 vim.keymap.set("n", "<leader><leader>sr", session.store_session_and_restart, { desc = "[ ][s]ession [r]estart" })
 vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
-vim.keymap.set("n", "<leader><leader>sd", session.delete_session, { desc = "[ ][s]ession [d]elete, if exists" })
 
 vim.keymap.set("n", "<leader>y", '"+y') -- yank motion into system clipboard
 vim.keymap.set("v", "<leader>y", '"+y') -- yank visual into system clipboard
@@ -129,7 +128,6 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-require("borders")
 require("highlight-on-yank")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -345,21 +343,18 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				bashls = {},
-				ts_ls = {}, -- https://github.com/pmizio/typescript-tools.nvim can be considered when more speed is required
-				eslint = {},
-				shellcheck = {},
-				shellharden = {},
-				angularls = {},
-				-- The preferred way to install csharp-ls is with `dotnet tool install --global csharp-ls`.
-				-- csharp_ls = {}, -- could be because of other global dotnet tooling which could depend on it,
-				-- and mason has its own container of installing them
-				cssls = {},
-				html = {},
-				pyright = {},
-				rust_analyzer = {},
+				["bashls"] = {},
+				["ts_ls"] = {}, -- https://github.com/pmizio/typescript-tools.nvim can be considered when more speed is required
+				["eslint"] = {},
+				["shellcheck"] = {},
+				["shellharden"] = {},
+				["angularls"] = {},
+				["cssls"] = {},
+				["html"] = {},
+				["pyright"] = {},
+				["rust_analyzer"] = {},
 
-				lua_ls = {
+				["lua_ls"] = {
 					-- cmd = { ... },
 					-- filetypes = { ... },
 					-- capabilities = {},
@@ -374,33 +369,19 @@ require("lazy").setup({
 					},
 				},
 				-- INFO: temp. disabled. see roslyn.nvim for more details
-				-- roslyn = {},
+				-- ["roslyn"] = {},
+
+				["prettierd"] = {},
+				["prettier"] = {},
+				["shfmt"] = {},
+				["yaml-language-server"] = {},
+				["yamlfmt"] = {},
+				["yamllint"] = {},
+				["eslint_d"] = {},
+				["stylua"] = {},
 			}
 
-			-- Ensure the servers and tools above are installed
-			-- in :Mason you can press `g?` for help
-			-- `mason` had to be setup earlier: to configure its options see the
-			-- `dependencies` table for `nvim-lspconfig` above.
-			--
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"prettierd",
-				"prettier",
-				-- bash
-				"shfmt",
-				"shellcheck",
-				"shellharden",
-				"yaml-language-server",
-				-- INFO: lets see what the lsp does on its own first
-				-- "yamlfmt",
-				-- "yamllint",
-
-				"eslint_d",
-				"stylua", -- Used to format Lua code
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			require("mason-tool-installer").setup({ ensure_installed = vim.tbl_keys(servers or {}) })
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
