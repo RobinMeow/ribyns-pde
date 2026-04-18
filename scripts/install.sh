@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PDE="$HOME/ribyns-pde"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/detect_env.sh"
