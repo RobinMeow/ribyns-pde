@@ -32,7 +32,8 @@ fi
 git -C "$PDE" diff
 git -C "$PDE" checkout .
 
-read -rp "Run 'git clean -f'? [y/N]: " answer
+read -n 1 -rp "Run 'git clean -f'? [y/N]: " answer
+echo
 if [[ "$answer" =~ ^[Yy]$ ]]; then
 	git -C "$PDE" clean -f
 	success "Git clean executed"
