@@ -6,9 +6,6 @@ source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/detect_env.sh"
 source "$PDE/scripts/detect_win_user.sh"
 
-info "Installing dircolors"
-cp "$PDE/.dircolors" "$HOME/" # TODO: i should check if i actually still need this
-
 info "installing .config"
 cp -r "$PDE/.config" "$HOME/"
 
