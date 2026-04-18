@@ -1,5 +1,5 @@
----@module 'lazy'
----@type LazySpec
+-- NOTE: supported llms and agents
+-- https://codecompanion.olimorris.dev/#supported-llms-and-agents
 return {
 	{
 		"olimorris/codecompanion.nvim",
@@ -88,12 +88,12 @@ return {
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
 								model = {
-									-- GPT-4.1
-									-- Claude Haiku 4.5
-									-- GPT-4o
-									-- GPT-5 mini
-									-- Raptor mini (Preview)
-									default = "Claude Haiku 4.5",
+									-- GPT-4.1 `gpt-4.1`
+									-- Claude Haiku 4.5 `?`
+									-- GPT-4o `gpt-4o`
+									-- GPT-5 mini `gpt-5`
+									-- Raptor mini (Preview) `?`
+									default = "gpt-4.1",
 								},
 							},
 						})
