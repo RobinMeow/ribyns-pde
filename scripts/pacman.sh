@@ -84,9 +84,9 @@ usage() {
 # when 0, will include --needed on pacman installs. otherwise it'll exlcude it causing updates.
 UPDATE_MODE=0
 main() {
+	core
 	if [ "$#" -eq 0 ]; then
-		error "requires at least one argument"
-		usage
+		return
 	fi
 
 	# check for --update
@@ -104,9 +104,7 @@ main() {
 
 	for category in "$@"; do
 		case "$category" in
-		core) core ;;
-		tools) tools ;;
-		dev) dev ;;
+		core) ;; # already called by default
 		gadgets) gadgets ;;
 		*)
 			error "Unknown category: $category"
