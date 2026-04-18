@@ -15,7 +15,7 @@ install() {
 core() {
 	info "Installing core packages..."
 	install core/man
-	install git curl zsh vi vim nvim unzip base-devel xclip wl-clipboard openssh navi kitty
+	install git curl zsh vi vim nvim tree-sitter-cli unzip base-devel xclip wl-clipboard openssh navi kitty
 	# yazi and yazi deps (deps are also great outside yazi)
 	install yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow
 	install file mpv feh
