@@ -16,10 +16,11 @@ return {
 					win = {
 						position = "float",
 						border = "rounded",
-						height = 0.4,
-						width = vim.o.columns,
 						zindex = 50,
-						row = vim.o.lines,
+						-- row = vim.o.lines,
+						-- columns = vim.o.columns,
+						height = vim.o.lines, -- formerly 0.4
+						width = vim.o.columns,
 					},
 				},
 				dashboard = {
