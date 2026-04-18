@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils.sh"
+PDE="~/ribyns-pde"
+source "$PDE/scripts/utils.sh"
 
 install() {
 	if [ "$UPDATE_MODE" -eq 1 ]; then
@@ -25,14 +25,9 @@ core() {
 	install bc ncdu wl-clipboard
 	# NOTE: xclip, xsel. Left these out cuz im on wsl mostly
 
-	# definitely not core
 	install fastfetch
-	success "core packages installed"
-}
 
-# Nice to have cli tools
-tools() {
-	info "Installing tools packages..."
+	# Tools
 	install bat lnav tree btop translate-shell tokei flameshot
 	install krita
 
@@ -44,26 +39,8 @@ tools() {
 	if [ "$tldr_was_already_installed" -eq 0 ]; then
 		tldr --update # tealdeer
 	fi
-	success "tools packages installed"
-}
 
-gadgets() {
-	info "Installing gadgets packages..."
-	install cmatrix cowsay fortune-mod sl lolcat
-	# pipe-viever apparently not available to archlinux without yay but it works?
-	# install pv
-	# both turn input into ascii. not sure if only text
-	install figlet toilet
-
-	# as of now gadget but i can imagine making good use of those in the future!
-	# i havent set up sound yet for wsl i think? or espeak didnt work. leaving it commented out for now
-	# install aplay espeak
-	success "tools packages installed"
-}
-
-# software development
-dev() {
-	info "Installing dev packages..."
+	# Development
 	# front end
 	install nodejs npm nvm
 	# containerization
@@ -77,15 +54,30 @@ dev() {
 	# https://wiki.archlinux.org/title/.NET
 	# https://github.com/dotnet/sdk/issues/52058#issuecomment-3700904315 'Prune Package data not found .NETCoreApp 10.0 Microsoft.AspNetCore.App'
 	install dotnet-runtime dotnet-sdk aspnet-runtime aspnet-targeting-pack
-	success "dev packages installed"
+
+	success "packages installed"
+}
+
+gadgets() {
+	info "Installing gadgets packages..."
+	install cmatrix cowsay fortune-mod sl lolcat
+	# pipe-viewer apparently not available to archlinux without yay but it works?
+	# install pv
+	# both turn input into ascii. not sure if only text
+	install figlet toilet
+
+	# as of now gadget but i can imagine making good use of those in the future!
+	# i havent set up sound yet for wsl i think? or espeak didnt work. leaving it commented out for now
+	# install aplay espeak
+	success "tools packages installed"
 }
 
 usage() {
-	echo "Usage: $0 [--update] [core] [tools] [dev] [gadgets]"
+	echo "Usage: $0 [--update] [gadgets]"
 	echo "will only install packages when --needed. unless --update is provided"
 	echo "Example:"
-	echo "  pacman.sh core dev"
-	echo "  pacman.sh --update core dev"
+	echo "  pacman.sh gadgets"
+	echo "  pacman.sh --update core gadgets"
 	exit 1
 }
 
