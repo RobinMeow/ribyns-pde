@@ -17,8 +17,8 @@ EOF
 	exit 0
 }
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils.sh"
+PDE="$HOME/ribyns-pde"
+source "$PDE/scripts/utils.sh"
 
 # Defaults
 fps=30
@@ -56,8 +56,6 @@ done
 	error "--input <input-dir/file> is required"
 	usage
 }
-
-PDE="$SCRIPT_DIR/.."
 
 if [ -d "$INPUT_DIR" ]; then
 	# Directory mode: loop through files

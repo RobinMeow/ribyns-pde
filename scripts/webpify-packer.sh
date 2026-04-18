@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils.sh"
+PDE="$HOME/ribyns-pde"
+source "$PDE/scripts/utils.sh"
 
 usage() {
 	cat <<EOF
@@ -39,7 +39,6 @@ done
 	usage
 }
 
-PDE="$SCRIPT_DIR/.."
 OUTPUT_DIR="$PDE/images/zip"
 
 if [ -d "$INPUT_DIR" ]; then

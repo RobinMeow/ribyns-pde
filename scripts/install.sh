@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRIPT_DIR="$PDE/scripts"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/detect_env.sh"
@@ -14,10 +13,10 @@ info "installing .config"
 cp -r "$PDE/.config" "$HOME/"
 
 info "Installing Wezterm"
-"$SCRIPT_DIR/sync-wezterm.sh"
+"$PDE/scripts/sync-wezterm.sh"
 
 info "Syncing .gitconfig"
-"$SCRIPT_DIR/sync-gitconfig.sh"
+"$PDE/scripts/sync-gitconfig.sh"
 
 info "Installing zsh and oh-my-zsh"
 cp "$PDE/.zshrc" "$HOME/.zshrc"
@@ -62,6 +61,6 @@ clone_repo https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins
 # clone_repo https://github.com/tmux-plugins/tmux-yank "$TMUX_PLUGIN_DIR/tmux-yank"
 
 # powerlevel10k
-"$SCRIPT_DIR/p10k.sh"
+"$PDE/scripts/p10k.sh"
 
 success "ribyns-pde installed"

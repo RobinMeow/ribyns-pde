@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 
-PDE="$HOME/ribyns-pde" # if on windows. invoke from within wsl
+PDE="$HOME/ribyns-pde"
 
-PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRIPT_DIR="$PDE/scripts"
-
-source "$SCRIPT_DIR/detect_env.sh"
+source "$PDE/scripts/detect_env.sh"
 detect_env
 
 WIN_HOME="$HOME" # assume linux
 
 if [[ "$OS_TYPE" == "wsl" ]]; then
-	source "$SCRIPT_DIR/detect_win_user.sh"
+	source "$PDE/scripts/detect_win_user.sh"
 	detect_win_user
 	win_user=$WINDOWS_USER
 	WIN_HOME="/mnt/c/Users/$win_user"

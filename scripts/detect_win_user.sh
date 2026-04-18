@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils.sh"
-source "$SCRIPT_DIR/detect_env.sh"
+PDE="$HOME/ribyns-pde"
+source "$PDE/scripts/utils.sh"
+source "$PDE/scripts/detect_env.sh"
 
 detect_win_user() {
 	local user_dir="/mnt/c/Users"
@@ -41,7 +41,7 @@ detect_win_user() {
 				warn "Invalid choice. Enter a number between 1 and ${#_users[@]}"
 				read -rp "Select user by number: " choice
 			done
-			WINDOWS_USER="${_users[choice - 1]}"
+			WINDOWS_USER="${_users[choice-1]}"
 			info "Selected Windows user: $WINDOWS_USER"
 		fi
 	else
