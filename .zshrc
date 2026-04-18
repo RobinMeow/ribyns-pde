@@ -141,6 +141,8 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias rgtree='rg --files | tree --fromfile' # treeview of all git tracked files (ripgrep respects .gitignore)
+alias nvimconfig='cd ~/.config/nvim && nvim'
+alias ribyns-pde='cd ~/ribyns-pde'
 
 ## Add .dotnet/dotnet to PATH if not already present (local script installs should take preceedence over the normal arch install)
 case ":$PATH:" in
