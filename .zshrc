@@ -96,6 +96,7 @@ plugins=(
     zsh-vi-mode
     zsh-autosuggestions
     zsh-syntax-highlighting
+		# nvm # adds around 120ms. on pc-white from 85ms -> 200+ms avrg.
 )
 _benchmark "Before Completions/Compinit"
 
