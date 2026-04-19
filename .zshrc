@@ -122,6 +122,13 @@ else
   export EDITOR='nvim'
 fi
 
+if [[ -d "$HOME/ribyns-pde" ]]; then
+  export PDE="$HOME/ribyns-pde"
+else
+  YELLOW="\033[1;33m"
+	echo -e "${YELLOW}[WARN] $*${NC}"
+fi
+
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
