@@ -41,6 +41,9 @@ info "Installing waybar"
 info "Installing wezterm"
 "$PDE/scripts/install-wezterm.sh"
 
+info "Installing tmux"
+"$PDE/scripts/install-tmux.sh"
+
 info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
