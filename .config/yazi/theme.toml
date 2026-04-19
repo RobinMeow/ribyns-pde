@@ -134,7 +134,7 @@ rules = [
 border = { fg = "#b4befe" }
 title  = { fg = "#b4befe" }
 tbl_cell = { fg = "#b4befe", reversed = true }
-tbl_col = { bold = true }
+tbl_col = { bold = true, fg = "blue" } # gf = blue added as shown in mediainfo.yazi
 
 [icon]
 files = [

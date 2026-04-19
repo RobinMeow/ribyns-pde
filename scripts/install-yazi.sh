@@ -2,5 +2,18 @@
 
 PDE="${PDE:-$HOME/ribyns-pde}"
 
+# NOTE: image, audio, video, subtitle and many media files using ffmpeg and mediainfo metainfo
+dest_mediainfo="$HOME/.config/yazi/plugins/mediainfo.yazi"
+"$PDE/scripts/pacman-S.sh" extra/mediainfo imagemagick
+
+if [[ ! -d $dest_mediainfo ]]; then
+	# install
+	mkdir -p "$dest_mediainfo"
+	git clone https://github.com/boydaihungst/mediainfo.yazi "$dest_mediainfo"
+else
+	# update
+	git -C "$dest_mediainfo" pull
+fi
+
 mkdir -p "$HOME/.config/yazi"
 cp -r "$PDE/.config/yazi/"* "$HOME/.config/yazi/"

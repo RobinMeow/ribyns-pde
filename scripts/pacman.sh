@@ -4,12 +4,10 @@ set -euo pipefail
 PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
+export RIBYNS_PDE_INSTALL_PACMAN=true
+
 install() {
-	if [ "$UPDATE_MODE" -eq 1 ]; then
-		sudo pacman -S "$@" --noconfirm
-	else
-		sudo pacman -S --needed "$@" --noconfirm
-	fi
+	RIBYNS_PDE_PACMAN_UPDATE=$UPDATE_MODE "$PDE/scripts/pacman-S.sh" "$@"
 }
 
 core() {

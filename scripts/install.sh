@@ -9,6 +9,7 @@ source "$PDE/scripts/stopwatch.sh"
 RUN_PACMAN=false
 for arg in "$@"; do
 	if [[ "$arg" == "--pacman" ]]; then
+		export RIBYNS_PDE_INSTALL_PACMAN=true
 		RUN_PACMAN=true
 	fi
 done
@@ -67,3 +68,4 @@ fi
 stop "$sw"
 success "ribyns-pde installed"
 RIBYNS_STOPWATCH_ENABLED=$temp
+unset RIBYNS_PDE_INSTALL_PACMAN
