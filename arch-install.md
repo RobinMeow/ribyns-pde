@@ -204,13 +204,6 @@ do so by `sudo vim /etc/tlp.conf` and search for `START_CHARGE` and `STOP_CHARGE
 
 ## Git
 
-ssh
-`ssh-keygen -t rsa -b 4096 -C "ribyns-pde@example.com"`
-`ssh-keyscan -H github.com >> ~/.ssh/known_hosts`
+run `gen-ssh-key.sh <email>`
 
-# TODO
-
-## system maintenance
-i plan to read the news feed to prevent updating when news says other wise
-would like some rollback functionality, or automated backups.
-https://wiki.archlinux.org/title/System_maintenance#Read_before_upgrading_the_system
+> will generate an rsa key and add github.com to known hosts

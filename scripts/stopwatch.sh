@@ -127,8 +127,6 @@ export -f _start _stamp _stop
 # note that i made manual changes afterwards
 # but it worked great out of the box
 #
-# #{buffer} @{agent} i want
-# the todo to be done.
 # use the file `$HOME/ribyns-pde/scripts/stopwatch.sh`
 # it should expose functions when sourced:
 # `_start`
