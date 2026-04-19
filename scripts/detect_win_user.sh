@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 PDE="$HOME/ribyns-pde"
-source "$PDE/scripts/utils.sh"
-source "$PDE/scripts/detect_env.sh"
 
 detect_win_user() {
+	source "$PDE/scripts/utils.sh"
 	local user_dir="/mnt/c/Users"
 
 	# Determine Windows user directory
@@ -26,6 +25,7 @@ detect_win_user() {
 			return 1
 		elif [[ ${#_users[@]} -eq 1 ]]; then
 			WINDOWS_USER="${_users[0]}"
+			WINDOWS_HOME="$user_dir/$WINDOWS_USER"
 			info "Detected single Windows user: $WINDOWS_USER"
 		else
 			# this is not yet tested but if the use case arises i'll
@@ -41,7 +41,7 @@ detect_win_user() {
 				warn "Invalid choice. Enter a number between 1 and ${#_users[@]}"
 				read -rp "Select user by number: " choice
 			done
-			WINDOWS_USER="${_users[choice-1]}"
+			WINDOWS_USER="${_users[choice - 1]}"
 			info "Selected Windows user: $WINDOWS_USER"
 		fi
 	else
@@ -52,7 +52,9 @@ detect_win_user() {
 
 # Run detection if script is executed directly
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+	source "$PDE/scripts/detect_env.sh"
 	detect_env
 	detect_win_user
 	echo "WINDOWS_USER=$WINDOWS_USER"
+	echo "WINDOWS_HOME=$WINDOWS_HOME"
 fi
