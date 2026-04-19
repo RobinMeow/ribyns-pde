@@ -5,23 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# --- BENCHMARK START ---
-# TODO: extract benchmarking into a util file
-# Set to: "quiet" | "info" | "verbose"
-ZSH_STARTUP_MODE="info"
 zmodload zsh/datetime
 _start_time=$EPOCHREALTIME
-_last_time=$_start_time
-
-_benchmark() {
-	[[ "$ZSH_STARTUP_MODE" != "verbose" ]] && return
-	local now=$EPOCHREALTIME
-	local elapsed=$(printf "%.1fs" $(( now - _start_time )))
-	local diff=$(printf "%.1fs" $(( now - _last_time )))
-	echo "⏱️  $1: ${elapsed} (+${diff})"
-	_last_time=$now
-}
-# --- END BENCHMARK START ---
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -58,16 +43,13 @@ plugins=(
     zsh-syntax-highlighting
 		# nvm # adds around 120ms. on pc-white from 85ms -> 200+ms avrg.
 )
-_benchmark "Before Completions/Compinit"
 
 # load zsh-completions not as a standard plugin but manually
 # this prevents compinit from being called twice and significantly improves startup time
 fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
-_benchmark "Completions/Compinit"
 
 source $ZSH/oh-my-zsh.sh
-_benchmark "source oh-my-zsh.sh"
 
 # User configuration
 
@@ -113,15 +95,12 @@ export PATH="$HOME/.dotnet:$PATH"
 # needs to pre-prended to take precedence over other installs
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-_benchmark "PATH and aliases"
-
 # nvm node version manager
 nvm() {
   unfunction nvm
   [ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
   nvm "$@"
 }
-_benchmark "source init-nvm.sh (Node Version Manager)"
 
 # Then use y instead of yazi to start, and press q to quit, you'll see 
 # the CWD changed. Sometimes, you don't want to change, press Q to quit.
@@ -133,17 +112,11 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-_benchmark "setup yazi"
-
 [[ -f "$HOME/.zshrc-local.sh" ]] && source "$HOME/.zshrc-local.sh"
 
-# --- FINAL TOTAL ---
-if [[ "$ZSH_STARTUP_MODE" != "quiet" ]]; then
-	_total_ms=$(printf "%.2f" $(( ($EPOCHREALTIME - _start_time) * 1000 )))
-	echo "✅ ZSH Startup Complete: ${_total_ms}ms"
-fi
-unset -f _benchmark
-unset _start_time _last_time _total_ms
+_total_ms=$(printf "%.2f" $(( ($EPOCHREALTIME - _start_time) * 1000 )))
+echo ".zsrc startup duration: ${_total_ms}ms"
+unset _start_time _total_ms
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
