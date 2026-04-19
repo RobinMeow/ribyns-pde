@@ -4,6 +4,15 @@ PDE="${PDE:-$HOME/ribyns-pde}"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/stopwatch.sh"
+
+# Argument parsing
+RUN_PACMAN=false
+for arg in "$@"; do
+	if [[ "$arg" == "--pacman" ]]; then
+		RUN_PACMAN=true
+	fi
+done
+
 temp=RIBYNS_STOPWATCH_ENABLED
 RIBYNS_STOPWATCH_ENABLED=true
 sw="installed in"
@@ -49,6 +58,11 @@ info "Installing yazi"
 
 info "Installing kde"
 "$PDE/scripts/install-kde.sh"
+
+if [[ "$RUN_PACMAN" == true ]]; then
+	info "Installing pacman packages"
+	"$PDE/scripts/pacman.sh"
+fi
 
 stop "$sw"
 success "ribyns-pde installed"
