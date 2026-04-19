@@ -3,6 +3,7 @@
 ## Gemini
 
 [github gemini-cli](https://github.com/google-gemini/gemini-cli)
+[quota-and-pricing](https://geminicli.com/docs/resources/quota-and-pricing/)
 requires `gemini-cli` to be installed for codecompanion to work in nvim.
 > Free tier: 60 requests/min and 1,000 requests/day with personal Google account.
 
