@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PDE="$HOME/ribyns-pde"
+PDE="${PDE:-$HOME/ribyns-pde}"
 
 # overide the entries for core and advice
 # Not a real migration. If a previous version of ribyns-pde had values and are not deleted

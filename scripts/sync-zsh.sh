@@ -2,14 +2,16 @@
 
 PDE="${PDE:-$HOME/ribyns-pde}"
 
+source "$PDE/scripts/utils.sh"
+
 cp "$PDE/.zshrc" "$HOME/.zshrc"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-	echo "Installing Oh My Zsh..."
+	info "Installing Oh My Zsh"
 	# Prevent auto-launching zsh after install
 	RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	success "Oh My Zsh installed"
 else
-	echo "Skipped Oh My Zsh install (already installed)"
+	verbose "skipped Oh My Zsh install (already installed)"
 fi
 
 # Default ZSH_CUSTOM if not set

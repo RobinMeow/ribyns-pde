@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 detect_env() {
+	PDE="$HOME/ribyns-pde"
+	source "$PDE/scripts/utils.sh"
+
 	OS_TYPE="unknown"
 	WSL_VERSION="none"
 
@@ -31,8 +34,8 @@ detect_env() {
 		fi
 	fi
 
-	echo "OS_TYPE=$OS_TYPE"
-	echo "WSL_VERSION=$WSL_VERSION"
+	verbose "OS_TYPE=$OS_TYPE"
+	verbose "WSL_VERSION=$WSL_VERSION"
 }
 
 # If script is executed directly (not sourced), run detection

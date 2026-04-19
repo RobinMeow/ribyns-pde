@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-PDE="$HOME/ribyns-pde"
+PDE="${PDE:-$HOME/ribyns-pde}"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/detect_env.sh"
@@ -34,10 +34,17 @@ git -C "$PDE" diff
 git -C "$PDE" checkout .
 
 read -n 1 -rp "Run 'git clean -f'? [y/N]: " answer
+
+# the preceding `read -n 1` command returns immediately after
+# a single keypress without waiting for the user to hit Enter,
+# the cursor stays on the same line as the prompt.
+# The `echo` ensures that subsequent output from the script
+# starts on a fresh line, keeping the terminal output clean.
 echo
+
 if [[ "$answer" =~ ^[Yy]$ ]]; then
 	git -C "$PDE" clean -f
-	success "Git clean executed"
+	success "\`git clean -f\` executed"
 else
-	info "Skipped git clean"
+	info "skipped g\`git clean -f\`"
 fi

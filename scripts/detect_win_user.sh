@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PDE="$HOME/ribyns-pde"
+PDE="${PDE:-$HOME/ribyns-pde}"
 
 detect_win_user() {
 	source "$PDE/scripts/utils.sh"
@@ -55,6 +55,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 	source "$PDE/scripts/detect_env.sh"
 	detect_env
 	detect_win_user
-	echo "WINDOWS_USER=$WINDOWS_USER"
-	echo "WINDOWS_HOME=$WINDOWS_HOME"
+	verbose "WINDOWS_USER=$WINDOWS_USER"
+	verbose "WINDOWS_HOME=$WINDOWS_HOME"
 fi

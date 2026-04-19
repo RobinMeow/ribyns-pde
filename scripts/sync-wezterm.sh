@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PDE="$HOME/ribyns-pde"
+PDE="${PDE:-$HOME/ribyns-pde}"
 WEZTERM_CONFIG="$HOME"
 
 source "$PDE/scripts/detect_env.sh"
