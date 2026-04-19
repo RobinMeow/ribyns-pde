@@ -33,15 +33,6 @@ return {
 			},
 			adapters = {
 				acp = {
-					ollama = function()
-						return require("codecompanion.adapters").extend("ollama", {
-							schema = {
-								model = {
-									default = ollama_model,
-								},
-							},
-						})
-					end,
 					gemini_cli = function()
 						return require("codecompanion.adapters").extend("gemini_cli", {
 							defaults = {
@@ -60,6 +51,15 @@ return {
 					end,
 				},
 				http = {
+					ollama = function()
+						return require("codecompanion.adapters").extend("ollama", {
+							schema = {
+								model = {
+									default = ollama_model,
+								},
+							},
+						})
+					end,
 					copilot = function()
 						return require("codecompanion.adapters").extend("copilot", {
 							schema = {
