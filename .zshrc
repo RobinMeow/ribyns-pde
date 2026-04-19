@@ -79,6 +79,7 @@ _benchmark "source oh-my-zsh.sh"
 export EDITOR='nvim'
 
 if [[ -d "$HOME/ribyns-pde" ]]; then
+  export PATH="$PATH:$HOME/ribyns-pde/scripts"
   export PDE="$HOME/ribyns-pde"
 else
   YELLOW="\033[1;33m"
@@ -96,8 +97,8 @@ fi
 # Self defined aliases
 # treeview of all git tracked files (ripgrep respects .gitignore)
 alias rgtree='rg --files | tree --fromfile'
-alias nvimconfig='cd ~/.config/nvim && nvim'
-alias ribyns-pde='cd ~/ribyns-pde'
+alias nvimconfig='cd $HOME/.config/nvim && nvim'
+alias ribyns-pde='cd $HOME/ribyns-pde'
 #
 alias gpl='git pull'
 #
@@ -106,26 +107,13 @@ alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
 alias gl='git l' # reference my global .gitconfig alias
 
 # Add .dotnet/dotnet to PATH if not already present.
-# local script installs should take preceedence over the normal arch install
-case ":$PATH:" in
-  *":$HOME/.dotnet:"*) ;;
-	# needs to pre-prended to take precedence over other installs
-  *) PATH="$HOME/.dotnet:$PATH" ;; 
-esac
-
+export PATH="$HOME/.dotnet:$PATH"
 # Add .dotnet/tools to PATH if not already present
-case ":$PATH:" in
-  *":$HOME/.dotnet/tools:"*) ;;
-  *) PATH="$PATH:$HOME/.dotnet/tools" ;;
-esac
+# local script installs should take preceedence over the normal arch install
+# needs to pre-prended to take precedence over other installs
+export PATH="$PATH:$HOME/.dotnet/tools"
 
-# TODO: should be okay to just append without checking
-# Add ribyns-pde/scripts to PATH if not already present
-case ":$PATH:" in
-  *":$HOME/ribyns-pde/scripts:"*) ;;
-  *) PATH="$PATH:$HOME/ribyns-pde/scripts" ;;
-esac
-_benchmark "add dotnet and ribyns-pde scripts to PATH"
+_benchmark "PATH and aliases"
 
 # nvm node version manager
 nvm() {
@@ -144,8 +132,6 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
-
-export PATH
 
 _benchmark "setup yazi"
 
