@@ -135,8 +135,7 @@ function y() {
 
 _benchmark "setup yazi"
 
-# TODO: rename .zshrc-local.sh
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[[ -f "$HOME/.zshrc-local.sh" ]] && source "$HOME/.zshrc-local.sh"
 
 # --- FINAL TOTAL ---
 if [[ "$ZSH_STARTUP_MODE" != "quiet" ]]; then
