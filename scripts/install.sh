@@ -9,28 +9,28 @@ RIBYNS_STOPWATCH_ENABLED=true
 sw="installed in"
 start "$sw"
 
-echo "Syncing from source: $PDE"
+echo "Installing from source: $PDE"
 
 # TODO: modularize this by invoking a script for each domain
-info "Syncing .config"
+info "Installing .config"
 cp -r "$PDE/.config" "$HOME/"
 
 # NOTE: .config sync already includes it
-# info "Syncing .config/nvim"
-# "$PDE/scripts/sync-nvim.sh"
+# info "Installing .config/nvim"
+# "$PDE/scripts/install-nvim.sh"
 
-info "Syncing Wezterm"
-"$PDE/scripts/sync-wezterm.sh"
+info "Installing Wezterm"
+"$PDE/scripts/install-wezterm.sh"
 
-info "Syncing .gitconfig"
-"$PDE/scripts/sync-gitconfig.sh"
+info "Installing .gitconfig"
+"$PDE/scripts/install-gitconfig.sh"
 
-info "Syncing zsh"
-"$PDE/scripts/sync-zsh.sh"
+info "Installing zsh"
+"$PDE/scripts/install-zsh.sh"
 
-info "Syncing powerlevel10k"
+info "Installing powerlevel10k"
 "$PDE/scripts/p10k.sh"
 
 stop "$sw"
-success "ribyns-pde synced"
+success "ribyns-pde installed"
 RIBYNS_STOPWATCH_ENABLED=$temp
