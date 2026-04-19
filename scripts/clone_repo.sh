@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
 clone_repo() {
-	local url="$1"
-	local target="$2"
+	source "$PDE/scripts/utils.sh"
 
-	if [ ! -d "$target" ]; then
-		git clone "$url" "$target"
-		info "Cloned $url"
+	# expect last arg to be a destination dir
+	local dest_dir="${@: -1}"
+
+	if [ ! -d "$dest_dir" ]; then
+		git clone "$@"
+		info "git clone $*"
 	else
-		echo "Skipped clone (already exists): $target"
+		verbose "git repository already exists. skipped \`git clone $*\`"
 	fi
 }
