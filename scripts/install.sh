@@ -11,25 +11,41 @@ start "$sw"
 
 echo "Installing from source: $PDE"
 
-# TODO: modularize this by invoking a script for each domain
-info "Installing .config"
-cp -r "$PDE/.config" "$HOME/"
-
-# NOTE: .config sync already includes it
-# info "Installing .config/nvim"
-# "$PDE/scripts/install-nvim.sh"
-
-info "Installing Wezterm"
-"$PDE/scripts/install-wezterm.sh"
+info "Installing zsh"
+"$PDE/scripts/install-zsh.sh"
 
 info "Installing .gitconfig"
 "$PDE/scripts/install-gitconfig.sh"
 
-info "Installing zsh"
-"$PDE/scripts/install-zsh.sh"
-
 info "Installing powerlevel10k"
-"$PDE/scripts/p10k.sh"
+"$PDE/scripts/install-p10k.sh"
+
+info "Installing bat"
+"$PDE/scripts/install-bat.sh"
+
+info "Installing hypr"
+"$PDE/scripts/install-hypr.sh"
+
+info "Installing kitty"
+"$PDE/scripts/install-kitty.sh"
+
+info "Installing nvim"
+"$PDE/scripts/install-nvim.sh"
+
+info "Installing rofi"
+"$PDE/scripts/install-rofi.sh"
+
+info "Installing waybar"
+"$PDE/scripts/install-waybar.sh"
+
+info "Installing wezterm"
+"$PDE/scripts/install-wezterm.sh"
+
+info "Installing yazi"
+"$PDE/scripts/install-yazi.sh"
+
+info "Installing kde"
+"$PDE/scripts/install-kde.sh"
 
 stop "$sw"
 success "ribyns-pde installed"
