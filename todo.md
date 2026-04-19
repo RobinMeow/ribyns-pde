@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- fix wildmidi bug on mpd
 - a nvim plugin which lets me make a visual selection(remember it using a keymap)
 - and another visual selection for which word to substitute within the previous visual selection
 
