@@ -87,6 +87,7 @@ alias gpl='git pull'
 # override the defaults from the git plugin:
 alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
 alias gl='git l' # reference my global .gitconfig alias
+alias gss='git ss' # reference my global .gitconfig alias
 
 # Add .dotnet/dotnet to PATH if not already present.
 export PATH="$HOME/.dotnet:$PATH"

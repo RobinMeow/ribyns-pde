@@ -3,6 +3,11 @@
 PDE="${PDE:-$HOME/ribyns-pde}"
 
 source "$PDE/scripts/utils.sh"
+source "$PDE/scripts/stopwatch.sh"
+temp=RIBYNS_STOPWATCH_ENABLED
+RIBYNS_STOPWATCH_ENABLED=true
+sw="installed in"
+start "$sw"
 
 echo "Syncing from source: $PDE"
 
@@ -26,4 +31,6 @@ info "Syncing zsh"
 info "Syncing powerlevel10k"
 "$PDE/scripts/p10k.sh"
 
+stop "$sw"
 success "ribyns-pde synced"
+RIBYNS_STOPWATCH_ENABLED=$temp
