@@ -27,9 +27,13 @@ fi
 mkdir -p "$WEZTERM_CONFIG_DIR/wallpapers"
 cp "$PDE/images/wallpapers/"* "$WEZTERM_CONFIG_DIR/wallpapers/"
 
-# Copy .config/wezterm content
+# copy .config/wezterm content (excluding my-workspaces.lua)
 mkdir -p "$WEZTERM_CONFIG_DIR"
-cp -r "$PDE/.config/wezterm/"* "$WEZTERM_CONFIG_DIR/"
+for file in "$PDE/.config/wezterm"/*; do
+	if [[ "$(basename "$file")" != "my-workspaces.lua" ]]; then
+		cp -r "$file" "$WEZTERM_CONFIG_DIR/"
+	fi
+done
 
 motions_dir="$PDE/images/motions"
 if [[ -d $motions_dir ]]; then
