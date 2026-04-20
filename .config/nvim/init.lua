@@ -460,6 +460,12 @@ require("lazy").setup({
         "diff",
         "html",
         "luadoc",
+        "javascript",
+        "json",
+        "python",
+        "regex",
+        "tsx",
+        "typescript",
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
