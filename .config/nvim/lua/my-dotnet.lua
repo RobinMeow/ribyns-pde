@@ -6,6 +6,6 @@
 
 -- Build and check errors for .NET projects
 vim.keymap.set("n", "<leader>dc", ":compiler dotnet<CR>:make<CR>:copen<CR>", {
-	desc = "[d]otnet [c]ompile",
-	silent = true,
+  desc = "[d]otnet [c]ompile",
+  silent = true,
 })
