@@ -3,9 +3,7 @@
 ## Arch
 
 `git clone git@github.com:RobinMeow/ribyns-pde.git $HOME/ribyns-pde`
-run `yay_ensure_installed.sh`
-run `pacman.sh`
-run `install.sh`
+run `~/ribyns-pde/scripts/install.sh --pacman`
 
 > if executable bits are not set (permission error) run
 `bash scripts/set_executable_bit.sh` then run the others scripts.
@@ -21,55 +19,33 @@ because its recommended tho use those to install the csharp-ls
 
 ### Emulator
 
-using wezterm.
-on arch build from souce (e.g. `yay wezterm-git`)
-on windoof just go to the [website](https://wezterm.org) and download it.
+using `kitty`
+
+on arch build from source (e.g. `yay wezterm-git`)
+on windows just go to the [website](https://wezterm.org) and download it.
 
 install the font commit-mono `yay extra/oft-commit-mono-nerd`
 choose the nerd one `otf-commit-mono-nerd`
 
-> when on wsl, you your wezterm config needs to be on you
-windows home path and the font needs to be installed there.
-
-**zsh theme: ohmyzsh**  
-install `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-
-**ohmyzsh plugins**  
-zsh-vi-mode `git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode`  
-zsh-autosuggestions `git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions`  
-zsh-syntax-highlighting `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting`  
-zsh-completions `git clone https://github.com/zsh-users/zsh-completions.git $ZSH_CUSTOM/plugins/zsh-completions`
-
 ## Notes on easy to forget keybinds
 
-`CTRL+e` will acception zsh-autosuggestions
+`CTRL+e` to accept ghost-like zsh-autosuggestions
 
-## Windows + WSL
+## WSL
 
-so far windows has used the same paths, except for nvim, which is located in `%AppData%/local/nvim`
-idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6`
+Terminal Emulator is `wezterm`. Since kitty is not supported.
+The font needs to be installed on windows to be available for wezterm
 
-## dotnet
+nvim path `%AppData%/local/nvim`
+but Telescope and maybe other features using the Linux ecosystem do not work.
 
-1. install the roslyn plugin "seblyng/roslyn.nvim"
-2. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
-3. add rosyn as ls
-see commit hash [dfa3003](https://github.com/RobinMeow/ribyns-pde/commit/dfa3003391d739122cc15adacb96194c2c8909b3)
+## .NET
+
+dotnet (meaning, microslop) is a mess, I use easy-dotnet nvim plugin now, 
+which is bloated but works pretty reliably at least.
 
 ### Scripts
 
-to be able to use the scripts directly add execution permission by running the setup
-`bash ~/ribyns-pde/setup.sh`
-now yow can run scripts without invoking bash and if in zsh the script folder is on the path `ng-test.sh`
-
-### WSL Versions
-
-on aralap (2026-02-27)
-$ wsl --version
-WSL version: 2.6.1.0
-Kernel version: 6.6.87.2-1
-WSLg version: 1.0.66
-MSRDC version: 1.2.6353
-Direct3D version: 1.611.1-81528511
-DXCore version: 10.0.26100.1-240331-1435.ge-release
-Windows version: 10.0.26100.7840
+the `scripts` directory is added to the `$PATH`,
+and therefore can be invoked using their filename.
+e.g. `install.sh --pacman`
