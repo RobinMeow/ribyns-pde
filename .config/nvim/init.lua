@@ -379,6 +379,8 @@ require("lazy").setup({
 				["yamllint"] = {},
 				["eslint_d"] = {},
 				["stylua"] = {},
+				["markdownlint"] = {},
+				["vale"] = {},
 			}
 
 			require("mason-tool-installer").setup({ ensure_installed = vim.tbl_keys(servers or {}) })
@@ -489,12 +491,7 @@ require("lazy").setup({
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
 
-	--  Here are some example plugins that I've included in the Kickstart repository.
-	--  Uncomment any of the lines below to enable them (you will need to restart nvim).
-	--
 	-- require 'kickstart.plugins.debug',
-	-- require 'kickstart.plugins.indent_line',
-	-- require 'kickstart.plugins.lint',
 	-- require 'kickstart.plugins.autopairs',
 	-- require 'kickstart.plugins.neo-tree',
 }, {

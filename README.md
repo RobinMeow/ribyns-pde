@@ -7,11 +7,12 @@ run `yay_ensure_installed.sh`
 run `pacman.sh`
 run `install.sh`
 
-> if executable bits arent set (permission error) run `bash scripts/set_executable_bit.sh` then run the others scripts.
+> if executable bits are not set (permission error) run
+`bash scripts/set_executable_bit.sh` then run the others scripts.
 
-set zsh as default shell
+set `/usr/bin/zsh` as default shell
 
-install dotnet stuff and add `~/.dotnet/tools`  to the path variable
+install .NET stuff and add `~/.dotnet/tools`  to the path variable
 because its recommended tho use those to install the csharp-ls
 `dotnet tool install --global csharp-ls`
 `https://wiki.archlinux.org/title/.NET`
@@ -20,13 +21,15 @@ because its recommended tho use those to install the csharp-ls
 
 ### Emulator
 
-using wezterm. 
+using wezterm.
 on arch build from souce (e.g. `yay wezterm-git`)
 on windoof just go to the [website](https://wezterm.org) and download it.
 
-install the font commit-mono `yay extra/oft-commit-mono-nerd` choose the nerd one `otf-commit-mono-nerd`
+install the font commit-mono `yay extra/oft-commit-mono-nerd`
+choose the nerd one `otf-commit-mono-nerd`
 
-> when on wsl, you your wezterm config needs to be on you windows home path and the font needs to be installed there.
+> when on wsl, you your wezterm config needs to be on you
+windows home path and the font needs to be installed there.
 
 **zsh theme: ohmyzsh**  
 install `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
@@ -48,11 +51,10 @@ idk colors origin from the 24-colors.sh `https://gist.github.com/andersevenrud/0
 
 ## dotnet
 
-2. install the roslyn plugin "seblyng/roslyn.nvim"
-1. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
+1. install the roslyn plugin "seblyng/roslyn.nvim"
+2. add registreis to mason.nvim `github:mason-org/mason-registry`, `github:Crashdummyy/mason-registry`.
 3. add rosyn as ls
 see commit hash [dfa3003](https://github.com/RobinMeow/ribyns-pde/commit/dfa3003391d739122cc15adacb96194c2c8909b3)
-
 
 ### Scripts
 
