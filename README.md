@@ -1,4 +1,6 @@
-# Ribyns Personal Development Environment
+# Ribyns Environment
+
+My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other things.
 
 ## Arch
 
