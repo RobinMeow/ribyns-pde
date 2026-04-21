@@ -31,25 +31,29 @@ info "Installing tmux"
 info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
-# desktop
-# NOTE: disabled since I currently dont need them synced anywhere
-# info "Installing hypr"
-# "$PDE/scripts/install-hypr.sh"
-#
-# info "Installing rofi"
-# "$PDE/scripts/install-rofi.sh"
-#
-# info "Installing waybar"
-# "$PDE/scripts/install-waybar.sh"
-#
-# info "Installing kde"
-# "$PDE/scripts/install-kde.sh"
-
 for arg in "$@"; do
 	if [[ "$arg" == "--pacman" ]]; then
 		info "Installing pacman packages"
 		"$PDE/scripts/pacman-core.sh"
 		"$PDE/scripts/pacman-webdev.sh"
+	fi
+done
+
+for arg in "$@"; do
+	# NOTE: disabled since I currently dont need them synced anywhere
+	if [[ "$arg" == "--desktop" ]]; then
+		info "Installing rofi"
+		"$PDE/scripts/install-rofi.sh"
+
+		info "Installing waybar"
+		"$PDE/scripts/install-waybar.sh"
+
+		# INFO: i can split up hypr and kde in future
+		info "Installing hypr"
+		"$PDE/scripts/install-hypr.sh"
+
+		info "Installing kde"
+		"$PDE/scripts/install-kde.sh"
 	fi
 done
 
