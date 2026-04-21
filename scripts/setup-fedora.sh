@@ -41,7 +41,6 @@ info "Creating user '$USERNAME'..."
 # Fedora uses 'wheel' for sudo; -m creates home; -s sets shell
 useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
 success "User '$USERNAME' created."
-info "Please set a password for '$USERNAME':"
-passwd "$USERNAME"
 
 success "Fedora setup complete. You can now log in as '$USERNAME'."
+info "Please set a password for '$USERNAME' by running: passwd $USERNAME"
