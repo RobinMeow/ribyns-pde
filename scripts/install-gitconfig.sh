@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # overide the entries for core and advice
 # Not a real migration. If a previous version of ribyns-pde had values and are not deleted
 # they wont be removed

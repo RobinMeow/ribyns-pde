@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 sudo pacman -S --needed --noconfirm bat
 
 mkdir -p "$HOME/.config/bat"

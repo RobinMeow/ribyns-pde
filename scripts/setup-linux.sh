@@ -68,6 +68,8 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 	run_as_root su - "$USERNAME" <<'EOF'
 		git clone --depth 1 -b setup-linux https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 		"$HOME/ribyns-pde/scripts/install-zsh.sh"
+		"$HOME/ribyns-pde/scripts/install-p10k.sh"
+		"$HOME/ribyns-pde/scripts/install-gitconfig.sh"
 EOF
 	success "Setup complete."
 	info "You can now log in as '$USERNAME' by running: su - $USERNAME"

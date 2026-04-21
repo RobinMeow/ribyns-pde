@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 sudo pacman -S --needed --noconfirm nvim tree-sitter-cli lazygit
 
 # NOTE: i usually do this manually
