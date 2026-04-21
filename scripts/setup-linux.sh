@@ -44,8 +44,8 @@ arch)
 esac
 
 # --- Base System ---
-info "Detected $DISTRO. Installing base packages (zsh, vim, sudo, git)..."
-run_as_root $INSTALL_CMD zsh vim sudo git
+info "Detected $DISTRO. Installing base packages (zsh, vim, sudo, git, bc)..."
+run_as_root $INSTALL_CMD zsh vim sudo git bc
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
