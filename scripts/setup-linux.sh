@@ -66,7 +66,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	info "Cloning and installing as $USERNAME..."
 	run_as_root su - "$USERNAME" <<'EOF'
-		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
+		git clone --depth 1 -b setup-linux https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 		"$HOME/ribyns-pde/scripts/install.sh"
 EOF
 	success "Setup complete."
