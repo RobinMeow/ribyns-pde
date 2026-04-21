@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
+sudo pacman -S --needed --noconfirm nvim tree-sitter-cli lazygit
 
 # NOTE: i usually do this manually
 # rm -rf "$HOME/.config/nvim/"

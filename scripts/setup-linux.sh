@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+# setup-pde.sh: Standalone script to prepare a Linux instance (Fedora/Arch).
+# Usage: curl -sSL <url> | bash
+
+set -e
+
+# --- Sudo Helper ---
+run_as_root() {
+	if [[ "$EUID" -ne 0 ]]; then
+		sudo "$@"
+	else
+		"$@"
+	fi
+}
+
+# --- Distro Detection ---
+if [ -f /etc/os-release ]; then
+	. /etc/os-release
+	DISTRO=$ID
+else
+	DISTRO="unknown"
+fi
+
+case "$DISTRO" in
+fedora)
+	PKG_MANAGER="dnf"
+	INSTALL_CMD="dnf install -y"
+	;;
+arch)
+	PKG_MANAGER="pacman"
+	INSTALL_CMD="pacman -S --needed --noconfirm"
+	;;
+*)
+	echo "Unsupported distribution: $DISTRO"
+	exit 1
+	;;
+esac
+
+# --- Base System ---
+echo "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
+run_as_root $INSTALL_CMD sudo git bc
+
+# --- User Configuration ---
+echo -n "Create a new user? [y/N]: "
+read -r CREATE_ANS </dev/tty
+if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
+	echo -n "Enter username to create [ribyn]: "
+	read -r USERNAME </dev/tty
+	USERNAME=${USERNAME:-ribyn}
+
+	echo "Creating user '$USERNAME'..."
+
+	groupadd sudo
+	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
+	# -G sudo,wheel (comma seperated to add a user to multiple groups)
+	cat <<'EOF' >/etc/sudoers.d/admin-groups
+%sudo ALL=(ALL:ALL) ALL
+EOF
+
+	chmod 440 /etc/sudoers.d/admin-groups
+
+	run_as_root useradd -m -G sudo -s /usr/bin/bash "$USERNAME"
+	echo "User '$USERNAME' created."
+
+	echo "Setting password for '$USERNAME'..."
+	until run_as_root passwd "$USERNAME" </dev/tty; do
+		echo "Password update failed. Please try again."
+	done
+
+	echo "Setup complete."
+	echo "You can now log in as '$USERNAME' by running: su - $USERNAME"
+else
+	USERNAME=$(whoami)
+	echo "Setup complete for '$USERNAME'."
+fi

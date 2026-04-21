@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 detect_env() {
-	PDE="$HOME/ribyns-pde"
 	source "$PDE/scripts/utils.sh"
 
 	OS_TYPE="unknown"

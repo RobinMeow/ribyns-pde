@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
-
 source "$PDE/scripts/utils.sh"
 
-cp "$PDE/.zshrc" "$HOME/.zshrc"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	info "Installing Oh My Zsh"
 	# Prevent auto-launching zsh after install
@@ -19,7 +16,10 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 mkdir -p "$ZSH_CUSTOM/plugins"
 
 source "$PDE/scripts/clone_repo.sh"
-clone_repo https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM/plugins/zsh-vi-mode"
-clone_repo https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-clone_repo https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-clone_repo https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins/zsh-completions"
+clone_repo --depth 1 https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM/plugins/zsh-vi-mode"
+clone_repo --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+clone_repo --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+clone_repo --depth 1 https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins/zsh-completions"
+
+# copy it last, in hope ohmyzsh doesnt override it
+cp "$PDE/.zshrc" "$HOME/.zshrc"

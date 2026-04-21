@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
+
+sudo pacman -S --needed --noconfirm rofi
 
 mkdir -p "$HOME/.config/rofi"
 cp -r "$PDE/.config/rofi/"* "$HOME/.config/rofi/"

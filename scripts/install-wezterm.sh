@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 WEZTERM_CONFIG_DIR="$HOME/.config/wezterm"
 WEZTERM_LUA_DIR="$HOME"
+
+sudo pacman -S --needed --noconfirm wezterm
 
 source "$PDE/scripts/detect_env.sh"
 detect_env

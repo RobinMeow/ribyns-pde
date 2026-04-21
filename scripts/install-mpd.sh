@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
-sudo pacman -S mpd rmpc --needed --noconfirm
+sudo pacman -S --needed --noconfirm mpd rmpc
 
 mkdir -p "$HOME/.config/mpd/playlists"
 cp -r "$PDE/.config/mpd/"* "$HOME/.config/mpd/"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
+
+sudo pacman -S --needed --noconfirm hyprland
 
 mkdir -p "$HOME/.config/hypr"
 cp -r "$PDE/.config/hypr/"* "$HOME/.config/hypr/"

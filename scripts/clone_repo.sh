@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 clone_repo() {
-	PDE="${PDE:-$HOME/ribyns-pde}"
 	source "$PDE/scripts/utils.sh"
 
 	# expect last arg to be a destination dir

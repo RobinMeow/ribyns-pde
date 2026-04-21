@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
+
+sudo pacman -S --needed --noconfirm tmux
+
 # TMUX Plugins
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"
 mkdir -p "$TMUX_PLUGIN_DIR"
