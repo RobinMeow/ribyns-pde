@@ -20,28 +20,18 @@ run_as_root() {
 	fi
 }
 
-# --- User Input ---
-# TODO: I think it is wierd to create user prompt but only later create the user
+# --- Base System ---
+info "Installing base packages (zsh, vim, sudo, git)..."
+run_as_root dnf install -y zsh vim sudo git
+
+# --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
 read -r CREATE_ANS </dev/tty
 if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 	echo -n "Enter username to create [ribyn]: "
 	read -r USERNAME </dev/tty
 	USERNAME=${USERNAME:-ribyn}
-	DO_CREATE=true
-else
-	USERNAME=$(whoami)
-	DO_CREATE=false
-fi
 
-info "Starting Fedora setup for user: $USERNAME"
-
-# --- Base System ---
-info "Installing base packages (zsh, vim, sudo, git)..."
-run_as_root dnf install -y zsh vim sudo git
-
-# --- User/Clone Configuration ---
-if [[ "$DO_CREATE" == true ]]; then
 	info "Creating user '$USERNAME'..."
 	run_as_root useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
 	success "User '$USERNAME' created."
@@ -56,13 +46,14 @@ if [[ "$DO_CREATE" == true ]]; then
 		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 		"$HOME/ribyns-pde/scripts/install.sh"
 EOF
+	success "Fedora setup complete."
+	info "You can now log in as '$USERNAME' by running: su - $USERNAME"
 else
+	USERNAME=$(whoami)
 	info "Proceeding with current user '$USERNAME'..."
 	if [[ ! -d "$HOME/ribyns-pde" ]]; then
 		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 	fi
 	"$HOME/ribyns-pde/scripts/install.sh"
+	success "Fedora setup complete for '$USERNAME'."
 fi
-
-# TODO: only show how to log in, if a new user was created
-success "Fedora setup complete. login: su - $USERNAME"
