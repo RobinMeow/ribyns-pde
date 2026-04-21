@@ -42,11 +42,15 @@ info "Creating user '$USERNAME'..."
 useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
 success "User '$USERNAME' created."
 
-success "Fedora setup complete. You can now log in as '$USERNAME' by running: su - $USERNAME"
-info "Please set a password for '$USERNAME' by running: passwd $USERNAME"
+info "Setting password for '$USERNAME'..."
+passwd "$USERNAME" </dev/tty
 
-passwd "$USERNAME"
-
-# TODO: how do I halt script execution until the user typed it his password twice? the user doesnt even have a chance to type it in, its like this script is messing it up
-
+# --- Clone Repository ---
+info "Cloning ribyns-pde for $USERNAME..."
 su - "$USERNAME"
+
+# WARN: fix the passwd first before continueing with the git clone
+# git clone "https://github.com/RobinMeow/ribyns-pde" "$HOME/ribyns-pde"
+
+success "Fedora setup complete."
+info "You can now log in as '$USERNAME' by running: su - $USERNAME"
