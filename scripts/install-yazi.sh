@@ -4,7 +4,7 @@ PDE="${PDE:-$HOME/ribyns-pde}"
 
 # NOTE: image, audio, video, subtitle and many media files using ffmpeg and mediainfo metainfo
 dest_mediainfo="$HOME/.config/yazi/plugins/mediainfo.yazi"
-"$PDE/scripts/pacman-S.sh" yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow extra/mediainfo feh
+"$PDE/scripts/pacman-S.sh" yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow extra/mediainfo feh file mpv
 
 if [[ ! -d $dest_mediainfo ]]; then
 	# install

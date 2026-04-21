@@ -2,7 +2,7 @@
 
 PDE="${PDE:-$HOME/ribyns-pde}"
 
-sudo pacman -S mpd rmpc --needed --noconfirm
+"$PDE/scripts/pacman-S.sh" mpd rmpc
 
 mkdir -p "$HOME/.config/mpd/playlists"
 cp -r "$PDE/.config/mpd/"* "$HOME/.config/mpd/"

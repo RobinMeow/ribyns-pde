@@ -2,6 +2,8 @@
 
 PDE="${PDE:-$HOME/ribyns-pde}"
 
+"$PDE/scripts/pacman-S.sh" zsh curl
+
 source "$PDE/scripts/utils.sh"
 
 cp "$PDE/.zshrc" "$HOME/.zshrc"

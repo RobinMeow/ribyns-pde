@@ -2,6 +2,8 @@
 
 PDE="${PDE:-$HOME/ribyns-pde}"
 
+"$PDE/scripts/pacman-S.sh" nvim tree-sitter-cli lazygit
+
 # NOTE: i usually do this manually
 # rm -rf "$HOME/.config/nvim/"
 
