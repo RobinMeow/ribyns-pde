@@ -115,9 +115,9 @@ run `systemctl enable NetworkManager.service`
 to make sure it starts on every boot
 and run `systemctl start NetworkManager.service` to start it now and to establish internet connection without rebooting now
 
-Alternatively, use the setup script to create a user and set up the PDE:
+Alternatively, use the setup script to create a user:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/main/scripts/setup-linux.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh | bash
 ```
 
 WARN: ran an Syu update and seems like i switched to extra/nvidia-open (open source drivers, prolly better was wasnt supported prev i think?)

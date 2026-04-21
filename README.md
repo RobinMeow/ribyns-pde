@@ -2,16 +2,14 @@
 
 My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other things.
 
-## Quick Setup (Fedora/Arch)
-
-If you have a fresh installation, you can use the [setup-linux.sh](scripts/setup-linux.sh) script to prepare your environment. See [setup-linux.md](setup-linux.md) for details.
-
 ## Arch
 
 `git clone git@github.com:RobinMeow/ribyns-pde.git $HOME/ribyns-pde`
 
-Make sure to export the `PDE` environment variable before running any scripts:
+if zsh is not yet synced, ake sure to export the `PDE` environment variable before running any scripts:
 `export PDE="$HOME/ribyns-pde"`
+
+> if zsh is already installed, .zshrc exports this variable
 
 Run the install script:
 `~/ribyns-pde/scripts/install.sh --pacman`
