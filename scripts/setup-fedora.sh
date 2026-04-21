@@ -47,8 +47,14 @@ until passwd "$USERNAME" </dev/tty; do
 	error "Password update failed. Please try again."
 done
 
-info "Cloning ribyns-pde for $USERNAME..."
-su - "$USERNAME" -c "git clone --depth 1 https://github.com/RobinMeow/ribyns-pde \$HOME/ribyns-pde"
+# --- Continue as User ---
+# We use a heredoc to run a block of commands as the new user.
+# Using <<'EOF' (with quotes) prevents local variable expansion.
+info "Cloning ribyns-pde..."
+su - "$USERNAME" <<'EOF'
+	# functions like info are now lost in new shell
+	git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
+EOF
 
 success "Fedora setup complete."
 info "You can now log in as '$USERNAME' by running: su - $USERNAME"
