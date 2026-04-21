@@ -54,6 +54,7 @@ info "Cloning ribyns-pde..."
 su - "$USERNAME" <<'EOF'
 	# functions like info are now lost in new shell
 	git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
+	"~/ribyns-pde/scripts/install.sh"
 EOF
 
 success "Fedora setup complete."
