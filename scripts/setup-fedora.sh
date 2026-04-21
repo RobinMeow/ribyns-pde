@@ -21,6 +21,7 @@ run_as_root() {
 }
 
 # --- User Input ---
+# TODO: I think it is wierd to create user prompt but only later create the user
 echo -n "Create a new user? [y/N]: "
 read -r CREATE_ANS </dev/tty
 if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
@@ -63,4 +64,5 @@ else
 	"$HOME/ribyns-pde/scripts/install.sh"
 fi
 
+# TODO: only show how to log in, if a new user was created
 success "Fedora setup complete. login: su - $USERNAME"
