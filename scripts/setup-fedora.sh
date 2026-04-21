@@ -48,7 +48,7 @@ until passwd "$USERNAME" </dev/tty; do
 done
 
 info "Cloning ribyns-pde for $USERNAME..."
-su - "$USERNAME" -c "git clone https://github.com/RobinMeow/ribyns-pde \$HOME/ribyns-pde"
+su - "$USERNAME" -c "git clone --depth 1 https://github.com/RobinMeow/ribyns-pde \$HOME/ribyns-pde"
 
 success "Fedora setup complete."
 info "You can now log in as '$USERNAME' by running: su - $USERNAME"
