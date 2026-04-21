@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 source "$PDE/scripts/utils.sh"
-source "$PDE/scripts/stopwatch.sh"
 
 # Argument parsing
 RUN_PACMAN=false
@@ -11,11 +10,6 @@ for arg in "$@"; do
 		RUN_PACMAN=true
 	fi
 done
-
-temp=RIBYNS_STOPWATCH_ENABLED
-RIBYNS_STOPWATCH_ENABLED=true
-sw="installed in"
-start "$sw"
 
 echo "Installing from source: $PDE"
 
@@ -64,7 +58,5 @@ if [[ "$RUN_PACMAN" == true ]]; then
 	"$PDE/scripts/pacman-webdev.sh"
 fi
 
-stop "$sw"
 success "ribyns-pde installed"
-RIBYNS_STOPWATCH_ENABLED=$temp
 unset RIBYNS_PDE_INSTALL_PACMAN
