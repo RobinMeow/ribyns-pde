@@ -56,7 +56,16 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 	USERNAME=${USERNAME:-ribyn}
 
 	info "Creating user '$USERNAME'..."
-	run_as_root useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
+
+	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
+	# -G sudo,wheel (comma seperated to add a user to multiple groups)
+	cat <<'EOF' >/etc/sudoers.d/admin-groups
+%sudo ALL=(ALL:ALL) ALL
+EOF
+
+	chmod 440 /etc/sudoers.d/admin-groups
+
+	run_as_root useradd -m -G sudo -s /usr/bin/zsh "$USERNAME"
 	success "User '$USERNAME' created."
 
 	info "Setting password for '$USERNAME'..."
@@ -66,11 +75,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	info "Cloning and installing as $USERNAME..."
 	run_as_root su - "$USERNAME" <<'EOF'
-	  export PDE="$HOME/ribyns-pde"
 		git clone --depth 1 -b setup-linux https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
-		"$HOME/ribyns-pde/scripts/install-zsh.sh"
-		"$HOME/ribyns-pde/scripts/install-p10k.sh"
-		"$HOME/ribyns-pde/scripts/install-gitconfig.sh"
 EOF
 	success "Setup complete."
 	info "You can now log in as '$USERNAME' by running: su - $USERNAME"

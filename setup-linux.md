@@ -17,3 +17,11 @@ The script will:
 3. Clone the `ribyns-pde` repository into the home directory.
 4. Execute the main installation script (`scripts/install.sh`).
 
+
+## Arch
+
+your user needs to be a sudoer
+
+1. `git clone --depth 1 https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde`
+2. `cd $HOME/ribyns-pde`
+3. `scripts/install.sh --pacman`
