@@ -57,6 +57,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	info "Creating user '$USERNAME'..."
 
+	groupadd sudo
 	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
 	# -G sudo,wheel (comma seperated to add a user to multiple groups)
 	cat <<'EOF' >/etc/sudoers.d/admin-groups
