@@ -1,6 +1,6 @@
 # Fedora Setup
 
-To prepare a fresh Fedora instance, run the following command as root. This script installs base packages (zsh, vim, sudo, git), prompts you to create a user, clones the repository, and starts the installation.
+To prepare a Fedora instance, run the following command. The script installs base packages (zsh, vim, sudo, git), optionally creates a new user, clones the repository, and starts the installation.
 
 ## Quick Start
 
@@ -9,10 +9,10 @@ curl -sSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/main/scripts/se
 ```
 
 The script will:
-1. Ensure it is running as root.
-2. Prompt you for a username (defaults to `ribyn`).
-3. Install base dependencies via `dnf`.
-4. Create the user and prompt for a password.
-5. Clone the `ribyns-pde` repository into the new user's home directory.
-6. Execute the main installation script (`scripts/install.sh`) as that user.
+1. Ask if you want to create a new user.
+   - If **yes**: Prompts for a username and password, then switches to that user.
+   - If **no**: Continues as the current user.
+2. Install base dependencies via `dnf` (using `sudo` if necessary).
+3. Clone the `ribyns-pde` repository into the home directory.
+4. Execute the main installation script (`scripts/install.sh`).
 
