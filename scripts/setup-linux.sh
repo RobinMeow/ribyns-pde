@@ -44,8 +44,8 @@ arch)
 esac
 
 # --- Base System ---
-info "Detected $DISTRO. Installing base packages (zsh, vim, sudo, git, bc)..."
-run_as_root $INSTALL_CMD zsh vim sudo git bc
+info "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
+run_as_root $INSTALL_CMD sudo git bc
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
@@ -66,7 +66,7 @@ EOF
 
 	chmod 440 /etc/sudoers.d/admin-groups
 
-	run_as_root useradd -m -G sudo -s /usr/bin/zsh "$USERNAME"
+	run_as_root useradd -m -G sudo -s /usr/bin/bash "$USERNAME"
 	success "User '$USERNAME' created."
 
 	info "Setting password for '$USERNAME'..."
@@ -76,7 +76,7 @@ EOF
 
 	info "Cloning and installing as $USERNAME..."
 	run_as_root su - "$USERNAME" <<'EOF'
-		git clone --depth 1 -b setup-linux https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
+		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 EOF
 	success "Setup complete."
 	info "You can now log in as '$USERNAME' by running: su - $USERNAME"
