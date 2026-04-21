@@ -13,6 +13,10 @@ RIBYNS_PDE_LOG_INFO=true info "Installing webdev packages..."
 	docker \
 	docker-compose \
 	docker-buildx \
-	postgresql
+	postgresql \
+	dotnet-runtime \
+	dotnet-sdk \
+	aspnet-runtime \
+	aspnet-targeting-pack
 
 RIBYNS_PDE_LOG_INFO=true success "Webdev packages installed"

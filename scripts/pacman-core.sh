@@ -26,7 +26,16 @@ RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 	cargo \
 	man-db \
 	man-pages \
-	tealdeer
+	tealdeer \
+	vlc \
+	vlc-plugins-all \
+	lnav \
+	tree \
+	btop \
+	translate-shell \
+	tokei \
+	flameshot \
+	gemini-cli
 
 # Update tealdeer cache if it was just installed
 if command -v tldr >/dev/null 2>&1; then

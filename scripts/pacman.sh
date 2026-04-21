@@ -18,17 +18,9 @@ gadgets() {
 	"$PDE/scripts/pacman-gadgets.sh"
 }
 
-dotnet() {
-	"$PDE/scripts/pacman-dotnet.sh"
-}
-
-extra() {
-	"$PDE/scripts/pacman-extra.sh"
-}
-
 usage() {
 	echo "Usage: $0 [--update] [category...]"
-	echo "Categories: core, webdev, gadgets, dotnet, extra"
+	echo "Categories: core, webdev, gadgets"
 	echo "will only install packages when --needed. unless --update is provided"
 	echo "Example:"
 	echo "  pacman.sh gadgets"
@@ -62,8 +54,6 @@ main() {
 		core) core ;;
 		webdev) webdev ;;
 		gadgets) gadgets ;;
-		dotnet) dotnet ;;
-		extra) extra ;;
 		*)
 			error "Unknown category: $category"
 			usage
