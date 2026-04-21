@@ -42,5 +42,5 @@ info "Creating user '$USERNAME'..."
 useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
 success "User '$USERNAME' created."
 
-success "Fedora setup complete. You can now log in as '$USERNAME'."
+success "Fedora setup complete. You can now log in as '$USERNAME' by running: su - $USERNAME"
 info "Please set a password for '$USERNAME' by running: passwd $USERNAME"
