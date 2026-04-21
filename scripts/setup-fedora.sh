@@ -42,15 +42,13 @@ info "Creating user '$USERNAME'..."
 useradd -m -G wheel -s /usr/bin/zsh "$USERNAME"
 success "User '$USERNAME' created."
 
-# TODO: implement retry, when the user typed in the password wrong the second time. Maybe we can read out the exit code of passwd? Apply best pratises and keep this script short an concise.
 info "Setting password for '$USERNAME'..."
-passwd "$USERNAME" </dev/tty
+until passwd "$USERNAME" </dev/tty; do
+	error "Password update failed. Please try again."
+done
 
-# --- Clone Repository ---
 info "Cloning ribyns-pde for $USERNAME..."
-su - "$USERNAME"
-
-git clone "https://github.com/RobinMeow/ribyns-pde" "$HOME/ribyns-pde"
+su - "$USERNAME" -c "git clone https://github.com/RobinMeow/ribyns-pde \$HOME/ribyns-pde"
 
 success "Fedora setup complete."
 info "You can now log in as '$USERNAME' by running: su - $USERNAME"
