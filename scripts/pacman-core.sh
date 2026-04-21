@@ -43,9 +43,6 @@ sudo pacman -S --needed --noconfirm \
 	chafa \
 	fd
 
-# Update tealdeer cache if it was just installed
-if command -v tldr >/dev/null 2>&1; then
-	tldr --update
-fi
+tldr --update
 
 RIBYNS_PDE_LOG_INFO=true success "Core packages installed"
