@@ -6,7 +6,11 @@ My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other t
 
 `git clone git@github.com:RobinMeow/ribyns-pde.git $HOME/ribyns-pde`
 
-run `~/ribyns-pde/scripts/install.sh --pacman`
+Make sure to export the `PDE` environment variable before running any scripts:
+`export PDE="$HOME/ribyns-pde"`
+
+Run the install script:
+`~/ribyns-pde/scripts/install.sh --pacman`
 
 
 ## Terminal
@@ -40,3 +44,4 @@ but Telescope and maybe other features using the Linux ecosystem do not work.
 the `scripts` directory is added to the `$PATH`,
 and therefore can be invoked using their filename.
 e.g. `install.sh --pacman`
+

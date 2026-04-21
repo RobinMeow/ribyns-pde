@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
 EMAIL="$1"

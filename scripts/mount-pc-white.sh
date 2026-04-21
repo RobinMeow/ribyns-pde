@@ -1,5 +1,4 @@
-PDE="${PDE:-$HOME/ribyns-pde}"
-"$PDE/scripts/pacman-S.sh" ntfs-3g
+sudo pacman -S --needed --noconfirm ntfs-3g
 # TODO: move to pacman-core.sh
 
 sudo mkdir -p /mnt/c -- main windows

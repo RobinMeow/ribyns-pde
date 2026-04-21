@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
-"$PDE/scripts/pacman-S.sh" zsh curl
+sudo pacman -S --needed --noconfirm zsh curl git
 
 source "$PDE/scripts/utils.sh"
 

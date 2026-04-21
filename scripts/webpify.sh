@@ -17,7 +17,6 @@ EOF
 	exit 0
 }
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
 # Defaults

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
-"$PDE/scripts/pacman-S.sh" tmux
+sudo pacman -S --needed --noconfirm tmux
 
 # TMUX Plugins
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"

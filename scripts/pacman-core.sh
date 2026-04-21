@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
 RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 
-"$PDE/scripts/pacman-S.sh" \
+sudo pacman -S --needed --noconfirm \
 	base-devel \
 	git \
 	curl \
@@ -35,7 +34,14 @@ RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 	translate-shell \
 	tokei \
 	flameshot \
-	gemini-cli
+	gemini-cli \
+	ffmpeg \
+	7zip \
+	ripgrep \
+	glow \
+	mpv \
+	chafa \
+	fd
 
 # Update tealdeer cache if it was just installed
 if command -v tldr >/dev/null 2>&1; then

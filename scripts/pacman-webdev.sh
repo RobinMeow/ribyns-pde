@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
 RIBYNS_PDE_LOG_INFO=true info "Installing webdev packages..."
 
-"$PDE/scripts/pacman-S.sh" \
+sudo pacman -S --needed --noconfirm \
 	nodejs \
 	npm \
 	nvm \
@@ -17,6 +16,7 @@ RIBYNS_PDE_LOG_INFO=true info "Installing webdev packages..."
 	dotnet-runtime \
 	dotnet-sdk \
 	aspnet-runtime \
-	aspnet-targeting-pack
+	aspnet-targeting-pack \
+	jq
 
 RIBYNS_PDE_LOG_INFO=true success "Webdev packages installed"

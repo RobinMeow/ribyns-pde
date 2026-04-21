@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
-"$PDE/scripts/pacman-S.sh" hyprland
+sudo pacman -S --needed --noconfirm hyprland
 
 mkdir -p "$HOME/.config/hypr"
 cp -r "$PDE/.config/hypr/"* "$HOME/.config/hypr/"

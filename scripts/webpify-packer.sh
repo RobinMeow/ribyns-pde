@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 source "$PDE/scripts/utils.sh"
 
 usage() {

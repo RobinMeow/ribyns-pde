@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
 detect_win_user() {
 	source "$PDE/scripts/utils.sh"

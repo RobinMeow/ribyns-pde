@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-PDE="${PDE:-$HOME/ribyns-pde}"
 
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/stopwatch.sh"
