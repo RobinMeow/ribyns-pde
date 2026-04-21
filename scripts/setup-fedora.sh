@@ -2,7 +2,7 @@
 
 # setup-fedora.sh: Standalone script to prepare a fresh Fedora instance.
 # run as root, or sudo
-# Usage: curl -sSL <url> | bash -s -- --username <name>
+# Usage: curl -sSL <url> | bash
 
 set -e
 
@@ -12,23 +12,16 @@ error() { echo "$(_color_wrap 31 "[ERROR]") $*" >&2; }
 success() { echo "$(_color_wrap 32 "[SUCCESS]") $*"; }
 info() { echo "$(_color_wrap 34 "[INFO]") $*"; }
 
-# --- Defaults ---
-USERNAME="ribyn"
+# --- Root Check ---
+if [[ "$EUID" -ne 0 ]]; then
+	error "This script must be run as root."
+	exit 1
+fi
 
-# --- Argument Parsing ---
-while [[ "$#" -gt 0 ]]; do
-	case $1 in
-	--username)
-		USERNAME="$2"
-		shift
-		;;
-	*)
-		error "Unknown parameter: $1"
-		exit 1
-		;;
-	esac
-	shift
-done
+# --- User Input ---
+echo -n "Enter username to create [ribyn]: "
+read -r USERNAME </dev/tty
+USERNAME=${USERNAME:-ribyn}
 
 info "Starting Fedora setup for user: $USERNAME"
 
@@ -52,9 +45,8 @@ done
 # Using <<'EOF' (with quotes) prevents local variable expansion.
 info "Cloning ribyns-pde..."
 su - "$USERNAME" <<'EOF'
-	# functions like info are now lost in new shell
 	git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
-	"~/ribyns-pde/scripts/install.sh"
+	"$HOME/ribyns-pde/scripts/install.sh"
 EOF
 
 success "Fedora setup complete."
