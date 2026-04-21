@@ -5,12 +5,6 @@
 
 set -e
 
-# --- Inlined Logging ---
-_color_wrap() { echo -e "\033[$1m$2\033[0m"; }
-error() { echo "$(_color_wrap 31 "[ERROR]") $*" >&2; }
-success() { echo "$(_color_wrap 32 "[SUCCESS]") $*"; }
-info() { echo "$(_color_wrap 34 "[INFO]") $*"; }
-
 # --- Sudo Helper ---
 run_as_root() {
 	if [[ "$EUID" -ne 0 ]]; then
@@ -38,13 +32,13 @@ arch)
 	INSTALL_CMD="pacman -S --needed --noconfirm"
 	;;
 *)
-	error "Unsupported distribution: $DISTRO"
+	echo "Unsupported distribution: $DISTRO"
 	exit 1
 	;;
 esac
 
 # --- Base System ---
-info "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
+echo "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
 run_as_root $INSTALL_CMD sudo git bc
 
 # --- User Configuration ---
@@ -55,7 +49,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 	read -r USERNAME </dev/tty
 	USERNAME=${USERNAME:-ribyn}
 
-	info "Creating user '$USERNAME'..."
+	echo "Creating user '$USERNAME'..."
 
 	groupadd sudo
 	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
@@ -67,25 +61,16 @@ EOF
 	chmod 440 /etc/sudoers.d/admin-groups
 
 	run_as_root useradd -m -G sudo -s /usr/bin/bash "$USERNAME"
-	success "User '$USERNAME' created."
+	echo "User '$USERNAME' created."
 
-	info "Setting password for '$USERNAME'..."
+	echo "Setting password for '$USERNAME'..."
 	until run_as_root passwd "$USERNAME" </dev/tty; do
-		error "Password update failed. Please try again."
+		echo "Password update failed. Please try again."
 	done
 
-	info "Cloning and installing as $USERNAME..."
-	run_as_root su - "$USERNAME" <<'EOF'
-		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
-EOF
-	success "Setup complete."
-	info "You can now log in as '$USERNAME' by running: su - $USERNAME"
+	echo "Setup complete."
+	echo "You can now log in as '$USERNAME' by running: su - $USERNAME"
 else
 	USERNAME=$(whoami)
-	info "Proceeding with current user '$USERNAME'..."
-	if [[ ! -d "$HOME/ribyns-pde" ]]; then
-		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
-	fi
-	"$HOME/ribyns-pde/scripts/install.sh"
-	success "Setup complete for '$USERNAME'."
+	echo "Setup complete for '$USERNAME'."
 fi
