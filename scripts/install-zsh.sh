@@ -12,7 +12,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 else
 	verbose "skipped Oh My Zsh install (already installed)"
 fi
-cp "$PDE/.zshrc" "$HOME/.zshrc"
 
 # Default ZSH_CUSTOM if not set
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -23,3 +22,6 @@ clone_repo --depth 1 https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM/plug
 clone_repo --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 clone_repo --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 clone_repo --depth 1 https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins/zsh-completions"
+
+# copy it last, in hope ohmyzsh doesnt override it
+cp "$PDE/.zshrc" "$HOME/.zshrc"
