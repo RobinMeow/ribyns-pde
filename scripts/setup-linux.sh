@@ -45,7 +45,7 @@ esac
 
 # --- Base System ---
 info "Detected $DISTRO. Installing base packages (zsh, vim, sudo, git, bc)..."
-run_as_root $INSTALL_CMD zsh vim sudo git bc
+run_as_root "$INSTALL_CMD" zsh vim sudo git bc
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
@@ -66,6 +66,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	info "Cloning and installing as $USERNAME..."
 	run_as_root su - "$USERNAME" <<'EOF'
+	  export PDE="$HOME/ribyns-pde"
 		git clone --depth 1 -b setup-linux https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 		"$HOME/ribyns-pde/scripts/install-zsh.sh"
 		"$HOME/ribyns-pde/scripts/install-p10k.sh"
