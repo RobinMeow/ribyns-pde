@@ -5,7 +5,7 @@ To prepare a Fedora instance, run the following command. The script installs bas
 ## Quick Start
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/main/scripts/setup-fedora.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/main/scripts/setup-fedora.sh | bash
 ```
 
 The script will:
