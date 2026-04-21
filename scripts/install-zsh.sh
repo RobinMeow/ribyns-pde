@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: reanable with conditiona fedora
-# sudo pacman -S --needed --noconfirm zsh curl git
-
 source "$PDE/scripts/utils.sh"
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
