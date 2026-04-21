@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 source "$PDE/scripts/utils.sh"
 source "$PDE/scripts/stopwatch.sh"
 
@@ -62,6 +61,7 @@ info "Installing kde"
 if [[ "$RUN_PACMAN" == true ]]; then
 	info "Installing core pacman packages"
 	"$PDE/scripts/pacman-core.sh"
+	"$PDE/scripts/pacman-webdev.sh"
 fi
 
 stop "$sw"
