@@ -1,4 +1,4 @@
-# Fedora Setup
+# Linux Setup (Fedora/Arch)
 
 To prepare a Fedora or Arch Linux instance, run the following command. The script installs base packages (zsh, vim, sudo, git), optionally creates a new user, clones the repository, and starts the installation.
 

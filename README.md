@@ -2,6 +2,10 @@
 
 My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other things.
 
+## Quick Setup (Fedora/Arch)
+
+If you have a fresh installation, you can use the [setup-linux.sh](scripts/setup-linux.sh) script to prepare your environment. See [setup-linux.md](setup-linux.md) for details.
+
 ## Arch
 
 `git clone git@github.com:RobinMeow/ribyns-pde.git $HOME/ribyns-pde`
@@ -44,4 +48,5 @@ but Telescope and maybe other features using the Linux ecosystem do not work.
 the `scripts` directory is added to the `$PATH`,
 and therefore can be invoked using their filename.
 e.g. `install.sh --pacman`
+
 
