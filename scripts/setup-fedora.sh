@@ -44,3 +44,9 @@ success "User '$USERNAME' created."
 
 success "Fedora setup complete. You can now log in as '$USERNAME' by running: su - $USERNAME"
 info "Please set a password for '$USERNAME' by running: passwd $USERNAME"
+
+passwd "$USERNAME"
+
+# TODO: how do I halt script execution until the user typed it his password twice? the user doesnt even have a chance to type it in, its like this script is messing it up
+
+su - "$USERNAME"
