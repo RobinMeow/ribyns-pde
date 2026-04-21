@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# setup-fedora.sh: Standalone script to prepare a Fedora instance.
+# setup-pde.sh: Standalone script to prepare a Linux instance (Fedora/Arch).
 # Usage: curl -sSL <url> | bash
 
 set -e
@@ -20,9 +20,32 @@ run_as_root() {
 	fi
 }
 
+# --- Distro Detection ---
+if [ -f /etc/os-release ]; then
+	. /etc/os-release
+	DISTRO=$ID
+else
+	DISTRO="unknown"
+fi
+
+case "$DISTRO" in
+fedora)
+	PKG_MANAGER="dnf"
+	INSTALL_CMD="dnf install -y"
+	;;
+arch)
+	PKG_MANAGER="pacman"
+	INSTALL_CMD="pacman -S --needed --noconfirm"
+	;;
+*)
+	error "Unsupported distribution: $DISTRO"
+	exit 1
+	;;
+esac
+
 # --- Base System ---
-info "Installing base packages (zsh, vim, sudo, git)..."
-run_as_root dnf install -y zsh vim sudo git
+info "Detected $DISTRO. Installing base packages (zsh, vim, sudo, git)..."
+run_as_root $INSTALL_CMD zsh vim sudo git
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
@@ -46,7 +69,7 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 		"$HOME/ribyns-pde/scripts/install.sh"
 EOF
-	success "Fedora setup complete."
+	success "Setup complete."
 	info "You can now log in as '$USERNAME' by running: su - $USERNAME"
 else
 	USERNAME=$(whoami)
@@ -55,5 +78,5 @@ else
 		git clone --depth 1 https://github.com/RobinMeow/ribyns-pde "$HOME/ribyns-pde"
 	fi
 	"$HOME/ribyns-pde/scripts/install.sh"
-	success "Fedora setup complete for '$USERNAME'."
+	success "Setup complete for '$USERNAME'."
 fi
