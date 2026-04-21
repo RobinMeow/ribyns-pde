@@ -4,7 +4,6 @@ sudo pacman -S --needed --noconfirm zsh curl git
 
 source "$PDE/scripts/utils.sh"
 
-cp "$PDE/.zshrc" "$HOME/.zshrc"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	info "Installing Oh My Zsh"
 	# Prevent auto-launching zsh after install
@@ -13,6 +12,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 else
 	verbose "skipped Oh My Zsh install (already installed)"
 fi
+cp "$PDE/.zshrc" "$HOME/.zshrc"
 
 # Default ZSH_CUSTOM if not set
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
