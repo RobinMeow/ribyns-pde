@@ -25,5 +25,6 @@ your user needs to be a sudoer
 1. `pacman -Syu --noconfirm --needed`
 2. `git clone --depth 1 https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde`
 3. `cd $HOME/ribyns-pde`
-4. `scripts/install.sh --pacman`
-5. `zsh`
+4. `export PDE=$HOME/ribyns-pde`
+5. `scripts/install.sh --pacman`
+6. `zsh`
