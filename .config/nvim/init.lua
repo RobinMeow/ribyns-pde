@@ -58,7 +58,7 @@ vim.opt.listchars = {
   tab = "· ", -- first char is overriden by ident blanklint plugin if applicable
   trail = "·",
   nbsp = "␣",
-  eol = "↵", -- ↵ ↲ ↲
+  eol = nil, -- used this one for a while '↵' other: ↵ ↲ ↲
 }
 
 -- Preview substitutions live, as you type! Whats a substitution: s%/replaceTxt/WithMe/g
@@ -166,7 +166,11 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
     },
     config = function()
-      require("easy-dotnet").setup()
+      require("easy-dotnet").setup({
+        lsp = {
+          auto_refresh_codelens = false,
+        },
+      })
     end,
   },
   {
