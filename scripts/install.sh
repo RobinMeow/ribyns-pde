@@ -61,8 +61,8 @@ info "Installing kde"
 "$PDE/scripts/install-kde.sh"
 
 if [[ "$RUN_PACMAN" == true ]]; then
-	info "Installing pacman packages"
-	"$PDE/scripts/pacman.sh"
+	info "Installing core pacman packages"
+	"$PDE/scripts/pacman-core.sh"
 fi
 
 stop "$sw"
