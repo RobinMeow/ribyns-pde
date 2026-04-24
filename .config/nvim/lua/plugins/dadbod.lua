@@ -1,5 +1,5 @@
 -- db as in dadbod or database
-vim.keymap.set("n", "<leader>db", ":DBUI<CR>", { desc = "[D]ad[B]od UI :DBUI" })
+vim.keymap.set("n", "<leader>db", ":tabnew<CR>:DBUI<CR>", { desc = "[D]ad[B]od UI :DBUI" })
 return {
   {
     "kristijanhusak/vim-dadbod-ui",
