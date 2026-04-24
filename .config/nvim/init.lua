@@ -496,10 +496,12 @@ local function get_kanagawa_variant()
   local min = tonumber(os.date("%M"))
   local currentTime = hour + (min / 60)
 
-  -- 10:00 AM to 5:30 PM (17.5 in decimal)
-  if currentTime >= 10 and currentTime < 17.5 then
+  -- 9:00 AM to 8:00 PM (20.0 in decimal)
+  if currentTime >= 9 and currentTime < 19 then
+    Snacks.notifier.notify("Colorscheme: Kanagawa-wave (Day)", "info")
     return "kanagawa-wave"
   else
+    Snacks.notifier.notify("Colorscheme: Kanagawa-dragon (Day)", "info")
     return "kanagawa-dragon"
   end
 end
