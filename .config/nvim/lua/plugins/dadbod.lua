@@ -1,3 +1,5 @@
+-- db as in dadbod or database
+vim.keymap.set("n", "<leader>db", ":DBUI<CR>", { desc = "[D]ad[B]od UI :DBUI" })
 return {
   {
     "kristijanhusak/vim-dadbod-ui",
@@ -51,6 +53,7 @@ return {
       end
 
       local ok = pcall(load_domain)
+
       if not ok then
         vim.notify("failed to load domains", vim.log.levels.ERROR, { title = "Dadbod Loader" })
       end
