@@ -27,7 +27,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	#   RUNZSH                 - 'no' means the installer will not run zsh after the install (default: yes)
 	#   KEEP_ZSHRC             - 'yes' means the installer will not replace an existing .zshrc (default: no)
 	#   OVERWRITE_CONFIRMATION - 'no' means the installer will not ask for confirmation to overwrite the existing .zshrc (default: yes)
-	RUNZSH=no KEEP_ZSHRC=yes CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	OVERWRITE_CONFIRMATION=no RUNZSH=no KEEP_ZSHRC=no CHSH=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	success "Oh My Zsh installed"
 else
 	verbose "skipped Oh My Zsh install (already installed)"
