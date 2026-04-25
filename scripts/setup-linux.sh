@@ -74,7 +74,10 @@ git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde
 export PDE="$HOME/ribyns-pde"
 "$PDE/scripts/install.sh" --full-install
 EOF
-	exec su --login "$USERNAME"
+	echo "you now now login in using: su --login $USERNAME"
 else
+	git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde
+	export PDE="$HOME/ribyns-pde"
+	"$PDE/scripts/install.sh" --full-install
 	echo "Setup complete for '$(whoami)'."
 fi
