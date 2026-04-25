@@ -38,24 +38,18 @@ for arg in "$@"; do
 	elif [[ "$arg" == "--gadgets" ]]; then
 		info "Installing gadgets"
 		"$PDE/scripts/pm-gadgets.sh"
-	fi
-done
-
-for arg in "$@"; do
-	# NOTE: disabled since I currently dont need them synced anywhere
-	if [[ "$arg" == "--desktop" ]]; then
+	elif [[ "$arg" == "--kde" ]]; then
+		info "Installing kde"
+		"$PDE/scripts/install-kde.sh"
+	elif [[ "$arg" == "--hypr" ]]; then
 		info "Installing rofi"
 		"$PDE/scripts/install-rofi.sh"
 
 		info "Installing waybar"
 		"$PDE/scripts/install-waybar.sh"
 
-		# INFO: i can split up hypr and kde in future
 		info "Installing hypr"
 		"$PDE/scripts/install-hypr.sh"
-
-		info "Installing kde"
-		"$PDE/scripts/install-kde.sh"
 	fi
 done
 

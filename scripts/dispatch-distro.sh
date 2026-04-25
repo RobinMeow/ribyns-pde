@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Strategy pattern for package managers based on distribution detection
+# this is kinda of a guard based strategy pattern
+# or kinda of a single dispatch pattern
 
 declare OSD_DISTRIBUTION=""
 source "$PDE/scripts/os-detect.sh"
