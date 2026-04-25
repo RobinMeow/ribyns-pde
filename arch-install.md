@@ -213,3 +213,6 @@ do so by `sudo vim /etc/tlp.conf` and search for `START_CHARGE` and `STOP_CHARGE
 run `gen-ssh-key.sh <email>`
 
 > will generate an rsa key and add github.com to known hosts
+
+run this to change your default shell
+`chsh -s /bin/zsh`
