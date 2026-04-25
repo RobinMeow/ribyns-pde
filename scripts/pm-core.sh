@@ -13,7 +13,6 @@ if [[ -d "/home/linuxbrew/" ]]; then
 	echo "skipping brew installed (already installed)"
 else
 	"$PDE/scripts/install-homebrew.sh"
-	brew install gemini-cli
 fi
 
 run_on_arch <<'EOF'
@@ -93,6 +92,7 @@ run_on_fedora <<'EOF'
 		chafa \
 		fd-find
 
+	brew install gemini-cli
 EOF
 
 tldr --update
