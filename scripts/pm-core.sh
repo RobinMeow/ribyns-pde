@@ -8,6 +8,14 @@ RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 
 source "$PDE/scripts/run_on_distro.sh"
 
+# gemini-cli is not available in the standard repo
+if [[ -d "/home/linuxbrew/" ]]; then
+	echo "skipping brew installed (already installed)"
+else
+	"$PDE/scripts/install-homebrew.sh"
+	brew install gemini-cli
+fi
+
 run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
 		base-devel \
@@ -56,9 +64,7 @@ run_on_fedora <<'EOF'
 		curl \
 		zsh \
 		vi \
-		vim
-
-	sudo dnf install -y \
+		vim \
 		tree-sitter-cli \
 		unzip \
 		xclip \
@@ -87,13 +93,6 @@ run_on_fedora <<'EOF'
 		chafa \
 		fd-find
 
-		# gemini-cli is not available in the standard repo
-  if [[ -d "/home/linuxbrew/" ]]; then
-		echo "skipping brew installed (already installed)"
-	else
-	  "$PDE/scripts/install-homebrew.sh"
-		brew install gemini-cli
-  fi
 EOF
 
 tldr --update
