@@ -22,18 +22,17 @@ fi
 
 verbose "Using branch: $BRANCH"
 
-# TODO: use pm-install.sh
-if [ -f /etc/arch-release ]; then
+source "$PDE/scripts/dispatch-distro.sh"
+
+dispatch_arch <<'EOF'
 	verbose "Detected Arch Linux. Installing dependencies..."
 	sudo pacman -S --noconfirm --needed base-devel cmake unzip ninja curl
-elif [ -f /etc/fedora-release ]; then
+EOF
+
+dispatch_fedora <<'EOF'
 	verbose "Detected Fedora. Installing dependencies..."
 	sudo dnf -y install ninja-build cmake gcc make unzip gettext curl
-else
-	warn "Unsupported distribution for automatic prerequisite installation."
-	warn "Please ensure build tools are installed manually."
-	exit 1
-fi
+EOF
 
 function build_nvim() {
 	verbose "Starting build process..."

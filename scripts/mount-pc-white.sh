@@ -1,4 +1,11 @@
-sudo pacman -S --needed --noconfirm ntfs-3g
+#!/usr/bin/env bash
+source "$PDE/scripts/utils.sh"
+assert_pde_vars
+
+source "$PDE/scripts/dispatch-distro.sh"
+
+dispatch_arch sudo pacman -S --needed --noconfirm ntfs-3g
+dispatch_fedora sudo dnf install -y ntfs-3g
 
 sudo mkdir -p /mnt/c -- main windows
 sudo mkdir -p /mnt/d -- arbitrary installs

@@ -3,17 +3,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-case "$OSD_DISTRIBUTION" in
-arch)
-	sudo pacman -S --needed --noconfirm zsh
-	;;
-fedora)
-	sudo dnf install -y zsh
-	;;
-*)
-	warn "Distro '$OSD_DISTRIBUTION' not supported for installing zsh"
-	;;
-esac
+source "$PDE/scripts/dispatch-distro.sh"
+
+dispatch_arch sudo pacman -S --needed --noconfirm zsh
+dispatch_fedora sudo dnf install -y zsh
 
 source "$PDE/scripts/clone_repo.sh"
 

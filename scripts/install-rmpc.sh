@@ -3,7 +3,7 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-# https://rmpc.mierak.dev/installation/
-# https://mpd.readthedocs.io/en/stable/user.html
+source "$PDE/scripts/dispatch-distro.sh"
 
-sudo pacman -S --needed --noconfirm rmpc mpd
+dispatch_arch sudo pacman -S --needed --noconfirm rmpc mpd
+dispatch_fedora sudo dnf install -y rmpc mpd

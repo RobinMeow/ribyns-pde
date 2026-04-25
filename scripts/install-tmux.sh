@@ -2,17 +2,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-case "$OSD_DISTRIBUTION" in
-arch)
-	sudo pacman -S --needed --noconfirm tmux
-	;;
-fedora)
-	sudo dnf install -y tmux
-	;;
-*)
-	warn "Distro '$OSD_DISTRIBUTION' not supported for installing tmux"
-	;;
-esac
+source "$PDE/scripts/dispatch-distro.sh"
+
+dispatch_arch sudo pacman -S --needed --noconfirm tmux
+dispatch_fedora sudo dnf install -y tmux
 
 # TMUX Plugins
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"
