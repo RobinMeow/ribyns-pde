@@ -58,34 +58,34 @@ run_on_fedora <<'EOF'
 		vi \
 		vim
 
-	# sudo dnf install -y \
-	# 	tree-sitter-cli \
-	# 	unzip \
-	# 	xclip \
-	# 	wl-clipboard \
-	# 	openssh \
-	# 	navi \
-	# 	fastfetch \
-	# 	bc \
-	# 	ncdu \
-	# 	cargo \
-	# 	man-db \
-	# 	man-pages \
-	# 	tealdeer \
-	# 	vlc \
-	# 	lnav \
-	# 	tree \
-	# 	btop \
-	# 	translate-shell \
-	# 	tokei \
-	# 	flameshot \
-	# 	ffmpeg \
-	# 	7zip \
-	# 	ripgrep \
-	# 	glow \
-	# 	mpv \
-	# 	chafa \
-	# 	fd-find
+	sudo dnf install -y \
+		tree-sitter-cli \
+		unzip \
+		xclip \
+		wl-clipboard \
+		openssh \
+		navi \
+		fastfetch \
+		bc \
+		ncdu \
+		cargo \
+		man-db \
+		man-pages \
+		tealdeer \
+		vlc \
+		lnav \
+		tree \
+		btop \
+		translate-shell \
+		tokei \
+		flameshot \
+		ffmpeg \
+		7zip \
+		ripgrep \
+		glow \
+		mpv \
+		chafa \
+		fd-find
 
 		# gemini-cli is not available in the standard repo
   if [[ -d "/home/linuxbrew/" ]]; then
