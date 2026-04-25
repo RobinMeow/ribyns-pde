@@ -29,19 +29,24 @@ info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
 for arg in "$@"; do
-	if [[ "$arg" == "--pm" ]]; then
+	full_install=@("$arg" == "--full-install")
+	if [[ "$arg" == "--pm" || $full_install ]]; then
 		info "Installing core"
 		"$PDE/scripts/pm-core.sh"
-	elif [[ "$arg" == "--webdev" ]]; then
+	fi
+	if [[ "$arg" == "--webdev" || $full_install ]]; then
 		info "Installing gadgets"
 		"$PDE/scripts/pm-gadgets.sh"
-	elif [[ "$arg" == "--gadgets" ]]; then
+	fi
+	if [[ "$arg" == "--gadgets" || $full_install ]]; then
 		info "Installing gadgets"
 		"$PDE/scripts/pm-gadgets.sh"
-	elif [[ "$arg" == "--kde" ]]; then
+	fi
+	if [[ "$arg" == "--kde" || $full_install ]]; then
 		info "Installing kde"
 		"$PDE/scripts/install-kde.sh"
-	elif [[ "$arg" == "--hypr" ]]; then
+	fi
+	if [[ "$arg" == "--hypr" || $full_install ]]; then
 		info "Installing rofi"
 		"$PDE/scripts/install-rofi.sh"
 
