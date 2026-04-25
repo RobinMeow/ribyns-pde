@@ -77,7 +77,7 @@ cd "$PDE"
 "$PDE/scripts/install.sh --full-install"
 zsh
 EOF
-	echo "Setup complete."
+	exec su -l "$USERNAME" -c "echo linux setup complete"
 else
 	echo "Setup complete for '$(whoami)'."
 fi
