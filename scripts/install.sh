@@ -28,8 +28,14 @@ info "Installing tmux"
 info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
+full_install=false
 for arg in "$@"; do
-	full_install=@("$arg" == "--full-install")
+	if [[ "$1" == "--full-install" ]]; then
+		full_install=true
+	fi
+done
+
+for arg in "$@"; do
 	if [[ "$arg" == "--pm" || $full_install ]]; then
 		info "Installing core"
 		"$PDE/scripts/pm-core.sh"
