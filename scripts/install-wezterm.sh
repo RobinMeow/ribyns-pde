@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
+
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm wezterm
-dispatch_fedora sudo dnf install -y wezterm
+run_on_arch sudo pacman -S --needed --noconfirm wezterm
+run_on_fedora sudo dnf install -y wezterm
 
 WEZTERM_CONFIG_DIR="$HOME/.config/wezterm"
 WEZTERM_LUA_DIR="$HOME"

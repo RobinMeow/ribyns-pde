@@ -6,9 +6,9 @@ assert_pde_vars
 
 RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch <<'EOF'
+run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
 		base-devel \
 		gawk \
@@ -48,7 +48,7 @@ dispatch_arch <<'EOF'
 		chafa \
 		fd
 EOF
-dispatch_fedora <<'EOF'
+run_on_fedora <<'EOF'
 	sudo dnf install -y \
 		@development-tools \
 		git \

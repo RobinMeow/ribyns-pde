@@ -2,7 +2,7 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
 NVIM_BUILD_STABLE="false"
 for arg in "$@"; do
@@ -20,13 +20,13 @@ function build_nvim_from_source() {
 	fi
 }
 
-dispatch_arch <<'EOF'
+run_on_arch <<'EOF'
 	# sudo pacman -S --needed --noconfirm nvim
 	sudo pacman -S --needed --noconfirm tree-sitter-cli
 	build_nvim_from_source
 EOF
 
-dispatch_fedora <<'EOF'
+run_on_fedora <<'EOF'
 	# sudo dnf install -y neovim
 	sudo dnf install -y tree-sitter-cli
 	build_nvim_from_source

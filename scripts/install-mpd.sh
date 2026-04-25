@@ -2,10 +2,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm mpd rmpc
-dispatch_fedora sudo dnf install -y mpd rmpc
+run_on_arch sudo pacman -S --needed --noconfirm mpd rmpc
+run_on_fedora sudo dnf install -y mpd rmpc
 
 mkdir -p "$HOME/.config/mpd/playlists"
 cp -r "$PDE/.config/mpd/"* "$HOME/.config/mpd/"

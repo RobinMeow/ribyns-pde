@@ -2,10 +2,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm tmux
-dispatch_fedora sudo dnf install -y tmux
+run_on_arch sudo pacman -S --needed --noconfirm tmux
+run_on_fedora sudo dnf install -y tmux
 
 # TMUX Plugins
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"

@@ -2,10 +2,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm rofi
-dispatch_fedora sudo dnf install -y rofi
+run_on_arch sudo pacman -S --needed --noconfirm rofi
+run_on_fedora sudo dnf install -y rofi
 
 mkdir -p "$HOME/.config/rofi"
 cp -r "$PDE/.config/rofi/"* "$HOME/.config/rofi/"

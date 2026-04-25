@@ -3,10 +3,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm zsh
-dispatch_fedora sudo dnf install -y zsh
+run_on_arch sudo pacman -S --needed --noconfirm zsh
+run_on_fedora sudo dnf install -y zsh
 
 source "$PDE/scripts/clone_repo.sh"
 

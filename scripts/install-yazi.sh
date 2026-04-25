@@ -2,14 +2,14 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch <<'EOF'
+run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
 		yazi chafa ffmpeg 7zip jq poppler fd ripgrep fzf resvg imagemagick glow extra/mediainfo feh file mpv
 EOF
 
-dispatch_fedora <<'EOF'
+run_on_fedora <<'EOF'
 	sudo dnf install -y \
 		yazi chafa ffmpeg 7zip jq poppler fd-find ripgrep fzf resvg ImageMagick glow mediainfo feh file mpv
 EOF

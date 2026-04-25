@@ -17,7 +17,7 @@ if [[ ! " ${SUPPORTED_DISTROS[*]} " =~ " ${DISTRO} " ]]; then
 	warn "Distro '$OSD_DISTRIBUTION' not supported for installing nvim"
 fi
 
-function dispatch_arch() {
+function run_on_arch() {
 	if [[ "$DISTRO" == "arch" ]]; then
 		if [[ $# -gt 0 ]]; then
 			"$@"
@@ -29,7 +29,7 @@ function dispatch_arch() {
 	fi
 }
 
-function dispatch_fedora() {
+function run_on_fedora() {
 	if [[ "$DISTRO" == "fedora" ]]; then
 		if [[ $# -gt 0 ]]; then
 			"$@"
@@ -42,19 +42,19 @@ function dispatch_fedora() {
 }
 
 # Usage
-# source "$PDE/scripts/dispatch-distro.sh"
+# source "$PDE/scripts/run_on_distro.sh"
 #
 # # 1. Direct command usage
-# dispatch_arch echo "Hello from Arch (Direct)"
-# dispatch_fedora echo "Hello from Fedora (Direct)"
+# run_on_arch echo "Hello from Arch (Direct)"
+# run_on_fedora echo "Hello from Fedora (Direct)"
 #
 # # 2. Heredoc (Inline Block) usage
-# dispatch_arch <<'EOF'
+# run_on_arch <<'EOF'
 #   echo "This is a block running on Arch"
 #   echo "Current directory: $(pwd)"
 # EOF
 #
-# dispatch_fedora <<'EOF'
+# run_on_fedora <<'EOF'
 #   echo "This is a block running on Fedora"
 #   echo "Current directory: $(pwd)"
 # EOF

@@ -22,14 +22,14 @@ fi
 
 verbose "Using branch: $BRANCH"
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch <<'EOF'
+run_on_arch <<'EOF'
 	verbose "Detected Arch Linux. Installing dependencies..."
 	sudo pacman -S --noconfirm --needed base-devel cmake unzip ninja curl
 EOF
 
-dispatch_fedora <<'EOF'
+run_on_fedora <<'EOF'
 	verbose "Detected Fedora. Installing dependencies..."
 	sudo dnf -y install ninja-build cmake gcc make unzip gettext curl
 EOF

@@ -2,10 +2,10 @@
 source "$PDE/scripts/utils.sh"
 assert_pde_vars
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
-dispatch_arch sudo pacman -S --needed --noconfirm waybar
-dispatch_fedora sudo dnf install -y waybar
+run_on_arch sudo pacman -S --needed --noconfirm waybar
+run_on_fedora sudo dnf install -y waybar
 
 mkdir -p "$HOME/.config/waybar"
 cp -r "$PDE/.config/waybar/"* "$HOME/.config/waybar/"

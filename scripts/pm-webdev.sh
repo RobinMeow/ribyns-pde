@@ -3,11 +3,11 @@ set -euo pipefail
 
 source "$PDE/scripts/utils.sh"
 
-source "$PDE/scripts/dispatch-distro.sh"
+source "$PDE/scripts/run_on_distro.sh"
 
 RIBYNS_PDE_LOG_INFO=true info "Installing webdev packages..."
 
-dispatch_arch <<'EOF'
+run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
 		nodejs \
 		npm \
@@ -23,7 +23,7 @@ dispatch_arch <<'EOF'
 		jq
 EOF
 
-dispatch_fedora <<'EOF'
+run_on_fedora <<'EOF'
 	sudo dnf install -y \
 		nodejs \
 		npm \
