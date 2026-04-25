@@ -68,7 +68,6 @@ EOF
 		echo "Password update failed. Please try again."
 	done
 
-	# TODO: extend with install.sh --core --webdev --gadgets
 	# TODO: allow specification of branch when using curl to execute this setup
 	su - "$USERNAME" <<'EOF'
 git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde
