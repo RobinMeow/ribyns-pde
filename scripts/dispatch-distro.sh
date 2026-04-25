@@ -2,8 +2,7 @@
 
 # Strategy pattern for package managers based on distribution detection
 
-declare OSD_DISTRIBUTION
-# shellcheck source=scripts/os-detect.sh
+declare OSD_DISTRIBUTION=""
 source "$PDE/scripts/os-detect.sh"
 detect_distribution
 

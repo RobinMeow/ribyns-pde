@@ -6,8 +6,9 @@ assert_pde_vars
 
 RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 
-case "$OSD_DISTRIBUTION" in
-arch)
+source "$PDE/scripts/dispatch-distro.sh"
+
+dispatch_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
 		base-devel \
 		gawk \
@@ -46,8 +47,8 @@ arch)
 		mpv \
 		chafa \
 		fd
-	;;
-fedora)
+EOF
+dispatch_fedora <<'EOF'
 	sudo dnf install -y \
 		@development-tools \
 		git \
@@ -84,11 +85,7 @@ fedora)
 		mpv \
 		chafa \
 		fd-find
-	;;
-*)
-	warn "Distro '$OSD_DISTRIBUTION' not supported for installing core packages"
-	;;
-esac
+EOF
 
 tldr --update
 
