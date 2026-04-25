@@ -96,6 +96,10 @@ export PATH="$HOME/.dotnet:$PATH"
 # needs to pre-prended to take precedence over other installs
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+if [[ -d "/home/linuxbrew/" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
+
 # nvm node version manager
 nvm() {
   unfunction nvm
