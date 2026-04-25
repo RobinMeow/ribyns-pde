@@ -9,6 +9,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/maste
 SKIP_INSTALL=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
 ```
 
+or manually:
+```bash
+git clone https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde
+$PDE/scripts/install.sh --full-install
+```
+
 The script will:
 1. Detect your distribution (Fedora or Arch).
 2. Ask if you want to create a new user.
