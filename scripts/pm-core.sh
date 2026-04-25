@@ -56,35 +56,44 @@ run_on_fedora <<'EOF'
 		curl \
 		zsh \
 		vi \
-		vim \
-		neovim \
-		tree-sitter-cli \
-		unzip \
-		xclip \
-		wl-clipboard \
-		openssh \
-		navi \
-		fastfetch \
-		bc \
-		ncdu \
-		cargo \
-		man-db \
-		man-pages \
-		tealdeer \
-		vlc \
-		lnav \
-		tree \
-		btop \
-		translate-shell \
-		tokei \
-		flameshot \
-		ffmpeg \
-		7zip \
-		ripgrep \
-		glow \
-		mpv \
-		chafa \
-		fd-find
+		vim
+
+	# sudo dnf install -y \
+	# 	tree-sitter-cli \
+	# 	unzip \
+	# 	xclip \
+	# 	wl-clipboard \
+	# 	openssh \
+	# 	navi \
+	# 	fastfetch \
+	# 	bc \
+	# 	ncdu \
+	# 	cargo \
+	# 	man-db \
+	# 	man-pages \
+	# 	tealdeer \
+	# 	vlc \
+	# 	lnav \
+	# 	tree \
+	# 	btop \
+	# 	translate-shell \
+	# 	tokei \
+	# 	flameshot \
+	# 	ffmpeg \
+	# 	7zip \
+	# 	ripgrep \
+	# 	glow \
+	# 	mpv \
+	# 	chafa \
+	# 	fd-find
+
+		# gemini-cli is not available in the standard repo
+  if [[ -d "/home/linuxbrew/" ]]; then
+		echo "skipping brew installed (already installed)"
+	else
+	  "$PDE/scripts/install-homebrew.sh"
+		brew install gemini-cli
+  fi
 EOF
 
 tldr --update
