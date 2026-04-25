@@ -46,7 +46,6 @@ run_on_arch <<'EOF'
 		translate-shell \
 		tokei \
 		flameshot \
-		gemini-cli \
 		ffmpeg \
 		7zip \
 		ripgrep \
@@ -91,9 +90,10 @@ run_on_fedora <<'EOF'
 		mpv \
 		chafa \
 		fd-find
-
-	brew install gemini-cli
 EOF
+
+# NOTE: gemini-cli is available in arch but might as well have things consistent
+brew install gemini-cli
 
 tldr --update
 
