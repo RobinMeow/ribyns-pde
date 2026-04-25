@@ -8,8 +8,10 @@ return {
       --   clojure = { "clj-kondo" },
       dockerfile = { "hadolint" },
       yaml = { "yamllint" },
-      bash = { "shellcheck", "shellharden" },
-      zsh = { "shellcheck", "shellharden" },
+      -- NOTE: not using shellharden anymore becuase it
+      -- crashed annoyingly on .zshrc file
+      bash = { "shellcheck" },
+      zsh = { "shellcheck" },
       --   inko = { "inko" },
       --   janet = { "janet" },
       --   json = { "jsonlint" },
