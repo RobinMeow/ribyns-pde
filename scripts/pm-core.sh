@@ -8,12 +8,7 @@ RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
 
 source "$PDE/scripts/run_on_distro.sh"
 
-# gemini-cli is not available in the standard repo
-if [[ -d "/home/linuxbrew/" ]]; then
-	echo "skipping brew installed (already installed)"
-else
-	"$PDE/scripts/install-homebrew.sh"
-fi
+"$PDE/scripts/ensure-homebrew-installed.sh"
 
 run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
