@@ -2,63 +2,65 @@
 
 set -e
 
+source "$PDE/scripts/utils.sh"
 REPO_DEST="$HOME/neovim"
 
 STABLE=false
+UPDATE=false
 for arg in "$@"; do
 	if [[ "$arg" == "--stable" ]]; then
 		STABLE=true
+	elif [[ "$arg" == "--update" ]]; then
+		UPDATE=true
 	fi
 done
 
+BRANCH="master"
 if $STABLE; then
-	echo "Using branch: stable"
-else
-	echo "Using branch: master"
+	BRANCH="stable"
 fi
 
+verbose "Using branch: $BRANCH"
+
+# TODO: use pm-install.sh
 if [ -f /etc/arch-release ]; then
-	echo "Detected Arch Linux. Installing dependencies..."
+	verbose "Detected Arch Linux. Installing dependencies..."
 	sudo pacman -S --noconfirm --needed base-devel cmake unzip ninja curl
 elif [ -f /etc/fedora-release ]; then
-	echo "Detected Fedora. Installing dependencies..."
+	verbose "Detected Fedora. Installing dependencies..."
 	sudo dnf -y install ninja-build cmake gcc make unzip gettext curl
 else
-	echo "Unsupported distribution for automatic prerequisite installation."
-	echo "Please ensure build tools are installed manually."
+	warn "Unsupported distribution for automatic prerequisite installation."
+	warn "Please ensure build tools are installed manually."
 	exit 1
 fi
 
+function build_nvim() {
+	verbose "Starting build process..."
+	make CMAKE_BUILD_TYPE=RelWithDebInfo
+
+	verbose "Installing Neovim..."
+	sudo make install
+}
+
 if [ -d "$REPO_DEST" ]; then
-	echo "Directory exists. Updating repository..."
 	cd "$REPO_DEST" || exit 1
 
-	if $STABLE; then
-		git checkout stable
-		git pull origin stable
+	if $UPDATE; then
+		verbose "Updating repository..."
+		git fetch --depth 1 origin $BRANCH
+		git checkout "$BRANCH"
 	else
-		git checkout master
-		git pull origin master
+		verbose "Directory exists. Skipping update (use --update to pull latest changes)."
+		git checkout "$BRANCH"
 	fi
-
 else
-	echo "Cloning Neovim repository..."
+	verbose "Cloning Neovim repository..."
 	git clone --depth 1 --no-single-branch "https://github.com/neovim/neovim" "$REPO_DEST"
-
 	cd "$REPO_DEST" || exit 1
-
-	if $STABLE; then
-		git checkout stable
-	else
-		git checkout master
-	fi
+	git checkout "$BRANCH"
 fi
 
-echo "Starting build process..."
-make clean
-make CMAKE_BUILD_TYPE=RelWithDebInfo
+build_nvim
 
-echo "Installing Neovim..."
-sudo make install
-
-echo "Neovim installation complete."
+success "Neovim installation complete."
