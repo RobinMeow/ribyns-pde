@@ -42,7 +42,7 @@ function dispatch_fedora() {
 }
 
 # Usage
-# source "$PDE/scripts/pm-install.sh"
+# source "$PDE/scripts/dispatch-distro.sh"
 #
 # # 1. Direct command usage
 # dispatch_arch echo "Hello from Arch (Direct)"
