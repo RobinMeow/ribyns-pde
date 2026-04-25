@@ -122,6 +122,13 @@ echo_lavender() {
 	echo -e "${CATLAVENDER}$*${NC}"
 }
 
+assert_pde_vars() {
+	if [[ -z "${PDE:-}" ]]; then
+		error "PDE environment variable is not set. It should point to the root of the PDE repository."
+		exit 1
+	fi
+}
+
 # Usage/Help function
 usage() {
 	cat <<'EOF'

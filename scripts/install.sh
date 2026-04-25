@@ -10,9 +10,6 @@ info "Installing zsh"
 info "Installing .gitconfig"
 "$PDE/scripts/install-gitconfig.sh"
 
-info "Installing powerlevel10k"
-"$PDE/scripts/install-p10k.sh"
-
 info "Installing bat"
 "$PDE/scripts/install-bat.sh"
 

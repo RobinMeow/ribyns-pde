@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
+source "$PDE/scripts/utils.sh"
+assert_pde_vars
+
+case "$OSD_DISTRIBUTION" in
+arch)
+	sudo pacman -S --needed --noconfirm wezterm
+	;;
+fedora)
+	sudo dnf install -y wezterm
+	;;
+*)
+	warn "Distro '$OSD_DISTRIBUTION' not supported for installing wezterm"
+	;;
+esac
 
 WEZTERM_CONFIG_DIR="$HOME/.config/wezterm"
-WEZTERM_LUA_DIR="$HOME"
-
-sudo pacman -S --needed --noconfirm wezterm
-
 source "$PDE/scripts/detect_env.sh"
 detect_env
 

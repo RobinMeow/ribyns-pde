@@ -18,6 +18,9 @@ The script will:
 4. Execute the main installation script (`scripts/install.sh`).
 
 
+`export PDE="$HOME/ribyns-pde"`
+`export OSD_DISTRIBUTION="arch"`
+
 ## Arch
 
 your user needs to be a sudoer
