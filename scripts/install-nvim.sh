@@ -22,14 +22,14 @@ function build_nvim_from_source() {
 
 function install_on_arch() {
 	# sudo pacman -S --needed --noconfirm nvim
-	sudo pacman -S --needed --noconfirm tree-sitter-cli lazygit
+	sudo pacman -S --needed --noconfirm tree-sitter-cli
 	build_nvim_from_source
 }
 pacman_strategy install_on_arch
 
 function install_on_fedora() {
 	# sudo dnf install -y neovim
-	sudo dnf install -y tree-sitter-cli lazygit
+	sudo dnf install -y tree-sitter-cli
 	build_nvim_from_source
 }
 dnf_strategy install_on_fedora
