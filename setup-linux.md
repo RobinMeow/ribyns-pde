@@ -9,32 +9,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/maste
 SKIP_INSTALL=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
 ```
 
-or manually:
+or manually (Recommended: the setup script is iffy):
 ```bash
 git clone https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde
 $PDE/scripts/install.sh --full-install
 ```
 
-The script will:
-1. Detect your distribution (Fedora or Arch).
-2. Ask if you want to create a new user.
-   - If **yes**: Prompts for a username and password, then switches to that user.
-   - If **no**: Continues as the current user.
-3. Install base dependencies via the package manager (`dnf` or `pacman`).
-3. Clone the `ribyns-pde` repository into the home directory.
-4. Execute the main installation script (`scripts/install.sh`).
-
-
-`export PDE="$HOME/ribyns-pde"`
-`export OSD_DISTRIBUTION="arch"`
-
-## Arch
-
-your user needs to be a sudoer
-
-1. `pacman -Syu --noconfirm --needed`
-2. `git clone --depth 1 https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde`
-3. `cd $HOME/ribyns-pde`
-4. `export PDE=$HOME/ribyns-pde`
-5. `scripts/install.sh --pacman`
-6. `zsh`
