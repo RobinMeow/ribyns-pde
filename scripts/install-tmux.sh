@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+set -u
+source "$PDE/scripts/run_on_distro.sh"
 
-sudo pacman -S --needed --noconfirm tmux
+run_on_arch sudo pacman -S --needed --noconfirm tmux
+run_on_fedora sudo dnf install -y tmux
 
 # TMUX Plugins
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"

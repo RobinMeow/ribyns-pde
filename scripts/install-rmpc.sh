@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# https://rmpc.mierak.dev/installation/
-# https://mpd.readthedocs.io/en/stable/user.html
+set -u
+source "$PDE/scripts/run_on_distro.sh"
 
-sudo pacman -S --needed --noconfirm rmpc mpd
+run_on_arch sudo pacman -S --needed --noconfirm rmpc mpd
+run_on_fedora sudo dnf install -y rmpc mpd

@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
+set -u
+source "$PDE/scripts/utils.sh"
+source "$PDE/scripts/run_on_distro.sh"
+
+run_on_arch sudo pacman -S --needed --noconfirm wezterm
+run_on_fedora <<'EOF'
+sudo dnf copr enable -y wezfurlong/wezterm-nightly
+sudo dnf install -y wezterm
+EOF
+
 WEZTERM_CONFIG_DIR="$HOME/.config/wezterm"
 WEZTERM_LUA_DIR="$HOME"
-
-sudo pacman -S --needed --noconfirm wezterm
-
 source "$PDE/scripts/detect_env.sh"
 detect_env
 
@@ -14,11 +21,9 @@ if [[ "$OS_TYPE" == "wsl" ]]; then
 
 	WEZTERM_CONFIG_DIR="$WINDOWS_HOME/.config/wezterm"
 	WEZTERM_LUA_DIR="$WINDOWS_HOME"
-
-	cp "$PDE/.wezterm.lua" "$WEZTERM_LUA_DIR"
-else
-	cp "$PDE/.wezterm.lua" "$WEZTERM_LUA_DIR"
 fi
+
+cp "$PDE/.wezterm.lua" "$WEZTERM_LUA_DIR"
 
 if [[ "$1" == "--clean" ]]; then
 	echo "Cleaning up wezterm config dir"

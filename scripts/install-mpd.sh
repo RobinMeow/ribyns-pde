@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+set -u
+source "$PDE/scripts/run_on_distro.sh"
 
-sudo pacman -S --needed --noconfirm mpd rmpc
+run_on_arch sudo pacman -S --needed --noconfirm mpd rmpc
+run_on_fedora sudo dnf install -y mpd rmpc
 
 mkdir -p "$HOME/.config/mpd/playlists"
 cp -r "$PDE/.config/mpd/"* "$HOME/.config/mpd/"

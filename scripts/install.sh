@@ -10,9 +10,6 @@ info "Installing zsh"
 info "Installing .gitconfig"
 "$PDE/scripts/install-gitconfig.sh"
 
-info "Installing powerlevel10k"
-"$PDE/scripts/install-p10k.sh"
-
 info "Installing bat"
 "$PDE/scripts/install-bat.sh"
 
@@ -31,29 +28,39 @@ info "Installing tmux"
 info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
+full_install=false
 for arg in "$@"; do
-	if [[ "$arg" == "--pacman" ]]; then
-		info "Installing pacman packages"
-		"$PDE/scripts/pacman-core.sh"
-		"$PDE/scripts/pacman-webdev.sh"
+	if [[ "$1" == "--full-install" ]]; then
+		full_install=true
 	fi
 done
 
 for arg in "$@"; do
-	# NOTE: disabled since I currently dont need them synced anywhere
-	if [[ "$arg" == "--desktop" ]]; then
+	if [[ "$arg" == "--pm" || $full_install ]]; then
+		info "Installing core"
+		"$PDE/scripts/pm-core.sh"
+	fi
+	if [[ "$arg" == "--webdev" || $full_install ]]; then
+		info "Installing gadgets"
+		"$PDE/scripts/pm-gadgets.sh"
+	fi
+	if [[ "$arg" == "--gadgets" || $full_install ]]; then
+		info "Installing gadgets"
+		"$PDE/scripts/pm-gadgets.sh"
+	fi
+	if [[ "$arg" == "--kde" || $full_install ]]; then
+		info "Installing kde"
+		"$PDE/scripts/install-kde.sh"
+	fi
+	if [[ "$arg" == "--hypr" || $full_install ]]; then
 		info "Installing rofi"
 		"$PDE/scripts/install-rofi.sh"
 
 		info "Installing waybar"
 		"$PDE/scripts/install-waybar.sh"
 
-		# INFO: i can split up hypr and kde in future
 		info "Installing hypr"
 		"$PDE/scripts/install-hypr.sh"
-
-		info "Installing kde"
-		"$PDE/scripts/install-kde.sh"
 	fi
 done
 

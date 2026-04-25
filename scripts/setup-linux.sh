@@ -21,25 +21,21 @@ if [ -f /etc/os-release ]; then
 else
 	DISTRO="unknown"
 fi
+echo "Detected $DISTRO. "
 
+echo "Installing base packages (sudo, git, bc)..."
 case "$DISTRO" in
 fedora)
-	PKG_MANAGER="dnf"
-	INSTALL_CMD="dnf install -y"
+	run_as_root dnf install -y sudo git bc
 	;;
 arch)
-	PKG_MANAGER="pacman"
-	INSTALL_CMD="pacman -S --needed --noconfirm"
+	run_as_root pacman -S --needed --noconfirm sudo git bc
 	;;
 *)
 	echo "Unsupported distribution: $DISTRO"
 	exit 1
 	;;
 esac
-
-# --- Base System ---
-echo "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
-run_as_root $INSTALL_CMD sudo git bc
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
@@ -51,7 +47,11 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	echo "Creating user '$USERNAME'..."
 
-	groupadd sudo
+	if groups | grep sudo; then
+		echo "Sudo group already exists"
+	else
+		groupadd sudo
+	fi
 	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
 	# -G sudo,wheel (comma seperated to add a user to multiple groups)
 	cat <<'EOF' >/etc/sudoers.d/admin-groups
@@ -68,9 +68,20 @@ EOF
 		echo "Password update failed. Please try again."
 	done
 
-	echo "Setup complete."
-	echo "You can now log in as '$USERNAME' by running: su - $USERNAME"
+	# TODO: allow specification of branch when using curl to execute this setup
+	if [[ "${SKIP_INSTALL:-false}" == "true" ]]; then
+		echo "skipping git clone and install"
+	else
+		su - "$USERNAME" <<'EOF'
+git clone --depth 1 -b master https://github.com/RobinMeow/ribyns-pde
+export PDE="$HOME/ribyns-pde"
+"$PDE/scripts/install.sh" --full-install
+EOF
+	fi
+	echo "you now now login in using: su --login $USERNAME"
 else
-	USERNAME=$(whoami)
-	echo "Setup complete for '$USERNAME'."
+	git clone --depth 1 -b master https://github.com/RobinMeow/ribyns-pde
+	export PDE="$HOME/ribyns-pde"
+	"$PDE/scripts/install.sh" --full-install
+	echo "Setup complete for '$(whoami)'."
 fi
