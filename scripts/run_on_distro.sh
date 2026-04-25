@@ -20,24 +20,30 @@ fi
 function run_on_arch() {
 	if [[ "$DISTRO" == "arch" ]]; then
 		if [[ $# -gt 0 ]]; then
+			# execute direct commands like `run_on_arch pacman -S git`
 			"$@"
 		else
-			# NOTE: we have to consume the here-doc,
-			# otherwise the shell will try to execute it
-			cat >/dev/null
+			# execute here-docs `run_on_arch <<'EOF' echo "Hi Ribyn!" EOF`
+			eval "$(cat)"
 		fi
+	else
+		# consume and throw away (commands are meant for other distros)
+		cat >/dev/null
 	fi
 }
 
 function run_on_fedora() {
 	if [[ "$DISTRO" == "fedora" ]]; then
 		if [[ $# -gt 0 ]]; then
+			# execute direct commands like `run_on_arch pacman -S git`
 			"$@"
 		else
-			# NOTE: we have to consume the here-doc,
-			# otherwise the shell will try to execute it
-			cat >/dev/null
+			# execute here-docs `run_on_arch <<'EOF' echo "Hi Ribyn!" EOF`
+			eval "$(cat)"
 		fi
+	else
+		# consume and throw away (commands are meant for other distros)
+		cat >/dev/null
 	fi
 }
 
