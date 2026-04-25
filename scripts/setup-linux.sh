@@ -70,10 +70,10 @@ EOF
 
 	# TODO: extend with install.sh --core --webdev --gadgets
 	# TODO: allow specification of branch when using curl to execute this setup
-	su - "$USERNAME" <<EOF
+	su - "$USERNAME" <<'EOF'
 export PDE="$HOME/ribyns-pde"
 git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde "$PDE"
-cd $PDE
+cd "$PDE"
 "$PDE/scripts/install-zsh.sh"
 zsh
 EOF
