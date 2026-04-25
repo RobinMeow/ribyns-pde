@@ -21,25 +21,21 @@ if [ -f /etc/os-release ]; then
 else
 	DISTRO="unknown"
 fi
+echo "Detected $DISTRO. "
 
+echo "Installing base packages (sudo, git, bc)..."
 case "$DISTRO" in
 fedora)
-	PKG_MANAGER="dnf"
-	INSTALL_CMD="dnf install -y"
+	run_as_root dnf install -y sudo git bc
 	;;
 arch)
-	PKG_MANAGER="pacman"
-	INSTALL_CMD="pacman -S --needed --noconfirm"
+	run_as_root pacman -S --needed --noconfirm sudo git bc
 	;;
 *)
 	echo "Unsupported distribution: $DISTRO"
 	exit 1
 	;;
 esac
-
-# --- Base System ---
-echo "Detected $DISTRO. Installing base packages (sudo, git, bc)..."
-run_as_root $INSTALL_CMD sudo git bc
 
 # --- User Configuration ---
 echo -n "Create a new user? [y/N]: "
@@ -51,7 +47,11 @@ if [[ "$CREATE_ANS" =~ ^[Yy]$ ]]; then
 
 	echo "Creating user '$USERNAME'..."
 
-	groupadd sudo
+	if groups | grep sudo; then
+		echo "Sudo group already exists"
+	else
+		groupadd sudo
+	fi
 	# NOTE: add if desired %wheel ALL=(ALL:ALL) ALL
 	# -G sudo,wheel (comma seperated to add a user to multiple groups)
 	cat <<'EOF' >/etc/sudoers.d/admin-groups
@@ -68,9 +68,16 @@ EOF
 		echo "Password update failed. Please try again."
 	done
 
+	# TODO: extend with install.sh --core --webdev --gadgets
+	# TODO: allow specification of branch when using curl to execute this setup
+	su - "$USERNAME" <<EOF
+export PDE="$HOME/ribyns-pde"
+git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde "$PDE"
+cd $PDE
+"$PDE/scripts/install-zsh.sh"
+zsh
+EOF
 	echo "Setup complete."
-	echo "You can now log in as '$USERNAME' by running: su - $USERNAME"
 else
-	USERNAME=$(whoami)
-	echo "Setup complete for '$USERNAME'."
+	echo "Setup complete for '$(whoami)'."
 fi

@@ -29,10 +29,15 @@ info "Installing yazi"
 "$PDE/scripts/install-yazi.sh"
 
 for arg in "$@"; do
-	if [[ "$arg" == "--pacman" ]]; then
-		info "Installing pacman packages"
-		"$PDE/scripts/pacman-core.sh"
-		"$PDE/scripts/pacman-webdev.sh"
+	if [[ "$arg" == "--pm" ]]; then
+		info "Installing core"
+		"$PDE/scripts/pm-core.sh"
+	elif [[ "$arg" == "--webdev" ]]; then
+		info "Installing gadgets"
+		"$PDE/scripts/pm-gadgets.sh"
+	elif [[ "$arg" == "--gadgets" ]]; then
+		info "Installing gadgets"
+		"$PDE/scripts/pm-gadgets.sh"
 	fi
 done
 
