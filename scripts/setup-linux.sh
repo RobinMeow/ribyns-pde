@@ -69,11 +69,15 @@ EOF
 	done
 
 	# TODO: allow specification of branch when using curl to execute this setup
-	su - "$USERNAME" <<'EOF'
+	if [[ "${SKIP_INSTALL:-false}" == "true" ]]; then
+		echo "skipping git clone and install"
+	else
+		su - "$USERNAME" <<'EOF'
 git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde
 export PDE="$HOME/ribyns-pde"
 "$PDE/scripts/install.sh" --full-install
 EOF
+	fi
 	echo "you now now login in using: su --login $USERNAME"
 else
 	git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde

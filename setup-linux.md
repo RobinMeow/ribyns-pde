@@ -6,6 +6,7 @@ To prepare a Fedora or Arch Linux instance, run the following command. The scrip
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
+SKIP_INSTALL=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
 ```
 
 The script will:
