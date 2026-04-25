@@ -26,7 +26,10 @@ function run_on_arch() {
 			# execute here-docs `run_on_arch <<'EOF' echo "Hi Ribyn!" EOF`
 			eval "$(cat)"
 		fi
-	else
+	elif [[ $# -eq 0 ]]; then
+		# also makes sure the command doesnt become stuck here
+		# e.g. when running pacman -S --needed --noconfirm zsh
+		# and zsh was already installed
 		# consume and throw away (commands are meant for other distros)
 		cat >/dev/null
 	fi
@@ -41,7 +44,8 @@ function run_on_fedora() {
 			# execute here-docs `run_on_arch <<'EOF' echo "Hi Ribyn!" EOF`
 			eval "$(cat)"
 		fi
-	else
+	elif [[ $# -eq 0 ]]; then
+		# also makes sure the command doesnt become stuck here
 		# consume and throw away (commands are meant for other distros)
 		cat >/dev/null
 	fi
@@ -64,3 +68,30 @@ function run_on_fedora() {
 #   echo "This is a block running on Fedora"
 #   echo "Current directory: $(pwd)"
 # EOF
+
+# NOTE: ai explain on why the elif was a fix:
+# The hang was caused by a logic error in how the script handled commands meant for a different distribution.
+#
+# ### The Problem
+# In the original version of `scripts/run_on_distro.sh`, the functions were designed to handle two types of usage:
+# 1. **Direct commands:** `run_on_fedora dnf install zsh`
+# 2. **Heredocs (blocks):** `run_on_fedora <<'EOF' ... EOF`
+#
+# When you ran the script on **Arch**, the call to `run_on_fedora` would trigger the `else` block, which contained:
+# ```bash
+# else
+#     # consume and throw away (commands are meant for other distros)
+#     cat >/dev/null
+# fi
+# ```
+# The `cat` command waits for input from `stdin`. If you were using a **heredoc**, this was fine because it "ate" the block of text. However, if you passed a **direct command** as an argument, there was no input for `cat` to read, so it hung indefinitely waiting for you to type something.
+#
+# ### The Fix
+# I modified the functions to check if any arguments were passed (`$#`) before attempting to "consume" input:
+#
+# ```bash
+# elif [[ $# -eq 0 ]]; then
+#     # Only call cat if there are NO arguments (meaning we expect a heredoc)
+#     cat >/dev/null
+# fi
+# ```
