@@ -74,7 +74,7 @@ EOF
 export PDE="$HOME/ribyns-pde"
 git clone --depth 1 -b fedora-support https://github.com/RobinMeow/ribyns-pde "$PDE"
 cd "$PDE"
-"$PDE/scripts/install-zsh.sh"
+"$PDE/scripts/install.sh --full-install"
 zsh
 EOF
 	echo "Setup complete."
