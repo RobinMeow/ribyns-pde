@@ -6,7 +6,10 @@ assert_pde_vars
 source "$PDE/scripts/run_on_distro.sh"
 
 run_on_arch sudo pacman -S --needed --noconfirm wezterm
-run_on_fedora sudo dnf install -y wezterm
+run_on_fedora <<'EOF'
+sudo dnf copr enable wezfurlong/wezterm-nightly
+sudo dnf install -y wezterm
+EOF
 
 WEZTERM_CONFIG_DIR="$HOME/.config/wezterm"
 WEZTERM_LUA_DIR="$HOME"
