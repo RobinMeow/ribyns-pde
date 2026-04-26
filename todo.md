@@ -9,8 +9,6 @@
 
 - central entry point like `renv install zsh` which I can used to lazy load stuff like wsl detection only once, and assert pde variable being set only once as well
 - fix wildmidi bug on mpd
-- a nvim plugin which lets me make a visual selection(remember it using a keymap)
-- and another visual selection for which word to substitute within the previous visual selection
 
 - use built in diffview, ui2, undotree and add keybinds for :restart
 ```
@@ -20,7 +18,6 @@ tool = nvim_difftool
 cmd = nvim -c \"packadd nvim.difftool"\ -c \"DiffTool $LOCAL $REMOTE\"
 ```
 - add safe boot option (Arch Safe boot) to grub menu, in case libinput breaks again or sth
-- better terminal integration. nice would be if i could show the terminal state as a split/pane show/hide as needed
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 - stay up2date with kickstarter e.g. auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 
@@ -37,12 +34,9 @@ cmd = nvim -c \"packadd nvim.difftool"\ -c \"DiffTool $LOCAL $REMOTE\"
 - consider floating cmdline. i think nice for pair-p https://github.com/VonHeikemen/fine-cmdline.nvim
 - seemless wezterm (using ctrl hjkl to switch panes from nvim to wezterm and using the same binds in wezterm and nvim)
 - math algo to increase the step amount on brightness change the brighter it gets and decrease its accuracy to less it gets but still allow reaching 0
-- source control btop conf
 - use `time` to add execution duration to all scripts
 - nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
 _ consider hand written workspice files in lua. BUt for that I wanna collect more lua experience
-- markdown viewer? https://github.com/iamcco/markdown-preview.nvim not sure if i need sth like that
-- Debugging in nvim? not sure if i care about this. im fine with using windows for debugging for now.
 - stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
 - add a shell cript for cloning this repo with installation instruction in readme
 - https://github.com/jesseduffield/lazydocker
