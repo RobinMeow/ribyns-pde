@@ -13,6 +13,9 @@ info "Installing .gitconfig"
 info "Installing bat"
 "$PDE/scripts/install-bat.sh"
 
+info "Installing btop"
+"$PDE/scripts/install-btop.sh"
+
 info "Installing kitty"
 "$PDE/scripts/install-kitty.sh"
 
