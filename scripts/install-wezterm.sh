@@ -25,7 +25,14 @@ fi
 
 cp "$PDE/.wezterm.lua" "$WEZTERM_LUA_DIR"
 
-if [[ "$1" == "--clean" ]]; then
+clean=false
+for arg in "$@"; do
+	if [[ "$arg" == "--clean" ]]; then
+		clean=true
+	fi
+done
+
+if [[ "$clean" == "true" ]]; then
 	echo "Cleaning up wezterm config dir"
 	rm -rf "$WEZTERM_CONFIG_DIR"
 fi
