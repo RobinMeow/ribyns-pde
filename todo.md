@@ -2,6 +2,7 @@
 
 ## prio quick todos
 
+- central entry point like `renv install zsh` which I can used to lazy load stuff like wsl detection only once, and assert pde variable being set only once as well
 - fix wildmidi bug on mpd
 - a nvim plugin which lets me make a visual selection(remember it using a keymap)
 - and another visual selection for which word to substitute within the previous visual selection
