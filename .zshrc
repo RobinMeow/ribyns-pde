@@ -100,6 +100,10 @@ if [[ -d "/home/linuxbrew/" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
+if [[ -d "$HOME/.cargo/bin" ]]; then
+	export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
 # nvm node version manager
 nvm() {
   unfunction nvm
