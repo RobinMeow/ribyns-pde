@@ -24,25 +24,11 @@
 
 - learn about the magic space
 
+## Hyprland
+
+make the switch
+
 ## random notes
 
-navi cheatsheet for cli cmds https://github.com/denisidoro/navi
-document reader https://github.com/kruseio/hygg
-
 [30 vim commands must-know: refresher for features which exist](https://www.youtube.com/watch?v=RSlrxE21l_k)
-
-## Future plans:
-
-- podman https://github.com/containers/podman
-- devbox?
-- testcontainers?
-- toggle background brightness
-
-
-# interesting open source tools
-
-- ffmpeg converting media files of all sorts (used it to convert mp4 to animated webp as wezterm background)
-- [convert files to markdown](https://github.com/microsoft/markitdown)
-- [li progress bar](https://github.com/tqdm/tqdm)
-- [display rich text beatiful in the terminal](https://github.com/Textualize/rich)
 
