@@ -14,11 +14,15 @@ run_on_fedora <<'EOF'
 EOF
 
 "$PDE/scripts/ensure-homebrew-installed.sh"
+
 # NOTE: optional dependencies, tho i got em all using dnf/pacman (excluding zoxide i dont use that)
 # brew install sevenzip jq poppler fd ripgrep fzf
 # brew install ffmpeg-full imagemagick-full
 # brew link ffmpeg-full imagemagick-full -f --overwrite
-brew install yazi resvg
+
+# using the binaries, cuz in fresh install with install.sh
+# bre is not yet in PATH
+/home/linuxbrew/.linuxbrew/bin/brew install yazi resvg
 
 # NOTE: image, audio, video, subtitle and many media files using ffmpeg and mediainfo metainfo
 dest_mediainfo="$HOME/.config/yazi/plugins/mediainfo.yazi"

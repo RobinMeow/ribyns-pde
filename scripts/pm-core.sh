@@ -17,6 +17,7 @@ run_on_arch <<'EOF'
 		git \
 		curl \
 		zsh \
+		eza \
 		vi \
 		vim \
 		nvim \
@@ -56,6 +57,7 @@ run_on_fedora <<'EOF'
 		gawk \
 		curl \
 		zsh \
+		eza \
 		vi \
 		vim \
 		tree-sitter-cli \
