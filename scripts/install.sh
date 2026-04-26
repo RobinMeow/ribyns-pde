@@ -7,6 +7,9 @@ echo "Installing from source: $PDE"
 info "Installing zsh"
 "$PDE/scripts/install-zsh.sh"
 
+info "Installing CommitMono"
+"$PDE/scripts/install-commit-mono.sh"
+
 info "Installing .gitconfig"
 "$PDE/scripts/install-gitconfig.sh"
 
@@ -33,7 +36,7 @@ info "Installing yazi"
 
 full_install=false
 for arg in "$@"; do
-	if [[ "$1" == "--full-install" ]]; then
+	if [[ "$arg" == "--full-install" ]]; then
 		full_install=true
 	fi
 done
