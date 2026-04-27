@@ -438,6 +438,8 @@ require("lazy").setup({
         css = { "prettierd", "prettier", stop_after_first = true },
         scss = { "prettierd", "prettier", stop_after_first = true },
         sass = { "prettierd", "prettier", stop_after_first = true },
+        cs = { "csharpier", stop_after_first = true },
+        csproj = { "csharpier", stop_after_first = true },
       },
     },
   },
