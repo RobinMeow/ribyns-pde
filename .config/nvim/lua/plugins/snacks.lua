@@ -23,6 +23,13 @@ return {
             width = vim.o.columns,
           },
         },
+        input = {
+          enabled = true,
+          win = {
+            relative = "cursor",
+            row = 1, -- it was one row to faar down. perhaps bc of the border (-3 to show on top, and not beneath)
+          },
+        }, -- nice ui e.g. rename variable
         dashboard = {
           enabled = true,
           pane_gap = 2,
@@ -45,7 +52,6 @@ return {
         },
         explorer = { enabled = false },
         indent = { enabled = false },
-        input = { enabled = false },
         picker = { enabled = false },
         notifier = {
           timeout = 5000,
