@@ -19,15 +19,16 @@ function build_nvim_from_source() {
 	fi
 }
 
+# NOTE: added luarocks and wget because of nvim :checkhealth
 run_on_arch <<'EOF'
-	# sudo pacman -S --needed --noconfirm nvim
-	sudo pacman -S --needed --noconfirm tree-sitter-cli
+	# sudo pacman -S --needed --noconfirm neovim
+	sudo pacman -S --needed --noconfirm tree-sitter-cli luarocks wget
 	build_nvim_from_source
 EOF
 
 run_on_fedora <<'EOF'
 	# sudo dnf install -y neovim
-	sudo dnf install -y tree-sitter-cli
+	sudo dnf install -y tree-sitter-cli luarocks wget
 	build_nvim_from_source
 EOF
 
