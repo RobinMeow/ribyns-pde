@@ -37,8 +37,6 @@
 	aacapf = "!git add --all && git commit --amend --verbose && git push --force-with-lease"
 	aacanepf = "!git add --all && git commit --amend --no-edit --verbose && git push --force-with-lease"
 	cp = "!git commit --verbose && git push"
-	aacp = "!git add -all && git commit --verbose && git push"
-	aacpf = "!git add -all && git commit --verbose && git push --force-with-lease"
 	wt = worktree
 	co = checkout
 	smfe = submodule foreach
