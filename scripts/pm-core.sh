@@ -48,8 +48,11 @@ run_on_arch <<'EOF'
 		glow \
 		mpv \
 		chafa \
-		fd
+		fd \
+		bluetui
 EOF
+
+# TODO: bluetui requires build from source on fedora
 run_on_fedora <<'EOF'
 	sudo dnf install -y \
 		@development-tools \
