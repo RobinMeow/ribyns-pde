@@ -4,7 +4,8 @@ return {
   config = function()
     local lint = require("lint")
     lint.linters_by_ft = {
-      markdown = { "markdownlint", "vale" }, -- Make sure to install `markdownlint` via mason / npm
+      -- NOTE: deactivated vale because it gave alot of warnings all the time
+      markdown = { "markdownlint" }, -- Make sure to install `markdownlint` via mason / npm
       --   clojure = { "clj-kondo" },
       dockerfile = { "hadolint" },
       yaml = { "yamllint" },

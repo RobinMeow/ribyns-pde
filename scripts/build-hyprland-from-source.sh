@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# TODO: https://wiki.hypr.land/Getting-Started/Installation/#cmake-recommended wip
+# NOTE: wip
+# https://wiki.hypr.land/Getting-Started/Installation/#cmake-recommended
+
 set -e
 
 source "$PDE/scripts/utils.sh"
