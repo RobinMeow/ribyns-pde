@@ -22,9 +22,11 @@ make qwertz layout
 - keymap, which folds the whole file based on indent e.g. fi3 (fold indent 3, any scope at 3rd indend level will get folded/toggeled)
 - got a few overlapping keymaps. didnt bother me enough so far tho (e.g. sg sgf)
 
-# angular
+## angular
 
 - ng-test-fzf.sh is runniung duplicated tests...
+
+## Local AI Image generation
 
 ## zsh / omz
 
@@ -42,8 +44,4 @@ make the switch
 
 - [yazi bulk rename](https://yazi-rs.github.io/features/)
 - [yazi tips and tricks e.g. drag and drop](https://yazi-rs.github.io/docs/tips/#drag-and-drop)
-
-## catppuccin btop theme 
-
-https://github.com/basecamp/omarchy/blob/dev/themes/catppuccin-latte/btop.theme
 
