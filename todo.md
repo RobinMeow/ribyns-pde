@@ -5,16 +5,18 @@
 - setup hyprland
 - test virtualization
 
+## Kitty
+
+- continue reading through the example config
+
 ## Neovim
 
 - harpoon https://github.com/ThePrimeagen/harpoon/tree/harpoon2
-- surround.nvim (replaces mini.surround?)
-- stay up2date with kickstarter e.g. auto show the diagnostic window when using diagnostic jump https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
+- learn native nvim mitions and operations before re-enableing mini.surround/flash plugins
 - Telescope builtin pickers to keymaps mappen und lernen welche es gibt
-- tab view is so bad when it shortens to ...
-- nvim restore previous session `:mksession filename.vim` and load with `nvim -S filename.vim`. doesnt work for quick fix list. so a plugin is probably worthline. perfeable one which supports different nvim workspaces
-- stay up 2 date on kickstarter commits to see i want to take those changes e.g. https://github.com/nvim-lua/kickstart.nvim/commit/21d5aabc22ac44fc9404953a0b77944879465dd0
-- Keybind for folding methods in csharp with and without namespaces maybe also for ts? or keybinds like vs code, based on indent level
+- current restore session solution, is good enough. but if i desore restored terminals or DBUI, or quickfix lists i might want to look for plugin
+- keymap, which folds the whole file based on indent e.g. fi3 (fold indent 3, any scope at 3rd indend level will get folded/toggeled)
+- got a few overlapping keymaps. didnt bother me enough so far tho (e.g. sg sgf)
 
 # angular
 
@@ -32,3 +34,5 @@ make the switch
 
 [30 vim commands must-know: refresher for features which exist](https://www.youtube.com/watch?v=RSlrxE21l_k)
 
+- [yazi bulk rename](https://yazi-rs.github.io/features/)
+- [yazi tips and tricks e.g. drag and drop](https://yazi-rs.github.io/docs/tips/#drag-and-drop)

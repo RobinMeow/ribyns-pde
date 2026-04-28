@@ -17,4 +17,3 @@ requires `gemini-cli` to be installed for codecompanion to work in nvim.
 ## Anthropic
 
 [claude pricing](https://claude.com/pricing)
-> TODO: ask Robin about his setup

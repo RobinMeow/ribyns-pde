@@ -68,7 +68,7 @@ EOF
 		echo "Password update failed. Please try again."
 	done
 
-	# TODO: allow specification of branch when using curl to execute this setup
+	# NOTE: allow branch variable to be set if I use this in future
 	if [[ "${SKIP_INSTALL:-false}" == "true" ]]; then
 		echo "skipping git clone and install"
 	else
