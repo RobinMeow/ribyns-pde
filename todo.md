@@ -1,5 +1,9 @@
 # TicketSystem
 
+## Glove80
+
+make qwertz layout
+
 ## Fedora
 
 - setup hyprland
