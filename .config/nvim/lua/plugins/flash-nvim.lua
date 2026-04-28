@@ -1,5 +1,8 @@
 return {
   {
+    -- NOTE: great i think, but there is alot of nvim native stuff
+    -- i should learn first, before resolving to a plugin
+    enabled = false,
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
