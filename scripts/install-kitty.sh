@@ -12,7 +12,20 @@ cp -r "$PDE/.config/kitty/"* "$HOME/.config/kitty/"
 # NOTE: wsl is not as fast as native.
 # so im using a throttled kitty perf
 source "$PDE/scripts/detect_env.sh"
+source "$PDE/scripts/utils.sh"
 detect_env
 if [[ "$OS_TYPE" == "wsl" ]]; then
-	cp -r "$PDE/.config/kitty/kitty-wsl.conf" "$HOME/.config/kitty/kitty.conf"
+	cat >>"$HOME/.config/kitty/kitty.conf" <<EOF
+
+# WSL Specific Changes
+font_size 11
+repaint_delay 100
+input_delay 5
+sync_to_monitor no
+EOF
+	warn "Kitty: WSL specific config has been appended."
+	verbose "font_size 11"
+	verbose "repaint_delay 100"
+	verbose "input_delay 5"
+	verbose "sync_to_monitor no"
 fi
