@@ -6,7 +6,6 @@ make qwertz layout
 
 ## Fedora
 
-- setup hyprland
 - test virtualization
 
 ## Kitty
@@ -28,15 +27,15 @@ make qwertz layout
 
 ## Local AI Image generation
 
+do it
+
 ## zsh / omz
 
 - learn about the magic space
 
 ## Hyprland
 
-make the switch
-
-> decided to wait at least until im no longer on nvidia. Even pre-configured "themes" have an install scripts which will auto download open-nvidia-dkms driver or sth, and i dont wanna mess with my working system, nor maintain 4 versions of hyprland to have the same desktop env on my lenovo (amd), macbook (intel?) and pc (nvidia). and only my bluetooth keyboard in qwerty
+decided to wait at least until im no longer on nvidia. Even pre-configured "themes" have an install scripts which will auto download open-nvidia-dkms driver or sth, and i dont wanna mess with my working system, nor maintain 4 versions of hyprland to have the same desktop env on my lenovo (amd), macbook (intel?) and pc (nvidia). and only my bluetooth keyboard in qwerty
 
 ## random notes
 
