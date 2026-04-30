@@ -1,5 +1,10 @@
 # TicketSystem
 
+## usage tracking
+
+track how much each script is called.
+commit it to sourcecode.
+
 ## Glove80
 
 make qwertz layout
