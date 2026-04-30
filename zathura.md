@@ -1,6 +1,7 @@
 # Mouse and Key Bindings
 
 > Documentation for Version 0.5.12
+> [doc](https://pwmt.org/projects/zathura/documentation/)
 
 ## General
 
@@ -342,10 +343,10 @@ The following shortcut functions can be mapped:
 | adjust_window | `best-fit`, `width` | Adjust page width. |
 | bisect | `forward`, `backward` | Bisect through the document. |
 | change_mode | | Change current mode. |
-| cycle_first_column | | In multiple page layout, cycle the column in which the first page is displayed. |
+| cycle_first_column | | Cycle the column in which the first page is displayed<br>(multi-page layout). |
 | display_link | | Display link target. |
-| exec | | Execute an external command. `$FILE` expands to the current document path, `$PAGE` to the current page number, and `$DBUS` to the bus name of the D-Bus interface. |
-| file_chooser | | Open a File Chooser Dialog. Uses the native file chooser on Windows and MacOS, desktop portals when available and otherwise GtkFileChooser. |
+| exec | | Execute an external command. `$FILE`: document path,<br>`$PAGE`: page number, `$DBUS`: D-Bus bus name. |
+| file_chooser | | Open File Chooser. Uses native on Win/macOS,<br>portals if available, or GtkFileChooser. |
 | focus_inputbar | | Focus inputbar. |
 | follow | | Follow a link. |
 | goto | page number | Go to a certain page. |
@@ -361,7 +362,7 @@ The following shortcut functions can be mapped:
 | scroll | `top`, `bottom`, `page-top`, `page-bottom`, `full-up`, `full-down`, `full-left`, `full-right`, `half-up`, `half-down`, `partial-up`, `partial-down`, `half-left`, `half-right`, `up`, `down`, `left`, `right`, `bidirectional` | Scroll. |
 | search | `forward`, `backward` | Search next/previous item. |
 | set | | Set an option. |
-| snap_to_page | | Snaps to the current page. equivalent to `goto <current_page>` |
+| snap_to_page | | Snaps to the current page (same as `goto <current_page>`). |
 | toggle_fullscreen | | Toggle fullscreen. |
 | toggle_index | | Show or hide index. |
 | toggle_inputbar | | Show or hide inputbar. |
@@ -370,7 +371,7 @@ The following shortcut functions can be mapped:
 | zoom | `in`, `out` | Zoom in or out. |
 | mark_add | | Set a quickmark. |
 | mark_evaluate | | Go to a quickmark. |
-| feedkeys | | Simulate key presses. note that all keys will be interpreted as if pressing a key on the keyboard. to input uppercase letters, follow the same convention as for key bindings, i.e. for `x`, use `<s-x>`. |
+| feedkeys | | Simulate keys. Uppercase uses conventions like `<s-x>`. |
 
 #### Pass arguments
 
@@ -429,73 +430,75 @@ This section describes settings concerning the behaviour of zathura.
 
 | Setting | Type | Default Value | Description |
 | :--- | :--- | :--- | :--- |
-| abort-clear-search | Boolean | true | Defines if the search results should be cleared on abort. |
-| adjust-open | String | best-fit | Defines which auto adjustment mode should be used if a document is loaded. Possible options are "best-fit" and "width". |
-| advance-pages-per-row | Boolean | false | Defines if the number of pages per row should be honored when advancing a page. |
-| continuous-hist-save | Boolean | false | Tells zathura whether to save document history at each page change or only when closing a document. |
-| database | String | plain | Defines the database backend to use for bookmarks and input history. Possible values are "plain", "sqlite" and "null". If "null" is used, bookmarks and input history will not be stored. <br> Note that the "plain" backend is deprecated. If selected, the "sqlite" backend will import old history from the "plain" database and operation will continue with the "sqlite" backend. After the first import, the setting can safely be changed to "sqlite". The default will change after a release of Debian trixie. |
-| dbus-raise-window | Boolean | true | Defines whether zathura's window should be raised when receiving certain commands via D-Bus. |
-| dbus-service | Boolean | true | En/Disables the D-Bus service. If the services is disabled, SyncTeX forward synchronization is not available. |
-| double-click-follow | Boolean | true | Defines whether double or single click on a link should trigger follow. |
-| filemonitor | String | glib | Defines the file monitor backend used to check for changes in files. Possible values are "glib", "signal" (if signal handling is supported), and "noop". The "noop" file monitor does not trigger reloads. |
-| first-page-column | String | 1:2 | Defines the column in which the first page will be displayed. This setting is stored separately for every value of pages-per-row according to the following pattern <1 page per row>:[<2 pages per row>[: ...]]. The last value in the list will be used for all other number of pages per row if not set explicitly. <br>Per default, the first column is set to 2 for double-page layout, i.e. the value is set to 1:2. A value of 1:1:3 would put the first page in dual-page layout in the first column, and for layouts with more columns the first page would be put in the 3rd column. |
-| highlight-active-color | String | rgba(0,188,0,0.5) | Defines the color that is used to show the current selected highlighted element (e.g: current search result) |
-| highlight-color | String | rgba(159,251,0,0.5) | Defines the color that is used for highlighting parts of the document (e.g.:show search results) |
-| highlight-fg | String | rgba(0,0,0,0.5) | Defines the color that is used for text when highlighting parts of the document (e.g.: number for links) |
-| highlighter-modifier | String | shift | Defines the modifier that needs to be pressed together with the left mouse button to draw the highlighter. Possible values are "shift", "ctrl" and "alt" |
-| incremental-search | Boolean | true | En/Disables incremental search (search while typing) |
-| index-active-bg | String | #9FBC00 | Define the background color of the selected element in index mode. |
-| index-active-fg | String | #232323 | Defines the foreground color of the selected element in index mode. |
-| index-bg | String | #232323 | Define the background color of the index mode. |
-| index-fg | String | #DDDDDD | Defines the foreground color of the index mode. |
-| jumplist-size | Integer | 2000 | Maximum number of positions to remember in the jumplist. |
-| link-hadjust | Boolean | true | En/Disables aligning to the left internal link targets, for example from the index. |
-| link-zoom | Boolean | true | En/Disables the ability of changing zoom when following links. |
-| nohlsearch | Boolean | false | Dis/Enables the highlighting of search results. |
-| open-first-page | Boolean | false | Always open documents on the first page. If disabled, zathura will jump to the last remembered position. |
-| page-cache-size | Integer | 15 | Defines the maximum number of pages that could be kept in the page cache. When the cache is full and a new page that isn't cached becomes visible, the least recently viewed page in the cache will be evicted to make room for the new one. Large values for this variable are NOT recommended, because this will lead to consuming a significant portion of the system memory. |
-| page-v-padding | Integer | 1 | Vertical page padding defines the vertical gap in pixels between each rendered page. |
-| page-h-padding | Integer | 1 | Horizontal page padding defines the horizontal gap in pixels between each rendered page. |
-| page-right-to-left | Boolean | false | Defines whether pages in multi-column view should start from the right side. |
-| page-thumbnail-size | Integer | 4194304 (4M) | Defines the maximum size in pixels of the thumbnail that could be kept in the thumbnail cache per page. The thumbnail is scaled for a quick preview during zooming before the page is rendered. When the page is rendered, the result is saved as the thumbnail only if the size is no more than this value. A larger value increases quality but introduces longer delay in zooming and uses more system memory. |
-| pages-per-row | Integer | 1 | Defines the number of pages that are rendered next to each other in a row. |
-| recolor | Boolean | false | En/Disables recoloring. |
-| recolor-adjust-lightness | Boolean | false | En/Disables adjusting lightness when recoloring. |
-| recolor-darkcolor | String | #FFFFFF | Defines the color value that is used to represent dark colors in recoloring mode. |
-| recolor-keephue | Boolean | false | En/Disables keeping original hue when recoloring. |
-| recolor-lightcolor | String | #000000 | Defines the color value that is used to represent light colors in recoloring mode. |
-| recolor-reverse-video | Boolean | false | Defines if original image colors should be kept while recoloring. |
-| render-loading | Boolean | true | Defines if the "Loading..." text should be displayed if a page is rendered. |
-| render-loading-bg | String | #FFFFFF | Defines the background color that is used for the "Loading..." text. |
-| render-loading-fg | String | #000000 | Defines the foreground color that is used for the "Loading..." text. |
-| scroll-full-overlap | Float | 0 | Defines the proportion of the current viewing area that should be visible after scrolling a full page. |
-| scroll-hstep | Float | -1 | Defines the horizontal step size of scrolling by calling the scroll command once. |
-| scroll-step | Float | 40 | Defines the step size of scrolling by calling the scroll command once. |
-| scroll-page-aware | Boolean | false | Defines if scrolling by half or full pages stops at page boundaries. |
-| scroll-wrap | Boolean | false | Defines if the last/first page should be wrapped. |
-| search-hadjust | Boolean | true | En/Disables horizontally centered search results. |
-| selection-clipboard | String | primary | Defines the X clipboard into which mouse-selected data will be written. When it is "clipboard", selected data will be written to the CLIPBOARD clipboard, and can be pasted using the Ctrl+v key combination. When it is "primary", selected data will be written to the PRIMARY clipboard, and can be pasted using the middle mouse button, or the Shift-Insert key combination. |
-| selection-notification | Boolean | true | Defines if a notification should be displayed after selecting text. |
-| signature-error-color | String | rgba(92%,11%,14%,0.9) | Defines the background color when displaying additional information for signatures with errors. |
-| signature-success-color | String | rgba(18%,80%,33%,0.9) | Defines the background color when displaying additional information for valid signatures. |
-| signature-warning-color | String | rgba(100%,84%,0%,0.9) | Defines the background color when displaying additional information for signatures with warnings. |
-| show-directories | Boolean | true | Defines if the directories should be displayed in completion. |
-| show-hidden | Boolean | false | Defines if hidden files and directories should be displayed in completion. |
-| show-recent | Integer | 10 | Defines the number of recent files that should be displayed in completion. If the value is negative, no upper bounds are applied. If the value is 0, no recent files are shown. |
-| show-signature-information | Boolean | false | Defines whether additional information on signatures embedded in documents should be displayed. |
-| statusbar-basename | Boolean | false | Use basename of the file in the statusbar. |
-| statusbar-home-tilde | Boolean | false | Display a short version of the file path, which replaces $HOME with ~, in the statusbar. |
-| statusbar-page-percent | Boolean | false | Display (current page / total pages) as a percent in the statusbar. |
-| synctex | Boolean | true | En/Disables SyncTeX backward synchronization support. |
-| synctex-edit-modifier | String | ctrl | Defines the modifier that needs to be pressed together with the left mouse button to trigger the SyncTeX backward synchronization. Possible values are "shift", "ctrl" and "alt". |
-| synctex-editor-command | String | | Defines the command executed for SyncTeX backward synchronization. |
-| vertical-center | Boolean | false | Center the screen at the vertical midpoint of the page by default. |
-| window-icon-document | Boolean | false | Defines whether the window document should be updated based on the first page of a document. |
-| window-title-basename | Boolean | false | Use basename of the file in the window title. |
-| window-title-home-tilde | Boolean | false | Display a short version of the file path, which replaces $HOME with ~, in the window title. |
-| window-title-page | Boolean | false | Display the page number in the window title. |
-| zoom-center | Boolean | false | En/Disables horizontally centered zooming. |
-| zoom-max | Integer | 1000 | Defines the maximum percentage that the zoom level can be. |
-| zoom-min | Integer | 10 | Defines the minimum percentage that the zoom level can be. |
-| zoom-step | Integer | 10 | Defines the amount of percent that is zoomed in or out on each command. |
+| abort-clear-search | Boolean | true | Clear search results on abort. |
+| adjust-open | String | best-fit | Auto adjustment mode on load ("best-fit", "width"). |
+| advance-pages-per-row | Boolean | false | Honor pages-per-row when advancing. |
+| continuous-hist-save | Boolean | false | Save history at each page change (instead of on close). |
+| database | String | plain | Database backend ("plain", "sqlite", "null").<br>"plain" is deprecated; "sqlite" will import its history. |
+| dbus-raise-window | Boolean | true | Raise window when receiving D-Bus commands. |
+| dbus-service | Boolean | true | En/Disable D-Bus (required for SyncTeX). |
+| double-click-follow | Boolean | true | Trigger link follow on double click. |
+| filemonitor | String | glib | File monitor backend ("glib", "signal", "noop"). |
+| first-page-column | String | 1:2 | Column for first page. Formatted as<br>`<1 per row>:[<2 per row>[: ...]]`. |
+| highlight-active-color | String | rgba(0,188,0,0.5) | Color for current highlighted element. |
+| highlight-color | String | rgba(159,251,0,0.5) | Color for document highlights (e.g. search results). |
+| highlight-fg | String | rgba(0,0,0,0.5) | Color for text in highlighted parts. |
+| highlighter-modifier | String | shift | Modifier for drawing highlighter ("shift", "ctrl", "alt"). |
+| incremental-search | Boolean | true | En/Disable search while typing. |
+| index-active-bg | String | #9FBC00 | Background for selected element in index mode. |
+| index-active-fg | String | #232323 | Foreground for selected element in index mode. |
+| index-bg | String | #232323 | Background for index mode. |
+| index-fg | String | #DDDDDD | Foreground for index mode. |
+| jumplist-size | Integer | 2000 | Max positions to remember in jumplist. |
+| link-hadjust | Boolean | true | Align internal link targets to the left. |
+| link-zoom | Boolean | true | Change zoom when following links. |
+| nohlsearch | Boolean | false | Dis/Enable search result highlighting. |
+| open-first-page | Boolean | false | Always open on first page (ignore last position). |
+| page-cache-size | Integer | 15 | Max cached pages. High values consume more memory. |
+| page-v-padding | Integer | 1 | Vertical gap (px) between pages. |
+| page-h-padding | Integer | 1 | Horizontal gap (px) between pages. |
+| page-right-to-left | Boolean | false | Multi-column view starts from right. |
+| page-thumbnail-size | Integer | 4M | Max size (px) of thumbnail cache per page.<br>Higher = better quality, more memory. |
+| pages-per-row | Integer | 1 | Number of pages rendered side-by-side. |
+| recolor | Boolean | false | En/Disable recoloring. |
+| recolor-adjust-lightness | Boolean | false | Adjust lightness when recoloring. |
+| recolor-darkcolor | String | #FFFFFF | Color for dark parts in recoloring mode. |
+| recolor-keephue | Boolean | false | Keep original hue when recoloring. |
+| recolor-lightcolor | String | #000000 | Color for light parts in recoloring mode. |
+| recolor-reverse-video | Boolean | false | Keep original image colors while recoloring. |
+| render-loading | Boolean | true | Display "Loading..." text during rendering. |
+| render-loading-bg | String | #FFFFFF | Background for "Loading..." text. |
+| render-loading-fg | String | #000000 | Foreground for "Loading..." text. |
+| scroll-full-overlap | Float | 0 | Proportion of area visible after full page scroll. |
+| scroll-hstep | Float | -1 | Horizontal step size for scroll command. |
+| scroll-step | Float | 40 | Step size for scroll command. |
+| scroll-page-aware | Boolean | false | Scrolling stops at page boundaries. |
+| scroll-wrap | Boolean | false | Wrap last/first page. |
+| search-hadjust | Boolean | true | Horizontally center search results. |
+| selection-clipboard | String | primary | X clipboard for selection ("clipboard", "primary"). |
+| selection-notification | Boolean | true | Display notification after selecting text. |
+| signature-error-color | String | rgba(...) | BG color for signatures with errors. |
+| signature-success-color | String | rgba(...) | BG color for valid signatures. |
+| signature-warning-color | String | rgba(...) | BG color for signatures with warnings. |
+| show-directories | Boolean | true | Display directories in completion. |
+| show-hidden | Boolean | false | Display hidden files/dirs in completion. |
+| show-recent | Integer | 10 | Number of recent files in completion. 0 to disable. |
+| show-signature-information | Boolean | false | Display embedded signature info. |
+| statusbar-basename | Boolean | false | Use basename of file in statusbar. |
+| statusbar-home-tilde | Boolean | false | Replace $HOME with ~ in statusbar. |
+| statusbar-page-percent | Boolean | false | Display (page / total) as % in statusbar. |
+| synctex | Boolean | true | En/Disable SyncTeX backward sync. |
+| synctex-edit-modifier | String | ctrl | Modifier for SyncTeX backward sync. |
+| synctex-editor-command | String | | Command for SyncTeX backward sync. |
+| vertical-center | Boolean | false | Center screen at vertical midpoint of page. |
+| window-icon-document | Boolean | false | Update window icon based on first page. |
+| window-title-basename | Boolean | false | Use basename of file in window title. |
+| window-title-home-tilde | Boolean | false | Replace $HOME with ~ in window title. |
+| window-title-page | Boolean | false | Display page number in window title. |
+| zoom-center | Boolean | false | Horizontally center zooming. |
+| zoom-max | Integer | 1000 | Max zoom percentage. |
+| zoom-min | Integer | 10 | Min zoom percentage. |
+| zoom-step | Integer | 10 | Zoom amount (%) per command. |
+
+
 
