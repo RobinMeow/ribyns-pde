@@ -4,15 +4,15 @@ My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other t
 
 ## Arch
 
-`git clone git@github.com:RobinMeow/ribyns-pde.git $HOME/ribyns-pde`
+`git clone ssh://git@codeberg.com:Ribyn/ribyns-env.git $HOME/ribyns-env`
 
-if zsh is not yet synced, ake sure to export the `PDE` environment variable before running any scripts:
-`export PDE="$HOME/ribyns-pde"`
+if zsh is not yet synced, ake sure to export the `RIBYNS_ENV` environment variable before running any scripts:
+`export RIBYNS_ENV="$HOME/ribyns-env"`
 
 > if zsh is already installed, .zshrc exports this variable
 
 Run the install script:
-`~/ribyns-pde/scripts/install.sh --pacman`
+`~/ribyns-env/scripts/install.sh --pacman`
 
 
 ## Terminal

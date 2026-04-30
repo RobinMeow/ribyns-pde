@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 
 EMAIL="$1"
 

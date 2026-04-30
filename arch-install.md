@@ -117,7 +117,7 @@ and run `systemctl start NetworkManager.service` to start it now and to establis
 
 Alternatively, use the setup script to create a user:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh | bash
+curl -fsSL https://codeberg.org/Ribyn/ribyns-env/raw/branch/master/scripts/setup-linux.sh | bash
 ```
 
 WARN: ran an Syu update and seems like i switched to extra/nvidia-open (open source drivers, prolly better was wasnt supported prev i think?)
@@ -134,7 +134,7 @@ create a new user
 `-G` add to group named sudo
 `-s` default shell
 
-exit root login into user and set up ribyns-pde for nicer shell
+exit root login into user and set up ribyns-env for nicer shell
 
 ### Desktop Environment
 
@@ -158,7 +158,7 @@ run it with `google-chrome-stable`
 [Wallet]
 Enabled=false
 ```
-you can set the background to the image in the ribyns-pde repo.
+you can set the background to the image in the ribyns-env repo.
 
 
 the second monitor worked after installing nvidia drivers and running mudprobe nvidia. it than worked on restart as well.

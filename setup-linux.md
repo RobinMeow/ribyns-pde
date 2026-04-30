@@ -5,13 +5,13 @@ To prepare a Fedora or Arch Linux instance, run the following command. The scrip
 ## Quick Start
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
-SKIP_INSTALL=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/RobinMeow/ribyns-pde/master/scripts/setup-linux.sh)"
+sh -c "$(curl -fsSL https://codeberg.org/Ribyn/ribyns-env/raw/branch/master/scripts/setup-linux.sh)"
+SKIP_INSTALL=true sh -c "$(curl -fsSL https://codeberg.org/Ribyn/ribyns-env/raw/branch/master/scripts/setup-linux.sh)"
 ```
 
 or manually (Recommended: the setup script is iffy):
 ```bash
-git clone https://github.com/RobinMeow/ribyns-pde $HOME/ribyns-pde
-$PDE/scripts/install.sh --full-install
+git clone ssh://git@codeberg.org:Ribyn/ribyns-env.git $HOME/ribyns-env
+$RIBYNS_ENV/scripts/install.sh --full-install
 ```
 

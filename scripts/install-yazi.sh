@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -u
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
@@ -13,7 +13,7 @@ run_on_fedora <<'EOF'
     chafa ffmpeg 7zip jq poppler fd-find ripgrep fzf ImageMagick mediainfo feh file mpv
 EOF
 
-"$PDE/scripts/ensure-homebrew-installed.sh"
+"$RIBYNS_ENV/scripts/ensure-homebrew-installed.sh"
 
 # NOTE: optional dependencies, tho i got em all using dnf/pacman (excluding zoxide i dont use that)
 # brew install sevenzip jq poppler fd ripgrep fzf
@@ -37,4 +37,4 @@ else
 fi
 
 mkdir -p "$HOME/.config/yazi"
-cp -r "$PDE/.config/yazi/"* "$HOME/.config/yazi/"
+cp -r "$RIBYNS_ENV/.config/yazi/"* "$HOME/.config/yazi/"

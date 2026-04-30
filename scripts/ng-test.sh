@@ -3,7 +3,7 @@ set -euo pipefail
 
 clear
 # Configuration
-CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-pde"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ribyns-env"
 HISTORY_FILE="$CACHE_DIR/ng_test_history"
 HISTORY_LIMIT=5
 BROWSER="ChromeHeadless"

@@ -1,5 +1,5 @@
-# export RIBYNS_PDE_LOG_VERBOSE=true
-# export RIBYNS_PDE_LOG_INFO=true
+# export RIBYNS_ENV_LOG_VERBOSE=true
+# export RIBYNS_ENV_LOG_INFO=true
 # export CODE_COMPANION_DEFAULT_ADAPTER="ollama"
 # export CODE_COMPANION_OLLAMA_MODEL="qwen2.5-coder:3b"
 

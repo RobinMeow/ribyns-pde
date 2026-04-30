@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -u
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 NVIM_BUILD_STABLE="false"
 for arg in "$@"; do
@@ -13,9 +13,9 @@ done
 
 function build_nvim_from_source() {
 	if [[ "$NVIM_BUILD_STABLE" == "true" ]]; then
-		"$PDE/scripts/build-neovim-from-source.sh" --stable
+		"$RIBYNS_ENV/scripts/build-neovim-from-source.sh" --stable
 	else
-		"$PDE/scripts/build-neovim-from-source.sh"
+		"$RIBYNS_ENV/scripts/build-neovim-from-source.sh"
 	fi
 }
 
@@ -36,4 +36,4 @@ EOF
 # rm -rf "$HOME/.config/nvim/"
 
 mkdir -p "$HOME/.config/nvim"
-cp -r "$PDE/.config/nvim/"* "$HOME/.config/nvim/"
+cp -r "$RIBYNS_ENV/.config/nvim/"* "$HOME/.config/nvim/"

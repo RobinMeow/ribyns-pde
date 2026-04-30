@@ -2,13 +2,13 @@
 
 set -euo pipefail
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 
-RIBYNS_PDE_LOG_INFO=true info "Installing core packages..."
+RIBYNS_ENV_LOG_INFO=true info "Installing core packages..."
 
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
-"$PDE/scripts/ensure-homebrew-installed.sh"
+"$RIBYNS_ENV/scripts/ensure-homebrew-installed.sh"
 
 run_on_arch <<'EOF'
 	sudo pacman -S --needed --noconfirm \
@@ -97,4 +97,4 @@ brew install gemini-cli
 
 tldr --update
 
-RIBYNS_PDE_LOG_INFO=true success "Core packages installed"
+RIBYNS_ENV_LOG_INFO=true success "Core packages installed"

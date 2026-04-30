@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 clone_repo() {
-	source "$PDE/scripts/utils.sh"
+	source "$RIBYNS_ENV/scripts/utils.sh"
 
 	# expect last arg to be a destination dir
 	local dest_dir="${@: -1}"

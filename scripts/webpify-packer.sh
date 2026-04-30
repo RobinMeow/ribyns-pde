@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 
 usage() {
 	cat <<EOF
@@ -38,7 +38,7 @@ done
 	usage
 }
 
-OUTPUT_DIR="$PDE/images/zip"
+OUTPUT_DIR="$RIBYNS_ENV/images/zip"
 
 if [ -d "$INPUT_DIR" ]; then
 	FILES=("$INPUT_DIR"/*)

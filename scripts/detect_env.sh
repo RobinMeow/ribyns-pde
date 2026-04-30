@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 detect_env() {
-	source "$PDE/scripts/utils.sh"
+	source "$RIBYNS_ENV/scripts/utils.sh"
 
 	OS_TYPE="unknown"
 	WSL_VERSION="none"

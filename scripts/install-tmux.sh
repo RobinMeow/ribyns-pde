@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -u
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 run_on_arch sudo pacman -S --needed --noconfirm tmux
 run_on_fedora sudo dnf install -y tmux
@@ -10,9 +10,9 @@ run_on_fedora sudo dnf install -y tmux
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"
 mkdir -p "$TMUX_PLUGIN_DIR"
 
-cp "$PDE/.tmux.conf" "$HOME/.tmux.conf"
+cp "$RIBYNS_ENV/.tmux.conf" "$HOME/.tmux.conf"
 
-source "$PDE/scripts/clone_repo.sh"
+source "$RIBYNS_ENV/scripts/clone_repo.sh"
 clone_repo https://github.com/catppuccin/tmux "$TMUX_PLUGIN_DIR/catppuccin"
 clone_repo https://github.com/tmux-plugins/tmux-cpu "$TMUX_PLUGIN_DIR/tmux-cpu"
 clone_repo https://github.com/tmux-plugins/tmux-battery "$TMUX_PLUGIN_DIR/tmux-battery"

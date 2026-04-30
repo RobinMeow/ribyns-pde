@@ -17,7 +17,7 @@ EOF
 	exit 0
 }
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 
 # Defaults
 fps=30
@@ -58,11 +58,11 @@ done
 
 if [ -d "$INPUT_DIR" ]; then
 	# Directory mode: loop through files
-	OUTPUT_DIR="$PDE/tmp/$(basename "$INPUT_DIR")"
+	OUTPUT_DIR="$RIBYNS_ENV/tmp/$(basename "$INPUT_DIR")"
 	FILES=("$INPUT_DIR"/*.mp4)
 else
 	# Single file mode: just one item
-	OUTPUT_DIR="$PDE/tmp"
+	OUTPUT_DIR="$RIBYNS_ENV/tmp"
 	FILES=("$INPUT_DIR")
 fi
 

@@ -2,7 +2,7 @@
 
 set -e
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 REPO_DEST="$HOME/neovim"
 
 STABLE=false
@@ -22,7 +22,7 @@ fi
 
 verbose "Using branch: $BRANCH"
 
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 run_on_arch <<'EOF'
 	verbose "Detected Arch Linux. Installing dependencies..."

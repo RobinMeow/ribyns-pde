@@ -2,20 +2,20 @@
 set -e
 
 
-source "$PDE/scripts/utils.sh"
-source "$PDE/scripts/detect_env.sh"
-source "$PDE/scripts/detect_win_user.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/detect_env.sh"
+source "$RIBYNS_ENV/scripts/detect_win_user.sh"
 detect_env
 
 # Check for clean git state and no added untracked files
-if ! git -C "$PDE" diff-index --quiet HEAD -- || [[ -n "$(git -C "$PDE" ls-files --others --exclude-standard)" ]]; then
+if ! git -C "$RIBYNS_ENV" diff-index --quiet HEAD -- || [[ -n "$(git -C "$RIBYNS_ENV" ls-files --others --exclude-standard)" ]]; then
 	error "Git repository has uncommitted changes. Please commit or stash them first"
 	exit 1
 fi
 
-cp -r "$HOME/.config/nvim" "$PDE/.config/"
-cp "$HOME/.zshrc" "$PDE/.zshrc"
-cp "$HOME/.p10k.zsh" "$PDE/.p10k.zsh"
+cp -r "$HOME/.config/nvim" "$RIBYNS_ENV/.config/"
+cp "$HOME/.zshrc" "$RIBYNS_ENV/.zshrc"
+cp "$HOME/.p10k.zsh" "$RIBYNS_ENV/.p10k.zsh"
 
 if [[ "$OS_TYPE" == "wsl" ]]; then
 	detect_win_user
@@ -23,14 +23,14 @@ if [[ "$OS_TYPE" == "wsl" ]]; then
 		error "Windows user not detected. Cannot copy .wezterm.lua"
 		exit 1
 	fi
-	cp "/mnt/c/Users/$WINDOWS_USER/.wezterm.lua" "$PDE/.wezterm.lua"
+	cp "/mnt/c/Users/$WINDOWS_USER/.wezterm.lua" "$RIBYNS_ENV/.wezterm.lua"
 else
-	cp "$HOME/.wezterm.lua" "$PDE/.wezterm.lua"
+	cp "$HOME/.wezterm.lua" "$RIBYNS_ENV/.wezterm.lua"
 fi
 
 # Reset working directory (optional)
-git -C "$PDE" diff
-git -C "$PDE" checkout .
+git -C "$RIBYNS_ENV" diff
+git -C "$RIBYNS_ENV" checkout .
 
 read -n 1 -rp "Run 'git clean -f'? [y/N]: " answer
 
@@ -42,7 +42,7 @@ read -n 1 -rp "Run 'git clean -f'? [y/N]: " answer
 echo
 
 if [[ "$answer" =~ ^[Yy]$ ]]; then
-	git -C "$PDE" clean -f
+	git -C "$RIBYNS_ENV" clean -f
 	success "\`git clean -f\` executed"
 else
 	info "skipped g\`git clean -f\`"

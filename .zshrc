@@ -60,9 +60,9 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
 
-if [[ -d "$HOME/ribyns-pde" ]]; then
-  export PATH="$PATH:$HOME/ribyns-pde/scripts"
-  export PDE="$HOME/ribyns-pde"
+if [[ -d "$HOME/ribyns-env" ]]; then
+  export PATH="$PATH:$HOME/ribyns-env/scripts"
+  export RIBYNS_ENV="$HOME/ribyns-env"
 else
   YELLOW="\033[1;33m"
 	echo -e "${YELLOW}[WARN] $*${NC}"
@@ -80,7 +80,6 @@ fi
 # treeview of all git tracked files (ripgrep respects .gitignore)
 alias rgtree='rg --files | tree --fromfile'
 alias nvimconfig='cd $HOME/.config/nvim && nvim'
-alias ribyns-pde='cd $HOME/ribyns-pde'
 #
 alias gpl='git pull'
 #

@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 
-source "$PDE/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
 
-echo "Installing from source: $PDE"
+echo "Installing from source: $RIBYNS_ENV"
 
 info "Installing zsh"
-"$PDE/scripts/install-zsh.sh"
+"$RIBYNS_ENV/scripts/install-zsh.sh"
 
 info "Installing CommitMono"
-"$PDE/scripts/install-commit-mono.sh"
+"$RIBYNS_ENV/scripts/install-commit-mono.sh"
 
 info "Installing .gitconfig"
-"$PDE/scripts/install-gitconfig.sh"
+"$RIBYNS_ENV/scripts/install-gitconfig.sh"
 
 info "Installing bat"
-"$PDE/scripts/install-bat.sh"
+"$RIBYNS_ENV/scripts/install-bat.sh"
 
 info "Installing btop"
-"$PDE/scripts/install-btop.sh"
+"$RIBYNS_ENV/scripts/install-btop.sh"
 
 info "Installing kitty"
-"$PDE/scripts/install-kitty.sh"
+"$RIBYNS_ENV/scripts/install-kitty.sh"
 
 info "Installing wezterm"
-"$PDE/scripts/install-wezterm.sh"
+"$RIBYNS_ENV/scripts/install-wezterm.sh"
 
 info "Installing nvim"
-"$PDE/scripts/install-nvim.sh"
+"$RIBYNS_ENV/scripts/install-nvim.sh"
 
 info "Installing tmux"
-"$PDE/scripts/install-tmux.sh"
+"$RIBYNS_ENV/scripts/install-tmux.sh"
 
 info "Installing yazi"
-"$PDE/scripts/install-yazi.sh"
+"$RIBYNS_ENV/scripts/install-yazi.sh"
 
 full_install=false
 for arg in "$@"; do
@@ -44,30 +44,34 @@ done
 for arg in "$@"; do
 	if [[ "$arg" == "--pm" || $full_install ]]; then
 		info "Installing core"
-		"$PDE/scripts/pm-core.sh"
+		"$RIBYNS_ENV/scripts/pm-core.sh"
 	fi
+
 	if [[ "$arg" == "--webdev" || $full_install ]]; then
 		info "Installing gadgets"
-		"$PDE/scripts/pm-gadgets.sh"
+		"$RIBYNS_ENV/scripts/pm-gadgets.sh"
 	fi
-	if [[ "$arg" == "--gadgets" || $full_install ]]; then
+
+	if [[ "$arg" == "--gadgets" ]]; then
 		info "Installing gadgets"
-		"$PDE/scripts/pm-gadgets.sh"
+		"$RIBYNS_ENV/scripts/pm-gadgets.sh"
 	fi
-	if [[ "$arg" == "--kde" || $full_install ]]; then
+
+	if [[ "$arg" == "--kde" ]]; then
 		info "Installing kde"
-		"$PDE/scripts/install-kde.sh"
+		"$RIBYNS_ENV/scripts/install-kde.sh"
 	fi
-	if [[ "$arg" == "--hypr" || $full_install ]]; then
+
+	if [[ "$arg" == "--hypr" ]]; then
 		info "Installing rofi"
-		"$PDE/scripts/install-rofi.sh"
+		"$RIBYNS_ENV/scripts/install-rofi.sh"
 
 		info "Installing waybar"
-		"$PDE/scripts/install-waybar.sh"
+		"$RIBYNS_ENV/scripts/install-waybar.sh"
 
 		info "Installing hypr"
-		"$PDE/scripts/install-hypr.sh"
+		"$RIBYNS_ENV/scripts/install-hypr.sh"
 	fi
 done
 
-success "ribyns-pde installed"
+success "ribyns-env installed"

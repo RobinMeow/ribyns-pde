@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# setup-pde.sh: Standalone script to prepare a Linux instance (Fedora/Arch).
 # Usage: curl -sSL <url> | bash
 
 set -e
@@ -73,15 +72,15 @@ EOF
 		echo "skipping git clone and install"
 	else
 		su - "$USERNAME" <<'EOF'
-git clone --depth 1 -b master https://github.com/RobinMeow/ribyns-pde
-export PDE="$HOME/ribyns-pde"
-"$PDE/scripts/install.sh" --full-install
+git clone --depth 1 -b master https://codeberg.org/Ribyn/ribyns-env
+export RIBYNS_ENV="$HOME/ribyns-env"
+"$RIBYNS_ENV/scripts/install.sh" --full-install
 EOF
 	fi
 	echo "you now now login in using: su --login $USERNAME"
 else
-	git clone --depth 1 -b master https://github.com/RobinMeow/ribyns-pde
-	export PDE="$HOME/ribyns-pde"
-	"$PDE/scripts/install.sh" --full-install
+	git clone --depth 1 -b master https://codeberg.org/Ribyn/ribyns-env
+	export RIBYNS_ENV="$HOME/ribyns-env"
+	"$RIBYNS_ENV/scripts/install.sh" --full-install
 	echo "Setup complete for '$(whoami)'."
 fi

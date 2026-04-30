@@ -5,8 +5,8 @@
 
 set -e
 
-source "$PDE/scripts/utils.sh"
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/utils.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 run_on_arch <<'EOF'
     echo "ERROR: Use pacman on archlinux to install hyperland."
@@ -16,8 +16,8 @@ EOF
 
 # Building Hyprland on Fedora HOWTO #284 https://github.com/hyprwm/Hyprland/discussions/284
 
-git clone --recursive https://github.com/hyprwm/Hyprland "$PDE/hyprland"
-cd "$PDE/hyprland"
+git clone --recursive https://github.com/hyprwm/Hyprland "$RIBYNS_ENV/hyprland"
+cd "$RIBYNS_ENV/hyprland"
 
 # NOTE: using cmake (recommended)
 

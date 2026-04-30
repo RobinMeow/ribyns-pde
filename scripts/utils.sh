@@ -42,13 +42,13 @@ success() {
 }
 
 info() {
-	if [[ "${RIBYNS_PDE_LOG_INFO:-false}" =~ ^(true|1|yes)$ ]]; then
+	if [[ "${RIBYNS_ENV_LOG_INFO:-false}" =~ ^(true|1|yes)$ ]]; then
 		echo -e "${CATBLUE}[INFO]${NC} $*"
 	fi
 }
 
 verbose() {
-	if [[ "${RIBYNS_PDE_LOG_VERBOSE:-false}" =~ ^(true|1|yes)$ ]]; then
+	if [[ "${RIBYNS_ENV_LOG_VERBOSE:-false}" =~ ^(true|1|yes)$ ]]; then
 		echo -e "${CATSURFACE2}[VERBOSE]${NC} $*"
 	fi
 }
@@ -140,8 +140,8 @@ Logging Functions:
   error <message>        - Print error message (red)
   warn <message>         - Print warning message (orange)
   success <message>      - Print success message (green)
-  info <message>         - Print info message (blue, if RIBYNS_PDE_LOG_INFO=true|1|yes)
-  verbose <message>      - Print verbose message (magenta, if RIBYNS_PDE_LOG_VERBOSE=true|1|yes)
+  info <message>         - Print info message (blue, if RIBYNS_ENV_LOG_INFO=true|1|yes)
+  verbose <message>      - Print verbose message (magenta, if RIBYNS_ENV_LOG_VERBOSE=true|1|yes)
 
 Color Echo Functions:
   echo_surface0 <text>   - Echo with surface0 color
@@ -163,8 +163,8 @@ Color Echo Functions:
   echo_lavender <text>   - Echo with lavender color
 
 Environment Variables:
-  RIBYNS_PDE_LOG_INFO=true|1|yes         - Enable info() output
-  RIBYNS_PDE_LOG_VERBOSE=true|1|yes      - Enable verbose() output
+  RIBYNS_ENV_LOG_INFO=true|1|yes         - Enable info() output
+  RIBYNS_ENV_LOG_VERBOSE=true|1|yes      - Enable verbose() output
 
 Examples:
   source utils.sh

@@ -3,13 +3,13 @@
 # renv - Ribyn's Environment CLI dispatcher
 
 # Resolve the project root
-if [[ -z "${PDE}" ]]; then
-	export PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -z "${RIBYNS_ENV}" ]]; then
+	export RIBYNS_ENV="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
 # Source utils for colors and logging
-if [[ -f "$PDE/scripts/utils.sh" ]]; then
-	source "$PDE/scripts/utils.sh"
+if [[ -f "$RIBYNS_ENV/scripts/utils.sh" ]]; then
+	source "$RIBYNS_ENV/scripts/utils.sh"
 else
 	CATBLUE="\033[38;5;109m"; CATGREEN="\033[38;5;114m"; CATRED="\033[38;5;203m"; NC="\033[0m"
 	info() { echo -e "${CATBLUE}[INFO]${NC} $*"; }
@@ -38,9 +38,9 @@ dispatch() {
 	shift 2
 
 	local patterns=(
-		"$PDE/scripts/${prefix}-${target}.sh"
-		"$PDE/scripts/${prefix}_${target}.sh"
-		"$PDE/scripts/${target}.sh"
+		"$RIBYNS_ENV/scripts/${prefix}-${target}.sh"
+		"$RIBYNS_ENV/scripts/${prefix}_${target}.sh"
+		"$RIBYNS_ENV/scripts/${target}.sh"
 	)
 
 	for script in "${patterns[@]}"; do
@@ -60,7 +60,7 @@ install)
 	shift
 	if [[ -z "$1" ]]; then
 		echo -e "${CATBLUE}Available for install:${NC}"
-		find "$PDE/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*install[-_](.*)\.sh/\1/' | sort | column
+		find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*install[-_](.*)\.sh/\1/' | sort | column
 	else
 		dispatch "install" "$@"
 	fi
@@ -69,11 +69,11 @@ build)
 	shift
 	if [[ -z "$1" ]]; then
 		echo -e "${CATBLUE}Available to build from source:${NC}"
-		find "$PDE/scripts" -maxdepth 1 -name "build-*-from-source.sh" | sed -E 's/.*build-(.*)-from-source\.sh/\1/' | sort | column
+		find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "build-*-from-source.sh" | sed -E 's/.*build-(.*)-from-source\.sh/\1/' | sort | column
 	else
 		# Special handling for the '-from-source' suffix
-		if [[ -f "$PDE/scripts/build-$1-from-source.sh" ]]; then
-			script="$PDE/scripts/build-$1-from-source.sh"
+		if [[ -f "$RIBYNS_ENV/scripts/build-$1-from-source.sh" ]]; then
+			script="$RIBYNS_ENV/scripts/build-$1-from-source.sh"
 			shift
 			"$script" "$@"
 		else
@@ -85,21 +85,21 @@ pm)
 	shift
 	if [[ -z "$1" ]]; then
 		echo -e "${CATBLUE}Available PM groups:${NC}"
-		find "$PDE/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*pm-(.*)\.sh/\1/' | sort | column
+		find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*pm-(.*)\.sh/\1/' | sort | column
 	else
 		dispatch "pm" "$@"
 	fi
 	;;
 setup)
-	"$PDE/scripts/setup-linux.sh" "${@:2}"
+	"$RIBYNS_ENV/scripts/setup-linux.sh" "${@:2}"
 	;;
 list)
 	echo -e "${CATBLUE}--- Installable ---${NC}"
-	find "$PDE/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*install[-_](.*)\.sh/\1/' | sort | column
+	find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*install[-_](.*)\.sh/\1/' | sort | column
 	echo -e "\n${CATBLUE}--- Source Builds ---${NC}"
-	find "$PDE/scripts" -maxdepth 1 -name "build-*-from-source.sh" | sed -E 's/.*build-(.*)-from-source\.sh/\1/' | sort | column
+	find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "build-*-from-source.sh" | sed -E 's/.*build-(.*)-from-source\.sh/\1/' | sort | column
 	echo -e "\n${CATBLUE}--- PM Groups ---${NC}"
-	find "$PDE/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*pm-(.*)\.sh/\1/' | sort | column
+	find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*pm-(.*)\.sh/\1/' | sort | column
 	;;
 help | --help | -h)
 	usage
@@ -109,13 +109,13 @@ help | --help | -h)
 	if command -v fzf >/dev/null 2>&1; then
 		# Generate a combined list for fzf
 		choice=$( (
-			find "$PDE/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*scripts\/(install[-_].*)\.sh/\1/'
-			find "$PDE/scripts" -maxdepth 1 -name "build-*.sh" | sed -E 's/.*scripts\/(build-.*)\.sh/\1/'
-			find "$PDE/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*scripts\/(pm-.*)\.sh/\1/'
+			find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "install-*.sh" -o -name "install_*.sh" | sed -E 's/.*scripts\/(install[-_].*)\.sh/\1/'
+			find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "build-*.sh" | sed -E 's/.*scripts\/(build-.*)\.sh/\1/'
+			find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "pm-*.sh" | sed -E 's/.*scripts\/(pm-.*)\.sh/\1/'
 		) | fzf --prompt="renv > " --height=40% --reverse --border)
 		
 		if [[ -n "$choice" ]]; then
-			"$PDE/scripts/${choice}.sh"
+			"$RIBYNS_ENV/scripts/${choice}.sh"
 		fi
 	else
 		usage
@@ -123,8 +123,8 @@ help | --help | -h)
 	;;
 *)
 	# Fallback: try to run as a direct script name if it matches nothing else
-	if [[ -f "$PDE/scripts/$1.sh" ]]; then
-		script="$PDE/scripts/$1.sh"
+	if [[ -f "$RIBYNS_ENV/scripts/$1.sh" ]]; then
+		script="$RIBYNS_ENV/scripts/$1.sh"
 		shift
 		"$script" "$@"
 	else

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# ribyn - Entry point for Robin's PDE scripts
+# ribyn - Entry point for Robin's RIBYNS_ENV scripts
 
 # Resolve the project root
-if [[ -z "${PDE}" ]]; then
-	export PDE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -z "${RIBYNS_ENV}" ]]; then
+	export RIBYNS_ENV="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
 # Source utils for colors and logging
-if [[ -f "$PDE/scripts/utils.sh" ]]; then
-	source "$PDE/scripts/utils.sh"
+if [[ -f "$RIBYNS_ENV/scripts/utils.sh" ]]; then
+	source "$RIBYNS_ENV/scripts/utils.sh"
 else
 	# Fallback colors if utils.sh is missing
 	CATBLUE="\033[38;5;109m"
@@ -22,7 +22,7 @@ else
 fi
 
 usage() {
-	echo -e "${CATBLUE}ribyn${NC} - Robin's PDE Script Entry Point"
+	echo -e "${CATBLUE}ribyn${NC} - Robin's RIBYNS_ENV Script Entry Point"
 	echo ""
 	echo "Usage:"
 	echo "  ribyn [script_name] [args...]   Run a specific script"
@@ -34,7 +34,7 @@ usage() {
 
 list_scripts() {
 	# List all .sh files, but filter out common library/utility scripts
-	find "$PDE/scripts" -maxdepth 1 -name "*.sh" -not -name "utils.sh" -not -name "os-detect.sh" -printf "%f\n" |
+	find "$RIBYNS_ENV/scripts" -maxdepth 1 -name "*.sh" -not -name "utils.sh" -not -name "os-detect.sh" -printf "%f\n" |
 		sed 's/\.sh$//' |
 		sort
 }
@@ -45,7 +45,7 @@ if [[ $# -eq 0 ]]; then
 	if command -v fzf >/dev/null 2>&1; then
 		script=$(list_scripts | fzf --prompt="Select a script to run: " --height=40% --reverse --border)
 		if [[ -n "$script" ]]; then
-			"$PDE/scripts/${script}.sh"
+			"$RIBYNS_ENV/scripts/${script}.sh"
 		fi
 	else
 		usage
@@ -71,11 +71,11 @@ case "$1" in
 	# Remove .sh suffix if provided to avoid duplication
 	script_name="${script_name%.sh}"
 
-	if [[ -f "$PDE/scripts/${script_name}.sh" ]]; then
+	if [[ -f "$RIBYNS_ENV/scripts/${script_name}.sh" ]]; then
 		shift
-		"$PDE/scripts/${script_name}.sh" "$@"
+		"$RIBYNS_ENV/scripts/${script_name}.sh" "$@"
 	else
-		error "Script '${script_name}' not found in $PDE/scripts/"
+		error "Script '${script_name}' not found in $RIBYNS_ENV/scripts/"
 		echo "Use 'ribyn --list' to see available scripts."
 		exit 1
 	fi

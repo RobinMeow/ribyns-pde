@@ -2,7 +2,7 @@
 
 
 detect_win_user() {
-	source "$PDE/scripts/utils.sh"
+	source "$RIBYNS_ENV/scripts/utils.sh"
 	local user_dir="/mnt/c/Users"
 
 	# Determine Windows user directory
@@ -51,7 +51,7 @@ detect_win_user() {
 
 # Run detection if script is executed directly
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-	source "$PDE/scripts/detect_env.sh"
+	source "$RIBYNS_ENV/scripts/detect_env.sh"
 	detect_env
 	detect_win_user
 	verbose "WINDOWS_USER=$WINDOWS_USER"

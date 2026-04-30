@@ -3,7 +3,7 @@
 # https://docs.fedoraproject.org/en-US/quick-docs/fonts/#unpackaged
 
 set -u
-source "$PDE/scripts/run_on_distro.sh"
+source "$RIBYNS_ENV/scripts/run_on_distro.sh"
 
 reinstall=false
 for arg in "$@"; do
