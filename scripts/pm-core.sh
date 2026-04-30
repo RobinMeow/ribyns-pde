@@ -49,7 +49,8 @@ run_on_arch <<'EOF'
 		mpv \
 		chafa \
 		fd \
-		bluetui
+		bluetui \
+		zathura zathura-pdf-mupdf tesseract-data-eng
 EOF
 
 # TODO: bluetui requires build from source on fedora
