@@ -1,5 +1,9 @@
 # TicketSystem
 
+## Rust app ideas
+
+- an app for workouts. Which shows a timer, and vie pre configured input how long a session is and how long a breka inbetween is. perpahs also aa plan format as input
+
 ## usage tracking
 
 track how much each script is called.
