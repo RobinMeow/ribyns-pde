@@ -1,0 +1,4 @@
+[Daemon]
+LockGrace=300
+LockOnResume=false
+Timeout=90
