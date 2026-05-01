@@ -28,6 +28,9 @@ info "Installing wezterm"
 info "Installing nvim"
 "$RIBYNS_ENV/scripts/install-nvim.sh"
 
+info "Installing Rust Music Player Client"
+"$RIBYNS_ENV/scripts/install-rmpc.sh"
+
 info "Installing tmux"
 "$RIBYNS_ENV/scripts/install-tmux.sh"
 
