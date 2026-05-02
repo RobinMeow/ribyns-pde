@@ -56,7 +56,7 @@ export PATH="$PATH:$HOME/ribyns-env/scripts"
 export RIBYNS_ENV="$HOME/ribyns-env"
 
 # treeview of all git tracked files (ripgrep respects .gitignore)
-alias rgtree='rg --files | tree --fromfile'
+alias lstree='eza -1T'
 alias nvimconfig='cd $HOME/.config/nvim && nvim'
 
 alias gpl='git pull'
@@ -65,6 +65,11 @@ alias gpl='git pull'
 alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
 alias gl='git log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"'
 alias gss='git status --short --untracked-files=all'
+
+# shadow ls to use eza instead
+alias ls='eza'
+# lsdefault :)
+alias lsd='eza -1 --group-directories-first --git-ignore'
 
 export PATH="$HOME/.dotnet:$PATH"
 # prepend to take preceedence over windows/wsl passthrough paths
