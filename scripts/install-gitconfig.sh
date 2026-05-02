@@ -7,7 +7,7 @@ set -u
 # they wont be removed
 # new ones will be added
 # existing ones overidden
-git config --file "$RIBYNS_ENV/.gitconfig" --get-regexp '^(core|advice|pull|push)\.' | while read -r key value; do
+git config --file "$RIBYNS_ENV/.gitconfig" --get-regexp '^(core|init|advice|pull|push)\.' | while read -r key value; do
 	git config --global "$key" "$value"
 done
 

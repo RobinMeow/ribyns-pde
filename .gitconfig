@@ -1,6 +1,9 @@
 [core]
 	pager = less -FRX
+[init]
+	defaultBranch = master
 [advice]
+	defaultBranchName = false
 	addIgnoreFile = false
 	addIgnoredFile = false
 [push]
