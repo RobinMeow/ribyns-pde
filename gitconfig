@@ -1,5 +1,5 @@
 [core]
-	pager = less -FRX
+	pager = less --quit-if-one-screen --RAW-CONTROL-CHARS --no-init
 [init]
 	defaultBranch = master
 [advice]
