@@ -10,9 +10,7 @@ _start_time=$EPOCHREALTIME
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# source .local/bin/env some apps are installed there (e.g. copilot_cli and claude)
-if [[ -f "$HOME/.local/bin/env" ]] . "$HOME/.local/bin/env"
+HISTCONTROL=ignoredups
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
