@@ -23,7 +23,7 @@ if [[ "$OS_TYPE" == "wsl" ]]; then
 	WEZTERM_LUA_DIR="$WINDOWS_HOME"
 fi
 
-cp "$RIBYNS_ENV/.wezterm.lua" "$WEZTERM_LUA_DIR"
+cp "$RIBYNS_ENV/wezterm.lua" "$WEZTERM_LUA_DIR"
 
 clean=false
 for arg in "$@"; do
@@ -42,7 +42,7 @@ cp "$RIBYNS_ENV/images/wallpapers/"* "$WEZTERM_CONFIG_DIR/wallpapers/"
 
 # copy .config/wezterm content (excluding my-workspaces.lua)
 mkdir -p "$WEZTERM_CONFIG_DIR"
-for file in "$RIBYNS_ENV/.config/wezterm"/*; do
+for file in "$RIBYNS_ENV/config/wezterm"/*; do
 	if [[ "$(basename "$file")" != "my-workspaces.lua" ]]; then
 		cp -r "$file" "$WEZTERM_CONFIG_DIR/"
 	fi

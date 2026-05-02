@@ -43,7 +43,7 @@ clone_repo --depth 1 https://github.com/zsh-users/zsh-completions.git "$ZSH_CUST
 
 p10k_dest="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 clone_repo "--depth=1" "https://github.com/romkatv/powerlevel10k.git" "$p10k_dest"
-cp "$RIBYNS_ENV/.p10k.zsh" "$HOME/.p10k.zsh"
+cp "$RIBYNS_ENV/p10k.zsh" "$HOME/.p10k.zsh"
 
 # copy it last, in hope ohmyzsh doesnt override it
-cp "$RIBYNS_ENV/.zshrc" "$HOME/.zshrc"
+cp "$RIBYNS_ENV/zshrc" "$HOME/.zshrc"

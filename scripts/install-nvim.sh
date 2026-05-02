@@ -36,4 +36,4 @@ EOF
 # rm -rf "$HOME/.config/nvim/"
 
 mkdir -p "$HOME/.config/nvim"
-cp -r "$RIBYNS_ENV/.config/nvim/"* "$HOME/.config/nvim/"
+cp -r "$RIBYNS_ENV/config/nvim/"* "$HOME/.config/nvim/"

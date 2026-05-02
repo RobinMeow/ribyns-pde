@@ -14,4 +14,4 @@ run_on_fedora error "Hyprland on fedora is not set up" exit 1
 -- NVIDIA
 
 mkdir -p "$HOME/.config/hypr"
-cp -r "$RIBYNS_ENV/.config/hypr/"* "$HOME/.config/hypr/"
+cp -r "$RIBYNS_ENV/config/hypr/"* "$HOME/.config/hypr/"

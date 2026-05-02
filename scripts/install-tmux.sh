@@ -10,7 +10,7 @@ run_on_fedora sudo dnf install -y tmux
 TMUX_PLUGIN_DIR="$HOME/.config/tmux/plugins"
 mkdir -p "$TMUX_PLUGIN_DIR"
 
-cp "$RIBYNS_ENV/.tmux.conf" "$HOME/.tmux.conf"
+cp "$RIBYNS_ENV/tmux.conf" "$HOME/.tmux.conf"
 
 source "$RIBYNS_ENV/scripts/clone_repo.sh"
 clone_repo https://github.com/catppuccin/tmux "$TMUX_PLUGIN_DIR/catppuccin"

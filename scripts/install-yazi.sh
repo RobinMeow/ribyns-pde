@@ -37,4 +37,4 @@ else
 fi
 
 mkdir -p "$HOME/.config/yazi"
-cp -r "$RIBYNS_ENV/.config/yazi/"* "$HOME/.config/yazi/"
+cp -r "$RIBYNS_ENV/config/yazi/"* "$HOME/.config/yazi/"
