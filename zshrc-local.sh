@@ -8,6 +8,6 @@ alias book='zathura --mode=fullscreen "$HOME/books/Efficient Linux at the Comman
 # find history (fzf a history cmd and select it for prompt editing and fire it off)
 fh() {
 	local choice
-	choice=$(cut -d';' -f2 "$HISTFILE" | grep '..........' | fzf)
+	choice=$(cut -d';' -f2 "$HISTFILE" | sort -u | uniq | grep '..........' | fzf)
 	print -z "$choice"
 }
