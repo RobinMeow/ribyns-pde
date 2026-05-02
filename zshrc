@@ -25,12 +25,6 @@ fi
 
 zstyle ':omz:update' mode reminder
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
@@ -60,47 +54,28 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
 
-if [[ -d "$HOME/ribyns-env" ]]; then
-  export PATH="$PATH:$HOME/ribyns-env/scripts"
-  export RIBYNS_ENV="$HOME/ribyns-env"
-else
-  YELLOW="\033[1;33m"
-	echo -e "${YELLOW}[WARN] $*${NC}"
-fi
+export PATH="$PATH:$HOME/ribyns-env/scripts"
+export RIBYNS_ENV="$HOME/ribyns-env"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Self defined aliases
 # treeview of all git tracked files (ripgrep respects .gitignore)
 alias rgtree='rg --files | tree --fromfile'
 alias nvimconfig='cd $HOME/.config/nvim && nvim'
-#
-alias gpl='git pull'
-#
-# override the defaults from the git plugin:
-alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
-alias gl='git l' # reference my global .gitconfig alias
-alias gss='git ss' # reference my global .gitconfig alias
 
-# Add .dotnet/dotnet to PATH if not already present.
+alias gpl='git pull'
+
+# override the defaults from the omz git plugin:
+alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
+alias gl='git log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"'
+alias gss='git status --short --untracked-files=all'
+
 export PATH="$HOME/.dotnet:$PATH"
-# Add .dotnet/tools to PATH if not already present
-# local script installs should take preceedence over the normal arch install
-# needs to pre-prended to take precedence over other installs
+# prepend to take preceedence over windows/wsl passthrough paths
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+export PATH="$PATH:$HOME/.cargo/bin"
 
 if [[ -d "/home/linuxbrew/" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-fi
-
-if [[ -d "$HOME/.cargo/bin" ]]; then
-	export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
 # nvm node version manager
