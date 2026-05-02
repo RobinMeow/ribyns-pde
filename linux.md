@@ -25,6 +25,16 @@ filter adjacent matchin lines from stdin
 md5sum (legacy), chsum
 print checksums (a hash of stdin)
 
+tr
+translate squeeze
+```bash
+echo $PATH | tr : "\n"
+```
+> replaces colon : with a newline \n
+
+type
+like which, but more verbose and works on functions and aliases
+
 ## shell globbing
 
 Most Linux users are familiar with the star or asterisk character (*), which matches
