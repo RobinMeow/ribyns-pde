@@ -1,5 +1,7 @@
 # TicketSystem
 
+- TODO: check if legit: sudo localectl set-x11-keymap de pc105 nodeadkeys caps:swapescape
+
 ## Rust app ideas
 
 - an app for workouts. Which shows a timer, and vie pre configured input how long a session is and how long a breka inbetween is. perpahs also aa plan format as input
