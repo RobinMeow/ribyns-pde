@@ -1,5 +1,6 @@
 # TicketSystem
 
+- (practical bash scripting: what AI cant teach you)[https://www.youtube.com/watch?v=aqEIE6Jn0mU]
 - learn sed
 - rebind outermost middle btn on moergo to normal shift, unlayerd
 - could make a script to update scripts into "$HOME/bin" to get rid of the .sh suffix so it feels more native

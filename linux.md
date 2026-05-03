@@ -53,7 +53,25 @@ Prints file paths
 yes
 Prints the same line repeatedly
 
+tac
+A bottom-to-top combiner of text files
 
+paste
+A side-by-side combiner of text files
+
+diff
+A command that interleaves text from two files by printing their differences
+
+tr
+Translates characters into other characters
+
+rev
+Reverses characters on a line
+
+awk and sed
+General-purpose transformers
+
+> learn awk at [tutorialspaint](https://tutorialspoint.com/awk) or [riptutorial](https://riptutorial.com/awk)
 
 ## shell globbing
 
@@ -88,7 +106,14 @@ at the end of the book:
 - write something which detects duplicated files
 
 
-> checking for duplicates: ls -d */ && (ls -d */*/ | cut -d/ -f2-) | sort | uniq -c | sort -nr | less
+> checking for duplicates: 
+> ls -d */ && (ls -d */*/ | cut -d/ -f2-) | sort | uniq -c | sort -nr | less
+> or (using using the hash as key for a map; maps are called arrays in awk; and a hash for a 2nd map to store the filenames of the dups):
+> md5sum *.jpg \
+  | awk '{counts[$1]++; names[$1]=names[$1] " " $2} \
+         END {for (key in counts) print counts[key] " " key ":" names[key]}' \
+  | grep -v '^1 ' \
+  | sort -nr
 
 (learn regex)[https://regexone.com/]
 
