@@ -44,6 +44,7 @@ autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 export ZVM_KEYTIMEOUT="2" # 2s timeout e.g. for cs"'
+# export ZVM_SYSTEM_CLIPBOARD_ENABLED=true NOTE: dont think i like this. should look for something else which copies the prompt for me
 
 # User configuration
 
