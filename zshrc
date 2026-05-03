@@ -43,6 +43,8 @@ autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
+export ZVM_KEYTIMEOUT="2" # 2s timeout e.g. for cs"'
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
