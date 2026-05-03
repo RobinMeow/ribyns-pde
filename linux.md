@@ -66,3 +66,6 @@ $ ls [A-Z]*_*@
 at the end of the book:
 - write something, which will traverse a through subdirs and read all files and find project wide duplicated lines (e.g. source "$RIBYNS_ENV/scripts/utils.sh" should accor often)
 - write something which detects duplicated files
+
+
+> checking for duplicates: ls -d */ && (ls -d */*/ | cut -d/ -f2-) | sort | uniq -c | sort -nr | less

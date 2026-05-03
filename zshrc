@@ -104,7 +104,7 @@ function y() {
 [[ -f "$HOME/.zshrc-local.sh" ]] && source "$HOME/.zshrc-local.sh"
 
 _total_ms=$(printf "%.2f" $(( ($EPOCHREALTIME - _start_time) * 1000 )))
-echo ".zshrc startup duration: ${_total_ms}ms"
+echo ".zshrc startup duration: ${_total_ms}ms. $(date +%A,\ %Y-%m-%d\ %H:%M)"
 unset _start_time _total_ms
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
