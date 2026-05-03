@@ -47,6 +47,11 @@ the `scripts` directory is added to the `$PATH`,
 and therefore can be invoked using their filename.
 e.g. `install.sh --pacman`
 
-### Current record on MonkeyType 
+### MonkeyType 
 
+100% acc
 ![monkeytype](./monkey.png)
+
+<100% acc
+![monkeytype](./monkey-fastest-with-errors.png)
+
