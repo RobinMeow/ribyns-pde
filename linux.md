@@ -35,6 +35,26 @@ echo $PATH | tr : "\n"
 type
 like which, but more verbose and works on functions and aliases
 
+date
+Prints dates and times in various formats
+
+seq
+Prints a sequence of numbers
+
+Brace expansion
+A shell feature that prints a sequence of numbers or characters
+
+find
+Prints file paths
+
+> `find -type f` print only files
+> `find -type d` print only dirs
+
+yes
+Prints the same line repeatedly
+
+
+
 ## shell globbing
 
 Most Linux users are familiar with the star or asterisk character (*), which matches
@@ -69,3 +89,6 @@ at the end of the book:
 
 
 > checking for duplicates: ls -d */ && (ls -d */*/ | cut -d/ -f2-) | sort | uniq -c | sort -nr | less
+
+(learn regex)[https://regexone.com/]
+

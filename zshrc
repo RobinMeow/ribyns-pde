@@ -1,8 +1,11 @@
+# -*- mode: zsh -*-
+# vim: ft=zsh
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 zmodload zsh/datetime
@@ -16,9 +19,9 @@ HISTCONTROL=ignoredups
 export ZSH="$HOME/.oh-my-zsh"
 
 if [[ -f "$HOME/.p10k.zsh" ]]; then
-  ZSH_THEME="powerlevel10k/powerlevel10k"
+	ZSH_THEME="powerlevel10k/powerlevel10k"
 else
-  ZSH_THEME="avit"
+	ZSH_THEME="avit"
 fi
 
 zstyle ':omz:update' mode reminder
@@ -29,11 +32,11 @@ zstyle ':omz:update' mode reminder
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
-    git
-    zsh-vi-mode
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-		# nvm # adds around 120ms. on pc-white from 85ms -> 200+ms avrg.
+	git
+	zsh-vi-mode
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	# nvm # adds around 120ms. on pc-white from 85ms -> 200+ms avrg.
 )
 
 # load zsh-completions not as a standard plugin but manually
@@ -81,29 +84,29 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.cargo/bin"
 
 if [[ -d "/home/linuxbrew/" ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
 # nvm node version manager
 nvm() {
-  unfunction nvm
-  [ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
-  nvm "$@"
+	unfunction nvm
+	[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
+	nvm "$@"
 }
 
-# Then use y instead of yazi to start, and press q to quit, you'll see 
+# Then use y instead of yazi to start, and press q to quit, you'll see
 # the CWD changed. Sometimes, you don't want to change, press Q to quit.
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
+	IFS= read -r -d '' cwd <"$tmp"
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
 
 [[ -f "$HOME/.zshrc-local.sh" ]] && source "$HOME/.zshrc-local.sh"
 
-_total_ms=$(printf "%.2f" $(( ($EPOCHREALTIME - _start_time) * 1000 )))
+_total_ms=$(printf "%.2f" $((($EPOCHREALTIME - _start_time) * 1000)))
 echo ".zshrc startup duration: ${_total_ms}ms. $(date +%A,\ %Y-%m-%d\ %H:%M)"
 unset _start_time _total_ms
 
