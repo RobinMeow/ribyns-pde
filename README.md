@@ -2,6 +2,8 @@
 
 My personalized environment for Arch Linux, Fedora, Neovim, WSL and many other things.
 
+![gource](./gource.png)
+
 ## Arch
 
 `git clone ssh://git@codeberg.com:Ribyn/ribyns-env.git $HOME/ribyns-env`

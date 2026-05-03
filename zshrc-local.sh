@@ -4,6 +4,7 @@
 # export CODE_COMPANION_OLLAMA_MODEL="qwen2.5-coder:3b"
 alias mpdd='mpd --no-daemon &'
 alias book='zathura --mode=fullscreen "$HOME/books/Efficient Linux at the Command Line (Daniel J. Barrett) (Z-Library).pdf"'
+alias gourced="gource --no-vsync --fullscreen --auto-skip-seconds 1 --seconds-per-day 1"
 
 # find history (fzf a history cmd and select it for prompt editing and fire it off)
 fh() {

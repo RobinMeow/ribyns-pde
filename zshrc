@@ -63,7 +63,7 @@ alias gpl='git pull'
 
 # override the defaults from the omz git plugin:
 alias gpf='git push --force-with-lease' # exlude flag: --force-if-includes
-alias gl='git log -7 --graph --pretty=format:\"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset\"'
+alias gl='git log -7 --graph --pretty=format:"%C(auto)%h%d%Creset %s %C(green)%cn%Creset %C(cyan)(%cr)%Creset"'
 alias gss='git status --short --untracked-files=all'
 
 # shadow ls to use eza instead

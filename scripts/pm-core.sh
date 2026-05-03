@@ -49,7 +49,8 @@ run_on_arch <<'EOF'
 		mpv \
 		chafa \
 		fd \
-		bluetui
+		bluetui \
+		gource
 EOF
 
 # TODO: bluetui requires build from source on fedora
@@ -89,7 +90,8 @@ run_on_fedora <<'EOF'
 		glow \
 		mpv \
 		chafa \
-		fd-find
+		fd-find \
+		gource
 EOF
 
 # NOTE: gemini-cli is available in arch but might as well have things consistent
