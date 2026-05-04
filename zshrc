@@ -1,4 +1,3 @@
-# -*- mode: zsh -*-
 # vim: ft=zsh
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -77,6 +76,10 @@ alias ls='eza'
 # lsdefault :)
 alias lsd='eza -1 --group-directories-first --git-ignore'
 
+alias mpdd='mpd --no-daemon &'
+alias book='zathura --mode=fullscreen "$HOME/books/Efficient Linux at the Command Line (Daniel J. Barrett) (Z-Library).pdf"'
+alias gourced="gource --no-vsync --fullscreen --auto-skip-seconds 1 --seconds-per-day 1"
+
 export PATH="$HOME/.dotnet:$PATH"
 # prepend to take preceedence over windows/wsl passthrough paths
 export PATH="$PATH:$HOME/.dotnet/tools"
@@ -93,6 +96,34 @@ nvm() {
 	[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
 	nvm "$@"
 }
+
+# find history (fzf a history cmd and select it for prompt editing and fire it off)
+fh() {
+	local choice
+	choice=$(cut -d';' -f2 "$HISTFILE" | sort -u | uniq | grep '..........' | fzf)
+	print -z "$choice"
+}
+
+ribyn() {
+	# associative array (apparently scoped to this fn)
+	declare -A temp_dirs=(
+		[env]="$HOME/ribyns-env/"
+		[state]="$HOME/ribyns-state/"
+	)
+
+	if [[ -n "$1" && -n "${temp_dirs[$1]}" ]]; then
+		cd "${temp_dirs[$1]}" || return 1
+	else
+		echo "ribyn: unknown key '$1'"
+		# echo "Available keys: ${(k)temp_dirs}" NOTE: this is zsh syntax and bashls doesnt like it
+		for k in "${!temp_dirs[@]}"; do
+			echo "  $k"
+		done
+		return 1
+	fi
+}
+# tab completion
+complete -W "env state" ribyn
 
 # Then use y instead of yazi to start, and press q to quit, you'll see
 # the CWD changed. Sometimes, you don't want to change, press Q to quit.
