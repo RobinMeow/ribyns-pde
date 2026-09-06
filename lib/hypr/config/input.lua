@@ -63,7 +63,7 @@ end
 local function apply_next_layout()
   apply_layout(get_next_layout())
 end
-require("key").bind("SUPER + SPACE", apply_next_layout, { locked = true, desc = "cycle next keyboard layout" })
+require("key").bind("SUPER + SHIFT + Space", apply_next_layout, { locked = true, desc = "cycle next keyboard layout" })
 
 local function init(opts)
   local opts = opts or {}

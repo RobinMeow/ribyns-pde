@@ -6,7 +6,11 @@ full install tests:
   asking if install from rust or rustup
 - hypr wayland-protocol is missing on wob install
 
-- https://wiki.hypr.land/configuring/code-snippets/#minimize-windows-using-special-workspaces
+- [https://wiki.hypr.land/configuring/core/config-options/#group-colors](https://wiki.hypr.land/configuring/code-snippets/#minimize-windows-using-special-workspaces)
+- make swappy a tiled window. window rule didnt work
+- [hypr group management](https://wiki.hypr.land/configuring/code-snippets/#vim-like-keymaps)
+  could allow me to get rid of hy3, and use colored group borders if possible to
+  [visualize group management when in keymap](https://wiki.hypr.land/configuring/core/config-options/#group-colors)
 - replace waybar with quickshell and have whatsapp/thunderbird icons for unread messages
 - discord automated install is missing. requires non-free rpm on fedora
 - [mpv-cut](https://github.com/familyfriendlymikey/mpv-cut) plugin for mpv for cutting videos or audio

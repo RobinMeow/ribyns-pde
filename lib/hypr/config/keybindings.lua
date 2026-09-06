@@ -221,6 +221,16 @@ function m.setup()
   key.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("dunstctl close-all"), { desc = "close all notifications" })
   key.bind("SUPER + D", hl.dsp.exec_cmd("dunstctl history-pop"), { desc = "display last notification again" })
 
+  key.bind("SUPER + Space", function()
+    hl.dispatch(hl.dsp.window.cycle_next({
+      floating = not hl.get_active_window().floating,
+    }))
+  end, { description = "toggle tiled/floating windows focus" })
+
+  key.bind("SUPER + CTRL + F", function()
+    hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+  end, { description = "toggle active window float/tile state" })
+
   -- multimedia keys for volume and LCD brightness (usually on laptops for fn keys)
   -- NOTE: according to AI, locked is for allow in lock-screen and repeating for hold to spam
   key.bind(
