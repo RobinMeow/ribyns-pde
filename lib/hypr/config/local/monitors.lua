@@ -1,3 +1,10 @@
+-- EXAMPLE get desc: using `hyprctl devices` (which is shorthand for `hyprctl devices all`)
+local front_monitor = "desc:Asus MODEL1 0x00000001"
+local left_monitor = "desc:BenQ MODEL2 0x00000002"
+
+hl.workspace_rule({ workspace = "1", persistent = true, monitor = front_monitor })
+hl.workspace_rule({ workspace = "2", persistent = true, monitor = left_monitor })
+
 local m = {}
 m.enabled = false
 function m.setup()
