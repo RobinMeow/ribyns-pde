@@ -6,6 +6,8 @@ full install tests:
   asking if install from rust or rustup
 - hypr wayland-protocol is missing on wob install
 
+- https://wiki.hypr.land/configuring/code-snippets/#minimize-windows-using-special-workspaces
+- replace waybar with quickshell and have whatsapp/thunderbird icons for unread messages
 - discord automated install is missing. requires non-free rpm on fedora
 - [mpv-cut](https://github.com/familyfriendlymikey/mpv-cut) plugin for mpv for cutting videos or audio
   or [lazycut](https://github.com/ozemin/lazycut) also supports video triming

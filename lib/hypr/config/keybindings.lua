@@ -15,9 +15,10 @@ function m.setup()
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
     { desc = "shutdown hyprland (cli cmd `hyprbye`)" }
   )
-  key.bind("SUPER + E", hl.dsp.exec_cmd("kitty -e yazi"), { desc = "open explorer yazi" })
 
-  key.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("kaomoji-picker"), { desc = "open kaomoji picker (emoticons)" })
+  key.bind("SUPER + Y", hl.dsp.exec_cmd("kitty -e yazi"), { desc = "open yazi" })
+
+  key.bind("SUPER + SHIFT + I", hl.dsp.exec_cmd("kaomoji-picker"), { desc = "open kaomoji picker (emoticons)" })
 
   -- https://wiki.hypr.land/Configuring/Basics/Dispatchers/#fullscreenstate
   -- internal is a reference to the state maintained by Hyprland.
@@ -103,11 +104,12 @@ function m.setup()
 
   -- special workspace (aka scratchpad)
   key.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"), { desc = "toggle special workspace" })
-  key.bind(
-    "SUPER + SHIFT + S",
-    hl.dsp.window.move({ workspace = "special:magic" }),
-    { desc = "move window to special workspace" }
-  )
+	-- stylua: ignore
+  key.bind( "SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }), { desc = "move window to special workspace" })
+
+  key.bind("SUPER + E", hl.dsp.workspace.toggle_special("email"), { desc = "toggle email workspace" })
+	-- stylua: ignore
+  key.bind( "SUPER + SHIFT + E", hl.dsp.window.move({ workspace = "special:email" }), { desc = "move window to email workspace" })
 
   key.bind("SUPER + TAB", hl.dsp.focus({ workspace = "e+1" }), { desc = "focus next workspace" })
   key.bind("SUPER + SHIFT + TAB", hl.dsp.focus({ workspace = "e-1" }), { desc = "focus prev workspace" })
