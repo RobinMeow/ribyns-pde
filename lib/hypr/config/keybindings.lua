@@ -150,9 +150,10 @@ function m.setup()
 
   key.bind(
     "Print",
-    hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'),
-    { desc = "screenshot with rectangular selection" }
+    hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'),
+    { desc = "screenshot with rectangular selection into primary selection" }
   )
+  key.bind("SHIFT + Print", hl.dsp.exec_cmd("wl-paste | swappy -f -"), { desc = "paste primary selection into swappy" })
 
   key.bind("SUPER + PAUSE", hl.dsp.exec_cmd("wl-freeze -a"), { desc = "toggle wl-freeze the currently active window" })
   key.bind(

@@ -7,7 +7,6 @@ full install tests:
 - hypr wayland-protocol is missing on wob install
 
 - [https://wiki.hypr.land/configuring/core/config-options/#group-colors](https://wiki.hypr.land/configuring/code-snippets/#minimize-windows-using-special-workspaces)
-- make swappy a tiled window. window rule didnt work
 - [hypr group management](https://wiki.hypr.land/configuring/code-snippets/#vim-like-keymaps)
   could allow me to get rid of hy3, and use colored group borders if possible to
   [visualize group management when in keymap](https://wiki.hypr.land/configuring/core/config-options/#group-colors)
