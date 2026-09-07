@@ -49,6 +49,7 @@ alias gfpat='git fetch --prune --all --tags'
 # truncates at 50, which is best practise to keep message within that range
 logformat_aligned='"%C(auto)%h%Creset %C(bold #FFAC00)%<(50,trunc)%s%Creset %C(#F6A4B3)%<(12,trunc)%cn%Creset %C(#cba6f7)%<(14,trunc)%ar%Creset %C(auto)%d%Creset"'
 logformat_full='"%C(auto)%h%Creset %C(bold #FFAC00)%<(50,trunc)%s%Creset Comitter: %C(#F6A4B3)%<(12,trunc)%cn%Creset Author: %C(#F6A4B3)%<(12,trunc)%an%Creset %C(#cba6f7)%<(14,trunc)%ar%Creset %C(auto)%d%Creset"'
+logformat='"%C(auto)%h%d%Creset %C(#FFAC00)%s%Creset %C(#cba6f7)%cn%Creset %C(#F6B0BC)%cr%Creset"'
 
 # shellcheck disable=SC2139
 alias gl="git log -7 --graph --pretty=format:$logformat_aligned"
@@ -62,7 +63,6 @@ alias gla="git log -7 --graph --pretty=format:$logformat_aligned --all"
 # shellcheck disable=SC2139
 alias glafull="git log -7 --graph --pretty=format:$logformat_full --all"
 
-logformat='"%C(auto)%h%d%Creset %C(#FFAC00)%s%Creset %C(#cba6f7)%cn%Creset %C(#F6B0BC)%cr%Creset"'
 # shellcheck disable=SC2139
 alias glo="git log -7 --graph --pretty=format:$logformat"
 # shellcheck disable=SC2139
