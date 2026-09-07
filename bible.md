@@ -57,3 +57,12 @@ heart, fearing the Lord.
 
 **Colossians 3:23**
 Whatever you do, work heartily, as for the Lord and not for me
+
+---
+
+## non bible
+
+Serenity Prayer:
+"Grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference."
+- Reinhold Niebuhr _American theologian_
+
