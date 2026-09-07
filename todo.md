@@ -6,6 +6,7 @@ full install tests:
   asking if install from rust or rustup
 - hypr wayland-protocol is missing on wob install
 
+- installing firefox, has set it as default mimetype for unzipping in yazi. w hat the?
 - [https://wiki.hypr.land/configuring/core/config-options/#group-colors](https://wiki.hypr.land/configuring/code-snippets/#minimize-windows-using-special-workspaces)
 - [hypr group management](https://wiki.hypr.land/configuring/code-snippets/#vim-like-keymaps)
   could allow me to get rid of hy3, and use colored group borders if possible to
