@@ -32,23 +32,23 @@ if on_arch; then
 	# hyprpicker is just nice to have. install standalone cli tool.
 	# TODO: I think these are removeable, because hyprlock is installed using pacman?
 	# these were maybe meant for hyprmoncfg instead..
-	function pacin_hyprlock() {
-		# check if I really need all those. probably do, cause some are only build dependencies
-		sudo pacman -S --needed --noconfirm \
-			cmake \
-			cairo \
-			hyprgraphics \
-			hyprlang \
-			hyprutils \
-			hyprwayland-scanner \
-			mesa \
-			pam \
-			pango \
-			sdbus-cpp \
-			wayland \
-			extra/wayland-protocols
-	}
-	pacin_hyprlock
+	# function pacin_hyprlock() {
+	# 	# check if I really need all those. probably do, cause some are only build dependencies
+	# 	sudo pacman -S --needed --noconfirm \
+	# 		cmake \
+	# 		cairo \
+	# 		hyprgraphics \
+	# 		hyprlang \
+	# 		hyprutils \
+	# 		hyprwayland-scanner \
+	# 		mesa \
+	# 		pam \
+	# 		pango \
+	# 		sdbus-cpp \
+	# 		wayland \
+	# 		extra/wayland-protocols
+	# }
+	# pacin_hyprlock
 elif on_fedora; then
 	"$RIBYN_ROOT/lib/hypr/build-stack-from-source.sh"
 

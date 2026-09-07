@@ -66,3 +66,7 @@ Serenity Prayer:
 "Grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference."
 - Reinhold Niebuhr _American theologian_
 
+my music Concentrate your Mind - Asian lofi at 15:55 has a similar passage:
+> sometimes there are things that kept me down. they can be hard to deal with.
+But I try not to worry too much about the things that I cant change.
+So I just accept that.
