@@ -54,3 +54,32 @@ is outdated for this, since I have minimal fedora installation.
 which has a small footprint and does not include defaults like the
 other stuff. e.g. workstation.
 intel `sudo dnf install microcore_ctl`
+
+## Updates
+
+`dnf update` and `dnf up` are aliases for `upgrade`
+
+updating repository lists:
+they are updated automatically from time to time.
+to refresh the repository list immediatly use
+`dnf upgrade --refresh`
+
+## security updates
+
+security updates can be pulled in isolation:
+with the `--security` flag
+
+```sh
+# get security updates only
+sudo dnf upgrade --security
+
+# get the absolute late security updates
+sudo dnf upgrade --refresh --security
+```
+
+in general its recommended to just run regular updates
+`sudo dnf upgrade`
+becuase only updating security patches increases the risk
+of dependecy breakages.
+optionally, to get the absolute latest security updates
+`sudo dnf upgrade --refresh`
