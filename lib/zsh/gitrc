@@ -42,7 +42,8 @@ alias gdws='git diff --word-diff --staged -w'
 alias gdup='git diff @{upstream} -w'
 alias gdwup='git diff --word-diff @{upstream} -w'
 
-alias gfa="echo 'depr. use gfpat instead \`git fetch --prune --all --tags\`'"
+alias gfa="echo 'depr. use gfpa instead \`git fetch --prune --all\`'"
+alias gfpa='git fetch --prune --all'
 alias gfpat='git fetch --prune --all --tags'
 
 # this is an interesting one. it usses even indented lines and truncates commit messages to make it possible
